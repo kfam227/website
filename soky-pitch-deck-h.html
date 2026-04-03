@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.85, user-scalable=no">
+<title>SOKY — Investor Pitch Deck · Spring 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;500;600;700;800;900&family=Mulish:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   BSG v3.0 — HORIZONTAL PITCH DECK
+═══════════════════════════════════════ */
+:root{
+  --navy:#31598A;--ink:#111827;--paper:#F7F7F5;--green:#688B58;--umber:#8A6A4D;
+  --almond:#D4BBA0;--sunlight:#FFD166;--pool:#006D77;--heat:#B31D1B;--cool:#1E3A8A;
+  --muted:#667085;--line:rgba(17,24,39,0.09);--line-md:rgba(17,24,39,0.14);
+  --surface:rgba(255,255,255,0.88);--surface-strong:rgba(255,255,255,0.94);
+  --r-xl:28px;--r-lg:20px;--r-md:14px;--r-sm:8px;
+  --shadow:0 20px 56px rgba(17,24,39,0.10);--shadow-sm:0 3px 14px rgba(17,24,39,0.06);
+  --head:'Montserrat',system-ui,sans-serif;--serif:'DM Serif Display',Georgia,serif;
+  --sub:'Mulish',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{overflow:hidden;height:100%}
+body{font-family:var(--body);color:var(--ink);font-size:14px;line-height:1.72;-webkit-font-smoothing:antialiased;overflow:hidden;height:100%}
+::selection{background:rgba(0,109,119,0.15)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ═══ HORIZONTAL TRACK ═══ */
+.deck{display:flex;width:max-content;height:100vh;height:100dvh;transition:transform .55s cubic-bezier(.4,.0,.2,1);will-change:transform}
+
+/* ═══ SLIDE BASE ═══ */
+.slide{width:100vw;height:100vh;height:100dvh;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+
+/* ═══ SLIDE THEMES ═══ */
+.slide-dark{background:linear-gradient(135deg,#0c1520 0%,#162033 50%,#0e1720 100%)}
+.slide-dark::before{content:'';position:absolute;inset:0;opacity:0.25;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:26px 26px}
+.slide-light{background:linear-gradient(180deg,#fcfcfb 0%,var(--paper) 50%,#f3f3ef 100%)}
+.slide-light::before{content:'';position:absolute;inset:0;opacity:0.25;pointer-events:none;background-image:linear-gradient(rgba(17,24,39,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(17,24,39,0.015) 1px,transparent 1px);background-size:26px 26px}
+.slide-accent{background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92))}
+
+/* ═══ SLIDE INNER — scrollable content area ═══ */
+.slide-inner{position:relative;z-index:2;width:min(calc(100% - 80px),1060px);max-height:calc(100vh - 130px);max-height:calc(100dvh - 130px);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0.5rem 4px 2rem;scrollbar-width:thin;scrollbar-color:rgba(0,0,0,0.12) transparent}
+.slide-inner::-webkit-scrollbar{width:4px}
+.slide-inner::-webkit-scrollbar-track{background:transparent}
+.slide-inner::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.12);border-radius:99px}
+.slide-dark .slide-inner::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12)}
+.slide-dark .slide-inner{scrollbar-color:rgba(255,255,255,0.12) transparent}
+
+/* ═══ TOPBAR ═══ */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:9999;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;pointer-events:none;transition:background .4s}
+.topbar-bg{position:absolute;inset:0;border-bottom:1px solid rgba(255,255,255,0.06);transition:all .4s}
+.topbar.is-light .topbar-bg{background:rgba(255,255,255,0.82);border-bottom-color:var(--line)}
+@supports(backdrop-filter:blur(14px)){.topbar.is-light .topbar-bg{background:rgba(255,255,255,0.56);backdrop-filter:blur(14px)}}
+.topbar.is-dark .topbar-bg{background:rgba(12,21,32,0.5)}
+@supports(backdrop-filter:blur(14px)){.topbar.is-dark .topbar-bg{backdrop-filter:blur(14px)}}
+.topbar>*{position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:10px;pointer-events:auto}
+.brand-logo{width:20px;height:20px;border-radius:4px;transition:filter .3s}
+.topbar.is-dark .brand-logo{filter:brightness(1.8)}
+.brand-name{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;transition:color .3s}
+.topbar.is-light .brand-name{color:var(--ink)}
+.topbar.is-dark .brand-name{color:rgba(255,255,255,0.8)}
+.topbar-mid{display:flex;align-items:center;gap:14px;flex:1;min-width:0;max-width:400px;margin:0 auto;pointer-events:auto}
+.section-lbl{font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;transition:color .3s}
+.topbar.is-light .section-lbl{color:var(--muted)}
+.topbar.is-dark .section-lbl{color:rgba(255,255,255,0.4)}
+.progress-track{height:3px;flex:1;min-width:40px;border-radius:999px;overflow:hidden;transition:background .3s}
+.topbar.is-light .progress-track{background:rgba(17,24,39,0.08)}
+.topbar.is-dark .progress-track{background:rgba(255,255,255,0.1)}
+.progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--navy),var(--pool),var(--green));transition:width .45s ease}
+.topbar-right{display:flex;align-items:center;gap:12px;pointer-events:auto}
+.conf-badge{padding:4px 10px;border-radius:999px;font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;transition:all .3s}
+.topbar.is-light .conf-badge{background:rgba(49,89,138,0.06);border:1px solid rgba(49,89,138,0.12);color:var(--navy)}
+.topbar.is-dark .conf-badge{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4)}
+.slide-num{font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.1em;transition:color .3s}
+.topbar.is-light .slide-num{color:var(--muted)}
+.topbar.is-dark .slide-num{color:rgba(255,255,255,0.3)}
+
+/* ═══ BOTTOM NAV ═══ */
+.bottom-nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;gap:10px;pointer-events:auto;padding:8px 16px;border-radius:999px;transition:background .4s,border-color .4s}
+.bottom-nav.is-light{background:rgba(255,255,255,0.82);border:1px solid var(--line);box-shadow:0 4px 20px rgba(17,24,39,0.08)}
+@supports(backdrop-filter:blur(14px)){.bottom-nav.is-light{background:rgba(255,255,255,0.56);backdrop-filter:blur(14px)}}
+.bottom-nav.is-dark{background:rgba(12,21,32,0.6);border:1px solid rgba(255,255,255,0.08)}
+@supports(backdrop-filter:blur(14px)){.bottom-nav.is-dark{backdrop-filter:blur(14px)}}
+.nav-btn{width:32px;height:32px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:15px;font-weight:600;flex-shrink:0}
+.bottom-nav.is-light .nav-btn{background:rgba(17,24,39,0.04);color:var(--muted)}
+.bottom-nav.is-light .nav-btn:hover{background:rgba(17,24,39,0.08);color:var(--ink)}
+.bottom-nav.is-dark .nav-btn{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4)}
+.bottom-nav.is-dark .nav-btn:hover{background:rgba(255,255,255,0.12);color:#fff}
+.nav-btn:disabled{opacity:0.2;cursor:default;pointer-events:none}
+.dot-row{display:flex;gap:5px;align-items:center}
+.dot{width:6px;height:6px;border-radius:50%;cursor:pointer;transition:all .35s}
+.bottom-nav.is-light .dot{background:rgba(17,24,39,0.12)}
+.bottom-nav.is-dark .dot{background:rgba(255,255,255,0.15)}
+.dot.active{width:22px;border-radius:999px;background:var(--pool) !important}
+
+/* ═══ TYPOGRAPHY ═══ */
+.eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:.5rem;display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:'';height:1px;width:40px;flex-shrink:0}
+.slide-dark .eyebrow{color:rgba(255,255,255,0.4)}.slide-dark .eyebrow::after{background:rgba(255,255,255,0.15)}
+.slide-light .eyebrow{color:var(--pool)}.slide-light .eyebrow::after{background:var(--line)}
+.slide-accent .eyebrow{color:rgba(255,255,255,0.5)}.slide-accent .eyebrow::after{background:rgba(255,255,255,0.2)}
+.stitle{font-family:var(--serif);font-size:clamp(24px,4.5vw,44px);line-height:1.08;margin-bottom:.5rem}
+.slide-dark .stitle{color:#fff}.slide-light .stitle{color:var(--ink)}.slide-accent .stitle{color:#fff}
+.ssub{font-family:var(--body);font-size:clamp(12px,1.3vw,15px);line-height:1.7;max-width:560px;margin-bottom:1.5rem}
+.slide-dark .ssub{color:rgba(255,255,255,0.5)}.slide-light .ssub{color:var(--muted)}.slide-accent .ssub{color:rgba(255,255,255,0.6)}
+.slbl{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:.5rem;margin-top:1.25rem}
+
+/* ═══ STAT GRID ═══ */
+.sg{display:grid;gap:8px}
+.sg3{grid-template-columns:repeat(3,1fr)}.sg4{grid-template-columns:repeat(4,1fr)}.sg2{grid-template-columns:repeat(2,1fr)}
+.sc{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:.9rem .7rem;text-align:center;box-shadow:var(--shadow-sm)}
+.slide-dark .sc{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
+.sv{font-family:var(--head);font-size:clamp(20px,2.8vw,32px);font-weight:800;line-height:1.1;margin-bottom:.15rem}
+.sv.navy{color:var(--navy)}.sv.pool{color:var(--pool)}.sv.green{color:var(--green)}.sv.heat{color:var(--heat)}.sv.wh{color:#fff}
+.slide-dark .sv{color:#fff}
+.sl{font-family:var(--sub);font-size:9.5px;color:var(--muted);line-height:1.4}
+.slide-dark .sl{color:rgba(255,255,255,0.4)}
+
+/* ═══ CALLOUT ═══ */
+.co{border-left:3px solid var(--navy);background:rgba(49,89,138,0.05);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:.85rem 1.1rem;margin-top:.75rem}
+.co.pool{border-left-color:var(--pool);background:rgba(0,109,119,0.05)}
+.co.green{border-left-color:var(--green);background:rgba(104,139,88,0.05)}
+.co.heat{border-left-color:var(--heat);background:rgba(179,29,27,0.04)}
+.co.sun{border-left-color:var(--sunlight);background:rgba(255,209,102,0.07)}
+.co-lbl{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.2rem}
+.co .co-lbl{color:var(--navy)}.co.pool .co-lbl{color:var(--pool)}.co.green .co-lbl{color:var(--green)}.co.heat .co-lbl{color:var(--heat)}.co.sun .co-lbl{color:#7a5c00}
+.co p{font-size:12.5px;color:rgba(17,24,39,0.72);line-height:1.6}
+
+/* ═══ TWO-COL ═══ */
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
+
+/* ═══ QUOTE BAND ═══ */
+.qb{padding:1.1rem 1.25rem;background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92));color:#fff;border-radius:var(--r-lg);box-shadow:0 16px 50px rgba(0,48,61,0.2);overflow:hidden;position:relative;margin-top:1.25rem}
+.qb::after{content:'';position:absolute;right:-40px;top:-30px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%)}
+.qb blockquote{font-family:var(--serif);font-size:clamp(14px,1.6vw,18px);font-style:italic;line-height:1.45;position:relative;z-index:1;margin-bottom:.4rem}
+.qb cite{font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.6;font-style:normal;position:relative;z-index:1}
+
+/* ═══ EDITORIAL IMAGE ═══ */
+.ei{width:100%;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);position:relative;background:#0e1720}
+.ei img{width:100%;display:block;object-fit:cover;object-position:center 45%}
+.ei.med img{height:280px}.ei.short img{height:200px}
+.ei-cap{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1rem 1rem .5rem;background:linear-gradient(0deg,rgba(12,21,32,0.6),transparent);font-family:var(--sub);font-size:8.5px;font-weight:500;letter-spacing:.06em;color:rgba(255,255,255,0.5);font-style:italic}
+.ig{display:grid;gap:8px}.ig2{grid-template-columns:1fr 1fr}
+.ig img{width:100%;height:200px;object-fit:cover;border-radius:var(--r-sm);border:1px solid var(--line)}
+.ig img.contain{object-fit:contain;background:#fff;padding:.4rem}
+
+/* ═══ RITUAL BAR ═══ */
+.rb{display:grid;grid-template-columns:repeat(5,1fr);background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm)}
+.rs{padding:.9rem .6rem;border-right:1px solid var(--line);text-align:center}
+.rs:last-child{border-right:none}
+.rs.don{background:rgba(0,109,119,0.04)}
+.rs-n{font-family:var(--head);font-size:22px;font-weight:900;color:var(--navy);line-height:1;margin-bottom:.2rem}
+.rs.don .rs-n{color:var(--pool)}
+.rs-w{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:.25rem}
+.rs-d{font-family:var(--body);font-size:9.5px;color:var(--muted);line-height:1.45}
+
+/* ═══ SKU CARDS ═══ */
+.skr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.skc{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);position:relative}
+.skc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.skc.res::before{background:linear-gradient(90deg,var(--pool),var(--green))}
+.skc.core::before{background:linear-gradient(90deg,var(--navy),var(--pool))}
+.skc.kit::before{background:linear-gradient(90deg,var(--green),var(--navy))}
+.skc-img{width:100%;aspect-ratio:5/3;object-fit:cover;background:#f0eeeb}
+.skc-b{padding:.9rem}
+.skc-id{font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.skc-pr{font-family:var(--serif);font-size:26px;color:var(--ink);line-height:1;margin-bottom:.2rem}
+.skc-tag{display:inline-flex;font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-bottom:.3rem}
+.tgr{background:rgba(0,109,119,0.1);color:var(--pool)}.tgc{background:rgba(49,89,138,0.1);color:var(--navy)}.tgk{background:rgba(104,139,88,0.1);color:var(--green)}
+.skc-nm{font-family:var(--sub);font-size:11px;font-weight:700;color:var(--ink);margin-bottom:.25rem}
+.skc-ds{font-family:var(--body);font-size:10.5px;color:var(--muted);line-height:1.45}
+
+/* ═══ TEAM GRID ═══ */
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tcard{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-sm);padding:.8rem;box-shadow:var(--shadow-sm)}
+.tbdg{display:inline-flex;font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:999px;margin-bottom:.2rem}
+.bf{background:rgba(49,89,138,0.1);color:var(--navy)}.ba{background:rgba(0,109,119,0.1);color:var(--pool)}.bi{background:rgba(138,106,77,0.1);color:var(--umber)}
+.tnm{font-family:var(--sub);font-size:12px;font-weight:700;color:var(--ink);margin-bottom:1px}
+.trl{font-family:var(--body);font-size:10px;color:var(--muted);line-height:1.45}
+
+/* ═══ SCENARIO ROW ═══ */
+.scr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.scc{border-radius:var(--r-md);padding:1rem;text-align:center;border:1px solid var(--line)}
+.scc.bear{background:rgba(179,29,27,0.05);border-color:rgba(179,29,27,0.15)}
+.scc.base{background:var(--surface-strong);border-color:var(--navy);border-width:2px;box-shadow:var(--shadow)}
+.scc.bull{background:rgba(104,139,88,0.06);border-color:rgba(104,139,88,0.2)}
+.scc-l{font-family:var(--sub);font-size:8.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem}
+.scc.bear .scc-l{color:var(--heat)}.scc.base .scc-l{color:var(--navy)}.scc.bull .scc-l{color:var(--green)}
+.scc-v{font-family:var(--serif);font-size:clamp(26px,4vw,38px);margin-bottom:.2rem}
+.scc.bear .scc-v{color:var(--heat)}.scc.base .scc-v{color:var(--navy)}.scc.bull .scc-v{color:var(--green)}
+.scc-n{font-size:10.5px;color:var(--muted);line-height:1.45}
+
+/* ═══ VAL TABLE ═══ */
+.vt{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:.75rem}
+.vt th{font-family:var(--sub);text-align:left;font-size:8.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.45rem .6rem;border-bottom:1.5px solid var(--line-md);background:rgba(49,89,138,0.04)}
+.vt td{font-family:var(--body);padding:.45rem .6rem;border-bottom:1px solid var(--line);color:rgba(17,24,39,0.78)}
+.vt tr:last-child td{border-bottom:none}
+.vt tr.hl td{background:rgba(49,89,138,0.06);font-weight:600;color:var(--navy)}
+
+/* ═══ LAYER STACK ═══ */
+.ls{display:grid;gap:6px}
+.ly{border-radius:var(--r-sm);padding:.75rem .9rem;display:flex;align-items:center;gap:.75rem}
+.ly-n{font-family:var(--head);font-size:18px;font-weight:900;flex-shrink:0;width:28px;text-align:center}
+.ly-i{flex:1;min-width:0}
+.ly-nm{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1px}
+.ly-ds{font-family:var(--body);font-size:10.5px;color:rgba(17,24,39,0.65);line-height:1.45}
+.ly.l1{background:rgba(49,89,138,0.06);border:1px solid rgba(49,89,138,0.15)}.ly.l1 .ly-n,.ly.l1 .ly-nm{color:var(--navy)}
+.ly.l2{background:rgba(0,109,119,0.05);border:1px solid rgba(0,109,119,0.15)}.ly.l2 .ly-n,.ly.l2 .ly-nm{color:var(--pool)}
+.ly.l3{background:rgba(104,139,88,0.05);border:1px solid rgba(104,139,88,0.15)}.ly.l3 .ly-n,.ly.l3 .ly-nm{color:var(--green)}
+
+/* ═══ PROOF LIST ═══ */
+.pl{list-style:none}
+.pl li{font-family:var(--body);font-size:12.5px;padding:.4rem 0 .4rem 1.5rem;border-bottom:1px solid var(--line);position:relative}
+.pl li:last-child{border-bottom:none}
+.pl li::before{content:'✓';position:absolute;left:0;font-size:10px;color:var(--green);font-weight:700;top:.45rem}
+.slide-dark .pl li{color:rgba(255,255,255,0.7);border-bottom-color:rgba(255,255,255,0.06)}
+.slide-dark .pl li::before{color:var(--pool)}
+
+/* ═══ IP CARDS ═══ */
+.ipr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ipc{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1rem;box-shadow:var(--shadow-sm)}
+.ips{display:inline-flex;font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:999px;margin-bottom:.3rem}
+.ips-i{background:rgba(104,139,88,0.15);color:var(--green)}.ips-p{background:rgba(247,209,102,0.2);color:#7a5c00}
+.ipt{font-family:var(--sub);font-size:11px;font-weight:700;color:var(--ink);margin-bottom:.25rem;line-height:1.3}
+.ipd{font-family:var(--body);font-size:10.5px;color:var(--muted);line-height:1.5}
+
+/* ═══ CTA BAND ═══ */
+.ctb{padding:clamp(1.5rem,3vw,2.5rem);background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92));color:#fff;border-radius:var(--r-xl);text-align:center;box-shadow:0 24px 80px rgba(0,48,61,0.2);position:relative;overflow:hidden}
+.ctb::after{content:'';position:absolute;right:-60px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%)}
+.ct-h{font-family:var(--serif);font-size:clamp(16px,2.5vw,26px);font-style:italic;margin-bottom:.6rem;position:relative;z-index:1}
+.ct-s{font-family:var(--body);font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:1.25rem;position:relative;z-index:1;max-width:460px;margin-left:auto;margin-right:auto}
+.ct-btns{display:flex;gap:10px;justify-content:center;position:relative;z-index:1;flex-wrap:wrap}
+.ct-btn{padding:10px 24px;border-radius:999px;font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.ct-btn.pri{background:#fff;color:var(--navy)}.ct-btn.sec{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.3)}
+
+/* ═══ HERO SPECIAL ═══ */
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1320px;margin:0 auto;padding:clamp(120px,15vw,200px) clamp(2rem,5vw,4rem) clamp(4rem,8vw,8rem);display:flex;flex-direction:row;align-items:center;gap:clamp(24px,4vw,56px)}
+#heroBg{position:absolute;inset:0;width:100%;height:100%;filter:blur(56px) saturate(1.5) brightness(0.75);z-index:1;pointer-events:none}
+.hero-veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(135deg,rgba(12,21,32,0.88),rgba(12,21,32,0.55) 50%,rgba(12,21,32,0.78))}
+.hvs{position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid rgba(255,255,255,0.18);box-shadow:0 30px 80px rgba(0,0,0,0.35);background:rgba(12,21,32,0.3);flex-shrink:0;order:2;width:clamp(180px,22vw,300px);aspect-ratio:9/16}
+.hvs video{width:100%;height:100%;object-fit:cover;display:block}
+.hvs::before{content:'';position:absolute;inset:0;z-index:2;border-radius:inherit;background:linear-gradient(to bottom,rgba(12,21,32,0.3),transparent 15%,transparent 80%,rgba(12,21,32,0.45));pointer-events:none}
+.hvs::after{content:'';position:absolute;inset:0;z-index:3;border-radius:inherit;border:1px solid rgba(255,255,255,0.08);pointer-events:none}
+.hvu{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(10px,2%,16px);pointer-events:none}
+.hv-b{opacity:0;transform:translateY(-8px);animation:fu .7s .3s ease forwards}
+.hv-ey{font-family:var(--sub);font-size:6.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1px}
+.hv-wm{font-family:var(--head);font-weight:800;font-size:clamp(12px,2vw,18px);letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,0.5);text-shadow:0 1px 6px rgba(0,0,0,0.3)}
+.hv-bt{opacity:0;transform:translateY(8px);animation:fu .7s .5s ease forwards;pointer-events:all}
+.hv-tg{font-family:var(--sub);font-size:clamp(7px,1vw,9px);font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:6px}
+.hv-m{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:4px 9px 4px 7px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,0.5);font-family:var(--sub);font-size:7px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.hv-m:hover{background:rgba(255,255,255,0.2);color:#fff}
+.hv-m svg{width:12px;height:12px;fill:currentColor}
+@keyframes fu{to{opacity:1;transform:translateY(0)}}
+.htxt{position:relative;z-index:10;text-align:left;flex:1;min-width:0;order:1}
+.htxt .eyebrow{color:rgba(255,255,255,0.45)}.htxt .eyebrow::after{background:rgba(255,255,255,0.2)}
+.h-t{font-family:var(--head);font-size:clamp(44px,8vw,100px);font-weight:900;line-height:.88;letter-spacing:.10em;text-transform:uppercase;color:#fff;margin-bottom:.4rem}
+.h-tl{font-family:var(--head);font-size:clamp(11px,1.4vw,16px);font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:1.25rem}
+.h-tl strong{font-weight:600;color:rgba(255,255,255,0.6)}
+.h-d{font-family:var(--body);font-size:clamp(11px,1.1vw,13px);font-weight:300;color:rgba(255,255,255,0.45);line-height:1.65;max-width:460px;margin-bottom:1.25rem}
+.h-d em{font-style:italic;color:rgba(255,255,255,0.6)}
+.hbr{display:flex;flex-wrap:wrap;gap:5px}
+.hb{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:999px;padding:4px 10px;font-family:var(--sub);font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.38)}
+.hb::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--pool);flex-shrink:0}
+.hb.hl{background:rgba(49,89,138,0.3);border-color:rgba(49,89,138,0.5);color:rgba(255,255,255,0.65)}.hb.hl::before{background:#7bb8e8}
+.hero-bot{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:1rem clamp(2rem,4vw,4rem);background:rgba(12,21,32,0.4);display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;font-family:var(--sub);font-size:9px;color:rgba(255,255,255,0.25);line-height:1.7}
+.hero-bot strong{color:rgba(255,255,255,0.4)}
+.hero-bot a{color:rgba(255,255,255,0.35)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  .tc,.ipr{grid-template-columns:1fr}
+  .skr{grid-template-columns:1fr}
+  .tg{grid-template-columns:1fr}
+  .scr{grid-template-columns:1fr 1fr 1fr}
+  .sg4{grid-template-columns:1fr 1fr}
+  .rb{grid-template-columns:repeat(3,1fr)}.rs:nth-child(4){border-top:1px solid var(--line)}.rs:nth-child(3){border-right:none}
+  .ig2{grid-template-columns:1fr}
+  .slide-inner{width:min(calc(100% - 40px),1060px);padding-bottom:1rem}
+  .hero-inner{flex-direction:column;align-items:flex-start;padding:140px clamp(1.5rem,4vw,3rem) 120px;gap:16px}
+  .hvs{order:1;align-self:flex-start;width:min(220px,40vw)}
+  .htxt{order:2}
+  .hero-bot{flex-direction:column;align-items:flex-start;gap:.4rem;padding:.8rem 1.5rem}
+  #heroBg{filter:blur(40px) saturate(1.2) brightness(0.8) !important}
+  .topbar .topbar-mid{max-width:200px}
+  .conf-badge{display:none}
+}
+@media(max-width:600px){
+  body{font-size:12px}
+  .sg3,.scr{grid-template-columns:1fr 1fr}
+  .h-t{font-size:clamp(36px,11vw,56px);letter-spacing:.06em}
+  .rb{grid-template-columns:1fr 1fr}.rs:nth-child(3){border-right:1px solid var(--line);border-top:1px solid var(--line)}.rs:nth-child(5){grid-column:span 2;border-top:1px solid var(--line)}
+  .slide-inner{width:min(calc(100% - 28px),1060px);padding:1rem 0.75rem}
+  .hvs{width:min(180px,45vw)}
+  .bottom-nav{padding:6px 12px;gap:8px;bottom:12px}
+  .nav-btn{width:28px;height:28px;font-size:13px}
+  .dot{width:5px;height:5px}
+  .dot.active{width:16px}
+}
+@media(max-width:480px){
+  .slide-inner{transform:scale(0.92);transform-origin:top center}
+  .hero-inner{padding:130px 1.25rem 100px}
+  .hvs{align-self:center;width:min(160px,50vw)}
+  .hero-bot{padding:.75rem 1.25rem;font-size:8px}
+}
+@media print{
+  .topbar,.bottom-nav{display:none}
+  .deck{display:block;width:auto;height:auto;transform:none !important}
+  .slide{width:100%;height:auto;min-height:100vh;page-break-after:always;display:block}
+  .slide-inner{max-height:none;overflow:visible}
+  #heroBg,.hero-veil{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ TOPBAR ═══ -->
+<div class="topbar is-dark" id="topbar">
+  <div class="topbar-bg"></div>
+  <div class="brand">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Logo-Icon.png" alt="NM Thera" class="brand-logo">
+    <span class="brand-name">NM Thera</span>
+  </div>
+  <div class="topbar-mid">
+    <span class="section-lbl" id="secLbl">Investor Overview</span>
+    <div class="progress-track"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+  <div class="topbar-right">
+    <span class="conf-badge">Confidential</span>
+    <span class="slide-num" id="slideNum">1 / 12</span>
+  </div>
+</div>
+
+<!-- ═══ BOTTOM NAV ═══ -->
+<div class="bottom-nav is-dark" id="bottomNav">
+  <button class="nav-btn" id="prevBtn" disabled aria-label="Previous">‹</button>
+  <div class="dot-row" id="dotRow"></div>
+  <button class="nav-btn" id="nextBtn" aria-label="Next">›</button>
+</div>
+
+<!-- ═══ HORIZONTAL DECK ═══ -->
+<div class="deck" id="deck">
+
+<!-- S1: COVER -->
+<div class="slide slide-dark" data-label="Investor Overview" data-theme="dark">
+  <canvas id="heroBg" aria-hidden="true"></canvas>
+  <div class="hero-veil"></div>
+  <div class="hero-inner">
+    <div class="hvs">
+      <video id="heroVid" autoplay muted loop playsinline preload="metadata" poster="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg">
+        <source src="https://nmthera.com/wp-content/uploads/2026/03/26Mar2026-KV-BLUE.mp4" type="video/mp4">
+      </video>
+      <div class="hvu">
+        <div class="hv-b"><p class="hv-ey">NM Thera presents</p><div class="hv-wm">SOKY</div></div>
+        <div class="hv-bt">
+          <p class="hv-tg">Spa-grade immersion. Anywhere.</p>
+          <button class="hv-m" id="heroMuteBtn">
+            <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>
+            <span id="heroMuteLbl">Unmute</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="htxt">
+      <div class="eyebrow">Wearable Soak Platform · Investor Overview</div>
+      <div class="h-t">SOKY</div>
+      <div class="h-tl"><strong>Hand &amp; Footcare</strong> Reimagined.</div>
+      <p class="h-d"><em>What if one of the oldest acts of personal care — immersing the body in water — could move with the person?</em> A patented silicone glove that seals water, warmth, and therapeutic agents around the body. <em>Three SKUs. 200 units. Dropping now.</em></p>
+      <div class="hbr">
+        <span class="hb hl">US Patent · Valid to 2043</span>
+        <span class="hb">3 SKUs · First Drop Now</span>
+        <span class="hb">$180K Raised · $3.2M Valuation</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bot">
+    <div><strong>NM Therapeutics, Inc.</strong> · Delaware C Corp · Pre-Seed</div>
+    <div style="text-align:right">Kenny Pham · Founder &amp; CEO · <a href="mailto:kenny@nmthera.com">kenny@nmthera.com</a> · 714-782-2843</div>
+  </div>
+</div>
+
+<!-- S2: PROBLEM -->
+<div class="slide slide-light" data-label="The Problem" data-theme="light">
+  <div class="slide-inner">
+    <div class="eyebrow">The Problem</div>
+    <h2 class="stitle">The bowl is the bottleneck.</h2>
+    <p class="ssub">Immersion care works. The format doesn't. ~70% of users abandon soak routines within 90 days.</p>
+    <div class="sg sg3">
+      <div class="sc"><div class="sv heat">365M+</div><div class="sl">People affected globally by hand & foot conditions</div></div>
+      <div class="sc"><div class="sv heat">~70%</div><div class="sl">Drop-off rate within 90 days</div></div>
+      <div class="sc"><div class="sv heat">$0</div><div class="sl">Innovation in the soak format in 50 years</div></div>
+    </div>
+    <div class="co heat">
+      <div class="co-lbl">The Core Insight</div>
+      <p>The science works — warm water, minerals, occlusion, and time are proven. But the delivery format hasn't evolved. <strong>SOKY removes the bowl and makes the water move with the person.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- S3: SOLUTION -->
+<div class="slide slide-light" data-label="Solution" data-theme="light">
+  <div class="slide-inner">
+    <div class="eyebrow">The Solution</div>
+    <h2 class="stitle">The seal that pressure makes tighter.</h2>
+    <p class="ssub">A patented silicone glove that seals water around the body while you move freely.</p>
+    <div class="ei med" style="margin-bottom:1.25rem"><img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="HandSOKY" loading="lazy"><div class="ei-cap">Wearable soak glove filled and sealed — product in its active state</div></div>
+    <div class="tc">
+      <div class="sg sg2">
+        <div class="sc"><div class="sv pool">300–400%</div><div class="sl">Hydration under occlusion</div></div>
+        <div class="sc"><div class="sv pool">80%+</div><div class="sl">Sweat reduction via iontophoresis</div></div>
+        <div class="sc"><div class="sv navy">+36 pts</div><div class="sl">Adherence improvement</div></div>
+        <div class="sc"><div class="sv green">9+</div><div class="sl">Conditions supported</div></div>
+      </div>
+      <div>
+        <div class="co pool"><div class="co-lbl">How the Seal Works</div><p>The inversion frustal cuff folds <strong>inward</strong>, creating a pocket. Internal pressure pushes the inner layer <em>more firmly</em> against skin. More pressure = tighter seal. No clamps. No adhesives. No power.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S4: RITUAL -->
+<div class="slide slide-light" data-label="The Ritual" data-theme="light">
+  <div class="slide-inner">
+    <div class="eyebrow">How It Works</div>
+    <h2 class="stitle">Five steps. Every product. Always this order.</h2>
+    <p class="ssub">The ritual is the platform's shared language. It never changes.</p>
+    <div class="rb">
+      <div class="rs don"><div class="rs-n">1</div><div class="rs-w">Don</div><div class="rs-d">Fold cuff <strong>inward</strong>. Slide on.</div></div>
+      <div class="rs"><div class="rs-n">2</div><div class="rs-w">Fill</div><div class="rs-d">Hold seal. Fill under tap.</div></div>
+      <div class="rs"><div class="rs-n">3</div><div class="rs-w">Seal</div><div class="rs-d">Ball fist — glove swells = sealed.</div></div>
+      <div class="rs"><div class="rs-n">4</div><div class="rs-w">Soak</div><div class="rs-d">15–20 min. Walk. Read. Rest.</div></div>
+      <div class="rs"><div class="rs-n">5</div><div class="rs-w">Drain</div><div class="rs-d">Slide off, pour, rinse, dry.</div></div>
+    </div>
+    <div class="ig ig2" style="margin-top:1.25rem">
+      <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9929.jpg" alt="Finger mobility" loading="lazy" style="object-position:center 50%">
+      <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9921.jpg" alt="Clasped hands" loading="lazy" style="object-position:center 45%">
+    </div>
+    <div class="qb">
+      <blockquote>"Care for the hands is care for everything the hands make possible."</blockquote>
+      <cite>— NM Thera Manifesto, 2026</cite>
+    </div>
+  </div>
+</div>
+
+<!-- S5: MARKET -->
+<div class="slide slide-light" data-label="Market" data-theme="light">
+  <div class="slide-inner">
+    <div class="eyebrow">Market Opportunity</div>
+    <h2 class="stitle">$597B TAM. Zero incumbents.</h2>
+    <p class="ssub">Category creation, not share capture. The competitor is the bowl.</p>
+    <div class="sg sg3">
+      <div class="sc"><div class="sv navy" style="font-size:26px">$597B+</div><div class="sl">TAM across eight verticals</div></div>
+      <div class="sc"><div class="sv pool" style="font-size:26px">$5.97B</div><div class="sl">SAM · Serviceable Addressable</div></div>
+      <div class="sc"><div class="sv green" style="font-size:26px">$59.7M</div><div class="sl">SOM · Serviceable Obtainable</div></div>
+    </div>
+    <div class="tc" style="margin-top:1.25rem">
+      <div style="font-size:12px;color:rgba(17,24,39,0.72);line-height:1.9">
+        <div class="slbl">Key Verticals</div>
+        <strong>Hand & Foot Care</strong> — $12.2B · First mover<br>
+        <strong>Wellness</strong> — $1.5T · Ritual behavior fit<br>
+        <strong>Wearable Med Devices</strong> — $34B→$120B · 28% CAGR<br>
+        <strong>Eczema & Skin Care</strong> — $145B<br>
+        <strong>Physical Therapy</strong> — $39.3B<br>
+        <strong>Anti-Aging</strong> — $23.4B+
+      </div>
+      <div>
+        <div class="co sun"><div class="co-lbl">Acquisition Precedent</div><p>PowerDot acquired by Therabody for ~$34M — single-modality, no consumable flywheel. NM Thera Y10 target: $72M (Therabody parity).</p></div>
+        <div class="co pool" style="margin-top:.5rem"><div class="co-lbl">Clinical Channel</div><p>15-patient dispensing program = ~$15,600 supplemental annual revenue per clinic.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6: BUSINESS MODEL -->
+<div class="slide slide-light" data-label="Business Model" data-theme="light">
+  <div class="slide-inner">
+    <div class="eyebrow">Business Model</div>
+    <h2 class="stitle">Three layers. One port. Recurring revenue.</h2>
+    <p class="ssub">Every garment sold is a distribution channel for recurring consumable revenue.</p>
+    <div class="ls">
+      <div class="ly l1"><div class="ly-n">1</div><div class="ly-i"><div class="ly-nm">Garment Base</div><div class="ly-ds">Silicone glove or sock · Inversion cuff seal · Universal port · US 11,602,631 B2</div></div></div>
+      <div class="ly l2"><div class="ly-n">2</div><div class="ly-i"><div class="ly-nm">Enhancer Modules</div><div class="ly-ds">Iontophoresis cap, thermal circulator, sensor pod, ultrasound, fill port — one interface</div></div></div>
+      <div class="ly l3"><div class="ly-n">3</div><div class="ly-i"><div class="ly-nm">Soak Packs & Formulations</div><div class="ly-ds">Salts, botanicals, peptide packs, Rx formulations · 75–85% margin · Recurring flywheel</div></div></div>
+    </div>
+    <div class="tc" style="margin-top:1.25rem">
+      <div>
+        <div class="slbl">Unit Economics</div>
+        <table class="vt"><thead><tr><th>SKU</th><th>Price</th><th>Margin</th></tr></thead><tbody>
+          <tr><td>Hand SOKY Core</td><td>$85</td><td>65–68%</td></tr>
+          <tr><td>Travel System</td><td>$150</td><td>72–77%</td></tr>
+          <tr><td>SOKY Plus (Salts)</td><td>$18–35</td><td>75–85%</td></tr>
+          <tr><td>Peptide Packs</td><td>$35–65</td><td>75–82%</td></tr>
+          <tr><td>SOKY Rx</td><td>$750–1K</td><td>High</td></tr>
+        </tbody></table>
+      </div>
+      <div>
+        <div class="slbl">Platform Expansion</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+          <div style="background:rgba(0,109,119,0.06);border:1px solid rgba(0,109,119,0.15);border-radius:var(--r-sm);padding:.55rem;text-align:center"><div style="font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pool)">Now</div><div style="font-family:var(--head);font-size:12px;font-weight:800">Hands · Feet</div></div>
+          <div style="background:rgba(49,89,138,0.04);border:1px solid rgba(49,89,138,0.12);border-radius:var(--r-sm);padding:.55rem;text-align:center"><div style="font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)">Scale</div><div style="font-family:var(--head);font-size:12px;font-weight:800;color:rgba(17,24,39,0.6)">Arms · Legs</div></div>
+          <div style="background:rgba(104,139,88,0.04);border:1px solid rgba(104,139,88,0.12);border-radius:var(--r-sm);padding:.55rem;text-align:center"><div style="font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green)">Expand</div><div style="font-family:var(--head);font-size:12px;font-weight:800;color:rgba(17,24,39,0.6)">Knees · Elbows</div></div>
+          <div style="background:rgba(179,29,27,0.03);border:1px solid rgba(179,29,27,0.1);border-radius:var(--r-sm);padding:.55rem;text-align:center"><div style="font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--heat)">Beyond</div><div style="font-family:var(--head);font-size:12px;font-weight:800;color:rgba(17,24,39,0.6)">Pelvic</div></div>
+        </div>
+        <div class="co green" style="margin-top:.5rem"><div class="co-lbl">9 Revenue Streams by Year 5</div><p>OTC · Rx · Consumables · App · Licensing · Data · Content · Advertising · Clinical Protocols</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S7: FIRST DROP -->
+<div class="slide slide-light" data-label="First Drop" data-theme="light">
+  <div class="slide-inner">
+    <div class="eyebrow">First Drop · Batch 1</div>
+    <h2 class="stitle">Three SKUs. 200 units.</h2>
+    <p class="ssub">Every offer ships the same patented glove. Pick the path.</p>
+    <div class="skr">
+      <div class="skc res"><img class="skc-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Research Access" loading="lazy" style="object-position:center 60%"><div class="skc-b"><div class="skc-id">_000</div><div class="skc-pr">$45</div><span class="skc-tag tgr">Research · 20 units</span><div class="skc-nm">Research Access</div><div class="skc-ds">Identical glove. 90-day feedback commitment. Application-based.</div></div></div>
+      <div class="skc core"><img class="skc-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Core" loading="lazy" style="object-position:center 45%"><div class="skc-b"><div class="skc-id">_001</div><div class="skc-pr">$85</div><span class="skc-tag tgc">Core · 80 units</span><div class="skc-nm">Hand SOKY</div><div class="skc-ds">One pair, Size M. The essential starting point.</div></div></div>
+      <div class="skc kit"><img class="skc-img" src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="Travel System" loading="lazy"><div class="skc-b"><div class="skc-id">_002</div><div class="skc-pr">$150</div><span class="skc-tag tgk">Travel · 100 units</span><div class="skc-nm">Travel System</div><div class="skc-ds">Gloves + towel + hook + bag. Gift-ready.</div></div></div>
+    </div>
+    <div class="co pool"><div class="co-lbl">Launch Strategy</div><p>Community first. First drop = proof. Sell through → Batch 2 waitlist → Foot SOKY mold (~$15K) funded by revenue. Kickstarter/WeFundr from warm base.</p></div>
+  </div>
+</div>
+
+<!-- S8: TRACTION -->
+<div class="slide slide-dark" data-label="Traction" data-theme="dark">
+  <div class="slide-inner">
+    <div class="eyebrow">Traction</div>
+    <h2 class="stitle">Not hypothetical. Executing now.</h2>
+    <ul class="pl">
+      <li><strong>83.8%</strong> pre-launch interest rate (109 / 130 prospective users)</li>
+      <li><strong>$70K LOI</strong> from leading footcare distributor</li>
+      <li><strong>5 clinicians</strong> actively engaged — protocol conversations underway</li>
+      <li><strong>Dr. Craig Heller</strong> (Stanford) — thermoregulation authority — Research Advisor</li>
+      <li><strong>Dr. Salem Lebada</strong> — board-certified podiatrist — Clinical Advisor</li>
+      <li><strong>Sean Tan</strong> (ex-Huawei) — Manufacturing & Fundraising Advisor</li>
+      <li><strong>TopSheng</strong> (ISO 13485) — manufacturer ready, first mold complete</li>
+      <li><strong>Website live</strong> — campaign assets deployed, 3 SKUs positioned</li>
+    </ul>
+    <div class="sg sg4" style="margin-top:1.25rem">
+      <div class="sc"><div class="sv">$180K</div><div class="sl">Raised to date</div></div>
+      <div class="sc"><div class="sv">2</div><div class="sl">Patents</div></div>
+      <div class="sc"><div class="sv">200</div><div class="sl">Units Batch 1</div></div>
+      <div class="sc"><div class="sv">8 yrs</div><div class="sl">Development</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S9: IP -->
+<div class="slide slide-light" data-label="IP Moat" data-theme="light">
+  <div class="slide-inner">
+    <div class="eyebrow">Intellectual Property</div>
+    <h2 class="stitle">Valid to 2043. No design-around.</h2>
+    <p class="ssub">The full family of frustal geometries is claimed.</p>
+    <div class="ipr">
+      <div class="ipc"><span class="ips ips-i">Issued</span><div class="ipt">US 11,602,631 B2 — Hyperhidrosis Treatment</div><div class="ipd">Filed June 2018. Issued March 2023. <strong>15 claims</strong> — glove, cuff seal, iontophoresis circuit. Valid through 2043.</div></div>
+      <div class="ipc"><span class="ips ips-p">Pending</span><div class="ipt">Platform Patent — Localized Immersion</div><div class="ipd">Provisional filed Dec 2025. Claims <strong>full frustal geometry family</strong> — all body zones, all modalities.</div></div>
+    </div>
+    <div class="ei short" style="margin-top:1.25rem"><img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-18.png" alt="Patent drawing" loading="lazy" style="object-fit:contain;background:#fff;padding:.75rem"><div class="ei-cap">Patent drawing — inversion cuff seal and port assembly</div></div>
+    <div class="co green"><div class="co-lbl">Regulatory</div><p><strong>OTC (Model B/F):</strong> Class I, 510(k) exempt — ready now. <strong>Rx (Model E):</strong> Class II, 510(k) — ISO 13485 via TopSheng.</p></div>
+  </div>
+</div>
+
+<!-- S10: TEAM -->
+<div class="slide slide-light" data-label="Team" data-theme="light">
+  <div class="slide-inner">
+    <div class="eyebrow">The Team</div>
+    <h2 class="stitle">Operators across three continents.</h2>
+    <div class="tg">
+      <div class="tcard"><span class="tbdg bf">Founder · CEO</span><div class="tnm">Kenny Pham</div><div class="trl">Inventor of SOKY. 8 years. Comp. neuroscience (UCR), stem cell biomanufacturing, med device sales.</div></div>
+      <div class="tcard"><span class="tbdg bf">Co-Founder · COO</span><div class="tnm">Kenichiro Nishii</div><div class="trl">Bioengineering. FDA 510(k) at Globizz/CureApp. Regulatory, supply chain. Okayama, Japan.</div></div>
+      <div class="tcard"><span class="tbdg bf">Marketing Director</span><div class="tnm">Chi Le</div><div class="trl">Cerebral (multi-$M/mo acquisition), bitFlyer (500% LTV growth). Go-to-market.</div></div>
+      <div class="tcard"><span class="tbdg bf">Product Design</span><div class="tnm">Hameed Kalvathi</div><div class="trl">Ideate9 founder — 500+ startups, 15 countries, 750+ products. Top 1% CAD globally.</div></div>
+      <div class="tcard"><span class="tbdg ba">Research Advisor</span><div class="tnm">Dr. Craig Heller</div><div class="trl">Stanford Biology. World authority on thermoregulation & palmar AVA vasculature.</div></div>
+      <div class="tcard"><span class="tbdg ba">Clinical Advisor</span><div class="tnm">Dr. Salem Lebada</div><div class="trl">Board-certified podiatrist, orthopedics. Clinical dispensing pathway.</div></div>
+      <div class="tcard"><span class="tbdg ba">Hardware · Fundraising</span><div class="tnm">Sean Tan</div><div class="trl">Ex-Posifa, AiCare, Huawei. Manufacturing strategy, Model E, fundraising.</div></div>
+      <div class="tcard"><span class="tbdg bi">Legal · Investor</span><div class="tnm">Seymour Everett</div><div class="trl">Everett Dorey LLP. $30K invested (~10%). IP prosecution, corporate structure.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S11: VALUATION -->
+<div class="slide slide-light" data-label="Valuation" data-theme="light">
+  <div class="slide-inner">
+    <div class="eyebrow">Valuation & Returns</div>
+    <h2 class="stitle">$3.2M. 113× base return.</h2>
+    <div class="scr">
+      <div class="scc bear"><div class="scc-l">Bear</div><div class="scc-v">$1.5M</div><div class="scc-n">IP moat carries the floor</div></div>
+      <div class="scc base"><div class="scc-l">Base ★</div><div class="scc-v">$3.2M</div><div class="scc-n">First drop succeeds</div></div>
+      <div class="scc bull"><div class="scc-l">Bull</div><div class="scc-v">$6.5M</div><div class="scc-n">LOI converts · Stanford trial</div></div>
+    </div>
+    <table class="vt" style="margin-top:1rem">
+      <thead><tr><th>Period</th><th>Revenue</th><th>Multiple</th><th>Valuation</th><th>Return</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td><strong>Now</strong></td><td>—</td><td>Asset</td><td><strong>$3.2M</strong></td><td>—</td></tr>
+        <tr><td>Year 2</td><td>$3.65M</td><td>3×</td><td>$12M</td><td>3.75×</td></tr>
+        <tr><td>Year 5</td><td>$48.1M</td><td>4×</td><td>$193M</td><td>60×</td></tr>
+        <tr><td>Year 10</td><td>$72M</td><td>5×</td><td>$361M</td><td><strong>113×</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="co" style="margin-top:.75rem"><div class="co-lbl">Blended Valuation Method</div><p>Asset Reconstruction ($1.85M, 35%) + Comparable Transactions ($3.5M, 35%) + Risk-Adjusted DCF ($4.2M, 30%) = <strong>$3.13M weighted → $3.2M base case.</strong></p></div>
+  </div>
+</div>
+
+<!-- S12: THE ASK -->
+<div class="slide slide-accent" data-label="The Ask" data-theme="dark">
+  <div class="slide-inner" style="display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 130px)">
+    <div style="text-align:center;max-width:600px">
+      <div class="eyebrow" style="justify-content:center">The Opportunity</div>
+      <h2 class="stitle" style="color:#fff;text-align:center;margin-bottom:.75rem">"Your hands deserve meaningful care."</h2>
+      <p class="ssub" style="color:rgba(255,255,255,0.6);text-align:center;margin:0 auto 1.75rem;max-width:480px">Patented. Portable. Ready to ship. The most asymmetric entry in the company's history.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;max-width:420px;margin:0 auto 1.75rem">
+        <div><div style="font-family:var(--serif);font-size:22px;color:#fff">$3.2M</div><div style="font-size:8px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:.1em;font-family:var(--sub);font-weight:600">Valuation</div></div>
+        <div><div style="font-family:var(--serif);font-size:22px;color:#fff">113×</div><div style="font-size:8px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:.1em;font-family:var(--sub);font-weight:600">Base Return</div></div>
+        <div><div style="font-family:var(--serif);font-size:22px;color:#fff">$597B+</div><div style="font-size:8px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:.1em;font-family:var(--sub);font-weight:600">TAM</div></div>
+      </div>
+      <div class="ct-btns" style="margin-bottom:1.5rem">
+        <a href="mailto:kenny@nmthera.com" class="ct-btn pri">Contact Kenny Pham</a>
+        <a href="https://nmthera.com" class="ct-btn sec" target="_blank">nmthera.com</a>
+      </div>
+      <div style="font-family:var(--sub);font-size:9px;color:rgba(255,255,255,0.25);line-height:1.7">
+        <strong style="color:rgba(255,255,255,0.35)">NM Therapeutics, Inc.</strong> · Delaware C Corp<br>
+        kenny@nmthera.com · 714-782-2843 · Riverside, CA<br>
+        <span style="font-size:8px;opacity:.7">SOKY supports personal care routines. Not intended to diagnose, treat, cure, or prevent any disease.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<script>
+/* ═══════════════════════════════════
+   HORIZONTAL DECK ENGINE
+   - Translates wheel → horizontal slide change
+   - Arrow keys, click nav, touch swipe
+   - Each slide's inner is independently scrollable
+═══════════════════════════════════ */
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=Array.from(deck.querySelectorAll('.slide'));
+  var total=slides.length;
+  var current=0;
+  var isAnimating=false;
+  var animTimeout=null;
+
+  var prevBtn=document.getElementById('prevBtn');
+  var nextBtn=document.getElementById('nextBtn');
+  var dotRow=document.getElementById('dotRow');
+  var secLbl=document.getElementById('secLbl');
+  var slideNum=document.getElementById('slideNum');
+  var progFill=document.getElementById('progFill');
+  var topbar=document.getElementById('topbar');
+  var bottomNav=document.getElementById('bottomNav');
+
+  // Build dots
+  for(var i=0;i<total;i++){
+    var d=document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.setAttribute('data-idx',i);
+    d.addEventListener('click',function(){goTo(parseInt(this.getAttribute('data-idx')))});
+    dotRow.appendChild(d);
+  }
+  var dots=Array.from(dotRow.querySelectorAll('.dot'));
+
+  function goTo(idx){
+    if(idx<0||idx>=total||idx===current||isAnimating)return;
+    isAnimating=true;
+    current=idx;
+    deck.style.transform='translateX(-'+current*100+'vw)';
+    update();
+    clearTimeout(animTimeout);
+    animTimeout=setTimeout(function(){isAnimating=false},580);
+  }
+
+  function update(){
+    slideNum.textContent=(current+1)+' / '+total;
+    progFill.style.width=((current+1)/total*100)+'%';
+    prevBtn.disabled=current===0;
+    nextBtn.disabled=current===total-1;
+    dots.forEach(function(d,i){
+      d.classList.toggle('active',i===current);
+    });
+    var label=slides[current].getAttribute('data-label')||'';
+    secLbl.textContent=label;
+    var theme=slides[current].getAttribute('data-theme');
+    topbar.classList.toggle('is-dark',theme==='dark');
+    topbar.classList.toggle('is-light',theme==='light');
+    bottomNav.classList.toggle('is-dark',theme==='dark');
+    bottomNav.classList.toggle('is-light',theme==='light');
+  }
+
+  prevBtn.addEventListener('click',function(){goTo(current-1)});
+  nextBtn.addEventListener('click',function(){goTo(current+1)});
+
+  // Keyboard
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();goTo(current+1)}
+    if(e.key==='ArrowLeft'){e.preventDefault();goTo(current-1)}
+  });
+
+  // Wheel → horizontal slide change (only when inner scroll is at boundary)
+  var wheelAccum=0;
+  var wheelTimer=null;
+  var WHEEL_THRESHOLD=80;
+
+  deck.addEventListener('wheel',function(e){
+    var inner=slides[current].querySelector('.slide-inner');
+    // If the inner content is scrollable and not at boundary, let it scroll naturally
+    if(inner&&inner.scrollHeight>inner.clientHeight+2){
+      var atTop=inner.scrollTop<=1;
+      var atBottom=inner.scrollTop+inner.clientHeight>=inner.scrollHeight-2;
+      // Scrolling down and not at bottom → let vertical scroll happen
+      if(e.deltaY>0&&!atBottom){return}
+      // Scrolling up and not at top → let vertical scroll happen
+      if(e.deltaY<0&&!atTop){return}
+    }
+    e.preventDefault();
+    wheelAccum+=e.deltaY||e.deltaX;
+    clearTimeout(wheelTimer);
+    wheelTimer=setTimeout(function(){wheelAccum=0},300);
+    if(Math.abs(wheelAccum)>=WHEEL_THRESHOLD){
+      if(wheelAccum>0)goTo(current+1);
+      else goTo(current-1);
+      wheelAccum=0;
+    }
+  },{passive:false});
+
+  // Touch swipe
+  var touchStartX=null,touchStartY=null,touchStartTime=0;
+  deck.addEventListener('touchstart',function(e){
+    touchStartX=e.touches[0].clientX;
+    touchStartY=e.touches[0].clientY;
+    touchStartTime=Date.now();
+  },{passive:true});
+  deck.addEventListener('touchend',function(e){
+    if(touchStartX===null)return;
+    var dx=touchStartX-e.changedTouches[0].clientX;
+    var dy=touchStartY-e.changedTouches[0].clientY;
+    var dt=Date.now()-touchStartTime;
+    // Only trigger if horizontal swipe is dominant and fast enough
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40&&dt<500){
+      if(dx>0)goTo(current+1);
+      else goTo(current-1);
+    }
+    touchStartX=null;
+  },{passive:true});
+
+  update();
+})();
+
+/* ═══ HERO MUTE ═══ */
+(function(){
+  var btn=document.getElementById('heroMuteBtn'),vid=document.getElementById('heroVid'),lbl=document.getElementById('heroMuteLbl');
+  if(!btn||!vid)return;
+  btn.addEventListener('click',function(){
+    vid.muted=!vid.muted;
+    lbl.textContent=vid.muted?'Unmute':'Mute';
+    var svg=btn.querySelector('svg');
+    if(svg)svg.innerHTML=vid.muted?'<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/>':'<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+  });
+})();
+
+/* ═══ REACTIVE HERO CANVAS ═══ */
+(function(){
+  var canvas=document.getElementById('heroBg');if(!canvas)return;
+  var ctx=canvas.getContext('2d');var video=document.getElementById('heroVid');
+  var slide=canvas.closest('.slide');
+  var isMobile=window.innerWidth<=900;var SCALE=isMobile?0.25:1;var INTERVAL=isMobile?100:0;
+  var w,h,raf,lastDraw=0;
+  function resize(){
+    w=canvas.width=Math.ceil(window.innerWidth*SCALE);
+    h=canvas.height=Math.ceil(window.innerHeight*SCALE);
+    if(isMobile){canvas.style.width=window.innerWidth+'px';canvas.style.height=window.innerHeight+'px'}
+  }
+  resize();window.addEventListener('resize',resize,{passive:true});
+  function tick(ts){
+    raf=requestAnimationFrame(tick);
+    if(!video||!video.videoWidth||video.paused)return;
+    if(isMobile&&ts-lastDraw<INTERVAL)return;lastDraw=ts;
+    var vw=video.videoWidth,vh=video.videoHeight;var scale=Math.max(w/vw,h/vh)*1.06;
+    var dw=vw*scale,dh=vh*scale;ctx.drawImage(video,(w-dw)/2,(h-dh)/2,dw,dh);
+  }
+  if(video){
+    video.addEventListener('loadeddata',function(){if(raf)cancelAnimationFrame(raf);tick(0)});
+    setTimeout(function(){if(!raf)tick(0)},600);
+  }
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){if(raf){cancelAnimationFrame(raf);raf=null}}else if(!raf)tick(0);
+  });
+})();
+</script>
+</body>
+</html>
