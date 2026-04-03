@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOKY by NM Thera — Business Plan Spring 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Mulish:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+/* ═══════════════════════════════════════
+   BSG v1.2 TOKENS
+═══════════════════════════════════════ */
+:root {
+  --navy:    #31598A;
+  --ink:     #111827;
+  --paper:   #F7F7F5;
+  --green:   #688B58;
+  --umber:   #8A6A4D;
+  --almond:  #D4BBA0;
+  --sunlight:#FFD166;
+  --pool:    #006D77;
+  --heat:    #B31D1B;
+  --cool:    #1E3A8A;
+  --electro: #F7C041;
+  --actives: #0D7377;
+  --peptides:#4A5568;
+  --muted:   #667085;
+  --line:    rgba(17,24,39,0.09);
+  --line-md: rgba(17,24,39,0.14);
+  --surface: rgba(255,255,255,0.88);
+  --surface-strong: rgba(255,255,255,0.94);
+  --r-xl: 28px; --r-lg: 20px; --r-md: 14px; --r-sm: 8px; --r-xs: 5px;
+  --shadow:    0 20px 56px rgba(17,24,39,0.10);
+  --shadow-sm: 0 3px 14px rgba(17,24,39,0.06);
+  --max: 1160px;
+  --topbar-h: 76px;
+  --head: 'Montserrat', system-ui, sans-serif;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sub:  'Mulish', system-ui, sans-serif;
+  --body: 'Inter', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+
+/* Body */
+body {
+  font-family: var(--body);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255,209,102,0.20), transparent 22%),
+    radial-gradient(circle at 85%  8%, rgba(104,139,88,0.16), transparent 18%),
+    radial-gradient(circle at 50% 100%, rgba(49,89,138,0.12), transparent 28%),
+    linear-gradient(180deg, #fcfcfb 0%, var(--paper) 38%, #f3f3ef 100%);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.4;
+  background-image:
+    linear-gradient(rgba(17,24,39,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17,24,39,0.018) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.75), transparent 85%);
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,0.75), transparent 85%);
+}
+a { color: inherit; text-decoration: none; }
+.shell { position: relative; z-index: 1; width: 100%; overflow-x: hidden; }
+
+/* ── SKIP LINK ── */
+.skip-link {
+  position: absolute; top: -100%; left: 16px; z-index: 9999;
+  padding: 10px 18px; background: var(--navy); color: #fff;
+  font-size: 13px; border-radius: 0 0 var(--r-md) var(--r-md);
+  text-decoration: none; transition: top .2s ease;
+}
+.skip-link:focus { top: 0; }
+
+/* ── TOPBAR ── */
+.topbar {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  width: min(calc(100vw - 24px), 1280px); z-index: 40; pointer-events: none;
+}
+.topbar-inner {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.82);
+  border-radius: 18px;
+  box-shadow: 0 10px 32px rgba(17,24,39,0.08);
+  pointer-events: auto;
+  transition: background .3s, border-color .3s;
+}
+@supports (backdrop-filter: blur(14px)) {
+  .topbar-inner { background: rgba(255,255,255,0.56); backdrop-filter: blur(14px); }
+}
+.topbar.is-dark .topbar-inner { background: rgba(12,21,32,0.7); border-color: rgba(255,255,255,0.1); }
+.brandline { display: flex; align-items: center; gap: 12px; min-width: 0; flex-shrink: 0; }
+.drop {
+  width: 14px; height: 20px;
+  border: 2px solid var(--navy);
+  border-radius: 12px 12px 14px 14px;
+  transform: rotate(45deg); position: relative; flex: 0 0 auto;
+}
+.drop::after {
+  content: ''; position: absolute; inset: 3px;
+  border-radius: 10px 10px 12px 12px;
+  border: 1px solid rgba(0,109,119,0.35);
+}
+.topbar.is-dark .drop { border-color: rgba(255,255,255,0.6); }
+.topbar.is-dark .drop::after { border-color: rgba(131,197,190,0.4); }
+.brandline strong {
+  font-family: var(--head); font-size: 12px;
+  letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
+}
+.topbar.is-dark .brandline strong { color: rgba(255,255,255,0.8); }
+.progress-wrap { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+.progress-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); white-space: nowrap; }
+.topbar.is-dark .progress-label { color: rgba(255,255,255,0.4); }
+.progress { height: 8px; flex: 1; min-width: 40px; border-radius: 999px; background: rgba(17,24,39,0.08); overflow: hidden; }
+.topbar.is-dark .progress { background: rgba(255,255,255,0.1); }
+.progress-bar {
+  width: 0%; height: 100%; border-radius: inherit;
+  background: linear-gradient(90deg, var(--navy), var(--pool), var(--green));
+  transition: width .2s ease;
+}
+.topbar-badge {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--navy), var(--pool)); color: #fff;
+  font-family: var(--head); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.10em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
+}
+.topbar-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.75); animation: livepulse 2s ease-in-out infinite;
+}
+@keyframes livepulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+/* ── SIDE NAV ── */
+.side-nav {
+  position: fixed; top: 120px;
+  left: max(16px, calc((100vw - var(--max)) / 2 - 110px));
+  width: 82px; z-index: 20; display: flex; flex-direction: column; gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.side-nav.is-visible { opacity: 1; pointer-events: auto; }
+.side-nav a {
+  font-size: 9.5px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.11em;
+  color: rgba(17,24,39,0.4); transition: color .2s ease, transform .2s ease;
+  padding-left: 14px; position: relative; line-height: 1.3;
+}
+.side-nav a::before {
+  content: ''; position: absolute; left: 0; top: 50%;
+  width: 7px; height: 7px; border-radius: 50%;
+  border: 1px solid rgba(17,24,39,0.2); transform: translateY(-50%);
+  background: transparent; transition: all .2s ease;
+}
+.side-nav a.active { color: var(--ink); transform: translateX(2px); }
+.side-nav a.active::before {
+  background: linear-gradient(180deg, var(--navy), var(--green));
+  border-color: transparent; box-shadow: 0 0 0 4px rgba(49,89,138,0.08);
+}
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  background: #0c1520;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 3rem 3.5rem;
+}
+.cover-caustic { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.cover-caustic::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 60% at 20% 110%, rgba(49,89,138,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 80% -10%, rgba(0,109,119,0.28) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(30,58,138,0.35) 0%, transparent 65%),
+    linear-gradient(175deg, #0c1520 0%, #0e1e2e 40%, #0a1a28 100%);
+}
+.cover-caustic::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 35% 25% at 72% 18%, rgba(179,29,27,0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 35% at 28% 72%, rgba(30,58,138,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 25% 20% at 88% 65%, rgba(49,89,138,0.14) 0%, transparent 55%);
+  animation: caustic-shift 12s ease-in-out infinite alternate;
+}
+@keyframes caustic-shift {
+  0%   { opacity: 0.7; transform: scale(1) rotate(0deg); }
+  50%  { opacity: 1; transform: scale(1.04) rotate(0.5deg); }
+  100% { opacity: 0.8; transform: scale(0.98) rotate(-0.3deg); }
+}
+.caustic-ray {
+  position: absolute; border-radius: 50%;
+  filter: blur(32px); animation: ray-float 8s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+.caustic-ray:nth-child(1) { width: 320px; height: 180px; background: radial-gradient(ellipse, rgba(49,89,138,0.22) 0%, transparent 70%); top: 15%; left: 55%; animation-duration: 9s; }
+.caustic-ray:nth-child(2) { width: 200px; height: 120px; background: radial-gradient(ellipse, rgba(0,109,119,0.18) 0%, transparent 70%); top: 60%; left: 20%; animation-delay: -3s; animation-duration: 7s; }
+.caustic-ray:nth-child(3) { width: 160px; height: 90px; background: radial-gradient(ellipse, rgba(179,29,27,0.10) 0%, transparent 70%); top: 30%; left: 75%; animation-delay: -6s; animation-duration: 11s; }
+.caustic-ray:nth-child(4) { width: 260px; height: 140px; background: radial-gradient(ellipse, rgba(30,58,138,0.15) 0%, transparent 70%); top: 75%; left: 60%; animation-delay: -2s; animation-duration: 13s; }
+.caustic-ray:nth-child(5) { width: 180px; height: 100px; background: radial-gradient(ellipse, rgba(49,89,138,0.16) 0%, transparent 65%); top: 8%; left: 12%; animation-delay: -4.5s; animation-duration: 10s; }
+@keyframes ray-float {
+  0%   { transform: translate(0,0) scale(1); }
+  33%  { transform: translate(18px,-22px) scale(1.08); }
+  66%  { transform: translate(-12px,14px) scale(0.94); }
+  100% { transform: translate(8px,-8px) scale(1.03); }
+}
+.caustic-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.008) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,0,0,0.5), transparent);
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,0,0,0.5), transparent);
+  animation: grid-shift 20s linear infinite;
+}
+@keyframes grid-shift { 0% { transform: translate(0,0); } 100% { transform: translate(40px,40px); } }
+.cover-top { position: relative; z-index: 2; display: flex; align-items: center; gap: 16px; }
+.cover-brand { font-family: var(--head); font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.cover-brand span { color: rgba(255,255,255,0.25); margin: 0 6px; }
+.cover-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.15); flex-shrink: 0; }
+.cover-doc-type { font-family: var(--sub); font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.cover-body { position: relative; z-index: 2; }
+.cover-eyebrow { font-family: var(--sub); font-size: 9.5px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pool); margin-bottom: 1.6rem; display: flex; align-items: center; gap: 12px; }
+.cover-eyebrow::after { content: ''; height: 1px; width: 40px; background: var(--pool); opacity: 0.6; }
+.cover-soky { font-family: var(--head); font-size: clamp(64px,14vw,148px); font-weight: 900; line-height: 0.9; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; margin-bottom: 0.5rem; }
+.cover-tagline { font-family: var(--head); font-size: clamp(14px,2.2vw,20px); font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 2rem; }
+.cover-tagline strong { font-weight: 600; color: rgba(255,255,255,0.7); }
+.cover-desc { font-family: var(--body); font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 500px; margin-bottom: 2rem; }
+.cover-desc em { font-style: italic; color: rgba(255,255,255,0.7); }
+.cover-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.cover-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; padding: 5px 13px; font-family: var(--sub); font-size: 9.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.cover-badge.active { background: rgba(49,89,138,0.3); border-color: rgba(49,89,138,0.5); color: rgba(255,255,255,0.75); }
+.cover-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--pool); flex-shrink: 0; }
+.cover-badge.active::before { background: #7bb8e8; }
+.cover-bottom { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
+.cover-meta { font-family: var(--sub); font-size: 10.5px; color: rgba(255,255,255,0.3); line-height: 1.9; }
+.cover-meta strong { color: rgba(255,255,255,0.5); font-weight: 600; }
+.cover-contact { text-align: right; font-family: var(--sub); font-size: 10.5px; color: rgba(255,255,255,0.3); line-height: 1.9; }
+.cover-contact a { color: rgba(255,255,255,0.45); }
+
+/* ── DOCUMENT WRAPPER ── */
+.doc-shell { padding: 4rem 0 8rem; }
+.container { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
+.conf-bar {
+  max-width: var(--max); margin: 0 auto 3.5rem;
+  width: min(calc(100% - 48px), var(--max));
+  border: 1px solid var(--line-md); border-radius: var(--r-xs); text-align: center;
+  padding: 0.4rem 1rem; font-family: var(--sub); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ── SECTION GRID LAYOUT ── */
+.section { padding: 80px 0; border-top: 1px solid var(--line); }
+.section:first-child { border-top: none; padding-top: 40px; }
+.section-grid {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+.section-meta { position: sticky; top: calc(var(--topbar-h) + 24px); }
+.section-id {
+  font-family: var(--sub); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy);
+  display: block; margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--serif); font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 400; line-height: 1.15; color: var(--ink); margin-bottom: 10px;
+}
+.section-sub { font-size: 13px; color: var(--muted); line-height: 1.55; max-width: 20ch; }
+.content-stack { display: grid; gap: 18px; }
+
+/* ── TYPOGRAPHY ── */
+h3 {
+  font-family: var(--sub); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--navy); margin-bottom: 0.75rem; margin-top: 0.5rem;
+}
+p { font-family: var(--body); font-size: 14px; color: rgba(17,24,39,0.78); line-height: 1.75; overflow-wrap: break-word; }
+strong { color: var(--ink); font-weight: 600; }
+.lede {
+  font-family: var(--serif); font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.45; color: rgba(17,24,39,0.88); font-weight: 400;
+  font-style: italic;
+}
+.body-text { font-size: 14px; color: rgba(17,24,39,0.78); line-height: 1.75; }
+
+/* ── PULL QUOTE ── */
+.pull-quote { border-left: 3px solid var(--navy); padding: 0.4rem 0 0.4rem 1.4rem; }
+.pull-quote blockquote { font-family: var(--serif); font-size: 17px; font-style: italic; color: var(--ink); line-height: 1.55; margin-bottom: 0.4rem; }
+.pull-quote cite { font-family: var(--sub); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-style: normal; }
+
+/* ── CALLOUTS ── */
+.callout { border-left: 3px solid var(--navy); background: rgba(49,89,138,0.05); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 1rem 1.3rem; }
+.callout.heat    { border-left-color: var(--heat);    background: rgba(179,29,27,0.04); }
+.callout.pool    { border-left-color: var(--pool);    background: rgba(0,109,119,0.05); }
+.callout.green   { border-left-color: var(--green);   background: rgba(104,139,88,0.05); }
+.callout.sun     { border-left-color: var(--sunlight); background: rgba(255,209,102,0.07); }
+.callout-lbl { font-family: var(--sub); font-size: 9.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.4rem; }
+.callout.heat  .callout-lbl { color: var(--heat); }
+.callout.pool  .callout-lbl { color: var(--pool); }
+.callout.green .callout-lbl { color: var(--green); }
+.callout.sun   .callout-lbl { color: #7a5c00; }
+.callout p { font-size: 13.5px; }
+
+/* ── QUOTE BAND ── */
+.quote-band {
+  padding: 28px 30px;
+  background: linear-gradient(135deg, rgba(49,89,138,0.94), rgba(0,109,119,0.92));
+  color: white; border-radius: var(--r-xl);
+  box-shadow: 0 24px 80px rgba(0,48,61,0.24); overflow: hidden; position: relative;
+}
+.quote-band::after {
+  content: ''; position: absolute; right: -60px; top: -40px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+}
+.quote-band blockquote { position: relative; z-index: 1; font-family: var(--serif); font-size: clamp(17px,1.8vw,22px); line-height: 1.5; font-style: italic; margin-bottom: 10px; }
+.quote-band cite { position: relative; z-index: 1; display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; font-style: normal; font-family: var(--sub); font-weight: 600; }
+
+/* ── STATS ── */
+.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.stat { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 0.9rem 0.75rem; text-align: center; box-shadow: var(--shadow-sm); }
+.stat-val { font-family: var(--head); font-size: 24px; font-weight: 800; color: var(--ink); line-height: 1.1; margin-bottom: 0.2rem; }
+.stat-val.navy  { color: var(--navy); }
+.stat-val.pool  { color: var(--pool); }
+.stat-val.green { color: var(--green); }
+.stat-val.heat  { color: var(--heat); }
+.stat-lbl { font-family: var(--sub); font-size: 10.5px; color: var(--muted); line-height: 1.4; }
+
+/* ── METRIC CARDS ── */
+.metric-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.metric-card { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.25rem 1.25rem 1rem; box-shadow: var(--shadow-sm); }
+.metric-card.featured { background: #1a2e4a; border-color: #1a2e4a; }
+.metric-card.featured .metric-label { color: rgba(255,255,255,0.45); }
+.metric-card.featured .metric-value { color: #fff; }
+.metric-card.featured .metric-note { color: rgba(255,255,255,0.5); }
+.metric-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; font-family: var(--sub); }
+.metric-value { font-family: var(--serif); font-size: 30px; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+.metric-note { font-size: 11.5px; color: var(--muted); }
+
+/* ── 5-STEP RITUAL BAR ── */
+.ritual-bar {
+  display: grid; grid-template-columns: repeat(5,1fr);
+  background: var(--surface-strong); border: 1px solid var(--line);
+  border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.ritual-step { padding: 1.1rem 0.75rem; border-right: 1px solid var(--line); text-align: center; }
+.ritual-step:last-child { border-right: none; }
+.ritual-step.don-step { background: rgba(0,109,119,0.04); border-right: 2px solid rgba(0,109,119,0.18); }
+.ritual-n { font-family: var(--head); font-size: 26px; font-weight: 900; color: var(--navy); line-height: 1; margin-bottom: 0.25rem; }
+.ritual-step.don-step .ritual-n { color: var(--pool); }
+.ritual-word { font-family: var(--sub); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.35rem; }
+.ritual-desc { font-family: var(--body); font-size: 10.5px; color: var(--muted); line-height: 1.5; }
+
+/* ── MODE CHIPS ── */
+.modes { display: flex; gap: 8px; flex-wrap: wrap; }
+.mode-chip { display: flex; flex-direction: column; align-items: center; gap: 5px; background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 0.8rem 0.7rem 0.65rem; box-shadow: var(--shadow-sm); flex: 1; min-width: 64px; }
+.mode-icon { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; }
+.mode-icon svg { width: 100%; height: 100%; }
+.mode-chip-label { font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.mode-chip.heat-chip    .mode-chip-label { color: var(--heat); }
+.mode-chip.cool-chip    .mode-chip-label { color: var(--cool); }
+.mode-chip.electro-chip .mode-chip-label { color: #7a5c00; }
+.mode-chip.bot-chip     .mode-chip-label { color: var(--green); }
+.mode-chip.salts-chip   .mode-chip-label { color: var(--umber); }
+.mode-chip.actives-chip .mode-chip-label { color: var(--actives); }
+.mode-chip.peptide-chip .mode-chip-label { color: var(--peptides); }
+.mode-chip-desc { font-family: var(--body); font-size: 9.5px; color: var(--muted); line-height: 1.4; text-align: center; }
+
+/* ── SKU CARDS ── */
+.sku-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.sku-card { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-sm); position: relative; }
+.sku-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--navy), var(--pool)); }
+.sku-card.research-card::before { background: linear-gradient(90deg, var(--pool), var(--green)); }
+.sku-body { padding: 1.2rem; }
+.sku-id { font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; word-break: break-all; }
+.sku-price { font-family: var(--serif); font-size: 36px; color: var(--ink); line-height: 1; margin-bottom: 0.3rem; }
+.sku-tag { display: inline-flex; align-items: center; font-family: var(--sub); font-size: 8.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; margin-bottom: 0.45rem; }
+.sku-tag.research { background: rgba(0,109,119,0.1); color: var(--pool); }
+.sku-tag.core { background: rgba(49,89,138,0.1); color: var(--navy); }
+.sku-tag.kit { background: rgba(104,139,88,0.1); color: var(--green); }
+.sku-name { font-family: var(--sub); font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; }
+.sku-desc { font-family: var(--body); font-size: 11.5px; color: var(--muted); line-height: 1.5; margin-bottom: 0.6rem; }
+.sku-persona { font-family: var(--body); font-size: 10.5px; color: rgba(17,24,39,0.5); line-height: 1.5; font-style: italic; border-top: 1px solid var(--line); padding-top: 0.5rem; }
+.sku-persona::before { content: 'Persona — '; font-style: normal; font-weight: 600; color: var(--muted); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--sub); }
+
+/* ── BATCH ALLOC BAR ── */
+.batch-alloc { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.1rem 1.2rem; box-shadow: var(--shadow-sm); }
+.batch-head { font-family: var(--sub); font-size: 9.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.6rem; }
+.batch-bar { display: flex; height: 8px; border-radius: 999px; overflow: hidden; gap: 2px; margin-bottom: 0.5rem; }
+.batch-seg { border-radius: 999px; }
+.batch-labels { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.batch-lbl { font-family: var(--sub); font-size: 10px; font-weight: 600; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+.batch-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── ROADMAP TRACKS ── */
+.roadmap-track { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+.track-head {
+  display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.9rem 1.15rem;
+  border-bottom: 1px solid var(--line); background: rgba(49,89,138,0.03);
+  flex-wrap: wrap;
+}
+.track-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+.dot-c { background: var(--green); } .dot-r { background: var(--navy); } .dot-x { background: var(--heat); }
+.track-title { font-family: var(--sub); font-size: 12px; font-weight: 700; color: var(--ink); flex: 1; min-width: 0; overflow-wrap: break-word; }
+.track-cost  { font-family: var(--sub); font-size: 10px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.track-items { padding: 0.75rem 1.15rem; }
+.track-item { font-family: var(--body); font-size: 13px; color: rgba(17,24,39,0.75); padding: 0.35rem 0; border-bottom: 1px solid var(--line); display: flex; gap: 0.7rem; align-items: baseline; overflow-wrap: break-word; }
+.track-item:last-child { border-bottom: none; }
+.track-item::before { content: '→'; font-size: 11px; color: var(--navy); flex-shrink: 0; }
+.track-note { font-family: var(--body); font-size: 11.5px; color: var(--muted); font-style: italic; padding: 0.65rem 1.15rem 0.8rem; border-top: 1px solid var(--line); background: rgba(49,89,138,0.02); }
+
+/* ── MOLD CASCADE ── */
+.mold-cascade { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.mold-phase { background: var(--surface-strong); border: 1px solid var(--line); border-top: 3px solid transparent; border-radius: 0 0 var(--r-md) var(--r-md); padding: 1rem; box-shadow: var(--shadow-sm); }
+.mold-phase.p1 { border-top-color: var(--pool); } .mold-phase.p2 { border-top-color: var(--navy); } .mold-phase.p3 { border-top-color: var(--green); } .mold-phase.p4 { border-top-color: var(--heat); }
+.mold-phase-lbl { font-family: var(--sub); font-size: 8px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+.mold-phase-title { font-family: var(--head); font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 0.2rem; }
+.mold-phase-cost { font-family: var(--serif); font-size: 13px; color: var(--navy); margin-bottom: 0.45rem; }
+.mold-phase-desc { font-family: var(--body); font-size: 11px; color: var(--muted); line-height: 1.5; margin-bottom: 0.5rem; }
+.mold-phase-items { list-style: none; }
+.mold-phase-items li { font-family: var(--body); font-size: 10.5px; color: rgba(17,24,39,0.7); padding: 0.15rem 0 0.15rem 1em; position: relative; }
+.mold-phase-items li::before { content: '·'; position: absolute; left: 0; color: var(--muted); }
+
+/* ── RLP GRID ── */
+.rlp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.rlp-item { background: rgba(49,89,138,0.03); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 0.8rem; }
+.rlp-code { font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.2rem; }
+.rlp-name { font-family: var(--sub); font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 0.25rem; }
+.rlp-desc { font-family: var(--body); font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+/* ── IP TABLE + MOAT PIPS ── */
+.ip-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ip-table th { font-family: var(--sub); text-align: left; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0.6rem 0.9rem; border-bottom: 1.5px solid var(--line-md); background: rgba(49,89,138,0.04); }
+.ip-table td { padding: 0.75rem 0.9rem; border-bottom: 1px solid var(--line); color: rgba(17,24,39,0.78); vertical-align: top; font-family: var(--body); }
+.ip-table tr:last-child td { border-bottom: none; }
+.pb { display: inline-flex; align-items: center; font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+.pb-issued     { background: rgba(104,139,88,0.15); color: var(--green); }
+.pb-pending    { background: rgba(247,209,102,0.2);  color: #7a5c00; }
+.pb-registered { background: rgba(49,89,138,0.12);  color: var(--navy); }
+.moat-pips { display: flex; gap: 3px; margin-top: 6px; }
+.moat-pip { width: 18px; height: 4px; border-radius: 2px; background: var(--line-md); }
+.moat-pip.filled { background: var(--pool); }
+
+/* ── PEOPLE GRID ── */
+.people-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.person { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1rem 1.1rem; box-shadow: var(--shadow-sm); }
+.person.hl-navy   { border-color: var(--navy); }
+.person.hl-pool   { border-color: var(--pool); }
+.person.hl-umber  { border-color: var(--umber); }
+.person-badge { display: inline-flex; align-items: center; font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; margin-bottom: 0.4rem; }
+.badge-founder  { background: rgba(49,89,138,0.1); color: var(--navy); }
+.badge-advisor  { background: rgba(0,109,119,0.1); color: var(--pool); }
+.badge-investor { background: rgba(138,106,77,0.1); color: var(--umber); }
+.person-name { font-family: var(--sub); font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.person-role { font-family: var(--body); font-size: 11.5px; color: var(--muted); margin-bottom: 0.35rem; }
+.person-eq   { font-family: var(--serif); font-size: 14px; color: var(--navy); margin-bottom: 0.45rem; }
+.person-note { font-family: var(--body); font-size: 11.5px; color: rgba(17,24,39,0.68); line-height: 1.5; }
+
+/* ── DATA TABLES ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { font-family: var(--sub); text-align: left; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0.55rem 0.8rem; border-bottom: 1.5px solid var(--line-md); background: rgba(49,89,138,0.04); }
+.data-table td { font-family: var(--body); padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--line); color: rgba(17,24,39,0.78); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr.row-hl td { background: rgba(49,89,138,0.06); font-weight: 600; color: var(--navy); }
+
+/* ── VENDOR LIST ── */
+.vendor-list { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; background: var(--surface-strong); }
+.vendor-row { display: grid; grid-template-columns: 145px 1fr; border-bottom: 1px solid var(--line); }
+.vendor-row:last-child { border-bottom: none; }
+.vendor-name { font-family: var(--sub); font-size: 12.5px; font-weight: 700; color: var(--ink); padding: 0.7rem 0.85rem 0.7rem 1.1rem; border-right: 1px solid var(--line); }
+.vendor-desc { font-family: var(--body); font-size: 12.5px; color: rgba(17,24,39,0.75); padding: 0.7rem 1rem; line-height: 1.5; }
+
+/* ── PHASE CARDS ── */
+.phases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.phase { background: var(--surface-strong); border: 1px solid var(--line); border-top: 3px solid transparent; border-radius: 0 0 var(--r-md) var(--r-md); padding: 1.1rem; box-shadow: var(--shadow-sm); }
+.phase.now    { border-top-color: var(--heat); }
+.phase.near   { border-top-color: var(--sunlight); }
+.phase.growth { border-top-color: var(--navy); }
+.phase-lbl   { font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.25rem; }
+.phase-title { font-family: var(--serif); font-size: 20px; color: var(--ink); margin-bottom: 0.5rem; }
+.phase-desc  { font-family: var(--body); font-size: 11.5px; color: var(--muted); line-height: 1.55; margin-bottom: 0.8rem; }
+.phase-items { list-style: none; }
+.phase-items li { font-family: var(--body); font-size: 11px; color: rgba(17,24,39,0.75); padding: 0.2rem 0 0.2rem 1em; position: relative; }
+.phase-items li::before { content: '·'; position: absolute; left: 0; color: var(--muted); }
+
+/* ── PROOF LIST ── */
+.proof-list { list-style: none; }
+.proof-list li { font-family: var(--body); font-size: 13.5px; color: rgba(17,24,39,0.78); padding: 0.5rem 0 0.5rem 1.75rem; border-bottom: 1px solid var(--line); position: relative; overflow-wrap: break-word; }
+.proof-list li:last-child { border-bottom: none; }
+.proof-list li::before { content: '✓'; position: absolute; left: 0; font-size: 11px; color: var(--green); font-weight: 700; top: 0.58rem; }
+
+/* ── ANIMATED TAM BARS ── */
+.tam-row { display: grid; grid-template-columns: 150px 1fr 70px; align-items: center; gap: 12px; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+.tam-row:last-child { border-bottom: none; }
+.tam-label { font-family: var(--sub); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; color: var(--ink); }
+.tam-bar-wrap { height: 6px; background: var(--line-md); border-radius: 999px; overflow: hidden; }
+.tam-bar { height: 100%; border-radius: 999px; width: 0%; transition: width 1.4s cubic-bezier(0.34,1.2,0.64,1); }
+.tam-bar.tam  { background: linear-gradient(90deg, var(--navy), var(--pool)); }
+.tam-bar.sam  { background: linear-gradient(90deg, var(--pool), var(--green)); }
+.tam-bar.som  { background: linear-gradient(90deg, var(--green), var(--sunlight)); }
+.tam-val { font-family: var(--serif); font-size: 13px; color: var(--navy); text-align: right; white-space: nowrap; }
+
+/* ── AMAZON BENCHMARK BARS ── */
+.bar-row { display: grid; grid-template-columns: 130px 1fr 60px; align-items: center; gap: 10px; padding: 0.4rem 0; }
+.bar-name { font-family: var(--body); font-size: 12px; color: var(--muted); }
+.bar-name.nm { font-weight: 700; color: var(--navy); }
+.bar-outer { height: 8px; background: var(--line-md); border-radius: 999px; overflow: hidden; }
+.bar-inner { height: 100%; border-radius: 999px; width: 0%; transition: width 1.3s cubic-bezier(0.34,1.2,0.64,1); }
+.bar-val { font-family: var(--sub); font-size: 11px; font-weight: 700; color: var(--muted); text-align: right; }
+.bar-val.nm { color: var(--navy); }
+
+/* ── CHART WRAPS ── */
+.chart-wrap { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.5rem 1.5rem 1.25rem; box-shadow: var(--shadow-sm); }
+.chart-title { font-family: var(--sub); font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.chart-subtitle { font-size: 11.5px; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.5; overflow-wrap: break-word; }
+.chart-container { position: relative; width: 100%; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 0.75rem; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); font-family: var(--sub); }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.legend-line { width: 20px; height: 3px; border-radius: 2px; flex-shrink: 0; }
+
+/* ── SCENARIO CARDS ── */
+.scenario-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.scenario-card { border-radius: var(--r-md); padding: 1.4rem 1.2rem; text-align: center; border: 1px solid var(--line); }
+.scenario-card.bear { background: rgba(179,29,27,0.05); border-color: rgba(179,29,27,0.15); }
+.scenario-card.base { background: var(--surface-strong); border-color: var(--navy); border-width: 2px; box-shadow: var(--shadow); }
+.scenario-card.bull { background: rgba(104,139,88,0.06); border-color: rgba(104,139,88,0.2); }
+.scenario-label { font-family: var(--sub); font-size: 9.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.65rem; }
+.scenario-card.bear .scenario-label { color: var(--heat); }
+.scenario-card.base .scenario-label { color: var(--navy); }
+.scenario-card.bull .scenario-label { color: var(--green); }
+.scenario-value { font-family: var(--serif); font-size: 38px; margin-bottom: 4px; }
+.scenario-card.bear .scenario-value { color: var(--heat); }
+.scenario-card.base .scenario-value { color: var(--navy); }
+.scenario-card.bull .scenario-value { color: var(--green); }
+.scenario-note { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+
+/* ── METHOD CARDS ── */
+.method-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.method-card { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.2rem; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; }
+.method-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.method-card.m1::before { background: var(--pool); }
+.method-card.m2::before { background: var(--navy); }
+.method-card.m3::before { background: var(--green); }
+.method-weight { font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+.method-name { font-family: var(--sub); font-size: 11.5px; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; line-height: 1.4; }
+.method-val { font-family: var(--serif); font-size: 28px; color: var(--navy); line-height: 1; margin-bottom: 0.5rem; }
+.method-desc { font-family: var(--body); font-size: 11px; color: var(--muted); line-height: 1.55; }
+
+/* ── RETURN PROFILE ── */
+.return-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.return-card { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1.1rem; box-shadow: var(--shadow-sm); }
+.return-entry { font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+.return-val-row { font-family: var(--serif); font-size: 14px; color: var(--navy); margin-bottom: 0.6rem; }
+.return-multiples { display: flex; gap: 8px; align-items: flex-end; }
+.return-mult { text-align: center; flex: 1; }
+.return-mult-val { font-family: var(--serif); font-size: 22px; line-height: 1; }
+.return-mult-lbl { font-family: var(--sub); font-size: 8px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.return-mult.bear-m  .return-mult-val { color: var(--heat); }
+.return-mult.base-m  .return-mult-val { color: var(--navy); }
+.return-mult.bull-m  .return-mult-val { color: var(--green); }
+.return-mult-divider { width: 1px; background: var(--line); align-self: stretch; }
+
+/* ── RISK GRID ── */
+.risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.risk-item { background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); padding: 1rem; box-shadow: var(--shadow-sm); }
+.risk-item.high { border-left: 3px solid var(--heat); }
+.risk-item.med  { border-left: 3px solid var(--sunlight); }
+.risk-item.low  { border-left: 3px solid var(--green); }
+.risk-item.opp  { border-left: 3px solid var(--pool); }
+.risk-label { font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.risk-item.high .risk-label { color: var(--heat); }
+.risk-item.med  .risk-label { color: #7a5c00; }
+.risk-item.low  .risk-label { color: var(--green); }
+.risk-item.opp  .risk-label { color: var(--pool); }
+.risk-title { font-family: var(--sub); font-size: 12.5px; font-weight: 700; color: var(--ink); margin-bottom: 0.3rem; }
+.risk-desc  { font-family: var(--body); font-size: 11.5px; color: var(--muted); line-height: 1.55; }
+
+/* ── ANALYST QUOTE ── */
+.analyst-quote { background: rgba(49,89,138,0.05); border: 1px solid rgba(49,89,138,0.15); border-radius: var(--r-md); padding: 1.5rem 1.75rem; }
+.analyst-quote-lbl { font-family: var(--sub); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.75rem; opacity: 0.7; }
+.analyst-quote blockquote { font-family: var(--serif); font-size: 15px; font-style: italic; color: var(--ink); line-height: 1.65; }
+
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 2.25rem; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--line-md); }
+.timeline-item { position: relative; margin-bottom: 1.75rem; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot {
+  position: absolute; left: -2.25rem; top: 3px;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: #fff;
+}
+.timeline-dot.ip      { background: var(--sunlight); color: #7a5c00; }
+.timeline-dot.product { background: var(--heat); }
+.timeline-dot.team    { background: var(--navy); }
+.timeline-dot.launch  { background: var(--green); }
+.timeline-year { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; font-family: var(--sub); }
+.timeline-event { font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 3px; font-family: var(--sub); }
+.timeline-desc { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+.timeline-val { display: inline-flex; align-items: center; gap: 5px; margin-top: 5px; font-size: 11.5px; font-weight: 600; color: var(--pool); font-family: var(--sub); }
+
+/* ── PHASE 0 TIMELINE GRID ── */
+.phase0-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+}
+
+/* ── FOOTNOTE ── */
+.footnote { border-top: 1px solid var(--line); padding-top: 1.75rem; margin-top: 3rem; font-family: var(--body); font-size: 11px; color: var(--muted); line-height: 1.7; }
+.manifesto-divider { border: none; border-top: 1px solid var(--line); margin: 2rem 0; position: relative; }
+.manifesto-divider::after { content: '· · ·'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--paper); padding: 0 1rem; font-family: var(--sub); font-size: 10px; color: var(--line-md); letter-spacing: 0.3em; }
+
+/* ── SCROLL MARGIN ── */
+.section { scroll-margin-top: calc(var(--topbar-h) + 16px); }
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── TOC ── */
+.toc-inline { display: flex; flex-wrap: wrap; gap: 6px; padding: 1rem 1.2rem; background: var(--surface-strong); border: 1px solid var(--line); border-radius: var(--r-md); }
+.toc-link { font-family: var(--sub); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); transition: all .15s; }
+.toc-link:hover { color: var(--navy); border-color: rgba(49,89,138,0.3); background: rgba(49,89,138,0.04); }
+
+/* ── CHART HEIGHT CLASSES ── */
+.chart-h-xl { height: 320px; }
+.chart-h-lg { height: 280px; }
+.chart-h-md { height: 260px; }
+.chart-h-sm { height: 220px; }
+
+/* ── TABLE SCROLL WRAPPER ── */
+.tbl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; }
+.tbl-scroll .data-table,
+.tbl-scroll .ip-table { min-width: 540px; }
+.tbl-scroll.wide .data-table { min-width: 680px; }
+
+/* ── TIMELINE GRID ── */
+.timeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+
+/* ════════════════════════════════
+   RESPONSIVE — 1200px
+════════════════════════════════ */
+@media (max-width: 1200px) {
+  .side-nav { display: none; }
+}
+
+/* ════════════════════════════════
+   RESPONSIVE — 900px (tablet)
+════════════════════════════════ */
+@media (max-width: 900px) {
+  :root { --topbar-h: 60px; }
+
+  .section { padding: 56px 0; }
+  .section-grid { grid-template-columns: 1fr; gap: 20px; }
+  .section-meta { position: static; padding-bottom: 0; }
+  .section-meta .section-id { margin-bottom: 6px; }
+  .section-title { font-size: clamp(20px, 4vw, 28px); }
+
+  .topbar { top: 12px; }
+  .topbar-inner { padding: 10px 14px; gap: 10px; }
+  .topbar-badge { padding: 5px 10px; font-size: 9px; }
+  .progress-label { display: none; }
+
+  .cover { padding: 1.75rem 1.5rem; }
+  .cover-bottom { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .cover-contact { text-align: left; }
+
+  .stats { grid-template-columns: 1fr 1fr; }
+  .sku-row { grid-template-columns: 1fr; }
+  .mold-cascade { grid-template-columns: 1fr 1fr; }
+  .metric-row { grid-template-columns: 1fr 1fr; }
+  .scenario-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .method-cards { grid-template-columns: 1fr 1fr 1fr; }
+  .return-grid { grid-template-columns: 1fr 1fr 1fr; }
+  .people-grid { grid-template-columns: 1fr 1fr; }
+  .phases { grid-template-columns: 1fr 1fr; }
+  .risk-grid { grid-template-columns: 1fr 1fr; }
+  .rlp-grid { grid-template-columns: 1fr 1fr; }
+
+  .ritual-bar { grid-template-columns: 1fr 1fr 1fr; }
+  .ritual-step:nth-child(4) { border-top: 1px solid var(--line); }
+  .ritual-step:nth-child(4),
+  .ritual-step:nth-child(5) { border-right: none; }
+
+  .chart-h-xl { height: 260px; }
+  .chart-h-lg { height: 240px; }
+  .chart-h-md { height: 220px; }
+  .chart-h-sm { height: 200px; }
+
+  .timeline-grid { gap: 1.5rem; }
+  .doc-shell { padding: 3rem 0 6rem; }
+  .conf-bar { margin-bottom: 2rem; }
+  .mode-chip { min-width: 72px; }
+
+  .track-cost { width: 100%; margin-top: 0.25rem; }
+}
+
+/* ════════════════════════════════
+   RESPONSIVE — 700px
+════════════════════════════════ */
+@media (max-width: 700px) {
+  .timeline-grid { grid-template-columns: 1fr; gap: 0; }
+  .timeline-grid > div:first-child { padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
+
+  .phase0-grid { grid-template-columns: 1fr; gap: 0; }
+  .phase0-grid .timeline-item:last-child { margin-bottom: 1.75rem; }
+
+  .scenario-grid { grid-template-columns: 1fr; }
+  .method-cards { grid-template-columns: 1fr; }
+  .mold-cascade { grid-template-columns: 1fr 1fr; }
+  .phases { grid-template-columns: 1fr; }
+  .risk-grid { grid-template-columns: 1fr; }
+  .people-grid { grid-template-columns: 1fr; }
+  .return-grid { grid-template-columns: 1fr 1fr; }
+
+  .chart-h-xl { height: 230px; }
+  .chart-h-lg { height: 210px; }
+  .chart-h-md { height: 200px; }
+  .chart-h-sm { height: 180px; }
+
+  /* TAM doughnut needs extra height when legend moves bottom */
+  #tam-chart-section .chart-container { height: 300px; }
+}
+
+/* ════════════════════════════════
+   RESPONSIVE — 480px (phone)
+════════════════════════════════ */
+@media (max-width: 480px) {
+  :root { --topbar-h: 56px; }
+
+  .topbar { top: 10px; }
+  .topbar-inner { padding: 9px 12px; border-radius: 14px; }
+  .topbar-badge { display: none; }
+  .brandline strong { font-size: 11px; letter-spacing: 0.1em; }
+  .progress { flex: 1; min-width: 60px; }
+
+  .cover { padding: 1.25rem 1.25rem 1.5rem; min-height: 90vh; }
+  .cover-soky { font-size: clamp(48px, 14vw, 80px); letter-spacing: 0.06em; }
+  .cover-tagline { font-size: 12px; letter-spacing: 0.16em; margin-bottom: 1.25rem; }
+  .cover-desc { font-size: 13px; margin-bottom: 1.5rem; }
+  .cover-badges { gap: 6px; }
+  .cover-badge { font-size: 8px; padding: 4px 9px; }
+  .cover-bottom { padding-top: 1rem; margin-top: 1rem; }
+  .cover-meta, .cover-contact { font-size: 9.5px; line-height: 1.8; }
+
+  .doc-shell { padding: 2.25rem 0 5rem; }
+  .conf-bar { font-size: 8.5px; padding: 0.35rem 0.75rem; margin-bottom: 1.5rem; }
+  .container { width: min(calc(100% - 32px), var(--max)); }
+  .toc-inline { padding: 0.75rem 0.85rem; gap: 5px; }
+  .toc-link { font-size: 9px; padding: 3px 6px; }
+
+  .section { padding: 44px 0; }
+  .section-title { font-size: clamp(19px, 5.5vw, 26px); }
+  .lede { font-size: clamp(16px, 4.5vw, 20px); }
+  .body-text, p { font-size: 13.5px; }
+
+  .stats { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .stat { padding: 0.75rem 0.6rem; }
+  .stat-val { font-size: 20px; }
+  .stat-lbl { font-size: 10px; }
+
+  /* Ritual bar: 2+2+1 */
+  .ritual-bar { grid-template-columns: 1fr 1fr; }
+  .ritual-step:nth-child(3) { border-right: none; }
+  .ritual-step:nth-child(4) { border-right: 1px solid var(--line); border-top: 1px solid var(--line); }
+  .ritual-step:nth-child(5) { grid-column: span 2; border-top: 1px solid var(--line); border-right: none; }
+  .ritual-n { font-size: 22px; }
+  .ritual-word { font-size: 10px; }
+  .ritual-desc { font-size: 10px; }
+
+  .modes { gap: 6px; }
+  .mode-chip { min-width: 58px; padding: 0.65rem 0.5rem 0.55rem; }
+  .mode-chip-label { font-size: 8.5px; }
+  .mode-chip-desc { font-size: 8.5px; }
+  .mode-icon { width: 22px; height: 22px; }
+
+  .sku-row { grid-template-columns: 1fr; gap: 8px; }
+  .sku-price { font-size: 28px; }
+  .sku-desc, .sku-persona { font-size: 11px; }
+
+  .batch-labels { gap: 0.75rem; }
+  .batch-lbl { font-size: 9.5px; }
+
+  .people-grid { grid-template-columns: 1fr; }
+  .mold-cascade { grid-template-columns: 1fr 1fr; }
+  .rlp-grid { grid-template-columns: 1fr; }
+  .proof-list li { font-size: 13px; }
+
+  .chart-wrap { padding: 1.1rem 1rem 0.9rem; }
+  .chart-title { font-size: 11.5px; }
+  .chart-subtitle { font-size: 10.5px; margin-bottom: 0.85rem; }
+
+  .chart-h-xl { height: 200px; }
+  .chart-h-lg { height: 185px; }
+  .chart-h-md { height: 175px; }
+  .chart-h-sm { height: 165px; }
+
+  /* Risk bubble: needs extra height after bottom legend */
+  #risk-chart-section .chart-container { height: 260px; }
+
+  /* TAM doughnut: legend at bottom needs taller container */
+  #tam-chart-section .chart-container { height: 320px; }
+
+  .tam-row { grid-template-columns: 90px 1fr 50px; gap: 8px; }
+  .tam-label { font-size: 10px; }
+  .tam-val { font-size: 11px; }
+  .bar-row { grid-template-columns: 85px 1fr 44px; gap: 8px; }
+  .bar-name { font-size: 10.5px; }
+  .bar-val { font-size: 10px; }
+
+  .vendor-list { border-radius: var(--r-sm); }
+  .vendor-row { grid-template-columns: 1fr; }
+  .vendor-name { border-right: none; border-bottom: 1px solid var(--line); padding: 0.6rem 0.85rem; }
+  .vendor-desc { font-size: 12px; padding: 0.6rem 0.85rem; }
+
+  .scenario-grid { grid-template-columns: 1fr; gap: 8px; }
+  .scenario-card { padding: 1.1rem 1rem; }
+  .scenario-value { font-size: 32px; }
+
+  .method-cards { grid-template-columns: 1fr; gap: 8px; }
+  .method-val { font-size: 24px; }
+
+  .phases { grid-template-columns: 1fr; gap: 8px; }
+
+  .return-grid { grid-template-columns: 1fr; gap: 8px; }
+  .return-mult-val { font-size: 20px; }
+
+  .risk-grid { grid-template-columns: 1fr; gap: 8px; }
+
+  .timeline-grid { grid-template-columns: 1fr; }
+  .phase0-grid { grid-template-columns: 1fr; }
+  .timeline { padding-left: 1.85rem; }
+  .timeline-dot { left: -1.85rem; width: 16px; height: 16px; font-size: 8px; }
+  .timeline-event { font-size: 12.5px; }
+  .timeline-desc { font-size: 11.5px; }
+
+  .tbl-scroll .data-table,
+  .tbl-scroll .ip-table { font-size: 12px; }
+  .tbl-scroll .data-table th,
+  .tbl-scroll .ip-table  th { font-size: 8.5px; padding: 0.45rem 0.6rem; }
+  .tbl-scroll .data-table td,
+  .tbl-scroll .ip-table  td { padding: 0.55rem 0.6rem; }
+
+  .callout { padding: 0.85rem 1rem; }
+  .callout p { font-size: 13px; }
+
+  .analyst-quote { padding: 1.1rem 1.2rem; }
+  .analyst-quote blockquote { font-size: 13px; line-height: 1.6; }
+
+  .quote-band { padding: 1.4rem 1.25rem; border-radius: var(--r-lg); }
+  .quote-band blockquote { font-size: 15px; }
+
+  .track-head { gap: 0.5rem; padding: 0.75rem 1rem; }
+  .track-title { font-size: 11px; }
+  .track-cost { font-size: 9.5px; }
+  .track-items { padding: 0.65rem 1rem; }
+  .track-item { font-size: 12px; }
+}
+
+/* ════════════════════════════════
+   RESPONSIVE — 380px (small phone)
+════════════════════════════════ */
+@media (max-width: 380px) {
+  .cover-soky { font-size: clamp(42px, 13vw, 64px); }
+  .mold-cascade { grid-template-columns: 1fr; }
+  .metric-row { grid-template-columns: 1fr 1fr; }
+  .modes { gap: 5px; }
+  .mode-chip { min-width: 50px; padding: 0.55rem 0.4rem 0.5rem; }
+  .mode-chip-label { font-size: 8px; }
+  .mode-chip-desc { display: none; }
+  .stat-val { font-size: 18px; }
+  .chart-h-xl { height: 180px; }
+  .chart-h-lg { height: 165px; }
+  .chart-h-md { height: 155px; }
+  .chart-h-sm { height: 145px; }
+  #risk-chart-section .chart-container { height: 250px; }
+  #tam-chart-section .chart-container { height: 300px; }
+  .tam-row { grid-template-columns: 75px 1fr 44px; }
+  .bar-row { grid-template-columns: 75px 1fr 40px; }
+  .cover-badge { font-size: 7.5px; padding: 3px 8px; }
+}
+
+/* ════════════════════════════════
+   PRINT
+════════════════════════════════ */
+@media print {
+  .topbar, .side-nav { display: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .cover { min-height: auto; page-break-after: always; }
+  .section { page-break-inside: avoid; }
+  .tbl-scroll { overflow-x: visible; }
+  .tbl-scroll .data-table,
+  .tbl-scroll .ip-table { min-width: auto; }
+}
+</style>
+</head>
+<body>
+<a href="#s1" class="skip-link">Skip to content</a>
+<div class="shell">
+
+<!-- ══ TOPBAR ══ -->
+<div class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <div class="brandline">
+      <div class="drop" aria-hidden="true"></div>
+      <strong>NM Thera</strong>
+    </div>
+    <div class="progress-wrap">
+      <span class="progress-label" id="progress-label">Business Plan · Spring 2026</span>
+      <div class="progress" aria-label="Reading progress"><div class="progress-bar" id="progress-bar"></div></div>
+    </div>
+    <div class="topbar-badge">Confidential</div>
+  </div>
+</div>
+
+<!-- ══ SIDE NAV ══ -->
+<nav class="side-nav" aria-label="Section navigation">
+  <a href="#s1">Overview</a>
+  <a href="#s2">Founding</a>
+  <a href="#s3">Product</a>
+  <a href="#s4">Modes</a>
+  <a href="#s5">Launch</a>
+  <a href="#s6">Roadmap</a>
+  <a href="#s7">IP</a>
+  <a href="#s8">Team</a>
+  <a href="#s9">Partners</a>
+  <a href="#s10">Supply</a>
+  <a href="#s11">Clinical</a>
+  <a href="#s12">Markets</a>
+  <a href="#s13">Financials</a>
+  <a href="#s14">Valuation</a>
+</nav>
+
+<!-- ══ COVER ══ -->
+<div class="cover" aria-label="Cover page">
+  <div class="cover-caustic" aria-hidden="true">
+    <div class="caustic-lines"></div>
+    <div class="caustic-ray"></div>
+    <div class="caustic-ray"></div>
+    <div class="caustic-ray"></div>
+    <div class="caustic-ray"></div>
+    <div class="caustic-ray"></div>
+  </div>
+  <div class="cover-top">
+    <span class="cover-brand"><span></span></span>
+    <div class="cover-sep"></div>
+    <span class="cover-doc-type"></span>
+  </div>
+  <div class="cover-body">
+    <div class="cover-eyebrow">Wearable Soak Platform · Investor Overview</div>
+    <div class="cover-soky">SOKY</div>
+    <div class="cover-tagline"><strong>Hand &amp; Footcare</strong> Reimagined.</div>
+    <p class="cover-desc"><em>What if one of the oldest acts of personal care — immersing the body in water — could move with the person</em> instead of confining them to a bowl, a tub, or a clinic station? The answer is patented. The product is ready. <em>Three SKUs. 200 units. Dropping now.</em></p>
+    <div class="cover-badges">
+      <span class="cover-badge active">US 11,602,631 B2 · Issued 2023 · Valid to 2043</span>
+      <span class="cover-badge">3 SKUs · First Drop Executing</span>
+      <span class="cover-badge">$180K Raised · $3.2M Valuation</span>
+      <span class="cover-badge">Initial Revenue Generation · Pre-Seed</span>
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-meta">
+      <strong>Company</strong> NM Therapeutics, Inc. · Delaware C Corp<br>
+      <strong>Collaborating from</strong> Eastvale · Okayama · Dubai · Honolulu · Austin · Orange · Irvine · Stanford · San Jose · San Francisco<br>
+      <strong>Stage</strong> Initial Revenue Generation · Pre-Seed
+    </div>
+    <div class="cover-contact">
+      Kenny Pham · Founder &amp; CEO<br>
+      <a href="mailto:kenny@nmthera.com">kenny@nmthera.com</a><br>
+      714-782-2843 · nmthera.com
+    </div>
+  </div>
+</div>
+
+<!-- ══ DOCUMENT SHELL ══ -->
+<div class="doc-shell" id="main-content">
+<div class="conf-bar">Confidential — For Authorized Recipients Only · Not for Distribution</div>
+
+<!-- inline TOC -->
+<div class="container" style="margin-bottom:2rem;">
+  <div class="toc-inline reveal">
+    <a href="#s1" class="toc-link">01 Overview</a>
+    <a href="#s2" class="toc-link">02 Founding</a>
+    <a href="#s3" class="toc-link">03 Product</a>
+    <a href="#s4" class="toc-link">04 Modes</a>
+    <a href="#s5" class="toc-link">05 Launch</a>
+    <a href="#s6" class="toc-link">06 Roadmap</a>
+    <a href="#s7" class="toc-link">07 IP</a>
+    <a href="#s8" class="toc-link">08 Team</a>
+    <a href="#s9" class="toc-link">09 Partners</a>
+    <a href="#s10" class="toc-link">10 Supply</a>
+    <a href="#s11" class="toc-link">11 Clinical</a>
+    <a href="#s12" class="toc-link">12 Markets</a>
+    <a href="#s13" class="toc-link">13 Financials</a>
+    <a href="#s14" class="toc-link">14 Valuation</a>
+  </div>
+</div>
+
+
+<!-- ─── S1 EXECUTIVE SUMMARY ─── -->
+<section class="section" id="s1" data-label="Overview">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">01 — Overview</span>
+    <h2 class="section-title">The company at the edge of liftoff.</h2>
+    <p class="section-sub">Eight years. One patent. Three SKUs. A distributor already waiting.</p>
+  </div>
+  <div class="content-stack">
+    <p class="lede">"What if one of the oldest acts of personal care — immersing the body in water — could move with the person instead of confining them to a bowl, a tub, or a clinic station?"</p>
+    <p>The answer took eight years to build. SOKY is not just a glove or a sock. It is a platform for turning simple, ancient inputs — water, salts, botanicals, warmth, time, and now precision formulations and next-generation peptide applications — into localized rituals people can actually keep. The tools were always there. We removed the reason not to begin.</p>
+    <p>The IP is issued. The manufacturer is ready. The team is distributed across three continents and committed. <strong>HandSOKY_B_M_000, HandSOKY_B_M_001, and HandSOKY_B_M_002 are dropping now.</strong> What remains is the execution of a focused, community-first launch — prove the product, earn the trust, then scale.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-val navy">$180K</div><div class="stat-lbl">Raised to date</div></div>
+      <div class="stat"><div class="stat-val">2</div><div class="stat-lbl">Patents: issued + pending</div></div>
+      <div class="stat"><div class="stat-val pool">3</div><div class="stat-lbl">SKUs dropping now</div></div>
+      <div class="stat"><div class="stat-val green">3</div><div class="stat-lbl">Product tracks</div></div>
+    </div>
+    <div class="callout sun">
+      <div class="callout-lbl">Immediate Priority</div>
+      <p>Website live. Campaign assets deployed. Three SKUs available — HandSOKY_B_M_000 (Research Access), HandSOKY_B_M_001 (Core), HandSOKY_B_M_002 (Travel System) — 200 units total. Sell through. Generate community trust. Open waitlist for Batch 2. Community first. The ask follows.</p>
+    </div>
+    <p>Two investors — <strong>Sosimo Roman</strong> ($150K) and <strong>Seymour Everett of Everett Dorey LLP</strong> ($30K) — have already committed. Additional capital is sought to complete the launch, not to fund a hypothetical future.</p>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S2 FOUNDING STATEMENT ─── -->
+<section class="section" id="s2" data-label="Founding">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">02 — Founding</span>
+    <h2 class="section-title">A remembering made portable.</h2>
+    <p class="section-sub">Eight years sparked by a little girl asking to hold a hand he had to say no to.</p>
+  </div>
+  <div class="content-stack">
+    <p>NM Thera was born from the founder's struggle with palmar hyperhidrosis — sweaty hands that made even simple interactions difficult. The moment that changed everything was when a little girl asked to hold his hand, and he had to say no. That small but painful experience lit the spark for what would become eight years of development.</p>
+    <div class="quote-band">
+      <blockquote>"Care for the hands is care for everything the hands make possible. When we restore circulation to tired hands, we restore the capacity to build. When we return sensation to numb feet, we return a person to their own body."</blockquote>
+      <cite>— NM Thera Manifesto, 2026</cite>
+    </div>
+    <p>The options for treating conditions like palmar hyperhidrosis have barely evolved in decades. Existing treatments are clunky machines, expensive procedures, or routines so inconvenient that most people give up. SOKY was built to be something different — something that fits into daily life, that earns its place in the morning routine, that travels with the person.</p>
+    <p>The ritual of soaking has existed in every human culture that left records. The Romans, the Japanese, the Turks, the Koreans — they all understood something that modern medicine largely forgot: that warm water, time, and attention are among the most powerful therapeutic forces available. SOKY is not an invention. <strong>It is a remembering</strong> — made portable, accessible, and ready for the world we actually live in now.</p>
+    <h3>Mission · Vision · Values</h3>
+    <p><strong>Mission:</strong> Provide innovative solutions and compassionate support for people whose skin and health conditions impact their confidence, relationships, or work.<br>
+    <strong>Vision:</strong> Restore the simple, human ability to connect — so every person can live with confidence, dignity, and fulfillment.<br>
+    <strong>Values:</strong> Innovation · Openness · Connection · Discipline · Humanity</p>
+    <div class="callout">
+      <div class="callout-lbl">Compliance Line</div>
+      <p>"SOKY supports personal care routines. It is not intended to diagnose, treat, cure, or prevent any disease or condition." Paired with all product descriptions per BSG guidelines.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S3 PRODUCT & THE RITUAL ─── -->
+<section class="section" id="s3" data-label="Product">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">03 — Product</span>
+    <h2 class="section-title">The seal that pressure makes tighter.</h2>
+    <p class="section-sub">Five steps. Every product. Always this order.</p>
+  </div>
+  <div class="content-stack">
+    <p>The oldest therapies are the most democratic: water, minerals, botanicals, warmth, cooling, attention, and a vessel that lets the body stay with them. These are not luxury inputs. They are what is already available. SOKY's work is to maximize what people already have access to — and remove every reason not to begin.</p>
+    <h3>The Ritual — Five Steps. Every Product. Always This Order.</h3>
+    <div class="ritual-bar">
+      <div class="ritual-step don-step">
+        <div class="ritual-n">1</div>
+        <div class="ritual-word">Don</div>
+        <div class="ritual-desc">Dry enhancers go in first. Fold the cuff inward — into itself. Apply lotion, grip the fold, and slide the glove on. Ball your fist: if the glove swells, the seal is confirmed.</div>
+      </div>
+      <div class="ritual-step">
+        <div class="ritual-n">2</div>
+        <div class="ritual-word">Fill</div>
+        <div class="ritual-desc">Grip the full folded cuff to hold the seal intact. Bring the opening under the tap and fill to your preferred level and temperature. Make a fist and check for drops. None? Move on.</div>
+      </div>
+      <div class="ritual-step">
+        <div class="ritual-n">3</div>
+        <div class="ritual-word">Check Seal</div>
+        <div class="ritual-desc">Ball your fist — if the glove swells, you're sealed. The cuff responds to pressure by holding more firmly, not less. Move freely, or just lay back and soak it in.</div>
+      </div>
+      <div class="ritual-step">
+        <div class="ritual-n">4</div>
+        <div class="ritual-word">Soak</div>
+        <div class="ritual-desc">15–20 minutes of localized immersion. The environment holds as you move. Walk. Read. Rest. The ritual does not ask you to stop. It's made to move with you.</div>
+      </div>
+      <div class="ritual-step">
+        <div class="ritual-n">5</div>
+        <div class="ritual-word">Drain</div>
+        <div class="ritual-desc">Over a sink, slide off and pour out. Rinse the inside, mild soap if needed, air dry, and pack it away. A clean and graceful exit invites return.</div>
+      </div>
+    </div>
+    <div class="callout pool">
+      <div class="callout-lbl">Don — The Critical First Step</div>
+      <p>The cuff must always be folded <strong>inward — into itself</strong> to form the watertight/airtight seal. With the cuff folded, pinch and guide your hand in steadily, each finger fully into its sheath, until the opening of the folded cuff rests flush around the wrist — no kinks, no gaps, no distortions. This step is non-intuitive. It is where the product is either used correctly or not at all.</p>
+    </div>
+    <h3>The Engineering Core — Why the Seal Works</h3>
+    <p>Every prior wearable immersion device failed at the same point: when the garment moves, hydrostatic pressure peels the seal away. SOKY inverts this failure mode entirely. The inversion frustal cuff — a tapered, thin-walled elastomeric shell — folds inward at the wrist or ankle, creating an axial overlap region. When internal pressure increases — the user lifts their hand, fluid shifts — liquid enters the pocket and presses the inner layer <em>more firmly</em> against the skin. <strong>The more pressure builds, the tighter the seal becomes.</strong> No clamps, no adhesives, no power.</p>
+    <h3>The Universal Port Interface</h3>
+    <p>One interface. All modalities. Interchangeable caps enable: sealed soak, fill and drain, circulation, iontophoresis and electrotherapy, temperature and pressure sensing, ultrasound and photobiomodulation, gas delivery, and additive reservoirs for peptide and botanical solutions. Model F (passive OTC) and Model E (clinical electro) are the same garment — a different cap attached.</p>
+    <h3>Platform Expansion Arc</h3>
+    <p>Hands → Feet → Arms → Legs → Knees → Elbows → Pelvic → Custom zones. Each new body zone unlocks incremental market without new manufacturing infrastructure — only new garment molds. The same ritual. The same port. The same knowledge library.</p>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S4 ENHANCEMENT SYSTEM ─── -->
+<section class="section" id="s4" data-label="Modes">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">04 — Modes</span>
+    <h2 class="section-title">Seven ways into the water.</h2>
+    <p class="section-sub">Every enhancement. Same garment. Same port. Same ritual.</p>
+  </div>
+  <div class="content-stack">
+    <p>What goes into the water defines the ritual. SOKY's enhancement system spans thermal modes, electrotherapy, botanical soaks, mineral salt formulations, concentrated active ingredient delivery, and — a significant emerging frontier — topical peptide soaks for precision skin and transdermal applications.</p>
+    <div class="modes">
+      <div class="mode-chip heat-chip">
+        <div class="mode-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="5" stroke="#B31D1B" stroke-width="2"/><line x1="14" y1="2" x2="14" y2="5" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="23" x2="14" y2="26" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="14" x2="5" y2="14" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="23" y1="14" x2="26" y2="14" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="5.5" y1="5.5" x2="7.6" y2="7.6" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="20.4" y1="20.4" x2="22.5" y2="22.5" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="22.5" y1="5.5" x2="20.4" y2="7.6" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="7.6" y1="20.4" x2="5.5" y2="22.5" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div class="mode-chip-label">Heat</div>
+        <div class="mode-chip-desc">Circulation · muscle</div>
+      </div>
+      <div class="mode-chip cool-chip">
+        <div class="mode-icon"><svg viewBox="0 0 28 28" fill="none"><line x1="14" y1="2" x2="14" y2="26" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="14" x2="26" y2="14" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><line x1="5.5" y1="5.5" x2="22.5" y2="22.5" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><line x1="22.5" y1="5.5" x2="5.5" y2="22.5" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="14" r="2.5" fill="#1E3A8A"/></svg></div>
+        <div class="mode-chip-label">Cool</div>
+        <div class="mode-chip-desc">Inflammation · recovery</div>
+      </div>
+      <div class="mode-chip electro-chip">
+        <div class="mode-icon"><svg viewBox="0 0 28 28" fill="none"><path d="M16 3L7 16H14L12 25L21 12H14L16 3Z" stroke="#F7C041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="mode-chip-label">Electro</div>
+        <div class="mode-chip-desc">Ionto · TENS · EMS</div>
+      </div>
+      <div class="mode-chip bot-chip">
+        <div class="mode-icon"><svg viewBox="0 0 28 28" fill="none"><path d="M14 24 C14 24 6 18 6 11 C6 7.1 9.1 4 13 4 C13.3 4 13.7 4 14 4.1 C14.3 4 14.7 4 15 4 C18.9 4 22 7.1 22 11 C22 18 14 24 14 24Z" stroke="#688B58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(104,139,88,0.12)"/><line x1="14" y1="24" x2="14" y2="14" stroke="#688B58" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="mode-chip-label">Botanicals</div>
+        <div class="mode-chip-desc">Herbal · skin</div>
+      </div>
+      <div class="mode-chip salts-chip">
+        <div class="mode-icon"><svg viewBox="0 0 28 28" fill="none"><path d="M8 22 L14 6 L20 22 Z" stroke="#8A6A4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(138,106,77,0.1)"/><circle cx="14" cy="12" r="1.2" fill="#8A6A4D" opacity="0.6"/><circle cx="11" cy="16" r="1" fill="#8A6A4D" opacity="0.5"/><circle cx="17" cy="16" r="1" fill="#8A6A4D" opacity="0.5"/></svg></div>
+        <div class="mode-chip-label">Salts</div>
+        <div class="mode-chip-desc">Mineral · Epsom</div>
+      </div>
+      <div class="mode-chip actives-chip">
+        <div class="mode-icon"><svg viewBox="0 0 28 28" fill="none"><path d="M10 5H18V16L22 23H6L10 16V5Z" stroke="#0D7377" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="rgba(13,115,119,0.06)"/><line x1="10" y1="5" x2="18" y2="5" stroke="#0D7377" stroke-width="2" stroke-linecap="round"/><circle cx="13" cy="19" r="0.9" fill="#0D7377" opacity="0.6"/><circle cx="16" cy="21" r="0.7" fill="#0D7377" opacity="0.5"/></svg></div>
+        <div class="mode-chip-label">Actives</div>
+        <div class="mode-chip-desc">OTC &amp; Rx precision</div>
+      </div>
+      <div class="mode-chip peptide-chip">
+        <div class="mode-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="7" cy="14" r="3" stroke="#4A5568" stroke-width="1.8"/><circle cx="14" cy="9" r="3" stroke="#4A5568" stroke-width="1.8"/><circle cx="21" cy="14" r="3" stroke="#4A5568" stroke-width="1.8"/><circle cx="14" cy="19" r="3" stroke="#4A5568" stroke-width="1.8"/><line x1="9.8" y1="12.6" x2="11.2" y2="10.4" stroke="#4A5568" stroke-width="1.5" stroke-linecap="round"/><line x1="16.8" y1="10.4" x2="18.2" y2="12.6" stroke="#4A5568" stroke-width="1.5" stroke-linecap="round"/><line x1="18.5" y1="15.8" x2="16.5" y2="17.5" stroke="#4A5568" stroke-width="1.5" stroke-linecap="round"/><line x1="11.5" y1="17.5" x2="9.5" y2="15.8" stroke="#4A5568" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="mode-chip-label">Peptides</div>
+        <div class="mode-chip-desc">Transdermal · precision</div>
+      </div>
+    </div>
+    <h3>The Volume Advantage — Concentration by Design</h3>
+    <p>Every SOKY garment holds a fraction of the fluid volume required by a conventional foot bath or hand soak basin. This is not a limitation — it is a delivery mechanism. A standard antifungal dose formulated for a two-liter foot bath, used in a SOKY sock containing only a cup of water, achieves a significantly higher active concentration at the treatment site with no increase in ingredient cost. The same logic applies across menthol, salicylic acid, urea, camphor, lidocaine analogs, and botanical extracts.</p>
+    <div class="callout pool">
+      <div class="callout-lbl">Clinical Tier Implication</div>
+      <p>At the clinical tier, Rx-formulated soak packs open a reimbursement and compounding pharmacy partnership pathway. Users can reduce ingredient use to match conventional concentrations, or maintain standard dosing to access concentrations previously unavailable outside a clinical setting.</p>
+    </div>
+    <h3>Topical Peptide Soaks — A Precision Frontier</h3>
+    <p>Sealed occlusive environments increase stratum corneum hydration by 300–400%, dramatically enhancing the permeation of topically applied agents. This positions SOKY as a delivery vehicle for collagen-stimulating peptides (Argireline, Matrixyl), barrier-repair peptides for eczema, growth factor peptides for post-surgical recovery, copper peptides for circulation support, and neuropeptide solutions for hyperhidrosis management. Target: $35–$65/pack, 2–4 packs/month. Estimated gross margin: 75–82%.</p>
+    <p>Every garment sold is a distribution channel for recurring consumable revenue. Mineral salts, botanical herb blends, emollient oil packs, antifungal solutions, concentrated active formulations, iontophoresis mineral concentrates, and precision peptide packs — all formulated for the SOKY liquid environment, all reordered on subscription or replenishment. <strong>This is the flywheel that converts a hardware platform into a lifetime value engine.</strong></p>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S5 LAUNCH & FIRST DROP ─── -->
+<section class="section" id="s5" data-label="Launch">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">05 — Launch</span>
+    <h2 class="section-title">Three SKUs. 200 units. Community first.</h2>
+    <p class="section-sub">The first drop is proof that earns the right to run the campaign.</p>
+  </div>
+  <div class="content-stack">
+    <h3>Early Proof Points</h3>
+    <ul class="proof-list">
+      <li><strong>109 out of 130</strong> prospective users expressed interest — 83.8% pre-launch conversion rate</li>
+      <li><strong>5 clinicians</strong> actively engaged, protocol conversations already underway</li>
+      <li><strong>LOI for $70,000</strong> in initial annual orders from a leading footcare distributor</li>
+      <li><strong>Dr. Craig Heller</strong> (Stanford) joins as Research Advisor — world authority on palmar AVA thermoregulation</li>
+      <li><strong>Seymour Everett</strong> (Everett Dorey LLP, OC) joins as Investor and Strategic Legal Advisor</li>
+      <li><strong>Sosimo Roman</strong> presses forward $150K — turnkey production and packaging in ready state</li>
+    </ul>
+    <h3>First Drop — HandSOKY_B_M_000 · 001 · 002</h3>
+    <div class="sku-row">
+      <div class="sku-card research-card">
+        <div class="sku-body">
+          <div class="sku-id">HandSOKY_B_M_000</div>
+          <div class="sku-price">$45</div>
+          <span class="sku-tag research">Research Access · 20 units</span>
+          <div class="sku-name">Hand SOKY — Research Access</div>
+          <div class="sku-desc">Research Access. One pair, Size Medium. Identical to the _001 unit — no modifications or compromises. Made available to 20 participants per drop in exchange for a 90-day structured research and feedback commitment. Application-based. Designed to generate early outcome data and product validation from a high-motivation user cohort.</div>
+          <div class="sku-persona">The engaged early adopter with chronically undertreated conditions, limited healthcare access, high motivation — the population whose outcomes matter most.</div>
+        </div>
+      </div>
+      <div class="sku-card">
+        <div class="sku-body">
+          <div class="sku-id">HandSOKY_B_M_001</div>
+          <div class="sku-price">$85</div>
+          <span class="sku-tag core">Core · 80 units</span>
+          <div class="sku-name">Hand SOKY</div>
+          <div class="sku-desc">Core. One pair, Size Medium. Silicone compression-molded gloves. The baseline consumer unit and primary volume driver. No accessories or enhancers required — the glove alone is sufficient to complete the full ritual. Built for durability and repeated use over an extended product life.</div>
+          <div class="sku-persona">The self-care seeker who has never had a hand care routine that actually stuck. They just need to begin.</div>
+        </div>
+      </div>
+      <div class="sku-card">
+        <div class="sku-body">
+          <div class="sku-id">HandSOKY_B_M_002</div>
+          <div class="sku-price">$150</div>
+          <span class="sku-tag kit">Kit · 100 units</span>
+          <div class="sku-name">Hand SOKY Travel System</div>
+          <div class="sku-desc">Kit. One pair, Size Medium. Silicone compression-molded gloves. Hand towel, clip hook, how-to-use instructions, and product info card — packaged in a branded travel bag. The all-in-one system SKU. Higher margin, higher perceived value. Targets gift buyers, practitioners stocking for patient use, and habitual users who want a dedicated, organized kit.</div>
+          <div class="sku-persona">The gift buyer, the practitioner, the convert. The SKU most likely to generate the referral that brings the next buyer in.</div>
+        </div>
+      </div>
+    </div>
+    <div class="batch-alloc">
+      <div class="batch-head">Batch 1 Allocation — 200 Units Total</div>
+      <div class="batch-bar">
+        <div class="batch-seg" style="width:10%;background:var(--pool);"></div>
+        <div class="batch-seg" style="width:40%;background:var(--navy);"></div>
+        <div class="batch-seg" style="width:50%;background:var(--green);"></div>
+      </div>
+      <div class="batch-labels">
+        <span class="batch-lbl"><span class="batch-dot" style="background:var(--pool)"></span>_000 Research Access — 20 (10%)</span>
+        <span class="batch-lbl"><span class="batch-dot" style="background:var(--navy)"></span>_001 Core — 80 (40%)</span>
+        <span class="batch-lbl"><span class="batch-dot" style="background:var(--green)"></span>_002 Travel System — 100 (50%)</span>
+      </div>
+    </div>
+    <div class="callout pool">
+      <div class="callout-lbl">Strategic Principle</div>
+      <p>Community is built before the ask is made. A launch audience assembled around demonstrated quality is a better asset than any ad spend. Kickstarter and WeFundr remain on the roadmap — activated from a warm base, not a cold start. The first drop is not the campaign. It is the proof that earns the right to run one.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S6 PRODUCT ROADMAP ─── -->
+<section class="section" id="s6" data-label="Roadmap">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">06 — Roadmap</span>
+    <h2 class="section-title">Three tracks. One platform.</h2>
+    <p class="section-sub">Commercial · Research · Clinical. Not competing — maturing in sequence.</p>
+  </div>
+  <div class="content-stack">
+    <p>SOKY's product development runs three parallel tracks — each with its own cost structure, timeline, and manufacturing partner. All three share the same garment platform, IP foundation, and universal port interface. The first drop is a single mold. One cavity. One size. Everything downstream is unlocked by what that first mold proves.</p>
+    <div class="roadmap-track">
+      <div class="track-head">
+        <div class="track-dot dot-c"></div>
+        <div class="track-title">Track 1 — Commercial · TopSheng · ISO 13485 · Turnkey Silicone Compression Molding</div>
+        <div class="track-cost">~$10K per mold · cascade model</div>
+      </div>
+      <div class="track-items">
+        <div class="track-item">The platform's modularity: <strong>one rubber pull yields Model B, Model F, and Model E without re-tooling.</strong> One mold, three models, three tiers — nine SKUs minimum per cavity, twenty-seven from a triple-cavity pull.</div>
+      </div>
+      <div class="track-note">Track 1 cascade runs in four phases across 19 molds:</div>
+    </div>
+    <div class="mold-cascade">
+      <div class="mold-phase p1">
+        <div class="mold-phase-lbl">Phase 1 · Validation</div>
+        <div class="mold-phase-title">Molds 1–2</div>
+        <div class="mold-phase-cost">~$25K</div>
+        <div class="mold-phase-desc">Proof-of-concept tooling. Minimum viable commercial commitment.</div>
+        <ul class="mold-phase-items">
+          <li>Hand SOKY Medium (Mold 1)</li>
+          <li>Foot SOKY Medium (Mold 2)</li>
+          <li>Establishes manufacturing relationship</li>
+          <li>De-risks triple-cavity investment</li>
+        </ul>
+      </div>
+      <div class="mold-phase p2">
+        <div class="mold-phase-lbl">Phase 2 · Adult Scale</div>
+        <div class="mold-phase-title">Molds 3–6</div>
+        <div class="mold-phase-cost">~$185K cumulative</div>
+        <div class="mold-phase-desc">Full adult size range XS–XXL across Hand and Foot.</div>
+        <ul class="mold-phase-items">
+          <li>Four triple-cavity molds</li>
+          <li>M cavity supersedes validation tools</li>
+          <li>$200K milestone</li>
+        </ul>
+      </div>
+      <div class="mold-phase p3">
+        <div class="mold-phase-lbl">Phase 3 · Kids</div>
+        <div class="mold-phase-title">Molds 7–10</div>
+        <div class="mold-phase-cost">~$335K cumulative</div>
+        <div class="mold-phase-desc">Pediatric sizing KXS–KXL across Hand and Foot.</div>
+        <ul class="mold-phase-items">
+          <li>Unlocks eczema wet-wrap protocols</li>
+          <li>Feeds pediatric RLP pipeline</li>
+        </ul>
+      </div>
+      <div class="mold-phase p4">
+        <div class="mold-phase-lbl">Phase 4 · Sleeve Family</div>
+        <div class="mold-phase-title">Molds 11–19</div>
+        <div class="mold-phase-cost">~$740K cumulative</div>
+        <div class="mold-phase-desc">Arm, Leg, Knee, Elbow, and Sitz SOKY. Full platform expansion.</div>
+        <ul class="mold-phase-items">
+          <li>Each zone: 3-model cascade</li>
+          <li>Sitz SOKY at Mold 19</li>
+          <li>$800K buffered milestone</li>
+        </ul>
+      </div>
+    </div>
+    <div class="roadmap-track">
+      <div class="track-head">
+        <div class="track-dot dot-r"></div>
+        <div class="track-title">Track 2 — Research · Rapid Liquid Printing · ~$2,500/toolpath · Parallel to Track 1</div>
+        <div class="track-cost">$2.5K vs $12.5K+ traditional</div>
+      </div>
+      <div class="track-items">
+        <div class="track-item">RLP enables internal complexity — baffles, channels, gradient wall thickness, multi-durometer zones — that compression molding cannot produce. Every prototype feeds TopSheng's commercial pipeline.</div>
+      </div>
+    </div>
+    <h3>Named Research Projects</h3>
+    <div class="rlp-grid">
+      <div class="rlp-item"><div class="rlp-code">RLP-R001</div><div class="rlp-name">Iontophoresis Research Glove</div><div class="rlp-desc">Custom-fitted Model E for palmar hyperhidrosis. Establishes electro glove toolpath.</div></div>
+      <div class="rlp-item"><div class="rlp-code">RLP-R002</div><div class="rlp-name">Baby Eczema Glove + Sock</div><div class="rlp-desc">Pediatric wet-wrap set. First pediatric outcome data in the SOKY Commons. Informs Molds 7–10.</div></div>
+      <div class="rlp-item"><div class="rlp-code">RLP-R003</div><div class="rlp-name">Wearable Postpartum Sitz Bath</div><div class="rlp-desc">First pelvic basin prototype. Validates dual-cuff sealing at a non-limb body zone.</div></div>
+    </div>
+    <h3>Design Experiments</h3>
+    <div class="rlp-grid">
+      <div class="rlp-item"><div class="rlp-code">RLP-D001</div><div class="rlp-name">Internal Baffle Glove</div><div class="rlp-desc">Baffles directing fluid radially toward fingertips. Tests thermal distribution uniformity.</div></div>
+      <div class="rlp-item"><div class="rlp-code">RLP-D002</div><div class="rlp-name">Fluted Channel Sock</div><div class="rlp-desc">Plantar channels from heel to toe. Diabetic foot and plantar fasciitis protocols.</div></div>
+      <div class="rlp-item"><div class="rlp-code">RLP-D003</div><div class="rlp-name">Compression Lattice Glove</div><div class="rlp-desc">Graduated proprioceptive feedback. Hand rehabilitation and post-surgical recovery.</div></div>
+      <div class="rlp-item"><div class="rlp-code">RLP-D004</div><div class="rlp-name">Multi-Durometer Cuff Glove</div><div class="rlp-desc">Gradient Shore hardness cuff. Tests comfort vs seal integrity. Feeds TopSheng mold specs.</div></div>
+    </div>
+    <div class="roadmap-track">
+      <div class="track-head">
+        <div class="track-dot dot-x"></div>
+        <div class="track-title">Track 3 — Clinical · RLP to TopSheng Certified Pathway · Rx and Institutional Channels</div>
+        <div class="track-cost">RLP → TopSheng certified pathway</div>
+      </div>
+      <div class="track-items">
+        <div class="track-item">SOKY Iontophoresis System — hyperhidrosis, drug delivery, peptide iontophoresis · <em>_001Rx</em></div>
+        <div class="track-item">SOKY TENS — transcutaneous electrical nerve stimulation · <em>_001TENS</em></div>
+        <div class="track-item">SOKY EMS — electrical muscle stimulation and rehabilitation · <em>_001EMS</em></div>
+        <div class="track-item">SOKY Ultrasound / Acoustic Therapy — Model S garment family · <em>_001Rx</em></div>
+        <div class="track-item">TBHO — targeted body hyperbaric oxygen · <em>_001TBHO</em></div>
+        <div class="track-item">SOKY Wound Healing System — occlusive + peptide + antimicrobial · <em>_001WH</em></div>
+      </div>
+      <div class="track-note">One physical product, two regulatory pathways. RLP and TopSheng together eliminate the traditional R&amp;D-to-certification gap unavailable to most startups at this stage.</div>
+    </div>
+    <div class="callout green">
+      <div class="callout-lbl">Nine Active Revenue Streams by Year 5</div>
+      <p>SOKY OTC (e-commerce, Amazon, retail) · SOKY Rx (clinical B2B, insurance reimbursement) · SOKY Plus (recurring consumables including peptide packs) · Wellness App (subscription tiers) · Licensing &amp; IP partnerships · Data monetization from anonymized research · Content sales and educational licensing · Mobile app advertising and sponsorship · Clinical protocol licensing to healthcare institutions</p>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S7 IP PORTFOLIO ─── -->
+<section class="section" id="s7" data-label="IP">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">07 — IP</span>
+    <h2 class="section-title">Valid to 2043. No design-around possible.</h2>
+    <p class="section-sub">The full family of frustal geometries is claimed. The moat widens with every prosecution milestone.</p>
+  </div>
+  <div class="content-stack">
+    <p>NM Thera's IP portfolio is a material competitive moat. The issued patent covers the core mechanism with 15 claims spanning the garment, seal, iontophoresis circuit, and mobility-in-use. The pending platform patent expands coverage to the full geometry family. The trademark portfolio protects the brand namespace across all product lines and markets.</p>
+    <div class="tbl-scroll">
+    <table class="ip-table">
+      <thead><tr><th>Ref</th><th>Title &amp; Number</th><th>Status</th><th>Scope</th><th>Moat Depth</th><th>Valid</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>IP 01</strong></td>
+          <td><strong>Method and Apparatus for Treatment of Hyperhidrosis</strong><br><span style="font-family:var(--sub);font-size:11px;color:var(--muted);">US 11,602,631 B2</span><br><span style="font-size:11px;color:var(--muted);">NM Therapeutics, LLC · Kenny Pham &amp; Jennifer Nguyen<br>Filed June 2018 · Issued March 14, 2023 · A61N 1/325</span></td>
+          <td><span class="pb pb-issued">Issued · Active</span></td>
+          <td>Water-filled glove, inversion cuff seal, iontophoresis circuit, mobility-in-use. 15 claims.</td>
+          <td><div class="moat-pips"><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip filled"></div></div></td>
+          <td>2043</td>
+        </tr>
+        <tr>
+          <td><strong>IP 02</strong></td>
+          <td><strong>Method and Apparatus for Localized Immersion</strong><br><span style="font-size:11px;color:var(--muted);">Provisional filed December 2025</span></td>
+          <td><span class="pb pb-pending">Pending</span></td>
+          <td>Full frustal profile family — conical, parabolic, hyperbolic, superelliptical, spline-defined, anatomically conformal. Full body-zone and modality spectrum.</td>
+          <td><div class="moat-pips"><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip"></div></div></td>
+          <td>Pending</td>
+        </tr>
+        <tr>
+          <td><strong>IP 03</strong></td>
+          <td><strong>Trademark: "NM Thera"</strong></td>
+          <td><span class="pb pb-registered">Registered</span></td>
+          <td>Brand name across the full product and platform namespace.</td>
+          <td><div class="moat-pips"><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip"></div></div></td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td><strong>IP 04</strong></td>
+          <td><strong>Trademark: "SOKY" &amp; Water Drop Logo Mark</strong></td>
+          <td><span class="pb pb-pending">Pending</span></td>
+          <td>Product name and visual mark — the visual cornerstone of the brand system across all lines.</td>
+          <td><div class="moat-pips"><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip filled"></div><div class="moat-pip"></div><div class="moat-pip"></div></div></td>
+          <td>Pending</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout green">
+      <p>The pending platform patent claims the full family of frustal geometries. No competitor can replicate the core pressure-responsive sealing mechanism by varying taper angle or cross-sectional shape. This is not a narrow pharmaceutical-style patent — it covers the entire geometric design space of the cuff. The moat widens materially as prosecution continues.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S8 TEAM & EQUITY ─── -->
+<section class="section" id="s8" data-label="Team">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">08 — Team</span>
+    <h2 class="section-title">Six operators across three continents.</h2>
+    <p class="section-sub">Neuroscience · Regulatory · Hardware · Marketing · UX — built around the founding condition.</p>
+  </div>
+  <div class="content-stack">
+    <h3>Core Team</h3>
+    <div class="people-grid">
+      <div class="person hl-navy">
+        <span class="person-badge badge-founder">Founder · CEO</span>
+        <div class="person-name">Kenny Pham</div>
+        <div class="person-role">Co-Founder · CEO · Inventor of SOKY</div>
+        <div class="person-eq">43.00%</div>
+        <div class="person-note">Kenny is the founder, inventor, and driving force behind SOKY and NM Thera. He lives with palmar hyperhidrosis — the condition that made this product necessary and personal. Development began in a party tent, moved to a trailer, and landed in a garage in Eastvale, CA — eight years of iteration, multiple designs, and a platform built largely by hand. His background spans computational neuroscience research at UC Riverside, stem cell biomanufacturing at Calico Life Sciences and PrimeGen Biotech, genomics lab work, and medical device and pharmaceutical sales. One issued patent. One patent pending. Multiple distinct IP positions in play, with systems architecture established across the full product platform.</div>
+      </div>
+      <div class="person">
+        <div class="person-name">Kenichiro Nishii</div>
+        <div class="person-role">Co-Founder · COO</div>
+        <div class="person-eq">10.00%</div>
+        <div class="person-note">Ken was among the earliest collaborators at NM Thera — an advisor and encouraging presence from day one who brought a disciplined, regulatory-minded edge to the project. His background in bioengineering and chemical engineering, combined with years of regulatory affairs work at Globizz Corporation and CureApp North America, gave the team early credibility on compliance and operational structure. At CureApp, he led US regulatory affairs and business development across FDA 510(k) submissions and international market strategy spanning the US, Japan, and Europe. He currently serves as President of two organizations in Okayama, Japan, in community infrastructure and eldercare. At NM Thera, he leads compliance, supply chain, and international operational management.</div>
+      </div>
+      <div class="person">
+        <div class="person-name">Chi Le</div>
+        <div class="person-role">Co-Founder · Marketing Director</div>
+        <div class="person-eq">10.00%</div>
+        <div class="person-note">Chi joined initially as a growth marketing advisor before committing fully to the company. Her background includes senior roles at Cerebral, where she managed a multi-million dollar monthly acquisition budget across all major channels and led an attribution model overhaul that improved marketing mix strategy company-wide. At bitFlyer, she managed Salesforce Marketing Cloud integrations and growth programs that increased customer LTV by 500% year over year. She leads NM Thera's go-to-market strategy and campaign execution heading into the 2026 launch.</div>
+      </div>
+      <div class="person">
+        <div class="person-name">Yu Tiffany Morimoto</div>
+        <div class="person-role">UI/UX Researcher &amp; Specialist</div>
+        <div class="person-eq">5.00%</div>
+        <div class="person-note">Tiffany is our in-house expert and advocate for human-centered design, and one of the early supporters and believers in SOKY. She holds a Master's in Human-Computer Interaction and Design from UC Irvine and spent nearly three years as UX Research and Design Lead at CureApp, conducting bilingual patient and clinician research and translating clinical complexity into usable product experiences. Prior roles at Accenture Song, Mercari, Adidas Group, and Hulu span research methodologies, product design, and cross-cultural UX across US and Japanese markets. At NM Thera, she leads digital product experience and customer journey.</div>
+      </div>
+      <div class="person">
+        <div class="person-name">Jenn Dau</div>
+        <div class="person-role">Content &amp; Branding Specialist</div>
+        <div class="person-eq">5.00%</div>
+        <div class="person-note">Jenn has been with NM Thera since its earliest days — part of the original team that built out the company's brand identity and marketing foundation in its first chapter. When the team dispersed and the company entered its second life, Jenn returned and picked up where she left off. That continuity and institutional knowledge is rare and valuable. Her professional background includes multichannel marketing coordination across content, social media, video production, and CRM at Harvey &amp; Company and J&amp;J Coastal Lending. She holds a BBA in Marketing from Cal State Fullerton. At NM Thera, she handles marketing coordination across content and brand development.</div>
+      </div>
+      <div class="person">
+        <div class="person-name">Hameed Kalvathi</div>
+        <div class="person-role">Product Design Engineer · Implementations Specialist</div>
+        <div class="person-eq">5.00%</div>
+        <div class="person-note">Hameed has been a contributor to SOKY's development since before the product had a name. He helped engineer the initial prototypes, produced the 3D-printed molds that gave the concept its first physical form, and advised on design modularity and manufacturability from the start — work that shaped the platform architecture still in place today. He is the founder of Ideate9, a product design firm that has supported over 500 startups across 15 countries with more than 750 CAD-ready products delivered across DTC, medtech, and hardware sectors. He holds a Master's in Mechanical Engineering from UTM and is ranked among the top 1% of CAD designers globally on Upwork and Fiverr.</div>
+      </div>
+    </div>
+    <h3>Advisors</h3>
+    <div class="people-grid">
+      <div class="person hl-pool">
+        <span class="person-badge badge-advisor">Research Advisor · Stanford</span>
+        <div class="person-name">Dr. Craig Heller</div>
+        <div class="person-role">Professor of Biology · Stanford University</div>
+        <div class="person-eq">0.50%</div>
+        <div class="person-note">One of the world's foremost researchers on thermoregulation and palmar AVA vasculature — the physiological mechanism directly foundational to SOKY's therapeutic rationale. His involvement validates the science and positions NM Thera for clinical trial credibility.</div>
+      </div>
+      <div class="person hl-pool">
+        <span class="person-badge badge-advisor">Hardware &amp; Manufacturing Advisor</span>
+        <div class="person-name">Sean Tan</div>
+        <div class="person-role">Hardware &amp; Technology Strategy</div>
+        <div class="person-eq">0.50%</div>
+        <div class="person-note">Former Director of Technology and VP of Hardware &amp; Manufacturing. Prior: Posifa Technologies, AiCare Corporation, Huawei, Nortel Networks. Advises on hardware architecture and Model E development.</div>
+      </div>
+    </div>
+    <h3>Investor-Partners</h3>
+    <div class="people-grid">
+      <div class="person hl-umber">
+        <span class="person-badge badge-investor">First Angel · $150K</span>
+        <div class="person-name">Sosimo Roman</div>
+        <div class="person-role">Angel Investor · Family Friend</div>
+        <div class="person-eq">11.00%</div>
+        <div class="person-note">$150K commitment funds the bridge from prototype to launch-ready. An early and trusted believer.</div>
+      </div>
+      <div class="person hl-umber">
+        <span class="person-badge badge-investor">Lead Angel · $30K</span>
+        <div class="person-name">Seymour Everett</div>
+        <div class="person-role">Founding Partner · Everett Dorey LLP</div>
+        <div class="person-eq">10.00%</div>
+        <div class="person-note">Lead Angel Investor and Company Legal Advisor. Strategic counsel over corporate structure and execution, IP prosecution, product liability and regulatory compliance.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S9 STRATEGIC RELATIONSHIPS ─── -->
+<section class="section" id="s9" data-label="Partners">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">09 — Partners</span>
+    <h2 class="section-title">Aligned at every layer.</h2>
+    <p class="section-sub">Legal · Science · Manufacturing · R&amp;D. Each partner structurally invested in the outcome.</p>
+  </div>
+  <div class="content-stack">
+    <div class="callout pool"><div class="callout-lbl">Everett Dorey LLP — Legal Counsel + Investor</div><p>Seymour Everett holds 10% equity and serves as legal advisor. Counsel is invested in the outcome. Everett Dorey handles corporate structure, IP prosecution, equity documentation, regulatory pathway legal support, and ongoing governance.</p></div>
+    <div class="callout pool"><div class="callout-lbl">Stanford · Dr. Craig Heller — Research Advisor</div><p>Dr. Heller's research on palmar AVA vasculature and thermoregulation is directly relevant to SOKY's mechanism and therapeutic claims. His science is the evidentiary foundation of the platform's clinical positioning and central to the research product track.</p></div>
+    <div class="callout green"><div class="callout-lbl">TopSheng — Primary Commercial Manufacturer</div><p>ISO 13485 certified. Turnkey silicone compression molding from tooling through fulfillment. Relationship established, first mold complete, production scales on confirmation. ~$10K per new commercial mold. No parallel QMS buildout needed at current stage.</p></div>
+    <div class="callout green"><div class="callout-lbl">Rapid Liquid Printing (RLP) — Strategic R&amp;D Partner</div><p>Breakthrough silicone 3D-printing. Research SKUs at ~$2,500 per toolpath versus $12,000+ traditional tooling. RLP prototypes feed directly into TopSheng's validated commercial pipeline.</p></div>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S10 MANUFACTURING & SUPPLY CHAIN ─── -->
+<section class="section" id="s10" data-label="Supply">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">10 — Supply</span>
+    <h2 class="section-title">Staged. De-risked. Certified.</h2>
+    <p class="section-sub">No single point of failure across a five-partner supply chain.</p>
+  </div>
+  <div class="content-stack">
+    <div class="vendor-list">
+      <div class="vendor-row"><div class="vendor-name">TopSheng</div><div class="vendor-desc"><strong>Primary commercial manufacturer.</strong> ISO 13485 certified. Turnkey silicone compression molding. First mold proven. ~$10K per new commercial mold. One pull yields Model B, F, and E without re-tooling.</div></div>
+      <div class="vendor-row"><div class="vendor-name">RLP</div><div class="vendor-desc"><strong>R&amp;D manufacturing (Track 2).</strong> ~$2,500 per research SKU. Enables internal complexity impossible in compression molding. Prototypes feed TopSheng's commercial pipeline.</div></div>
+      <div class="vendor-row"><div class="vendor-name">3LINX</div><div class="vendor-desc">Third-party logistics (3PL). Global fulfillment network. Pick-pack-ship for e-commerce, B2B bulk, and direct sales. SOP confirmed for Batch 1. Fulfillment is not a bottleneck.</div></div>
+      <div class="vendor-row"><div class="vendor-name">Blaine Labs &amp; Botanx</div><div class="vendor-desc">Prospective SOKY Plus formulation partner. 30+ FDA-registered products in skin care, wound care, fungal care, and pain management. Pharmaceutical-grade credibility for peptide-enhanced soak packs.</div></div>
+      <div class="vendor-row"><div class="vendor-name">MorphoMFG</div><div class="vendor-desc">Secondary manufacturing route. Chinese contract manufacturing broker for high-volume scale scenarios where TopSheng capacity or cost structure warrants a parallel option.</div></div>
+    </div>
+    <h3>Regulatory Pathway</h3>
+    <div class="tbl-scroll">
+    <table class="data-table">
+      <thead><tr><th>Track</th><th>Classification</th><th>Pathway</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>SOKY OTC — Model B / Model F</td><td>Class I</td><td>510(k) exempt — passive thermotherapy</td><td>Market entry ready</td></tr>
+        <tr><td>SOKY Pro / Rx — Model E</td><td>Class II</td><td>510(k) notification — iontophoresis, TENS, EMS</td><td>MFG ISO 13485 ready / FDA action plan ready</td></tr>
+        <tr><td>EU / Canada</td><td>CE / MDL</td><td>Conformity assessment / CMDCAS</td><td>Post-US launch / Global Launch</td></tr>
+        <tr><td>Quality Management</td><td>ISO 13485</td><td>Via TopSheng (active)</td><td>No parallel QMS buildout required</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S11 CLINICAL EVIDENCE ─── -->
+<section class="section" id="s11" data-label="Clinical">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">11 — Clinical</span>
+    <h2 class="section-title">The science precedes the product.</h2>
+    <p class="section-sub">SOKY doesn't ask the market to accept a new therapeutic concept. The evidence already exists.</p>
+  </div>
+  <div class="content-stack">
+    <p>The therapeutic modalities SOKY delivers — balneotherapy, hydrotherapy, iontophoresis, occlusive wet-wrap, contrast bathing — are among the most studied localized care approaches in medicine. SOKY's contribution is not the science. It is making that science accessible, repeatable, and portable for the first time.</p>
+    <div class="callout">
+      <div class="callout-lbl">Key Evidence Anchors</div>
+      <p><strong>Iontophoresis:</strong> Tap water iontophoresis produces 80%+ sweat reduction in controlled clinical studies. (Kreyden OP, J Cosmet Dermatol, 2004; Pariser &amp; Ballard, Arch Dermatol Res, 2019.) <strong>Occlusion:</strong> Sealed occlusive environments increase stratum corneum hydration by 300–400%, dramatically enhancing topical agent permeation. (International Journal of Pharmaceutics.) <strong>Balneotherapy / RA:</strong> Significant, sustained reduction in pain and disability vs standard care. (Cochrane Database Syst Rev.) <strong>Atopic Dermatitis:</strong> Dead Sea mineral baths produce statistically significant SCORAD improvement sustained at 3-month follow-up. <strong>Adherence:</strong> 68% of patients abandon home immersion routines within 30 days — primary reason: setup friction. SOKY's portable format shows a documented <strong>36-point improvement in 30-day adherence</strong>.</p>
+    </div>
+    <h3>Clinical Dispensing Opportunity</h3>
+    <p>Physical Therapists, Occupational Therapists, Dermatologists, and Podiatrists represent an immediately accessible B2B channel. A 15-patient dispensing program generates an estimated <strong>$15,600 in supplemental annual revenue per clinic</strong> — a meaningful number for a practitioner, a recurring revenue stream for NM Thera, and a trust signal that compounds into consumer referrals.</p>
+    <h3>Conditions Addressed</h3>
+    <p>Palmar &amp; Plantar Hyperhidrosis · Atopic Dermatitis / Eczema (including pediatric) · Post-Surgical Hand &amp; Foot Recovery · Rheumatoid &amp; Osteoarthritis · Peripheral Vascular Disease / Diabetic Neuropathy · Psoriasis · Post-Exercise Recovery · Plantar Fasciitis · Wound Healing (SOKY Clinical Track)</p>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S12 MARKETS & OPPORTUNITY ─── -->
+<section class="section" id="s12" data-label="Markets">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">12 — Markets</span>
+    <h2 class="section-title">$597B TAM. Zero wearable incumbents.</h2>
+    <p class="section-sub">The competitive frame is not other wearables — it is the bowl, the basin, and the tub.</p>
+  </div>
+  <div class="content-stack">
+    <p>SOKY enters the market as the only wearable soak platform in existence. Every market SOKY addresses was previously served by a stationary format. The opportunity is not to take share from an existing product. It is to redefine the category. At 1% SAM penetration, NM Thera projects annual revenues of $50–$100M by Year 10.</p>
+    <!-- TAM CHART -->
+    <div class="chart-wrap" id="tam-chart-section">
+      <div class="chart-title">Total Addressable Market — $597B+ Across Eight Verticals</div>
+      <div class="chart-subtitle">SOKY is the only wearable immersion platform in all eight categories. Wearable Medical Devices growing at 28% CAGR.</div>
+      <div class="chart-legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#1a2e4a"></span>Wellness</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#006D77"></span>Eczema &amp; Skincare</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#D4A849"></span>Wearable Med Devices</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#C05B3C"></span>Physical Therapy</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#2D6A4F"></span>Others</span>
+      </div>
+      <div class="chart-container chart-h-md"><canvas id="tamChart"></canvas></div>
+    </div>
+    <!-- TAM BARS -->
+    <div class="chart-wrap" id="tam-bars-section">
+      <div class="chart-title">TAM · SAM · SOM — Serviceable Market Sizing</div>
+      <div class="chart-subtitle">SAM = 1% of TAM. SOM = 1% of SAM. Conservative first-capture assumption.</div>
+      <div class="tam-row"><div class="tam-label">TAM — $597B+</div><div class="tam-bar-wrap"><div class="tam-bar tam" data-width="100"></div></div><div class="tam-val">$597B+</div></div>
+      <div class="tam-row"><div class="tam-label">SAM — $5.97B</div><div class="tam-bar-wrap"><div class="tam-bar sam" data-width="45"></div></div><div class="tam-val">$5.97B</div></div>
+      <div class="tam-row"><div class="tam-label">SOM — $59.7M</div><div class="tam-bar-wrap"><div class="tam-bar som" data-width="8"></div></div><div class="tam-val">$59.7M</div></div>
+    </div>
+    <!-- MARKET TABLE -->
+    <div class="tbl-scroll">
+    <table class="data-table">
+      <thead><tr><th>Market</th><th>TAM</th><th>SOKY Angle</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hand &amp; Foot Care</strong></td><td>$12.2B</td><td>First mover. Disrupts the $2B foot spa bath market entirely.</td></tr>
+        <tr><td><strong>Hyperhidrosis</strong></td><td>$646M</td><td>Issued patent US 11,602,631 B2 covers wearable iontophoresis through 2043.</td></tr>
+        <tr><td><strong>Wellness</strong></td><td>$1.5T</td><td>Don · Fill · Seal · Soak · Drain maps directly onto fastest-growing wellness ritual behaviors.</td></tr>
+        <tr><td><strong>Wearable Medical Devices</strong></td><td>$34B → $120B</td><td>28% CAGR 2023–2030. Only wearable immersion platform in this category.</td></tr>
+        <tr><td><strong>Eczema &amp; Skin Care</strong></td><td>$145B</td><td>Pediatric wet-wrap (Track 2). Peptide packs for barrier repair and anti-aging.</td></tr>
+        <tr><td><strong>Sports Medicine</strong></td><td>$5.9B → $8.4B</td><td>Contrast therapy, post-injury immersion, sleeve family formats.</td></tr>
+        <tr><td><strong>Physical Therapy</strong></td><td>$39.3B</td><td>Clinical dispensing program. PT/OT practitioners as referral nodes.</td></tr>
+        <tr><td><strong>Anti-Aging / Precision Skincare</strong></td><td>$23.4B+</td><td>SOKY Plus peptide soak line — clinically-informed skincare delivery.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <!-- AMAZON BENCHMARK BARS -->
+    <div class="chart-wrap" id="benchmark-section">
+      <div class="chart-title">Amazon Annual Revenue — Comparable Products · JungleScout 2024</div>
+      <div class="chart-subtitle">NM Thera Year 10 target matches Therabody's Amazon performance — a company that began with a single-modality device and expanded into a platform. SOKY enters with a more defensible patent, a consumable flywheel, and a clinical Rx channel Therabody lacks.</div>
+      <div class="bar-row"><span class="bar-name">HoMedics Footbath</span><div class="bar-outer"><div class="bar-inner" style="background:rgba(49,89,138,0.35)" data-width="7"></div></div><span class="bar-val">$5.2M</span></div>
+      <div class="bar-row"><span class="bar-name">Epielle</span><div class="bar-outer"><div class="bar-inner" style="background:rgba(49,89,138,0.4)" data-width="8"></div></div><span class="bar-val">$5.8M</span></div>
+      <div class="bar-row"><span class="bar-name">Dr. Teal's</span><div class="bar-outer"><div class="bar-inner" style="background:rgba(49,89,138,0.5)" data-width="16"></div></div><span class="bar-val">$11.8M</span></div>
+      <div class="bar-row"><span class="bar-name">TheraIce</span><div class="bar-outer"><div class="bar-inner" style="background:rgba(0,109,119,0.55)" data-width="21"></div></div><span class="bar-val">$14.9M</span></div>
+      <div class="bar-row"><span class="bar-name">Carpe</span><div class="bar-outer"><div class="bar-inner" style="background:rgba(0,109,119,0.65)" data-width="28"></div></div><span class="bar-val">$19.9M</span></div>
+      <div class="bar-row"><span class="bar-name">HyperIce</span><div class="bar-outer"><div class="bar-inner" style="background:rgba(104,139,88,0.65)" data-width="46"></div></div><span class="bar-val">$33.2M</span></div>
+      <div class="bar-row"><span class="bar-name nm">NM Thera Y10 ↑</span><div class="bar-outer" style="box-shadow:0 0 0 1px rgba(49,89,138,0.2)"><div class="bar-inner" style="background:linear-gradient(90deg,var(--navy),var(--pool))" data-width="99"></div></div><span class="bar-val nm">$72M</span></div>
+      <div class="bar-row"><span class="bar-name">Therabody</span><div class="bar-outer"><div class="bar-inner" style="background:linear-gradient(90deg,var(--green),#4a7a3a)" data-width="100"></div></div><span class="bar-val">$72.6M</span></div>
+    </div>
+    <div class="callout sun">
+      <div class="callout-lbl">Acquisition Precedent</div>
+      <p>PowerDot was acquired by Therabody for approximately $34M in 2021 — a single-modality device with no consumable flywheel and a narrower product scope than SOKY at equivalent stage. Potential acquirers across the SOKY platform: Therabody, Johnson &amp; Johnson, Medtronic, Abbott, Zimmer Biomet, Samsung Health.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S13 FINANCIAL PLAN ─── -->
+<section class="section" id="s13" data-label="Financials">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">13 — Financials</span>
+    <h2 class="section-title">Product-first. Revenue now.</h2>
+    <p class="section-sub">The 2024 $2.83M raise plan has been set aside. Generate revenue quickly. Let capital arrive on stronger terms.</p>
+  </div>
+  <div class="content-stack">
+    <div class="callout heat">
+      <div class="callout-lbl">Capital Position — March 2026</div>
+      <p>Total raised: $180K ($150K Sosimo Roman + $30K Seymour Everett). Runway: approximately one month remaining. Revenue generation from HandSOKY_B_M_001 and HandSOKY_B_M_002 is the immediate operational priority.</p>
+    </div>
+    <h3>Phase Structure</h3>
+    <div class="phases">
+      <div class="phase now">
+        <div class="phase-lbl">Phase 1 — Now</div>
+        <div class="phase-title">First Drop</div>
+        <div class="phase-desc">200 units across three SKUs. No additional capital required.</div>
+        <ul class="phase-items">
+          <li>Website live · 3 SKUs available</li>
+          <li>3LINX fulfillment SOP confirmed</li>
+          <li>Campaign assets deployed</li>
+          <li>Waitlist open for Batch 2</li>
+        </ul>
+      </div>
+      <div class="phase near">
+        <div class="phase-lbl">Phase 2 — 30–90 Days</div>
+        <div class="phase-title">Batch 2 + Foot SOKY</div>
+        <div class="phase-desc">First drop revenue funds FootSOKY mold (~$15K). Kickstarter/WeFundr launch from warm community.</div>
+        <ul class="phase-items">
+          <li>Foot SOKY Medium mold</li>
+          <li>SOKY Plus consumable SKUs</li>
+          <li>Kickstarter / WeFundr launch</li>
+          <li>Peptide packs introduced</li>
+        </ul>
+      </div>
+      <div class="phase growth">
+        <div class="phase-lbl">Phase 3 — 6–18 Months</div>
+        <div class="phase-title">Platform</div>
+        <div class="phase-desc">Three-track structure matures in parallel. Adult size expansion (Molds 3–6). Series A scoped vs demonstrated traction.</div>
+        <ul class="phase-items">
+          <li>Full adult Hand + Foot lineup</li>
+          <li>Model E (Ionto) via RLP</li>
+          <li>Clinical dispensing partnerships</li>
+          <li>510(k) preparation for Model E</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Unit Economics</h3>
+    <div class="tbl-scroll">
+    <table class="data-table">
+      <thead><tr><th>SKU</th><th>Price</th><th>COGS (est.)</th><th>Gross Margin</th></tr></thead>
+      <tbody>
+        <tr><td><strong>HandSOKY_B_M_001</strong> — Hand SOKY</td><td>$85</td><td>$27–$29</td><td>~65–68%</td></tr>
+        <tr><td><strong>HandSOKY_B_M_002</strong> — Travel System</td><td>$150</td><td>$35–$42</td><td>~72–77%</td></tr>
+        <tr><td>SOKY OTC full range</td><td>$85–$175</td><td>$16–$27</td><td>65–80%</td></tr>
+        <tr><td>SOKY Plus — Salts / Botanicals</td><td>$18–$35</td><td>$4–$8</td><td>75–85%</td></tr>
+        <tr><td>SOKY Plus — Peptide Packs</td><td>$35–$65</td><td>$8–$14</td><td>75–82%</td></tr>
+        <tr><td>SOKY Rx / Model E</td><td>$750–$1,000</td><td>TBD</td><td>High</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <!-- FORWARD TRAJECTORY CHART -->
+    <div class="chart-wrap" id="forward-chart-section">
+      <div class="chart-title">Revenue &amp; Valuation Trajectory · Conservative Model · 2026–2036</div>
+      <div class="chart-subtitle">Revenue projections from NM Thera business plan. Valuation multiples: 3× Year 2, 3.5× Year 3, 4× Year 5, 5× Year 10. Benchmarked vs Therabody ($72.6M/yr Amazon).</div>
+      <div class="chart-legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#1a2e4a;opacity:0.75"></span>Revenue ($M)</span>
+        <span class="legend-item"><span class="legend-line" style="background:#006D77"></span>Valuation — Base ($M)</span>
+        <span class="legend-item"><span class="legend-line" style="background:#D4A849;border-top:2px dashed #D4A849;height:0;background:none;border-radius:0"></span>Valuation — Bull ($M)</span>
+      </div>
+      <div class="chart-container chart-h-xl"><canvas id="forwardChart"></canvas></div>
+    </div>
+    <!-- STACKED REVENUE CHART -->
+    <div class="chart-wrap" id="stacked-chart-section">
+      <div class="chart-title">Revenue Stream Maturation — Nine Streams to Year 5</div>
+      <div class="chart-subtitle">OTC hardware anchors early years; recurring consumables and clinical Rx become dominant by Year 5.</div>
+      <div class="chart-legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#1a2e4a"></span>SOKY OTC</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#006D77"></span>SOKY Plus (consumables)</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#D4A849"></span>SOKY Rx / Clinical</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#C05B3C"></span>App + Licensing + IP</span>
+      </div>
+      <div class="chart-container chart-h-lg"><canvas id="stackedChart"></canvas></div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ─── S14 VALUATION & INVESTOR ASK ─── -->
+<section class="section" id="s14" data-label="Valuation">
+<div class="container section-grid reveal">
+  <div class="section-meta">
+    <span class="section-id">14 — Valuation</span>
+    <h2 class="section-title">$3.2M. 113× base case return.</h2>
+    <p class="section-sub">Initial Revenue Generation. Pre-seed. The most asymmetric entry in the company's history.</p>
+  </div>
+  <div class="content-stack">
+    <h3>Valuation History — How Value Was Built: 2016–2026</h3>
+    <div class="chart-wrap">
+      <div class="chart-title">Estimated Enterprise Value Trajectory · 2016–2026</div>
+      <div class="chart-subtitle">Pre-revenue companies accrue value in non-linear bursts tied to de-risking events — IP filings, capital events, team formation, and product milestones. For SOKY, value was also built through the harder-to-quantify work of eliminating what doesn't work: failed molds, wrong materials, and dead ends that narrowed the path to what does.</div>
+
+      <!-- PHASE 0 -->
+      <div style="margin-bottom:2rem;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:1rem;font-family:var(--sub);">Phase 0 · Origin (2016–2018)</div>
+        <div class="timeline phase0-grid">
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--muted);color:#fff;font-size:9px;font-weight:700;">O</div>
+            <div class="timeline-year">2016–2017</div>
+            <div class="timeline-event">Concept Materialized · Latex Dip Molding</div>
+            <div class="timeline-desc">First physical prototypes produced using plaster casting and latex dip molding — gloves, mitts, and sock variants. Off-the-shelf analogs identified as crude proof of concept. Materials science and forming technique absorbed entirely in-house.</div>
+            <div class="timeline-val">↑ ~$50K foundational value event</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--muted);color:#fff;font-size:9px;font-weight:700;">O</div>
+            <div class="timeline-year">2017–2018</div>
+            <div class="timeline-event">In-House 3D Engineering Established</div>
+            <div class="timeline-desc">In-house 3D printing and CAD engineering capabilities built out. Multiple garment form factors iterated. Design modularity and garment family logic established early — the platform architecture that would later anchor the patent claims takes its first shape here.</div>
+            <div class="timeline-val">↑ ~$60K capability value event</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE I + II -->
+      <div class="timeline-grid">
+        <div>
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:1rem;font-family:var(--sub);">Phase I · Invention (2018–2022)</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot ip">IP</div>
+              <div class="timeline-year">June 2018</div>
+              <div class="timeline-event">Provisional Patent Filed</div>
+              <div class="timeline-desc">Priority date established for the inversion frustal cuff mechanism.</div>
+              <div class="timeline-val">↑ ~$150K value event</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot ip">IP</div>
+              <div class="timeline-year">May 2019</div>
+              <div class="timeline-event">PCT Application Filed</div>
+              <div class="timeline-desc">International filing extends protection across key markets.</div>
+              <div class="timeline-val">↑ ~$80K value event</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot product">P</div>
+              <div class="timeline-year">2019–2021</div>
+              <div class="timeline-event">Mold Iteration · Failures as De-Risking</div>
+              <div class="timeline-desc">Two mold attempts — a sock mold and a first-generation glove mold — produced non-viable results. 3D-printed mold approach also tested and retired. Estimated $5K–$7K in direct expenditure per failed cycle. Each failure eliminated a design path and sharpened the specifications that would define the eventual winning mold.</div>
+              <div class="timeline-val" style="color:var(--muted);">→ Engineering knowledge consolidated · Path narrowed</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot product">P</div>
+              <div class="timeline-year">2021</div>
+              <div class="timeline-event">MorphoMFG Prototypes + COGS Validation</div>
+              <div class="timeline-desc">$16–$27/unit COGS confirmed. Manufacturing feasibility de-risked with external manufacturing partner.</div>
+              <div class="timeline-val">↑ ~$120K value event</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot product">P</div>
+              <div class="timeline-year">2021–2022</div>
+              <div class="timeline-event">Platform Architecture Defined — Parallel Track</div>
+              <div class="timeline-desc">Running in parallel with garment development: fill port design, electrotherapy integration, and the full modality ecosystem — thermal, chemical, electrical, photobiomodulation, gas delivery. Port interface standardization completed here is the foundation of the platform's interoperability claim and the Model E clinical pathway.</div>
+              <div class="timeline-val">↑ ~$100K platform architecture value event</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:1rem;font-family:var(--sub);">Phase II · Validation (2023–2026)</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot ip">IP</div>
+              <div class="timeline-year">March 14, 2023</div>
+              <div class="timeline-event">US Patent Issued · US 11,602,631 B2</div>
+              <div class="timeline-desc">15-claim patent issued. Valid to 2043. Largest single value event in company history.</div>
+              <div class="timeline-val">↑ Largest step · ~$500K+ IP value</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot team">T</div>
+              <div class="timeline-year">2024</div>
+              <div class="timeline-event">Team Formation + Strategic Investors</div>
+              <div class="timeline-desc">$180K raised. 6-person international team across 3 continents. Dr. Craig Heller (Stanford) advisory established.</div>
+              <div class="timeline-val">↑ ~$350K team + capital event</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot ip">IP</div>
+              <div class="timeline-year">Dec 2025</div>
+              <div class="timeline-event">Platform Patent Provisional Filed</div>
+              <div class="timeline-desc">Full frustal geometry family claimed. No design-around possible by taper angle. Competitor moat extended across all garment profiles and cuff geometries.</div>
+              <div class="timeline-val">↑ ~$300K forward value event</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot product">P</div>
+              <div class="timeline-year">Feb 2026</div>
+              <div class="timeline-event">Third Mold · First Viable Unit · True Zero-to-One</div>
+              <div class="timeline-desc">After two failed mold cycles spanning years, the third mold — single-cavity, Size Medium, Hand SOKY — produced a commercially viable, sellable unit. This is the actual zero-to-one moment. Not the patent filing, not the prototypes. The moment a manufacturable product existed that could be sold, supported, and scaled. Current capacity: several hundred units per month.</div>
+              <div class="timeline-val">↑ ~$200K production de-risk event</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot launch">↑</div>
+              <div class="timeline-year">March 2026</div>
+              <div class="timeline-event">First Drop Executing · $70K LOI</div>
+              <div class="timeline-desc">TopSheng mold proven. 200-unit first drop executing. $70K LOI from footcare distributor in hand. Research access cohort in formation. All three SKUs priced and positioned.</div>
+              <div class="timeline-val">Present state · $3.2M base</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUMULATIVE VALUE STEP CHART -->
+      <div style="margin-top:2.5rem;">
+        <div class="chart-title">Cumulative Value Built — Event by Event</div>
+        <div class="chart-subtitle">Each de-risking event is a step up. Value accrues non-linearly — the patent issuance in 2023 was the single largest vertical move. The third mold in early 2026 was the operational zero-to-one that makes everything below it real.</div>
+        <div class="chart-container chart-h-lg"><canvas id="cumulativeValueChart"></canvas></div>
+      </div>
+    </div>
+
+    <h3>Current Valuation — $3.2M Base Case</h3>
+    <p>Not a founder estimate. The output of three complementary methods, triangulated against comparable transactions and discounted against execution risk in a macro-aware framework.</p>
+    <div class="method-cards">
+      <div class="method-card m1">
+        <div class="method-weight">Method 1 · 35% Weight</div>
+        <div class="method-name">Asset &amp; Cost Reconstruction</div>
+        <div class="method-val">$1.85M</div>
+        <div class="method-desc">$180K capital + issued patent ($500K+, valid 2043) + 8+ years sweat equity ($500K) + TopSheng relationship and proven first mold — a 12–24 month head start no competitor can shortcut.</div>
+      </div>
+      <div class="method-card m2">
+        <div class="method-weight">Method 2 · 35% Weight</div>
+        <div class="method-name">Comparable Transactions</div>
+        <div class="method-val">$3.5M</div>
+        <div class="method-desc">Pre-seed medtech companies with issued patents and validated manufacturing partners transact at ~$3.5M median. PowerDot (Therabody acquisition ~$34M, 2021) entered at comparable stage with narrower scope and no consumable flywheel.</div>
+      </div>
+      <div class="method-card m3">
+        <div class="method-weight">Method 3 · 30% Weight</div>
+        <div class="method-name">Risk-Adjusted DCF</div>
+        <div class="method-val">$4.2M</div>
+        <div class="method-desc">10-year DCF at $72M Year 10 at 5× exit multiple, 80% execution risk haircut, 15% WACC. Deliberately conservative — the 80% haircut accounts for the full range of underperformance scenarios.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-lbl">Blended Result</div>
+      <p><strong>$3.13M weighted average → rounded to $3.2M base case.</strong> (35% × $1.85M) + (35% × $3.5M) + (30% × $4.2M) = $3.13M.</p>
+    </div>
+
+    <h3>Scenario Analysis</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card bear">
+        <div class="scenario-label">Bear Case</div>
+        <div class="scenario-value">$1.5M</div>
+        <div class="scenario-note">First drop underperforms. No Batch 2. IP moat alone carries the floor — US 11,602,631 B2 valid through 2043, no design-around available.</div>
+      </div>
+      <div class="scenario-card base">
+        <div class="scenario-label">Base Case ★</div>
+        <div class="scenario-value">$3.2M</div>
+        <div class="scenario-note">First drop succeeds. Community and Batch 2 unlocked. Foot SOKY mold funded. Momentum toward Series A. Blended 3-method result.</div>
+      </div>
+      <div class="scenario-card bull">
+        <div class="scenario-label">Bull Case</div>
+        <div class="scenario-value">$6.5M</div>
+        <div class="scenario-note">$70K LOI converts. Stanford clinical trial engaged. Strategic investor with distribution adds 2× premium.</div>
+      </div>
+    </div>
+
+    <h3>Valuation Trajectory</h3>
+    <div class="tbl-scroll wide">
+    <table class="data-table">
+      <thead><tr><th>Period</th><th>Stage</th><th>Revenue</th><th>Multiple</th><th>Valuation</th><th>vs. Today</th><th>Comparable</th></tr></thead>
+      <tbody>
+        <tr class="row-hl"><td><strong>March 2026</strong></td><td>Initial Revenue Generation · Launch</td><td>—</td><td>Asset basis</td><td><strong>$3.2M</strong></td><td>—</td><td>PowerDot pre-seed</td></tr>
+        <tr><td>Year 2 (2028)</td><td>First revenue scale</td><td>$3.65M</td><td>3×</td><td>$12M</td><td>3.75×</td><td>HoMedics early</td></tr>
+        <tr><td>Year 3 (2029)</td><td>Full OTC lineup</td><td>$20.4M</td><td>3.5×</td><td>$71M</td><td>22×</td><td>TheraIce scale</td></tr>
+        <tr><td>Year 5 (2031)</td><td>SOKY Rx + App</td><td>$48.1M</td><td>4×</td><td>$193M</td><td>60×</td><td>HyperIce comparable</td></tr>
+        <tr><td>Year 10 (2036)</td><td>Full platform</td><td>$72M</td><td>5×</td><td>$361M</td><td>113×</td><td>Therabody Amazon parity</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- RETURN CHART -->
+    <div class="chart-wrap" id="return-chart-section">
+      <div class="chart-title">Return Profile by Entry Point — Bear · Base · Bull Scenarios</div>
+      <div class="chart-subtitle">An investor entering at $3.2M today with a ten-year hold achieves ~113× at base case. Even the bear case returns ~15× — anchored by the IP moat alone.</div>
+      <div class="chart-container chart-h-lg"><canvas id="returnChart"></canvas></div>
+    </div>
+
+    <h3>Return Profile at a Glance</h3>
+    <div class="return-grid">
+      <div class="return-card">
+        <div class="return-entry">Pre-Seed — Now</div>
+        <div class="return-val-row">Entry at $3.2M</div>
+        <div class="return-multiples">
+          <div class="return-mult bear-m"><div class="return-mult-val">15×</div><div class="return-mult-lbl">Bear</div></div>
+          <div class="return-mult-divider"></div>
+          <div class="return-mult base-m"><div class="return-mult-val">113×</div><div class="return-mult-lbl">Base</div></div>
+          <div class="return-mult-divider"></div>
+          <div class="return-mult bull-m"><div class="return-mult-val">168×</div><div class="return-mult-lbl">Bull</div></div>
+        </div>
+      </div>
+      <div class="return-card">
+        <div class="return-entry">Seed Round (2028)</div>
+        <div class="return-val-row">Entry at $12M</div>
+        <div class="return-multiples">
+          <div class="return-mult bear-m"><div class="return-mult-val">4×</div><div class="return-mult-lbl">Bear</div></div>
+          <div class="return-mult-divider"></div>
+          <div class="return-mult base-m"><div class="return-mult-val">30×</div><div class="return-mult-lbl">Base</div></div>
+          <div class="return-mult-divider"></div>
+          <div class="return-mult bull-m"><div class="return-mult-val">45×</div><div class="return-mult-lbl">Bull</div></div>
+        </div>
+      </div>
+      <div class="return-card">
+        <div class="return-entry">Series A (2030)</div>
+        <div class="return-val-row">Entry at $75M</div>
+        <div class="return-multiples">
+          <div class="return-mult bear-m"><div class="return-mult-val">0.7×</div><div class="return-mult-lbl">Bear</div></div>
+          <div class="return-mult-divider"></div>
+          <div class="return-mult base-m"><div class="return-mult-val">4.8×</div><div class="return-mult-lbl">Base</div></div>
+          <div class="return-mult-divider"></div>
+          <div class="return-mult bull-m"><div class="return-mult-val">7.2×</div><div class="return-mult-lbl">Bull</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RISK BUBBLE CHART -->
+    <div class="chart-wrap" id="risk-chart-section">
+      <div class="chart-title">Risk &amp; Opportunity Landscape — Probability vs Valuation Impact</div>
+      <div class="chart-subtitle">Bubble size = relative magnitude. Red = risks. Teal/green = upside opportunities. Runway constraint is the highest-probability near-term risk. Strategic investor is the highest-impact upside driver.</div>
+      <div class="chart-container chart-h-xl"><canvas id="riskChart"></canvas></div>
+    </div>
+
+    <h3>Risk Landscape — Plain Language</h3>
+    <div class="risk-grid">
+      <div class="risk-item high"><div class="risk-label">High Probability · Near-Term</div><div class="risk-title">Runway Constraint</div><div class="risk-desc">~One month of operating runway as of March 2026. The first drop must generate sufficient revenue to bridge to Batch 2 without emergency capital. This is what makes the current entry window both urgent and compelling.</div></div>
+      <div class="risk-item med"><div class="risk-label">Medium · Structural</div><div class="risk-title">Supply Chain Concentration</div><div class="risk-desc">TopSheng is primary manufacturer, operating in China. Tariff environment introduces logistics exposure. RLP and MorphoMFG provide partial mitigation. Domestic pathway for Rx track is on medium-term roadmap.</div></div>
+      <div class="risk-item low"><div class="risk-label">Low · Timing Risk</div><div class="risk-title">Regulatory Timing — Model E</div><div class="risk-desc">Class II 510(k) clearance timelines are subject to agency scheduling. Predicate device pathway well-established. TopSheng ISO 13485 eliminates most common rejection risk. OTC track is entirely unaffected.</div></div>
+      <div class="risk-item opp"><div class="risk-label">Opportunity · Upside Driver</div><div class="risk-title">Strategic Investor Multiplier</div><div class="risk-desc">A single investor with meaningful distribution into PT, podiatry, dermatology, or sports recovery could double the base case valuation at no additional dilution. The $70K LOI is direct evidence the channel is active. The right introduction is worth more than the capital.</div></div>
+    </div>
+
+    <h3>What We Are Looking For</h3>
+    <div class="callout heat"><div class="callout-lbl">Immediate — First Drop Operations</div><p>Modest operational capital to ensure the first drop executes cleanly — campaign assets, fulfillment costs, runway extension through initial sell-through. Investors who enter now receive the most favorable terms in the company's history. The ask is small. The entry multiple is 113× at base case.</p></div>
+    <div class="callout sun"><div class="callout-lbl">Near-Term — Batch 2 + Foot SOKY (~$10K–$30K)</div><p>$15,000 unlocks the Foot SOKY single-cavity mold — a second complete product family, three new SKUs, a second body zone, and the opening of the footcare channel. An additional $10,000–$15,000 accelerates size expansion into triple-cavity tooling.</p></div>
+    <div class="callout green"><div class="callout-lbl">Strategic Investment</div><p>NM Thera actively seeks investors whose networks accelerate distribution, clinical validation, or retail presence. A pathway to Therabody, HyperIce, a medical device distributor, a professional sports recovery network, or a practitioner channel creates value that exceeds the dollar amount of the check by a significant multiple.</p></div>
+
+    <div class="analyst-quote">
+      <div class="analyst-quote-lbl">Analyst Conclusion · March 2026 Valuation Report</div>
+      <blockquote>"NM Thera is priced at $3.2M at a moment when the option value of the platform — a patented, defensible, no-direct-competitor wearable soak system positioned across a $597B TAM — is substantially larger than the current price implies. The runway constraint creates a near-term execution risk that is real but not structural. An investor entering at $3.2M today with a ten-year hold and $361M exit achieves a ~113× return on base case, or ~200× on the bull case. In a volatile macro environment where most early-stage investments are speculative narrative plays, NM Thera has an issued patent, a validated manufacturing partner, documented clinical evidence, and a signed LOI as tangible anchors. This is an asymmetric bet worth taking at the right check size."</blockquote>
+    </div>
+
+    <div class="manifesto-divider"></div>
+    <div class="pull-quote">
+      <blockquote>"We are building this not as a product company but as a proof of concept. A demonstration that health technology can be humane, accessible, repairable, and financially sustainable at the same time."</blockquote>
+      <cite>— NM Thera Manifesto, 2026</cite>
+    </div>
+
+    <div class="footnote">
+      <p><strong>Confidentiality Notice.</strong> This document contains proprietary and confidential information belonging to NM Therapeutics, Inc. It is provided solely for the use of the named recipient and may not be reproduced, disclosed, or distributed without prior written consent. All financial projections are forward-looking and subject to material risks and uncertainties.</p>
+      <p style="margin-top:0.5rem;"><strong>NM Therapeutics, Inc.</strong> · kenny@nmthera.com · 714-782-2843 · nmthera.com · Eastvale, CA</p>
+      <p style="margin-top:0.35rem;font-size:10.5px;">SOKY supports personal care routines. It is not intended to diagnose, treat, cure, or prevent any disease or medical condition.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+</div><!-- /doc-shell -->
+</div><!-- /shell -->
+
+<script>
+/* ══ PROGRESS BAR + TOPBAR + SIDE NAV ══ */
+const progressBar   = document.getElementById('progress-bar');
+const progressLabel = document.getElementById('progress-label');
+const topbar        = document.getElementById('topbar');
+const coverEl       = document.querySelector('.cover');
+const sideNav       = document.querySelector('.side-nav');
+
+function updateProgress() {
+  if (!progressBar) return;
+  const scrollTop = window.scrollY || 0;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct  = docH > 0 ? Math.min(100, Math.max(0, (scrollTop / docH) * 100)) : 0;
+  progressBar.style.width = pct + '%';
+  if (coverEl && topbar) {
+    const coverH = coverEl.offsetHeight;
+    topbar.classList.toggle('is-dark', scrollTop < coverH * 0.88);
+  }
+  if (sideNav && coverEl) {
+    sideNav.classList.toggle('is-visible', scrollTop > coverEl.offsetHeight * 0.6);
+  }
+}
+document.addEventListener('DOMContentLoaded', updateProgress);
+window.addEventListener('load', updateProgress);
+window.addEventListener('scroll', updateProgress, { passive: true });
+window.addEventListener('resize', updateProgress, { passive: true });
+
+/* ══ INTERSECTION OBSERVERS ══ */
+const sections  = Array.from(document.querySelectorAll('[data-label]'));
+const navLinks  = Array.from(document.querySelectorAll('.side-nav a'));
+const revealEls = Array.from(document.querySelectorAll('.reveal'));
+
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => {
+  const r = el.getBoundingClientRect();
+  if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
+  else revealObs.observe(el);
+});
+
+const sectionObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const label = e.target.getAttribute('data-label');
+    if (label && progressLabel) progressLabel.textContent = label;
+    const id = e.target.id;
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+  });
+}, { threshold: 0.15, rootMargin: '-8% 0px -55% 0px' });
+sections.forEach(s => sectionObs.observe(s));
+
+const barTargets = [
+  document.getElementById('benchmark-section'),
+  document.getElementById('tam-bars-section'),
+];
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.bar-inner[data-width]').forEach((bar, i) => {
+      setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, i * 80);
+    });
+    e.target.querySelectorAll('.tam-bar[data-width]').forEach((bar, i) => {
+      setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, i * 140 + 100);
+    });
+    barObs.unobserve(e.target);
+  });
+}, { threshold: 0.2 });
+barTargets.forEach(t => { if (t) barObs.observe(t); });
+
+/* ══ CHART CONSTANTS ══ */
+const navy   = '#1a2e4a';
+const teal   = '#006D77';
+const gold   = '#D4A849';
+const coral  = '#C05B3C';
+const green  = '#2D6A4F';
+const muted  = '#9CA3AF';
+
+// 1. TAM DOUGHNUT
+(function() {
+  const el = document.getElementById('tamChart');
+  if (!el) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const isMobile = window.innerWidth < 600;
+      new Chart(el, {
+        type: 'doughnut',
+        data: {
+          labels: ['Wellness ($1,500B)', 'Eczema & Skincare ($189B)', 'Wearable Med Devices ($120B)', 'Physical Therapy ($39.3B)', 'Sports Medicine ($8.4B)', 'Hand & Foot Care ($12.2B)', 'Hyperhidrosis ($0.65B)'],
+          datasets: [{
+            data: [1500, 189, 120, 39.3, 12.2, 8.4, 0.65],
+            backgroundColor: [navy, teal, gold, coral, green, '#83C5BE', muted],
+            borderWidth: 2, borderColor: '#F7F7F5',
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: isMobile ? 'bottom' : 'right',
+              labels: { boxWidth: isMobile ? 10 : 11, padding: isMobile ? 6 : 10, font: { size: isMobile ? 10 : 11 } }
+            },
+            tooltip: { callbacks: { label: ctx => ' $' + ctx.parsed.toFixed(1) + 'B' } }
+          }
+        }
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+// 2. FORWARD TRAJECTORY
+(function() {
+  const el = document.getElementById('forwardChart');
+  if (!el) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const isMobile = window.innerWidth < 600;
+      new Chart(el, {
+        data: {
+          labels: ['Now', 'Yr 2\n(2028)', 'Yr 3\n(2029)', 'Yr 5\n(2031)', 'Yr 10\n(2036)'],
+          datasets: [
+            { type: 'bar', label: 'Revenue ($M)', data: [0, 3.65, 20.4, 48.1, 72], backgroundColor: 'rgba(26,46,74,0.72)', borderRadius: 5, yAxisID: 'y' },
+            { type: 'line', label: 'Valuation — Base ($M)', data: [3.2, 12, 71, 193, 361], borderColor: teal, backgroundColor: 'transparent', borderWidth: 2.5, tension: 0.35, pointBackgroundColor: teal, pointRadius: isMobile ? 4 : 6, yAxisID: 'y2' },
+            { type: 'line', label: 'Valuation — Bull ($M)', data: [6.5, 20, 110, 290, 540], borderColor: gold, backgroundColor: 'transparent', borderWidth: 1.5, borderDash: [5, 4], tension: 0.35, pointRadius: isMobile ? 2 : 3, yAxisID: 'y2' }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y:  { type: 'linear', position: 'left',  ticks: { callback: v => '$' + v + 'M', font: { size: isMobile ? 9 : 11 } }, grid: { color: 'rgba(17,24,39,0.06)' }, title: { display: !isMobile, text: 'Revenue ($M)' } },
+            y2: { type: 'linear', position: 'right', ticks: { callback: v => '$' + v + 'M', font: { size: isMobile ? 9 : 11 } }, grid: { display: false }, title: { display: !isMobile, text: 'Valuation ($M)' } },
+            x:  { grid: { display: false }, ticks: { font: { size: isMobile ? 9 : 11 } } }
+          }
+        }
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+// 3. STACKED REVENUE
+(function() {
+  const el = document.getElementById('stackedChart');
+  if (!el) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      new Chart(el, {
+        type: 'bar',
+        data: {
+          labels: ['Y1', 'Y2', 'Y3', 'Y4', 'Y5'],
+          datasets: [
+            { label: 'SOKY OTC',               data: [0, 2.5, 12, 22, 28],   backgroundColor: navy,  borderRadius: 4 },
+            { label: 'SOKY Plus (consumables)', data: [0, 0.8, 4.5, 10, 12],  backgroundColor: teal  },
+            { label: 'SOKY Rx / Clinical',      data: [0, 0.2, 2.5,  7,  5],  backgroundColor: gold  },
+            { label: 'App + Licensing + IP',    data: [0, 0.15, 1.4, 4, 3.1], backgroundColor: coral },
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { stacked: true, grid: { display: false } },
+            y: { stacked: true, ticks: { callback: v => '$' + v + 'M' }, grid: { color: 'rgba(17,24,39,0.06)' } }
+          }
+        }
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+// 4. RETURN CHART
+(function() {
+  const el = document.getElementById('returnChart');
+  if (!el) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      new Chart(el, {
+        type: 'bar',
+        data: {
+          labels: ['Pre-Seed\n($3.2M)', 'Seed\n($12M, 2028)', 'Series A\n($75M, 2030)'],
+          datasets: [
+            { label: 'Bear Case (×)',  data: [15,  4,   0.7], backgroundColor: 'rgba(179,29,27,0.6)',  borderRadius: 4 },
+            { label: 'Base Case (×)',  data: [113, 30,  4.8], backgroundColor: teal,                   borderRadius: 4 },
+            { label: 'Bull Case (×)',  data: [168, 45,  7.2], backgroundColor: gold,                   borderRadius: 4 },
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: true, position: 'top', labels: { boxWidth: 11, font: { size: 11 } } } },
+          scales: {
+            x: { grid: { display: false } },
+            y: { ticks: { callback: v => v + '×' }, grid: { color: 'rgba(17,24,39,0.06)' } }
+          }
+        }
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+// 5. RISK BUBBLE
+(function() {
+  const el = document.getElementById('riskChart');
+  if (!el) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const isMobile = window.innerWidth < 600;
+      const rScale   = isMobile ? 0.55 : 1;
+      new Chart(el, {
+        type: 'bubble',
+        data: {
+          datasets: [
+            { label: 'Runway Depletion',            data: [{x:75,y:82,r:18*rScale}], backgroundColor:'rgba(179,29,27,0.65)' },
+            { label: 'Supply Chain / China Tariffs', data: [{x:55,y:50,r:14*rScale}], backgroundColor:'rgba(180,83,9,0.65)'  },
+            { label: 'Regulatory Delay (Class II)',  data: [{x:35,y:60,r:11*rScale}], backgroundColor:'rgba(180,83,9,0.5)'   },
+            { label: 'Market Adoption Slower',       data: [{x:40,y:42,r:13*rScale}], backgroundColor:'rgba(107,114,128,0.55)'},
+            { label: 'Key Person Risk (CEO)',         data: [{x:20,y:68,r:10*rScale}], backgroundColor:'rgba(26,46,74,0.55)'  },
+            { label: 'Strategic Investor Uplift',    data: [{x:50,y:87,r:16*rScale}], backgroundColor:'rgba(0,109,119,0.65)' },
+            { label: 'LOI Converts to Order',        data: [{x:60,y:73,r:14*rScale}], backgroundColor:'rgba(0,109,119,0.5)'  },
+            { label: 'Stanford Clinical Trial',      data: [{x:30,y:78,r:12*rScale}], backgroundColor:'rgba(45,106,79,0.6)'  },
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          clip: false,
+          plugins: {
+            legend: {
+              position: isMobile ? 'bottom' : 'right',
+              labels: { boxWidth: 10, font: { size: isMobile ? 9 : 10 }, padding: isMobile ? 5 : 8 }
+            },
+            tooltip: { callbacks: { label: ctx => ctx.dataset.label } }
+          },
+          layout: { padding: { top: 12, right: 12, bottom: 6, left: 6 } },
+          scales: {
+            x: { min: 0, max: 100, title: { display: true, text: 'Probability (%)', font: { size: isMobile ? 10 : 12 } }, ticks: { callback: v => v + '%', font: { size: isMobile ? 9 : 11 } }, grid: { color: 'rgba(17,24,39,0.06)' } },
+            y: { min: 0, max: 100, title: { display: true, text: 'Valuation Impact (%)', font: { size: isMobile ? 10 : 12 } }, ticks: { callback: v => v + '%', font: { size: isMobile ? 9 : 11 } }, grid: { color: 'rgba(17,24,39,0.06)' } }
+          }
+        }
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+// 6. CUMULATIVE VALUE CHART
+(function() {
+  const el = document.getElementById('cumulativeValueChart');
+  if (!el) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const isMobile = window.innerWidth < 600;
+      const labels = [
+        '2016\nConcept', '2017\n3D Eng.', 'Jun 2018\nProvisional', 'May 2019\nPCT',
+        '2021\nMorphoMFG', '2021–22\nPlatform', 'Mar 2023\nUS Patent',
+        '2024\nTeam+Capital', 'Dec 2025\nPlatform Prov.', 'Feb 2026\n3rd Mold', 'Mar 2026\nFirst Drop'
+      ];
+      const cumulative = [50, 110, 260, 340, 460, 560, 1120, 1470, 1770, 1970, 3200];
+      const increments = cumulative.map((v, i) => i === 0 ? v : v - cumulative[i-1]);
+      const barColors = [
+        'rgba(156,163,175,0.7)', 'rgba(156,163,175,0.7)',
+        'rgba(0,109,119,0.75)',  'rgba(0,109,119,0.75)',
+        'rgba(26,46,74,0.7)',    'rgba(26,46,74,0.7)',
+        'rgba(0,109,119,0.9)',   'rgba(212,168,73,0.8)',
+        'rgba(0,109,119,0.75)',  'rgba(26,46,74,0.85)',
+        'rgba(192,91,60,0.85)',
+      ];
+      new Chart(el, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: 'Cumulative Est. Value ($K)', data: cumulative, backgroundColor: barColors, borderRadius: 4, borderSkipped: false },
+            { type: 'line', label: 'Value Trajectory', data: cumulative, borderColor: teal, backgroundColor: 'transparent', borderWidth: 2, tension: 0.3, pointRadius: isMobile ? 3 : 4, pointBackgroundColor: barColors, pointBorderColor: '#fff', pointBorderWidth: 1.5 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => {
+                  const val = ctx.parsed.y;
+                  const inc = increments[ctx.dataIndex];
+                  if (ctx.datasetIndex === 0) {
+                    return [
+                      ' Cumulative: $' + (val >= 1000 ? (val/1000).toFixed(2) + 'M' : val + 'K'),
+                      ' Event added: +$' + (inc >= 1000 ? (inc/1000).toFixed(2) + 'M' : inc + 'K')
+                    ];
+                  }
+                  return null;
+                }
+              }
+            }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { font: { size: isMobile ? 8 : 9.5 }, maxRotation: 0 } },
+            y: {
+              ticks: { callback: v => v >= 1000 ? '$' + (v/1000).toFixed(1) + 'M' : '$' + v + 'K', font: { size: isMobile ? 9 : 11 } },
+              grid: { color: 'rgba(17,24,39,0.06)' },
+              title: { display: !isMobile, text: 'Estimated Enterprise Value', font: { size: 11 } }
+            }
+          }
+        }
+      });
+      obs.unobserve(e.target);
+    });
+  }, { threshold: 0.25 });
+  obs.observe(el);
+})();
+</script>
+</body>
+</html>

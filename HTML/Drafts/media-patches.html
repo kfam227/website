@@ -1,0 +1,309 @@
+<!--
+  ═══════════════════════════════════════════════════════════════
+  SOKY Business Plan — Media Integration Reference
+  ═══════════════════════════════════════════════════════════════
+  
+  This file documents EVERY media insertion for the business plan.
+  Each section shows:
+    1. WHERE to find the insertion point (context text)
+    2. WHAT to insert (the exact HTML)
+    3. WHETHER it goes BEFORE or AFTER the context text
+  
+  Total: 18 media assets placed across 14 sections
+  ═══════════════════════════════════════════════════════════════
+-->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 1: TOPBAR — Replace CSS drop icon with actual logo
+  FIND:    <div class="drop" aria-hidden="true"></div>
+  REPLACE WITH:
+═══════════════════════════════════════════════════════════════ -->
+<img src="https://nmthera.com/wp-content/uploads/2026/03/Logo-Icon.png" alt="NM Thera" class="topbar-logo">
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 2: COVER — Add video background + mute button
+  FIND:    <div class="cover-caustic" aria-hidden="true">
+  INSERT BEFORE (inside .cover, before .cover-caustic):
+═══════════════════════════════════════════════════════════════ -->
+<div class="cover-video-wrap" aria-hidden="true">
+  <video id="cover-vid" autoplay muted loop playsinline preload="metadata" poster="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg">
+    <source src="https://nmthera.com/wp-content/uploads/2026/03/26Mar2026-KV-BLUE.mp4" type="video/mp4">
+  </video>
+</div>
+<button class="cover-mute-btn" id="cover-mute" aria-label="Toggle sound" title="Toggle sound">
+  <svg id="mute-icon" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>
+  <svg id="unmute-icon" viewBox="0 0 24 24" style="display:none"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+</button>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 3: COVER TOP — Add NM Thera logo mark
+  FIND:    <span class="cover-brand"><span></span></span>
+  REPLACE WITH:
+═══════════════════════════════════════════════════════════════ -->
+<span class="cover-brand"><img src="https://nmthera.com/wp-content/uploads/2026/03/NM-THERA-LOGO-SITE-IMAGE.png" alt="NM Thera" style="height:28px;width:auto;opacity:0.6;vertical-align:middle;margin-right:8px;"><span></span></span>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 4: S1 OVERVIEW — Hero image
+  FIND:    <p>The answer took eight years to build.
+  INSERT BEFORE:
+  ASSET: SKU001 Launch Assets (3) — cinematic water backdrop
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-break medium reveal">
+  <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="HandSOKY — cinematic product shot against water" loading="lazy">
+  <div class="media-break-caption">HandSOKY · Key Visual</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 5: S2 FOUNDING — IRL lifestyle image
+  FIND:    <p>The options for treating conditions like palmar hyperhidrosis
+  INSERT BEFORE:
+  ASSET: IRL Key Visual (IMG_0152) — home setting, dog, chill vibe
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-break medium reveal">
+  <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_0152.jpg" alt="SOKY in a home setting — relaxed, real" loading="lazy">
+  <div class="media-break-caption">Real Use · Workshop G · Eastvale, CA</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 6a: S3 PRODUCT — Pool water video
+  FIND:    <h3>The Engineering Core
+  INSERT BEFORE:
+  ASSET: pool-water-video — caustic light, watery vibe
+═══════════════════════════════════════════════════════════════ -->
+<div class="video-section reveal">
+  <video id="pool-vid" autoplay muted loop playsinline preload="metadata">
+    <source src="https://videos.files.wordpress.com/2uAOPAQx/pool-water-video-cl-edit.mp4" type="video/mp4">
+  </video>
+  <button class="video-mute" onclick="toggleVidMute('pool-vid', this)" aria-label="Toggle sound">
+    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>
+  </button>
+  <div class="video-section-caption">HandSOKY · Caustic Light · Pool Water Key Visual</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 6b: S3 PRODUCT — Patent drawings pair
+  FIND:    <h3>The Universal Port Interface</h3>
+  INSERT BEFORE:
+  ASSETS: Fig HandSOKY Model F + SKU001 Launch Assets (2) annotated
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-pair reveal">
+  <div class="inline-media patent">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-17.png" alt="HandSOKY Model F — active and inactive configuration showing cuff inversion" loading="lazy">
+    <div class="inline-media-caption">HandSOKY Model F — Active &amp; Inactive Configuration · Cuff Inversion Detail</div>
+  </div>
+  <div class="inline-media patent">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-2.jpg" alt="HandSOKY — annotated product features" loading="lazy">
+    <div class="inline-media-caption">HandSOKY — Annotated Feature Diagram</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 6c: S3 PRODUCT — Fist balled image
+  FIND:    <h3>Platform Expansion Arc</h3>
+  INSERT BEFORE:
+  ASSET: IMG_9940 — fist balled, seal integrity
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-break short reveal">
+  <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9940.jpg" alt="HandSOKY being worn — fist balled showing seal integrity" loading="lazy">
+  <div class="media-break-caption">Seal Under Load · Fist Formation</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 7: S4 MODES — Spa tiles image
+  FIND:    <h3>The Volume Advantage
+  INSERT BEFORE:
+  ASSET: IMG_1196 — frontal shot, fist, spa tiles
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-break medium reveal">
+  <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_1196.jpg" alt="HandSOKY — frontal shot, fist balled, spa tile backdrop" loading="lazy">
+  <div class="media-break-caption">HandSOKY · Spa Environment · Wellness Context</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 8a: S5 LAUNCH — Travel Kit animation video
+  FIND:    <h3>Early Proof Points</h3>
+  INSERT BEFORE:
+  ASSET: HandSOKY Travel Kit Animation (0227.mp4)
+═══════════════════════════════════════════════════════════════ -->
+<div class="video-section reveal">
+  <video id="travelkit-vid" autoplay muted loop playsinline preload="metadata">
+    <source src="https://nmthera.com/wp-content/uploads/2026/03/0227.mp4" type="video/mp4">
+  </video>
+  <button class="video-mute" onclick="toggleVidMute('travelkit-vid', this)" aria-label="Toggle sound">
+    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>
+  </button>
+  <div class="video-section-caption">HandSOKY Travel Kit · Product Animation · Key Visual</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 8b: S5 LAUNCH — Product image pair (flat shot + travel kit)
+  FIND:    <div class="batch-alloc">
+  INSERT BEFORE:
+  ASSETS: Plain Flat Shot + HandSOKY Travel Kit static
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-pair reveal">
+  <div class="inline-media">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="HandSOKY — plain flat shot, top view on cotton towel" loading="lazy">
+    <div class="inline-media-caption">HandSOKY — Flat Product Shot</div>
+  </div>
+  <div class="inline-media">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="HandSOKY Travel Kit — gloves, towel, and travel bag" loading="lazy">
+    <div class="inline-media-caption">HandSOKY Travel Kit — _002 SKU Contents</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 9: S6 ROADMAP — FootSOKY + KneeSOKY patent drawings
+  FIND:    Track 2 — Research · Rapid Liquid Printing (the second roadmap-track div)
+  INSERT BEFORE that roadmap-track div:
+  ASSETS: Fig FootSOKY Model F + Fig KneeSOKY Model F
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-pair reveal">
+  <div class="inline-media patent">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-14.png" alt="FootSOKY Model F — active and inactive configuration" loading="lazy">
+    <div class="inline-media-caption">FootSOKY Model F — Active &amp; Inactive Configuration</div>
+  </div>
+  <div class="inline-media patent">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-15.png" alt="KneeSOKY Model F — active and inactive configuration" loading="lazy">
+    <div class="inline-media-caption">KneeSOKY (Ni-SOKY) Model F — Active &amp; Inactive Configuration</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 10: S7 IP — Patent Drawing Fig 1
+  FIND:    <p>NM Thera's IP portfolio is a material competitive moat.
+  INSERT BEFORE:
+  ASSET: Patent Drawing Fig1 — HandSOKY perspective view
+═══════════════════════════════════════════════════════════════ -->
+<div class="inline-media patent reveal">
+  <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-18.png" alt="Patent Drawing Fig 1 — HandSOKY perspective view showing proximal body-entry opening, self-sealing cuff, and optional port assembly" loading="lazy">
+  <div class="inline-media-caption">Patent Drawing · Fig. 1 — US 11,602,631 B2 · Perspective View · Inversion Cuff Seal &amp; Port Assembly</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 11: S8 TEAM — Lifestyle pair (hands clasped + side fist)
+  FIND:    <h3>Advisors</h3> (the one in S8)
+  INSERT BEFORE:
+  ASSETS: IMG_9921 (hands clasped) + IMG_0289 (side fist)
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-pair reveal">
+  <div class="inline-media">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9921.jpg" alt="HandSOKY worn — hands clasped together" loading="lazy">
+    <div class="inline-media-caption">In Use · Hands Clasped · Seal Maintained</div>
+  </div>
+  <div class="inline-media">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_0289-rotated.jpg" alt="HandSOKY — side profile, fist balled" loading="lazy">
+    <div class="inline-media-caption">Side Profile · Fist Formation · Compression Hold</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 12: S9 PARTNERS — Fingers splayed image
+  FIND:    Rapid Liquid Printing (RLP) — Strategic R&D Partner callout (the last callout in S9)
+  INSERT BEFORE that callout:
+  ASSET: IMG_9929 — fingers splayed, looking at palms
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-break short reveal">
+  <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9929.jpg" alt="HandSOKY worn — fingers splayed, looking at palms" loading="lazy">
+  <div class="media-break-caption">In Use · Fingers Splayed · Full Mobility</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 13: S10 SUPPLY — Spa image #2
+  FIND:    <h3>Regulatory Pathway</h3>
+  INSERT BEFORE:
+  ASSET: IMG_1194 — frontal shot, fist, spa tiles
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-break short reveal">
+  <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_1194.jpg" alt="HandSOKY — frontal shot, fist balled, spa tile backdrop" loading="lazy">
+  <div class="media-break-caption">Product in Wellness Environment · Spa Tiles</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 14: S11 CLINICAL — Book reading lifestyle pair
+  FIND:    <h3>Clinical Dispensing Opportunity</h3>
+  INSERT BEFORE:
+  ASSETS: IMG_9594 (book) + IMG_9601 (book + fist)
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-pair reveal">
+  <div class="inline-media">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9594.jpg" alt="HandSOKY resting on a book — lifestyle context" loading="lazy" style="object-position:center top;">
+    <div class="inline-media-caption">Lifestyle · Book &amp; Soak · At-Home Context</div>
+  </div>
+  <div class="inline-media">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9601.jpg" alt="HandSOKY on hand, balled fist near book — about to soak and read" loading="lazy" style="object-position:center top;">
+    <div class="inline-media-caption">Lifestyle · Don &amp; Read · In Ritual</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 15: S12 MARKETS — Plant backdrop key visual
+  FIND:    <p>SOKY enters the market as the only wearable soak platform
+  INSERT BEFORE:
+  ASSET: SKU001 Launch Assets (4) — plant backdrop, cinematic
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-break medium reveal">
+  <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-4.jpg" alt="HandSOKY — moody cinematic portrait against plant backdrop" loading="lazy">
+  <div class="media-break-caption">HandSOKY · Product Key Visual</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 16: S14 VALUATION — Side profile near closing
+  FIND:    <div class="analyst-quote">
+  INSERT BEFORE:
+  ASSET: IMG_0283 — side profile, fingers splayed
+═══════════════════════════════════════════════════════════════ -->
+<div class="media-break short reveal">
+  <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_0283-rotated.jpg" alt="HandSOKY — side profile, fingers splayed" loading="lazy">
+  <div class="media-break-caption">HandSOKY · Side Profile · Full Extension</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+  EDIT 17: JAVASCRIPT — Add mute toggle functions
+  FIND:    </script> (the closing script tag at the end)
+  INSERT BEFORE:
+═══════════════════════════════════════════════════════════════ -->
+<script>
+/* ══ VIDEO MUTE TOGGLES ══ */
+(function() {
+  var btn = document.getElementById('cover-mute');
+  var vid = document.getElementById('cover-vid');
+  var muteIcon = document.getElementById('mute-icon');
+  var unmuteIcon = document.getElementById('unmute-icon');
+  if (btn && vid) {
+    btn.addEventListener('click', function() {
+      vid.muted = !vid.muted;
+      muteIcon.style.display = vid.muted ? 'block' : 'none';
+      unmuteIcon.style.display = vid.muted ? 'none' : 'block';
+    });
+  }
+})();
+
+function toggleVidMute(vidId, btn) {
+  var vid = document.getElementById(vidId);
+  if (!vid) return;
+  vid.muted = !vid.muted;
+  btn.title = vid.muted ? 'Unmute' : 'Mute';
+  btn.style.opacity = vid.muted ? '0.6' : '1';
+}
+</script>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOKY Community — Conversation Landscape</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Mulish:wght@400;600;700&family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#31598A;--ink:#111827;--paper:#F7F7F5;--green:#688B58;--pool:#006D77;
+  --heat:#B31D1B;--muted:#667085;
+  --line:rgba(17,24,39,0.09);--line-md:rgba(17,24,39,0.14);
+  --surface-strong:rgba(255,255,255,0.94);
+  --r-xl:28px;--r-lg:20px;--r-md:14px;--r-sm:8px;
+  --shadow:0 20px 56px rgba(17,24,39,0.10);
+  --head:'Montserrat',system-ui,sans-serif;--sub:'Mulish',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;--serif:'DM Serif Display',Georgia,serif;
+  --ig-gradient:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  --c-soky:#006D77;--c-hh:#6B46C1;--c-ecz:#C05621;--c-arth:#B7791F;
+  --c-palm:#2B6CB0;--c-foot:#2F855A;--c-pep:#B83280;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.72;-webkit-font-smoothing:antialiased;padding:clamp(1rem,3vw,2rem)}
+
+.page-header{text-align:center;max-width:780px;margin:0 auto 1.75rem}
+.page-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pool);margin-bottom:.4rem}
+.page-title{font-family:var(--serif);font-size:clamp(22px,4vw,34px);color:var(--ink);margin-bottom:.4rem;line-height:1.15}
+.page-sub{font-family:var(--body);font-size:13px;color:var(--muted);line-height:1.7;max-width:620px;margin:0 auto}
+
+/* ═══ THREE-ZONE LAYOUT ═══ */
+.community-layout{display:flex;gap:6px;max-width:1400px;margin:0 auto;align-items:start}
+.zone-left{flex:0 0 24%;min-width:0}
+.zone-center{flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start}
+.zone-right{flex:0 0 24%;min-width:0}
+
+@media(max-width:1200px){
+  .community-layout{flex-wrap:wrap}
+  .zone-left{flex:0 0 32%}
+  .zone-center{flex:0 0 calc(68% - 6px)}
+  .zone-right{flex:0 0 100%;margin-top:6px}
+  .zone-right .card-ig{max-width:50%}
+}
+@media(max-width:900px){
+  .zone-left{flex:0 0 100%}
+  .zone-center{flex:0 0 100%;margin-top:6px}
+  .zone-right{flex:0 0 100%;margin-top:6px}
+  .zone-right .card-ig{max-width:100%}
+}
+@media(max-width:600px){
+  .community-layout{max-width:420px;margin:0 auto}
+  .zone-center{grid-template-columns:1fr}
+}
+
+/* Card */
+.feed-panel{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+
+/* Header */
+.feed-header{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:.55rem .85rem;border-bottom:1px solid var(--line)}
+.feed-header-left{display:flex;align-items:center;gap:9px;min-width:0}
+.feed-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feed-icon svg{width:12px;height:12px;fill:#fff}
+.feed-titles{min-width:0}
+.feed-title{font-family:var(--head);font-size:10px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feed-sub{font-family:var(--sub);font-size:7px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:0}
+
+/* Search badge */
+.search-badge{display:flex;align-items:center;gap:4px;padding:3px 8px;border-bottom:1px solid var(--line)}
+.search-badge-icon{width:11px;height:11px;flex-shrink:0}
+.search-badge-text{font-family:var(--sub);font-size:8.5px;font-weight:600;color:var(--muted)}
+.search-badge-term{font-weight:700}
+.search-badge-sort{margin-left:auto;font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.45}
+.search-badge-spacer{height:22px;border-bottom:1px solid var(--line)}
+
+/* Footer */
+.feed-footer{padding:.5rem 1.1rem;border-top:1px solid var(--line);text-align:center;margin-top:auto}
+.feed-footer-text{font-family:var(--body);font-size:8.5px;color:rgba(17,24,39,0.25)}
+
+
+/* ═══ Per-card theming ═══ */
+.card-soky .feed-icon{background:linear-gradient(135deg,#FF4500,#FF5722)}
+
+.card-hh .feed-icon{background:linear-gradient(135deg,var(--c-hh),#805AD5)}
+.card-hh .search-badge{background:rgba(107,70,193,0.04)}.card-hh .search-badge-icon,.card-hh .search-badge-term,.card-hh .search-badge-sort{color:var(--c-hh)}
+
+.card-ecz .feed-icon{background:linear-gradient(135deg,var(--c-ecz),#DD6B20)}
+.card-ecz .search-badge{background:rgba(192,86,33,0.04)}.card-ecz .search-badge-icon,.card-ecz .search-badge-term,.card-ecz .search-badge-sort{color:var(--c-ecz)}
+
+.card-arth .feed-icon{background:linear-gradient(135deg,var(--c-arth),#D69E2E)}
+.card-arth .search-badge{background:rgba(183,121,31,0.04)}.card-arth .search-badge-icon,.card-arth .search-badge-term,.card-arth .search-badge-sort{color:var(--c-arth)}
+
+.card-palm .feed-icon{background:linear-gradient(135deg,var(--c-palm),#3182CE)}
+.card-palm .search-badge{background:rgba(43,108,176,0.04)}.card-palm .search-badge-icon,.card-palm .search-badge-term,.card-palm .search-badge-sort{color:var(--c-palm)}
+
+.card-foot .feed-icon{background:linear-gradient(135deg,var(--c-foot),#38A169)}
+.card-foot .search-badge{background:rgba(47,133,90,0.04)}.card-foot .search-badge-icon,.card-foot .search-badge-term,.card-foot .search-badge-sort{color:var(--c-foot)}
+
+.card-pep .feed-icon{background:linear-gradient(135deg,var(--c-pep),#D53F8C)}
+.card-pep .search-badge{background:rgba(184,50,128,0.04)}.card-pep .search-badge-icon,.card-pep .search-badge-term,.card-pep .search-badge-sort{color:var(--c-pep)}
+
+/* Instagram */
+.card-ig .feed-icon{background:var(--ig-gradient)}
+.ig-profile{padding:.85rem .85rem;text-align:center;border-bottom:1px solid var(--line)}
+.ig-avatar{width:48px;height:48px;border-radius:50%;margin:0 auto .4rem;background:var(--ig-gradient);padding:2px}
+.ig-avatar-inner{width:100%;height:100%;border-radius:50%;background:var(--surface-strong);display:flex;align-items:center;justify-content:center}
+.ig-avatar-letter{font-family:var(--head);font-size:18px;font-weight:800;color:var(--ink)}
+.ig-handle{font-family:var(--head);font-size:11px;font-weight:700;color:var(--ink);margin-bottom:1px}
+.ig-bio{font-family:var(--body);font-size:9px;color:var(--muted);line-height:1.4;max-width:220px;margin:0 auto .4rem}
+.ig-stats{display:flex;justify-content:center;gap:1rem;margin-bottom:.6rem}
+.ig-stat-num{font-family:var(--head);font-size:13px;font-weight:800;color:var(--ink);line-height:1}
+.ig-stat-lbl{font-family:var(--sub);font-size:7.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.ig-follow-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 18px;border-radius:999px;border:none;cursor:pointer;background:var(--ig-gradient);color:#fff;font-family:var(--head);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:transform .15s;box-shadow:0 3px 10px rgba(193,53,132,0.25)}
+.ig-follow-btn:hover{transform:translateY(-1px)}.ig-follow-btn svg{width:12px;height:12px;fill:#fff}
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px;flex:1}
+.ig-grid-cell{aspect-ratio:1;border-radius:3px;overflow:hidden;background:rgba(49,89,138,0.03);text-decoration:none;transition:opacity .15s}
+.ig-grid-cell:hover{opacity:.85}
+.ig-grid-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.ig-grid-placeholder svg{width:18px;height:18px;color:rgba(17,24,39,0.06)}
+.ig-note{padding:.6rem 1.1rem;border-top:1px solid var(--line);background:rgba(193,53,132,0.02)}
+.ig-note-label{font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#c13584;margin-bottom:1px}
+.ig-note p{font-family:var(--body);font-size:9px;color:var(--muted);line-height:1.4}
+
+@media(max-width:600px){.feed-header{padding:.75rem .9rem}.pill-body{padding:.7rem .9rem}.ig-profile{padding:.9rem}}
+
+/* ═══ YOUTUBE CARD ═══ */
+.yt-link{display:block;position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000;border-radius:var(--r-lg) var(--r-lg) 0 0}
+.yt-link img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .2s;filter:brightness(0.85)}
+.yt-link:hover img{filter:brightness(1);opacity:1}
+.card-yt .feed-header{border-top:1px solid var(--line);border-bottom:none;margin-top:auto}
+
+/* ═══ PILL BODY (Reddit cards) ═══ */
+.pill-body{padding:.6rem .85rem;text-align:center;cursor:pointer}
+.pill-title{font-family:var(--sub);font-size:10px;font-weight:700;color:var(--ink);margin-bottom:.1rem}
+.pill-desc{font-family:var(--body);font-size:9px;color:var(--muted);line-height:1.4}
+
+/* ═══ INTERACTIVE HOVER — all cards ═══ */
+.feed-panel{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.feed-panel:hover{transform:translateY(-3px);box-shadow:0 24px 64px rgba(17,24,39,0.14);border-color:rgba(17,24,39,0.16)}
+
+/* Per-card accent border on hover */
+.card-soky:hover{border-color:rgba(0,109,119,0.35)}
+.card-hh:hover{border-color:rgba(107,70,193,0.35)}
+.card-ecz:hover{border-color:rgba(192,86,33,0.35)}
+.card-arth:hover{border-color:rgba(183,121,31,0.35)}
+.card-palm:hover{border-color:rgba(43,108,176,0.35)}
+.card-foot:hover{border-color:rgba(47,133,90,0.35)}
+.card-pep:hover{border-color:rgba(184,50,128,0.35)}
+.card-yt:hover{border-color:rgba(255,0,0,0.3)}
+.card-ig:hover{border-color:rgba(193,53,132,0.35)}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-eyebrow">Conversation Landscape</div>
+  <h1 class="page-title">Where water meets care.</h1>
+  <p class="page-sub">Live snapshots from the communities SOKY connects — the branching conversation around portable immersion care, updated on every page load.</p>
+</div>
+
+<div class="community-layout" id="layout">
+  <div class="zone-left" id="zoneLeft"></div>
+  <div class="zone-center" id="zoneCenter"></div>
+  <div class="zone-right" id="zoneRight"></div>
+</div>
+
+<script>
+var REDDIT_SVG='<svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6.066 13.06c.183.225.29.508.29.82 0 1.81-2.11 3.278-4.713 3.278-2.602 0-4.713-1.468-4.713-3.278 0-.312.108-.595.29-.82-.453-.392-.735-.972-.735-1.613 0-1.177.956-2.133 2.133-2.133.573 0 1.094.226 1.476.596a6.588 6.588 0 011.549-.189c.54 0 1.06.066 1.549.189.382-.37.903-.596 1.476-.596 1.177 0 2.133.956 2.133 2.133 0 .641-.282 1.221-.735 1.613zM9.5 12.5c0 .69.56 1.25 1.25 1.25s1.25-.56 1.25-1.25-.56-1.25-1.25-1.25-1.25.56-1.25 1.25zm5 1.25c.69 0 1.25-.56 1.25-1.25s-.56-1.25-1.25-1.25-1.25.56-1.25 1.25.56 1.25 1.25 1.25z"/></svg>';
+var SEARCH_SVG='<svg class="search-badge-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14" stroke-linecap="round"/></svg>';
+var IG_SVG='<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>';
+
+var FEEDS=[
+  {id:'soky',cls:'card-soky',title:'r/soky',sub:'Our Community · Latest',
+   visitUrl:'https://www.reddit.com/r/soky',
+   fbTitle:'r/soky',fbDesc:'Join the SOKY community on Reddit.'},
+  {id:'hh',cls:'card-hh',title:'r/Hyperhidrosis',sub:'Iontophoresis · Newest',keyword:'iontophoresis',
+   visitUrl:'https://www.reddit.com/r/Hyperhidrosis/search/?q=iontophoresis&type=posts&sort=new',
+   fbTitle:'Iontophoresis',fbDesc:'Latest iontophoresis conversations in r/Hyperhidrosis.'},
+  {id:'ecz',cls:'card-ecz',title:'r/eczema',sub:'Hand & Foot · Newest',keyword:'hand foot',
+   visitUrl:'https://www.reddit.com/r/eczema/search/?q=hand+foot&type=posts&sort=new',
+   fbTitle:'Hand & Foot Eczema',fbDesc:'Hand and foot care discussions in r/eczema.'},
+  {id:'arth',cls:'card-arth',title:'r/thritis',sub:'Hand & Foot · Newest',keyword:'hand foot',
+   visitUrl:'https://www.reddit.com/r/arthritis/search/?q=hand+foot&type=posts&sort=new',
+   fbTitle:'Hand & Foot Arthritis',fbDesc:'Hand and foot care conversations in r/thritis.'},
+  {id:'palm',cls:'card-palm',title:'All Reddit',sub:'palmar-cooling · Newest',keyword:'palmar cooling',
+   visitUrl:'https://www.reddit.com/search/?q=%22palmar+cooling%22&type=posts&sort=new',
+   fbTitle:'palmar-cooling',fbDesc:'palmar-cooling conversation across all of Reddit.'},
+  {id:'foot',cls:'card-foot',title:'All Reddit',sub:'Footbath · Newest',keyword:'footbath',
+   visitUrl:'https://www.reddit.com/search/?q=footbath&type=posts&sort=new',
+   fbTitle:'Footbath',fbDesc:'Footbath conversations across all of Reddit.'},
+  {id:'pep',cls:'card-pep',title:'All Reddit',sub:'Peptide · Newest',keyword:'peptide',
+   visitUrl:'https://www.reddit.com/search/?q=peptide+skin&type=posts&sort=new',
+   fbTitle:'Peptide Therapy',fbDesc:'Peptide and skincare discussions across Reddit.'}
+];
+
+/* ═══ BUILD ZONES ═══ */
+var zL=document.getElementById('zoneLeft');
+var zC=document.getElementById('zoneCenter');
+var zR=document.getElementById('zoneRight');
+
+/* YouTube card → left zone */
+var ytHtml='';
+ytHtml+='<a href="https://www.youtube.com/watch?v=64eIdY9GQN4&t=1914s" target="_blank" rel="noopener" class="feed-panel card-yt" style="text-decoration:none;color:inherit">';
+ytHtml+='<div class="yt-link"><img src="https://img.youtube.com/vi/64eIdY9GQN4/maxresdefault.jpg" alt="Watch on YouTube" loading="lazy"></div>';
+ytHtml+='<div class="feed-header"><div class="feed-header-left"><div class="feed-icon" style="background:#FF0000"><svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:#fff"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>';
+ytHtml+='<div class="feed-titles"><div class="feed-title">The Water Protocol</div><div class="feed-sub">Ambient · SOKY Ritual Soundtrack</div></div></div></div>';
+ytHtml+='</a>';
+zL.innerHTML=ytHtml;
+
+/* Reddit pill cards → center zone */
+var rdHtml='';
+FEEDS.forEach(function(f){
+  rdHtml+='<a href="'+f.visitUrl+'" target="_blank" rel="noopener" class="feed-panel '+f.cls+'" style="text-decoration:none;color:inherit">';
+  rdHtml+='<div class="feed-header"><div class="feed-header-left"><div class="feed-icon">'+REDDIT_SVG+'</div>';
+  rdHtml+='<div class="feed-titles"><div class="feed-title">'+f.title+'</div><div class="feed-sub">'+f.sub+'</div></div></div></div>';
+  if(f.keyword){rdHtml+='<div class="search-badge">'+SEARCH_SVG+'<span class="search-badge-text">Filtered: <span class="search-badge-term">"'+f.keyword+'"</span></span><span class="search-badge-sort">Newest</span></div>';}else{rdHtml+='<div class="search-badge-spacer"></div>';}
+  rdHtml+='<div class="pill-body"><div class="pill-title">'+f.fbTitle+'</div><div class="pill-desc">'+f.fbDesc+'</div></div>';
+  rdHtml+='</a>';
+});
+zC.innerHTML=rdHtml;
+
+/* Instagram card → right zone */
+var igHtml='';
+igHtml+='<div class="feed-panel card-ig">';
+igHtml+='<div class="feed-header"><div class="feed-header-left"><div class="feed-icon">'+IG_SVG+'</div><div class="feed-titles"><div class="feed-title">@nm.thera</div><div class="feed-sub">Behind the Build</div></div></div></div>';
+igHtml+='<div class="ig-profile"><div class="ig-avatar"><div class="ig-avatar-inner"><span class="ig-avatar-letter">N</span></div></div><div class="ig-handle">@nm.thera</div><div class="ig-bio">Wearable soak systems for hands &amp; feet. Patented. Portable. Built in public from Workshop G.</div>';
+igHtml+='<div class="ig-stats"><div class="ig-stat"><div class="ig-stat-num">—</div><div class="ig-stat-lbl">Posts</div></div><div class="ig-stat"><div class="ig-stat-num">—</div><div class="ig-stat-lbl">Followers</div></div><div class="ig-stat"><div class="ig-stat-num">—</div><div class="ig-stat-lbl">Following</div></div></div>';
+igHtml+='<a href="https://www.instagram.com/nm.thera/" target="_blank" rel="noopener" class="ig-follow-btn">'+IG_SVG+' Follow</a></div>';
+igHtml+='<div class="ig-grid" id="igGrid"></div>';
+igHtml+='<div class="ig-note"><div class="ig-note-label">Live Feed</div><p>Connect Instagram Graph API for live posts.</p></div>';
+igHtml+='<div class="feed-footer"><div class="feed-footer-text">Profile · Requires Graph API</div></div>';
+igHtml+='</div>';
+zR.innerHTML=igHtml;
+
+/* ═══ Instagram grid placeholders ═══ */
+(function(){
+  var g=document.getElementById('igGrid'),sv='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',h='';
+  for(var i=0;i<9;i++)h+='<a class="ig-grid-cell" href="https://www.instagram.com/nm.thera/" target="_blank" rel="noopener"><div class="ig-grid-placeholder">'+sv+'</div></a>';
+  g.innerHTML=h;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NM Thera — Investor Valuation Analysis · March 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --navy: #1a2e4a;
+  --teal: #006D77;
+  --teal-light: #83C5BE;
+  --gold: #D4A849;
+  --gold-light: #F7E7B8;
+  --coral: #C05B3C;
+  --ink: #111827;
+  --muted: #6B7280;
+  --line: rgba(17,24,39,0.08);
+  --paper: #F8F7F4;
+  --white: #FFFFFF;
+  --green: #2D6A4F;
+  --green-light: #D8F3DC;
+  --amber: #B45309;
+  --amber-light: #FEF3C7;
+  --red: #991B1B;
+  --red-light: #FEE2E2;
+  --blue-light: #EFF6FF;
+  --shadow: 0 4px 24px rgba(17,24,39,0.07);
+  --shadow-lg: 0 8px 48px rgba(17,24,39,0.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.page-header {
+  background: var(--navy);
+  color: #fff;
+  padding: 3.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 90% 50%, rgba(0,109,119,0.35) 0%, transparent 60%),
+              radial-gradient(ellipse 40% 60% at 5% 80%, rgba(212,168,73,0.12) 0%, transparent 50%);
+}
+.header-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+.header-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px; padding: 5px 14px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); margin-bottom: 1.5rem;
+}
+.header-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--teal-light); }
+.header-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+.header-subtitle {
+  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.55);
+  margin-bottom: 2.5rem; max-width: 580px;
+}
+.header-meta {
+  display: flex; flex-wrap: wrap; gap: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1.75rem;
+}
+.header-meta-item { }
+.header-meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.header-meta-value { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.75); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 4rem 0; border-bottom: 1px solid var(--line); }
+.section:last-child { border-bottom: none; }
+.section-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 0.5rem;
+}
+.section-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 32px; font-weight: 400; color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.section-lead { font-size: 16px; color: var(--muted); max-width: 680px; margin-bottom: 2.5rem; line-height: 1.7; }
+
+/* METRIC CARDS */
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 2.5rem; }
+.metric-card {
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: 14px; padding: 1.5rem 1.5rem 1.25rem;
+  box-shadow: var(--shadow);
+}
+.metric-card.featured { background: var(--navy); border-color: var(--navy); }
+.metric-card.featured .metric-label { color: rgba(255,255,255,0.45); }
+.metric-card.featured .metric-value { color: #fff; }
+.metric-card.featured .metric-change { color: var(--teal-light); }
+.metric-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.metric-value { font-family: 'DM Serif Display', Georgia, serif; font-size: 32px; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+.metric-change { font-size: 12px; font-weight: 500; }
+.metric-change.up { color: var(--green); }
+.metric-change.neutral { color: var(--muted); }
+
+/* VALUATION TABLE */
+.val-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.val-table th {
+  text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); padding: 10px 16px;
+  background: var(--paper); border-bottom: 1.5px solid var(--line);
+}
+.val-table td { padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.val-table tr:last-child td { border-bottom: none; }
+.val-table tr:hover td { background: rgba(0,109,119,0.03); }
+.val-table .total-row td { font-weight: 600; background: var(--blue-light); }
+.badge {
+  display: inline-flex; align-items: center;
+  border-radius: 999px; padding: 3px 10px;
+  font-size: 11px; font-weight: 500; white-space: nowrap;
+}
+.badge-green { background: var(--green-light); color: var(--green); }
+.badge-amber { background: var(--amber-light); color: var(--amber); }
+.badge-red { background: var(--red-light); color: var(--red); }
+.badge-navy { background: var(--navy); color: #fff; }
+.badge-teal { background: rgba(0,109,119,0.1); color: var(--teal); }
+
+/* CHART CONTAINERS */
+.chart-wrap { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow); margin-bottom: 2rem; }
+.chart-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.chart-subtitle { font-size: 12px; color: var(--muted); margin-bottom: 1.5rem; }
+.chart-container { position: relative; width: 100%; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 2.5rem; }
+.timeline::before { content: ''; position: absolute; left: 9px; top: 0; bottom: 0; width: 2px; background: var(--line); }
+.timeline-item { position: relative; margin-bottom: 2rem; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot {
+  position: absolute; left: -2.5rem; top: 4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+}
+.timeline-dot.value { background: var(--teal); color: #fff; }
+.timeline-dot.ip { background: var(--gold); color: #fff; }
+.timeline-dot.team { background: var(--navy); color: #fff; }
+.timeline-dot.product { background: var(--coral); color: #fff; }
+.timeline-dot.launch { background: var(--green); color: #fff; }
+.timeline-year { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.timeline-event { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.timeline-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.timeline-val { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--teal); }
+
+/* TWO-COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 780px) {
+  .two-col, .three-col { grid-template-columns: 1fr; }
+  .page-header { padding: 2rem 1.5rem; }
+  .container { padding: 0 1.25rem; }
+}
+
+/* INFO CARDS */
+.info-card {
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: 14px; padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.info-card-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
+.info-card-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.info-card.accent-teal { border-left: 3px solid var(--teal); }
+.info-card.accent-gold { border-left: 3px solid var(--gold); }
+.info-card.accent-coral { border-left: 3px solid var(--coral); }
+.info-card.accent-navy { border-left: 3px solid var(--navy); }
+
+/* ASSUMPTION BOX */
+.assumption-box {
+  background: var(--gold-light); border: 1px solid rgba(212,168,73,0.3);
+  border-radius: 12px; padding: 1.25rem 1.5rem;
+  font-size: 13px; color: #7c5a1e; line-height: 1.6;
+  margin-bottom: 2rem;
+}
+.assumption-box strong { color: #5a3e10; }
+
+/* SCENARIO TABLE */
+.scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.scenario-card {
+  border-radius: 14px; padding: 1.5rem; text-align: center;
+  border: 1px solid var(--line);
+}
+.scenario-card.bear { background: var(--red-light); border-color: rgba(153,27,27,0.15); }
+.scenario-card.base { background: var(--white); border-color: var(--teal); border-width: 2px; box-shadow: var(--shadow-lg); }
+.scenario-card.bull { background: var(--green-light); border-color: rgba(45,106,79,0.2); }
+.scenario-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.scenario-card.bear .scenario-label { color: var(--red); }
+.scenario-card.base .scenario-label { color: var(--teal); }
+.scenario-card.bull .scenario-label { color: var(--green); }
+.scenario-value { font-family: 'DM Serif Display', Georgia, serif; font-size: 36px; margin-bottom: 4px; }
+.scenario-card.bear .scenario-value { color: var(--red); }
+.scenario-card.base .scenario-value { color: var(--navy); }
+.scenario-card.bull .scenario-value { color: var(--green); }
+.scenario-note { font-size: 12px; color: var(--muted); }
+
+/* LEGEND */
+.legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 1rem; font-size: 12px; color: var(--muted); }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+/* MOAT TABLE */
+.moat-row { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.moat-row:last-child { border-bottom: none; }
+.moat-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(0,109,119,0.1); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+.moat-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.moat-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.moat-rating { display: flex; gap: 3px; margin-top: 6px; }
+.moat-pip { width: 20px; height: 4px; border-radius: 2px; background: var(--line); }
+.moat-pip.filled { background: var(--teal); }
+
+/* FOOTER */
+.page-footer {
+  background: var(--navy); color: rgba(255,255,255,0.4);
+  padding: 2rem 4rem; font-size: 11px; line-height: 1.7;
+}
+.page-footer a { color: rgba(255,255,255,0.5); }
+
+/* PRINT */
+@media print {
+  .page-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-badge">Investor Valuation Analysis · Confidential</div>
+    <h1 class="header-title">NM Thera<br>Valuation Report</h1>
+    <p class="header-subtitle">An independent valuation of NM Therapeutics, Inc. — parent of the SOKY wearable soak platform — assessed through the lens of a macro-aware growth investor in March 2026.</p>
+    <div class="header-meta">
+      <div class="header-meta-item">
+        <div class="header-meta-label">Valuation Date</div>
+        <div class="header-meta-value">March 20, 2026</div>
+      </div>
+      <div class="header-meta-item">
+        <div class="header-meta-label">Stage</div>
+        <div class="header-meta-value">Pre-Revenue · Pre-Seed</div>
+      </div>
+      <div class="header-meta-item">
+        <div class="header-meta-label">Total Raised</div>
+        <div class="header-meta-value">$180,000</div>
+      </div>
+      <div class="header-meta-item">
+        <div class="header-meta-label">Primary IP</div>
+        <div class="header-meta-value">US 11,602,631 B2 · Issued 2023</div>
+      </div>
+      <div class="header-meta-item">
+        <div class="header-meta-label">Analyst Persona</div>
+        <div class="header-meta-value">Macro-Aware Growth Investor · Hard Asset Bias</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CURRENT VALUATION SNAPSHOT -->
+<div class="container">
+<div class="section">
+  <div class="section-eyebrow">Current State · March 2026</div>
+  <h2 class="section-title">Valuation Snapshot</h2>
+  <p class="section-lead">Three complementary methods triangulate a defensible pre-revenue valuation. In a volatile macro environment, asset-anchored and IP-weighted approaches carry more weight than pure DCF projections.</p>
+
+  <div class="metric-grid">
+    <div class="metric-card featured">
+      <div class="metric-label">Base Case Valuation</div>
+      <div class="metric-value">$3.2M</div>
+      <div class="metric-change">Blended 3-method average · March 2026</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Asset / Cost Basis Method</div>
+      <div class="metric-value">$1.85M</div>
+      <div class="metric-change up">↑ From ~$1.1M book (internal est.)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Comparable Precedent</div>
+      <div class="metric-value">$3.5M</div>
+      <div class="metric-change neutral">Pre-seed medtech median · IP-heavy</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Risk-Adj. DCF (10-yr)</div>
+      <div class="metric-value">$4.2M</div>
+      <div class="metric-change neutral">80% haircut on Y10 projection</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Exit Potential (Y10)</div>
+      <div class="metric-value">$240M–$361M</div>
+      <div class="metric-change up">↑ Acquisition / IPO range</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Entry Multiple Today</div>
+      <div class="metric-value">~75–110×</div>
+      <div class="metric-change up">Implied return on $3.2M entry</div>
+    </div>
+  </div>
+
+  <!-- SCENARIO CARDS -->
+  <div class="scenario-grid">
+    <div class="scenario-card bear">
+      <div class="scenario-label">Bear Case</div>
+      <div class="scenario-value">$1.5M</div>
+      <div class="scenario-note">Capital depleted. SKU_001/002 underperform. No Batch 2. IP moat alone carries floor value.</div>
+    </div>
+    <div class="scenario-card base">
+      <div class="scenario-label">Base Case ★</div>
+      <div class="scenario-value">$3.2M</div>
+      <div class="scenario-note">Blended 3-method. First drop succeeds. Community + Batch 2 unlocked. Momentum toward Series A.</div>
+    </div>
+    <div class="scenario-card bull">
+      <div class="scenario-label">Bull Case</div>
+      <div class="scenario-value">$6.5M</div>
+      <div class="scenario-note">LOI converts ($70K order). Stanford trial engaged. Strategic investor with distribution adds 2× premium.</div>
+    </div>
+  </div>
+
+  <!-- METHOD BREAKDOWN TABLE -->
+  <div class="chart-wrap">
+    <div class="chart-title">Valuation Method Breakdown — March 2026</div>
+    <div class="chart-subtitle">Each method emphasizes a different lens. A blended view accounts for the pre-revenue stage.</div>
+    <table class="val-table">
+      <thead>
+        <tr>
+          <th>Valuation Method</th>
+          <th>Inputs Used</th>
+          <th>Result</th>
+          <th>Weight</th>
+          <th>Weighted Value</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Asset / Cost Reconstruction</strong></td>
+          <td>Capital deployed + IP value + sweat equity + relationships</td>
+          <td><strong>$1.85M</strong></td>
+          <td>35%</td>
+          <td>$648K</td>
+          <td><span class="badge badge-green">High</span></td>
+        </tr>
+        <tr>
+          <td><strong>2. Comparable Transactions</strong></td>
+          <td>Pre-seed medtech w/ issued patent · PowerDot ($34M exit at comparable stage) · Berkley benchmark</td>
+          <td><strong>$3.5M</strong></td>
+          <td>35%</td>
+          <td>$1.225M</td>
+          <td><span class="badge badge-amber">Medium</span></td>
+        </tr>
+        <tr>
+          <td><strong>3. Risk-Adjusted DCF</strong></td>
+          <td>Y10 revenue $72M · 5× multiple · 80% exec risk haircut · 15% WACC</td>
+          <td><strong>$4.2M</strong></td>
+          <td>30%</td>
+          <td>$1.26M</td>
+          <td><span class="badge badge-amber">Medium</span></td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="4"><strong>Blended Base Case Valuation</strong></td>
+          <td><strong>$3.13M</strong></td>
+          <td><span class="badge badge-navy">Rounded: $3.2M</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- VALUATION HISTORY CHART -->
+<div class="section">
+  <div class="section-eyebrow">Historical Trajectory</div>
+  <h2 class="section-title">How Value Was Built: 2018–2026</h2>
+  <p class="section-lead">NM Thera did not raise capital on a schedule — it created value on a schedule determined by invention, validation, and relationship formation. Each event below represents a discrete value inflection point.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Estimated Enterprise Value Trajectory · 2018–2026</div>
+    <div class="chart-subtitle">Reconstructed from IP filings, capital events, team formation, and product milestones. Pre-revenue companies accrue value in non-linear bursts tied to de-risking events.</div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#1a2e4a"></span>Estimated Valuation</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#006D77; opacity:0.3; width:24px; height:4px; border-radius:2px; align-self:center"></span>Value Range (Bear–Bull)</span>
+    </div>
+    <div class="chart-container" style="height: 380px;">
+      <canvas id="trajectoryChart"></canvas>
+    </div>
+  </div>
+
+  <!-- TIMELINE OF VALUE EVENTS -->
+  <div class="two-col" style="gap: 2.5rem; margin-top: 2rem;">
+    <div>
+      <h3 style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.25rem;">Phase I · Invention (2018–2022)</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot ip">IP</div>
+          <div class="timeline-year">June 2018</div>
+          <div class="timeline-event">Provisional Patent Filed</div>
+          <div class="timeline-desc">Priority date established for the core inversion frustal cuff mechanism and iontophoresis application. Locked the clock on patent protection.</div>
+          <div class="timeline-val">↑ ~$150K value event</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot ip">IP</div>
+          <div class="timeline-year">May 2019</div>
+          <div class="timeline-event">PCT Application Filed</div>
+          <div class="timeline-desc">International filing extends IP protection across key markets. Signals serious commercial intent to future investors and acquirers.</div>
+          <div class="timeline-val">↑ ~$80K value event</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot product">P</div>
+          <div class="timeline-year">Nov 2020</div>
+          <div class="timeline-event">US Continuation Filed</div>
+          <div class="timeline-desc">US continuation deepens prosecution, expands claim coverage. Prosecution-in-progress creates ongoing defensive width.</div>
+          <div class="timeline-val">↑ ~$50K value event</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot product">P</div>
+          <div class="timeline-year">2021</div>
+          <div class="timeline-event">MorphoMFG Prototypes + COGS Validation</div>
+          <div class="timeline-desc">First physical prototypes produced. Unit economics validated. $16–$27/unit COGS confirmed for SOKY OTC. Manufacturing feasibility de-risked.</div>
+          <div class="timeline-val">↑ ~$120K value event</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.25rem;">Phase II · Validation (2023–2026)</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot ip">IP</div>
+          <div class="timeline-year">March 14, 2023</div>
+          <div class="timeline-event">US Patent Issued · US 11,602,631 B2</div>
+          <div class="timeline-desc">15-claim patent issued. Valid to 2043. Largest single value event in company history. Transforms the company from aspirational to defensible.</div>
+          <div class="timeline-val">↑ Largest single step · ~$500K+ IP value</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot team">T</div>
+          <div class="timeline-year">2024</div>
+          <div class="timeline-event">Team Formation + Strategic Investors</div>
+          <div class="timeline-desc">$180K raised. Sosimo Roman ($150K), Seymour Everett ($30K, also legal counsel). 6-person international team assembled across 3 continents. Dr. Craig Heller (Stanford) advisory relationship established.</div>
+          <div class="timeline-val">↑ ~$350K team + capital event</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot product">P</div>
+          <div class="timeline-year">Feb 2025</div>
+          <div class="timeline-event">Electro Prototypes Complete · Sealing Issue Resolved</div>
+          <div class="timeline-desc">Model E (electrotherapy) prototypes functional. Critical product sealing issue resolved April 2025. Product declared ready for marketing.</div>
+          <div class="timeline-val">↑ ~$200K product de-risk event</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot ip">IP</div>
+          <div class="timeline-year">Dec 2025</div>
+          <div class="timeline-event">Platform Patent Provisional Filed</div>
+          <div class="timeline-desc">Full frustal geometry family claimed. Body-zone expansion and full modality spectrum. No design-around possible by taper angle. Deepest IP moat event since 2018.</div>
+          <div class="timeline-val">↑ ~$300K forward value event</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot launch">↑</div>
+          <div class="timeline-year">March 2026</div>
+          <div class="timeline-event">SKU_001 + SKU_002 Launch Imminent · $70K LOI</div>
+          <div class="timeline-desc">TopSheng mold proven. 200-unit first drop ready. $70K LOI from footcare distributor in hand. 83.8% prospective user interest signal. Website and campaign deployed.</div>
+          <div class="timeline-val">Present state · $3.2M base valuation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- YEAR-OVER-YEAR COMPARISON -->
+<div class="section">
+  <div class="section-eyebrow">Comparative Analysis</div>
+  <h2 class="section-title">YoY Value Change: 2025 → 2026</h2>
+  <p class="section-lead">The 12 months from March 2025 to March 2026 were the most operationally dense in the company's history — four distinct categories of value were consolidated simultaneously.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Value Accumulation Waterfall: What Changed March 2025 → March 2026</div>
+    <div class="chart-subtitle">Each bar represents a discrete category of value added. Figures are estimated enterprise value contributions.</div>
+    <div class="chart-container" style="height: 340px;">
+      <canvas id="waterfallChart"></canvas>
+    </div>
+  </div>
+
+  <div class="three-col" style="margin-top: 1.5rem;">
+    <div class="info-card accent-teal">
+      <div class="info-card-title">IP Deepening (+$300K est.)</div>
+      <div class="info-card-body">December 2025 provisional platform patent dramatically expands claim coverage. Full frustal geometry family. No taper-angle design-around possible. This is the most defensible IP filing since the original 2018 provisional.</div>
+    </div>
+    <div class="info-card accent-gold">
+      <div class="info-card-title">Product Readiness (+$250K est.)</div>
+      <div class="info-card-body">Sealing issue resolved (April 2025). Electro prototypes functional (Feb 2025). TopSheng relationship formalized with first commercial mold proven. Manufacturing partner is ISO 13485 certified — critical for Class II pathway.</div>
+    </div>
+    <div class="info-card accent-coral">
+      <div class="info-card-title">Market Validation (+$180K est.)</div>
+      <div class="info-card-body">$70K LOI from footcare distributor. 83.8% prospective user interest (109/130). 5 clinicians engaged. 36-point adherence improvement documented. These signals materially de-risk the commercial thesis.</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap" style="margin-top: 2rem;">
+    <div class="chart-title">Side-by-Side: March 2025 vs March 2026 Value Drivers</div>
+    <div class="chart-subtitle">Radar comparison across six value dimensions. Scale: 1 (embryonic) to 10 (launch-ready).</div>
+    <div class="chart-container" style="height: 380px;">
+      <canvas id="radarChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- FORWARD VALUATION PROJECTIONS -->
+<div class="section">
+  <div class="section-eyebrow">Forward Projections</div>
+  <h2 class="section-title">Valuation Runway: 2026–2036</h2>
+  <p class="section-lead">Revenue-multiple based projections anchored to disclosed financial model. Comparable exits (Therabody Amazon performance, PowerDot acquisition) provide the empirical ceiling.</p>
+
+  <div class="assumption-box">
+    <strong>Investor Persona Note:</strong> As a macro-aware growth investor in 2026's volatile geopolitical environment, I apply a 25–35% discount to pre-revenue DCF projections and weight IP-anchored and asset-cost methodologies more heavily than in a stable-rate environment. The tariff climate, supply chain pressures on Chinese manufacturing partners (TopSheng), and consumer discretionary headwinds in a high-rate environment all introduce execution risk. Conversely, the domestic manufacturing partnership with RLP, the open-source governance vision, and the resilience of therapeutic self-care spending (historically counter-cyclical) represent structural macro tailwinds.
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Revenue & Valuation Trajectory · Conservative Model · 2026–2036</div>
+    <div class="chart-subtitle">Revenue projections from NM Thera business plan. Valuation multiples: 3× Year 2, 4× Year 5, 5× Year 10. Benchmarked vs Therabody's Amazon performance ($72.6M/yr).</div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#1a2e4a"></span>Revenue (left axis)</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#006D77"></span>Valuation — Base Case (right axis)</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#D4A849"></span>Valuation — Bull Case (right axis)</span>
+    </div>
+    <div class="chart-container" style="height: 380px;">
+      <canvas id="forwardChart"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Revenue Stream Maturation · Nine Streams to Year 5</div>
+    <div class="chart-subtitle">Stacked area showing how each revenue stream contributes to aggregate. OTC hardware anchors early years; recurring consumables and Rx B2B become dominant by Year 5.</div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#1a2e4a"></span>SOKY OTC</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#006D77"></span>SOKY Plus (consumables)</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#D4A849"></span>SOKY Rx / Clinical</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#C05B3C"></span>App + Licensing + IP</span>
+    </div>
+    <div class="chart-container" style="height: 340px;">
+      <canvas id="stackedChart"></canvas>
+    </div>
+  </div>
+
+  <div style="margin-top: 1.5rem;">
+    <div class="chart-wrap">
+      <div class="chart-title">Valuation Milestone Table · Conservative Case</div>
+      <div class="chart-subtitle">Revenue multiples compress as scale increases — standard for hardware/platform businesses.</div>
+      <table class="val-table">
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th>Stage</th>
+            <th>Active SKUs</th>
+            <th>Revenue (Est.)</th>
+            <th>Multiple</th>
+            <th>Valuation</th>
+            <th>vs. Today ($3.2M)</th>
+            <th>Comparable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>March 2026</td>
+            <td>Pre-Revenue / Launch</td>
+            <td>2</td>
+            <td>—</td>
+            <td>Asset basis</td>
+            <td><strong>$3.2M</strong></td>
+            <td>—</td>
+            <td>PowerDot pre-seed stage</td>
+          </tr>
+          <tr>
+            <td>Year 2 (2028)</td>
+            <td>First Revenue Scale</td>
+            <td>2–10</td>
+            <td>$3.65M</td>
+            <td>3×</td>
+            <td><strong>$12M</strong></td>
+            <td><span class="badge badge-green">3.75×</span></td>
+            <td>HoMedics early trajectory</td>
+          </tr>
+          <tr>
+            <td>Year 3 (2029)</td>
+            <td>Full OTC lineup</td>
+            <td>10–25</td>
+            <td>$20.4M</td>
+            <td>3.5×</td>
+            <td><strong>$71M</strong></td>
+            <td><span class="badge badge-green">22×</span></td>
+            <td>TheraIce scale</td>
+          </tr>
+          <tr>
+            <td>Year 5 (2031)</td>
+            <td>SOKY Rx + App Launch</td>
+            <td>25–50</td>
+            <td>$48.1M</td>
+            <td>4×</td>
+            <td><strong>$193M</strong></td>
+            <td><span class="badge badge-green">60×</span></td>
+            <td>HyperIce comparable</td>
+          </tr>
+          <tr>
+            <td>Year 10 (2036)</td>
+            <td>Full Platform</td>
+            <td>50+</td>
+            <td>$72M</td>
+            <td>5×</td>
+            <td><strong>$361M</strong></td>
+            <td><span class="badge badge-navy">113×</span></td>
+            <td>Therabody Amazon parity</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETITIVE MOAT ANALYSIS -->
+<div class="section">
+  <div class="section-eyebrow">Competitive Positioning</div>
+  <h2 class="section-title">Moat Assessment</h2>
+  <p class="section-lead">In a volatile macro environment, moat durability matters more than growth rate. NM Thera has assembled an unusually deep defensive stack for a pre-revenue company.</p>
+
+  <div class="two-col">
+    <div>
+      <div class="moat-row">
+        <div class="moat-icon">⚖️</div>
+        <div>
+          <div class="moat-title">Patent IP — Core Mechanism</div>
+          <div class="moat-desc">US 11,602,631 B2 issued, valid to 2043. 15 claims covering the pressure-responsive inversion seal, iontophoresis circuit, and mobility-in-use. Pending platform patent closes geometry design-around. This is not a narrow pharma patent — it covers the full geometric family.</div>
+          <div class="moat-rating">
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip filled"></div>
+          </div>
+        </div>
+      </div>
+      <div class="moat-row">
+        <div class="moat-icon">🏭</div>
+        <div>
+          <div class="moat-title">Manufacturing Partnership — ISO 13485</div>
+          <div class="moat-desc">TopSheng (primary) is ISO 13485 certified — a prerequisite for Class II medical device production. A competitor entering this space would need 12–24 months to establish a comparable manufacturing partner. First mold proven. COGS validated.</div>
+          <div class="moat-rating">
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip"></div>
+          </div>
+        </div>
+      </div>
+      <div class="moat-row">
+        <div class="moat-icon">🔬</div>
+        <div>
+          <div class="moat-title">Stanford Advisory — Dr. Craig Heller</div>
+          <div class="moat-desc">World-leading researcher on palmar AVA vasculature and thermoregulation — the exact physiological mechanism SOKY leverages. This is not a vanity advisory relationship. His science is the scientific foundation of the platform's clinical claims. Difficult to replicate.</div>
+          <div class="moat-rating">
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="moat-row">
+        <div class="moat-icon">🌐</div>
+        <div>
+          <div class="moat-title">Platform Architecture — No Direct Competitor</div>
+          <div class="moat-desc">SOKY is the only wearable, portable, localized immersion system. The category doesn't yet exist in the market. Stationary competitors (HoMedics, Epielle foot baths) compete in a fundamentally different form factor. First-mover moat compounds with each new body zone.</div>
+          <div class="moat-rating">
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip filled"></div>
+          </div>
+        </div>
+      </div>
+      <div class="moat-row">
+        <div class="moat-icon">🔁</div>
+        <div>
+          <div class="moat-title">Consumable Flywheel — SOKY Plus</div>
+          <div class="moat-desc">Every garment sold is a recurring revenue channel. Peptide packs ($25–$65/pack at 2–4/month), salts, botanicals, and clinical formulations create 75–85% gross margin recurring revenue. This is the Gillette model applied to therapeutic wellness.</div>
+          <div class="moat-rating">
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip filled"></div>
+            <div class="moat-pip"></div><div class="moat-pip"></div>
+          </div>
+        </div>
+      </div>
+      <div class="moat-row">
+        <div class="moat-icon">📋</div>
+        <div>
+          <div class="moat-title">Clinical Evidence Base</div>
+          <div class="moat-desc">Iontophoresis: 80%+ sweat reduction documented. Occlusive transdermal: 300–400% hydration increase. 36-point adherence improvement vs standard home soak. Published evidence base reduces clinical adoption friction and supports future reimbursement pathway.</div>
+          <div class="moat-rating">
+            <div class="moat-pip filled"></div><div class="moat-pip filled"></div>
+            <div class="moat-pip filled"></div>
+            <div class="moat-pip"></div><div class="moat-pip"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-wrap" style="margin-top: 2rem;">
+    <div class="chart-title">Competitive Benchmarking — NM Thera vs Amazon Incumbents</div>
+    <div class="chart-subtitle">Annual Amazon revenue of comparable wearable therapeutic / foot care products (JungleScout 2024). NM Thera Year 10 target modeled to match Therabody's actual performance.</div>
+    <div class="chart-container" style="height: 340px;">
+      <canvas id="benchmarkChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- TAM CHART -->
+<div class="section">
+  <div class="section-eyebrow">Market Opportunity</div>
+  <h2 class="section-title">Total Addressable Market</h2>
+  <p class="section-lead">$597B consolidated TAM across seven verticals. SOKY is the only wearable soak platform across all of them. The 1% SAM penetration model is deliberately conservative for an issued-patent first mover.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Market Size by Vertical · TAM Breakdown</div>
+    <div class="chart-subtitle">SOKY's platform architecture enables entry into every vertical simultaneously as body zone expansion proceeds. Wellness and skincare markets are the largest near-term opportunities.</div>
+    <div class="chart-container" style="height: 360px;">
+      <canvas id="tamChart"></canvas>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top: 1.5rem;">
+    <div class="info-card accent-navy">
+      <div class="info-card-title">TAM · SAM · SOM Model</div>
+      <div class="info-card-body">
+        <strong>TAM:</strong> $596.8B — Sum of all seven addressable verticals<br>
+        <strong>SAM:</strong> $5.97B — 1% of TAM; realistic segment share for a premium platform<br>
+        <strong>SOM:</strong> $59.7M — 1% of SAM; near-term capturable market<br>
+        <br>
+        At Year 10's $72M revenue, NM Thera captures ~1.2% of SAM — well within the conservative 1% model and substantially below a reasonable bull case ceiling.
+      </div>
+    </div>
+    <div class="info-card accent-teal">
+      <div class="info-card-title">Macro Tailwinds in 2026's Environment</div>
+      <div class="info-card-body">
+        <strong>Counter-cyclical spending:</strong> Therapeutic self-care accelerated through 2020–2023 and continues as healthcare costs rise. Patients seek at-home alternatives to clinic visits.<br><br>
+        <strong>Drug-free demand:</strong> Consumer preference for non-pharmaceutical pain and condition management growing at measurable rates across all demographics.<br><br>
+        <strong>Wearable medical devices:</strong> 28% CAGR 2023–2030. The fastest-growing segment in healthcare.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INVESTOR CONSIDERATIONS -->
+<div class="section">
+  <div class="section-eyebrow">Investor Assessment</div>
+  <h2 class="section-title">Risk, Return & Entry Thesis</h2>
+  <p class="section-lead">From the perspective of a macro-aware growth investor in March 2026: the entry window is narrow, the risk is real, and the asymmetry is exceptional.</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Risk Matrix — Probability vs. Impact</div>
+    <div class="chart-subtitle">Each risk factor plotted by likelihood (x-axis) and potential valuation impact (y-axis). Bubble size = relative mitigation difficulty.</div>
+    <div class="chart-container" style="height: 380px;">
+      <canvas id="riskChart"></canvas>
+    </div>
+  </div>
+
+  <div class="three-col" style="margin-top: 1.5rem;">
+    <div class="info-card accent-coral">
+      <div class="info-card-title">⚠ Key Risk: Runway</div>
+      <div class="info-card-body">~1 month of runway remaining as of March 2026. The first drop must succeed and generate sufficient revenue to bridge to Batch 2 without additional capital. This is the single highest-probability failure scenario.</div>
+    </div>
+    <div class="info-card accent-gold">
+      <div class="info-card-title">⚠ Key Risk: Supply Chain Concentration</div>
+      <div class="info-card-body">TopSheng is the primary manufacturer, located in China. Current tariff environment and geopolitical volatility introduce logistics risk. RLP (secondary R&D partner) provides partial mitigation. Domestic manufacturing pathway needs to be developed for Rx track.</div>
+    </div>
+    <div class="info-card accent-teal">
+      <div class="info-card-title">✓ Key Opportunity: Strategic Investor Premium</div>
+      <div class="info-card-body">A strategic investor with distribution into physical therapy, podiatry, dermatology, or sports recovery channels could double valuation instantly. The $70K LOI suggests this channel is actively interested. The right strategic adds 2–3× to base case at no dilution cost.</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap" style="margin-top: 2rem;">
+    <div class="chart-title">Return Profile by Entry Point</div>
+    <div class="chart-subtitle">Modeled returns for investors entering at pre-seed ($3.2M), Seed ($12M), and Series A ($75M) valuations. Exit assumption: $361M at Year 10.</div>
+    <div class="chart-container" style="height: 300px;">
+      <canvas id="returnChart"></canvas>
+    </div>
+  </div>
+
+  <div class="assumption-box" style="margin-top: 2rem;">
+    <strong>Analyst Conclusion (March 2026):</strong> NM Thera is priced at $3.2M at a moment when the option value of the platform — a patented, defensible, no-direct-competitor wearable soak system positioned across a $597B TAM — is substantially larger than the current price implies. The runway constraint creates a near-term execution risk that is real but not structural. An investor entering at $3.2M today with a 10-year hold and $361M exit achieves a ~113× return on base case, or ~200× on the bull case. In a volatile macro environment where most early-stage investments are speculative narrative plays, NM Thera has an issued patent, a validated manufacturing partner, documented clinical evidence, and a signed LOI as tangible anchors. This is an asymmetric bet worth taking at the right check size.
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<div class="page-footer">
+  <div class="container">
+    <p><strong>NM Thera Valuation Analysis · March 20, 2026 · Prepared for Internal + Investor Use</strong><br>
+    This analysis is based on documents provided by NM Therapeutics, Inc. including the Business Plan 2026 v3, Investor Overview v1.3, Clinical Overview, and Manifesto. All valuation figures are estimates and should not be relied upon as financial advice. NM Therapeutics, Inc. · Delaware C Corp · nmthera.com · kenny@nmthera.com</p>
+  </div>
+</div>
+
+<script>
+Chart.defaults.font.family = "'DM Sans', system-ui, sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.color = '#6B7280';
+
+const navy = '#1a2e4a';
+const teal = '#006D77';
+const gold = '#D4A849';
+const coral = '#C05B3C';
+const green = '#2D6A4F';
+const red = '#991B1B';
+const muted = '#9CA3AF';
+
+/* 1. TRAJECTORY CHART */
+new Chart(document.getElementById('trajectoryChart'), {
+  type: 'line',
+  data: {
+    labels: ['Jun 2018', 'May 2019', 'Nov 2020', '2021', 'Mar 2023', '2024 H1', '2024 H2', 'Apr 2025', 'Dec 2025', 'Mar 2026'],
+    datasets: [
+      {
+        label: 'Base Valuation ($K)',
+        data: [150, 250, 320, 500, 1050, 1400, 1800, 2100, 2700, 3200],
+        borderColor: navy,
+        backgroundColor: 'rgba(26,46,74,0.08)',
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.35,
+        pointBackgroundColor: navy,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+      },
+      {
+        label: 'Bull Case ($K)',
+        data: [200, 350, 450, 700, 1400, 1900, 2500, 2900, 3700, 6500],
+        borderColor: teal,
+        borderWidth: 1.5,
+        borderDash: [5,4],
+        backgroundColor: 'transparent',
+        tension: 0.35,
+        pointRadius: 0,
+        fill: false,
+      },
+      {
+        label: 'Bear Case ($K)',
+        data: [80, 150, 200, 300, 700, 900, 1100, 1300, 1600, 1500],
+        borderColor: muted,
+        borderWidth: 1.5,
+        borderDash: [5,4],
+        backgroundColor: 'transparent',
+        tension: 0.35,
+        pointRadius: 0,
+        fill: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ' $' + ctx.parsed.y.toLocaleString() + 'K'
+        }
+      }
+    },
+    scales: {
+      y: {
+        ticks: { callback: v => '$' + v.toLocaleString() + 'K' },
+        grid: { color: 'rgba(17,24,39,0.06)' },
+        title: { display: true, text: 'Estimated Enterprise Value ($K)' }
+      },
+      x: { grid: { color: 'rgba(17,24,39,0.04)' }, ticks: { maxRotation: 30 } }
+    }
+  }
+});
+
+/* 2. WATERFALL CHART */
+new Chart(document.getElementById('waterfallChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Start: Mar 2025', 'IP — Platform\nPatent Filed', 'Product —\nSealing Resolved', 'Market —\nLOI + Signals', 'Team &\nPartnerships', 'End: Mar 2026'],
+    datasets: [{
+      label: 'Value ($K)',
+      data: [1900, 300, 250, 180, 120, 3200],
+      backgroundColor: [navy, gold, teal, coral, green, navy],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ' $' + ctx.parsed.y.toLocaleString() + 'K' } }
+    },
+    scales: {
+      y: {
+        ticks: { callback: v => '$' + v.toLocaleString() + 'K' },
+        grid: { color: 'rgba(17,24,39,0.06)' }
+      },
+      x: { grid: { display: false }, ticks: { maxRotation: 20 } }
+    }
+  }
+});
+
+/* 3. RADAR CHART */
+new Chart(document.getElementById('radarChart'), {
+  type: 'radar',
+  data: {
+    labels: ['IP Strength', 'Product Readiness', 'Market Validation', 'Team Depth', 'Financial Position', 'Manufacturing'],
+    datasets: [
+      {
+        label: 'March 2025',
+        data: [7, 5, 4, 5, 3, 4],
+        borderColor: muted,
+        backgroundColor: 'rgba(156,163,175,0.15)',
+        borderWidth: 1.5,
+        pointBackgroundColor: muted,
+      },
+      {
+        label: 'March 2026',
+        data: [9, 8, 7, 7, 3, 8],
+        borderColor: teal,
+        backgroundColor: 'rgba(0,109,119,0.15)',
+        borderWidth: 2,
+        pointBackgroundColor: teal,
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: true, position: 'top' }
+    },
+    scales: {
+      r: {
+        min: 0, max: 10,
+        ticks: { display: false },
+        grid: { color: 'rgba(17,24,39,0.08)' },
+        pointLabels: { font: { size: 12 } }
+      }
+    }
+  }
+});
+
+/* 4. FORWARD PROJECTION */
+new Chart(document.getElementById('forwardChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Now\n(2026)', 'Year 2\n(2028)', 'Year 3\n(2029)', 'Year 5\n(2031)', 'Year 10\n(2036)'],
+    datasets: [
+      {
+        label: 'Revenue ($M)',
+        data: [0, 3.65, 20.4, 48.1, 72],
+        backgroundColor: 'rgba(26,46,74,0.75)',
+        borderRadius: 5,
+        yAxisID: 'y',
+      },
+      {
+        label: 'Valuation — Base ($M)',
+        data: [3.2, 12, 71, 193, 361],
+        type: 'line',
+        borderColor: teal,
+        backgroundColor: 'transparent',
+        borderWidth: 2.5,
+        tension: 0.35,
+        pointBackgroundColor: teal,
+        pointRadius: 6,
+        yAxisID: 'y2',
+      },
+      {
+        label: 'Valuation — Bull ($M)',
+        data: [6.5, 20, 110, 290, 540],
+        type: 'line',
+        borderColor: gold,
+        backgroundColor: 'transparent',
+        borderWidth: 1.5,
+        borderDash: [5,4],
+        tension: 0.35,
+        pointRadius: 4,
+        yAxisID: 'y2',
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: {
+        type: 'linear', position: 'left',
+        ticks: { callback: v => '$' + v + 'M' },
+        grid: { color: 'rgba(17,24,39,0.06)' },
+        title: { display: true, text: 'Revenue ($M)' }
+      },
+      y2: {
+        type: 'linear', position: 'right',
+        ticks: { callback: v => '$' + v + 'M' },
+        grid: { display: false },
+        title: { display: true, text: 'Valuation ($M)' }
+      },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+/* 5. STACKED REVENUE CHART */
+new Chart(document.getElementById('stackedChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Y1', 'Y2', 'Y3', 'Y4', 'Y5'],
+    datasets: [
+      {
+        label: 'SOKY OTC',
+        data: [0, 2.5, 12, 22, 28],
+        backgroundColor: navy,
+        borderRadius: 4,
+      },
+      {
+        label: 'SOKY Plus (consumables)',
+        data: [0, 0.8, 4.5, 10, 12],
+        backgroundColor: teal,
+      },
+      {
+        label: 'SOKY Rx / Clinical',
+        data: [0, 0.2, 2.5, 7, 5],
+        backgroundColor: gold,
+      },
+      {
+        label: 'App + Licensing + IP',
+        data: [0, 0.15, 1.4, 4, 3.1],
+        backgroundColor: coral,
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, ticks: { callback: v => '$' + v + 'M' }, grid: { color: 'rgba(17,24,39,0.06)' } }
+    }
+  }
+});
+
+/* 6. BENCHMARK CHART */
+new Chart(document.getElementById('benchmarkChart'), {
+  type: 'bar',
+  data: {
+    labels: ['HoMedics\n(Foot Bath)', 'Epielle', "Dr. Teal's", 'TheraIce', 'Carpe', 'HyperIce', 'NM Thera\n(Y10 Target)', 'Therabody\n(Amazon)'],
+    datasets: [{
+      label: 'Annual Amazon Revenue ($M)',
+      data: [5.2, 5.8, 11.8, 14.9, 19.9, 33.2, 72, 72.6],
+      backgroundColor: [muted,muted,muted,muted,muted,muted,teal,navy],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: {
+        ticks: { callback: v => '$' + v + 'M' },
+        grid: { color: 'rgba(17,24,39,0.06)' }
+      },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+/* 7. TAM CHART */
+new Chart(document.getElementById('tamChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Wellness ($1,500B)', 'Eczema & Skincare ($189B)', 'Wearable Med Devices ($120B)', 'Physical Therapy & Rehab ($39.3B)', 'Sports Medicine ($8.4B)', 'Hand & Foot Care ($12.2B)', 'Hyperhidrosis ($0.65B)'],
+    datasets: [{
+      data: [1500, 189, 120, 39.3, 12.2, 8.4, 0.65],
+      backgroundColor: [navy, teal, gold, coral, green, '#83C5BE', muted],
+      borderWidth: 2,
+      borderColor: '#F8F7F4',
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { boxWidth: 12, padding: 12, font: { size: 11 } } },
+      tooltip: { callbacks: { label: ctx => ' $' + ctx.parsed.toFixed(1) + 'B' } }
+    }
+  }
+});
+
+/* 8. RISK BUBBLE CHART */
+new Chart(document.getElementById('riskChart'), {
+  type: 'bubble',
+  data: {
+    datasets: [
+      { label: 'Runway Depletion', data: [{x: 75, y: 85, r: 18}], backgroundColor: 'rgba(153,27,27,0.65)' },
+      { label: 'Supply Chain / China Tariffs', data: [{x: 55, y: 50, r: 14}], backgroundColor: 'rgba(180,83,9,0.65)' },
+      { label: 'Regulatory Delay (Class II)', data: [{x: 35, y: 60, r: 11}], backgroundColor: 'rgba(180,83,9,0.5)' },
+      { label: 'Market Adoption Slower', data: [{x: 40, y: 45, r: 13}], backgroundColor: 'rgba(107,114,128,0.55)' },
+      { label: 'Key Person Risk (CEO)', data: [{x: 20, y: 70, r: 10}], backgroundColor: 'rgba(26,46,74,0.55)' },
+      { label: 'Strategic Investor Uplift', data: [{x: 50, y: 90, r: 16}], backgroundColor: 'rgba(0,109,119,0.65)' },
+      { label: 'LOI Converts to Order', data: [{x: 60, y: 75, r: 14}], backgroundColor: 'rgba(0,109,119,0.5)' },
+      { label: 'Stanford Clinical Trial', data: [{x: 30, y: 80, r: 12}], backgroundColor: 'rgba(45,106,79,0.6)' },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 }, padding: 8 } },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label } }
+    },
+    scales: {
+      x: {
+        min: 0, max: 100,
+        title: { display: true, text: 'Probability (%)' },
+        ticks: { callback: v => v + '%' },
+        grid: { color: 'rgba(17,24,39,0.06)' }
+      },
+      y: {
+        min: 0, max: 100,
+        title: { display: true, text: 'Valuation Impact (%)' },
+        ticks: { callback: v => v + '%' },
+        grid: { color: 'rgba(17,24,39,0.06)' }
+      }
+    }
+  }
+});
+
+/* 9. RETURN CHART */
+new Chart(document.getElementById('returnChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Pre-Seed Entry\n($3.2M today)', 'Seed Entry\n($12M, 2028)', 'Series A Entry\n($75M, 2030)'],
+    datasets: [
+      {
+        label: 'Bear Case Return (×)',
+        data: [15, 4, 0.7],
+        backgroundColor: 'rgba(153,27,27,0.6)',
+        borderRadius: 4,
+      },
+      {
+        label: 'Base Case Return (×)',
+        data: [113, 30, 4.8],
+        backgroundColor: teal,
+        borderRadius: 4,
+      },
+      {
+        label: 'Bull Case Return (×)',
+        data: [168, 45, 7.2],
+        backgroundColor: gold,
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: true, position: 'top' } },
+    scales: {
+      x: { grid: { display: false } },
+      y: { ticks: { callback: v => v + '×' }, grid: { color: 'rgba(17,24,39,0.06)' }, title: { display: true, text: 'Return Multiple on Exit' } }
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOKY for Clinicians — NM Thera Clinical Partner Program</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:    #31598A;
+      --ink:     #111827;
+      --paper:   #F7F7F5;
+      --green:   #688B58;
+      --umber:   #8A6A4D;
+      --almond:  #D4BBA0;
+      --sunlight:#FFD166;
+      --pool:    #006D77;
+      --red:     #B31D1B;
+      --blue:    #1E3A8A;
+      --muted:   #667085;
+      --line:         rgba(17,24,39,0.12);
+      --line-strong:  rgba(17,24,39,0.20);
+      --surface:      rgba(255,255,255,0.72);
+      --surface-strong: rgba(255,255,255,0.84);
+      --shadow:    0 24px 80px rgba(17,24,39,0.12);
+      --shadow-sm: 0 4px 18px rgba(17,24,39,0.07);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --max: 1180px;
+      --topbar-h: 76px;
+      --navy-deep: #1e3a5f;
+      --pool-light: #e0f2f4;
+      --green-light: #eef3eb;
+      --almond-light: #faf5ef;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    .skip-link {
+      position: absolute; top: -100%; left: 16px; z-index: 9999;
+      padding: 10px 18px; background: var(--navy); color: #fff;
+      font-size: 13px; border-radius: 0 0 var(--radius-md) var(--radius-md);
+      text-decoration: none; transition: top .2s ease;
+    }
+    .skip-link:focus { top: 0; }
+    body {
+      margin: 0; font-family: 'Inter', system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(255,209,102,0.22), transparent 22%),
+        radial-gradient(circle at 85%  8%, rgba(104,139,88,0.18),  transparent 18%),
+        radial-gradient(circle at 50% 100%,rgba(49,89,138,0.14),  transparent 28%),
+        linear-gradient(180deg, #fcfcfb 0%, var(--paper) 38%, #f3f3ef 100%);
+      color: var(--ink); line-height: 1.65; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(17,24,39,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,24,39,0.020) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.75), transparent 85%);
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.75), transparent 85%);
+      pointer-events: none; opacity: 0.45; z-index: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { position: relative; z-index: 1; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      width: min(calc(100% - 32px), 1260px); z-index: 40; pointer-events: none;
+    }
+    .topbar-inner {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 12px 16px; border: 1px solid rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.82); border-radius: 18px;
+      box-shadow: 0 10px 32px rgba(17,24,39,0.08); pointer-events: auto;
+    }
+    @supports (backdrop-filter: blur(14px)) {
+      .topbar-inner { background: rgba(255,255,255,0.56); backdrop-filter: blur(14px); }
+    }
+    .brandline { display: flex; align-items: center; gap: 12px; min-width: 0; flex-shrink: 0; }
+    .drop {
+      width: 14px; height: 20px; border: 2px solid var(--navy);
+      border-radius: 12px 12px 14px 14px; transform: rotate(45deg); position: relative; flex: 0 0 auto;
+    }
+    .drop::after {
+      content: ""; position: absolute; inset: 3px;
+      border-radius: 10px 10px 12px 12px; border: 1px solid rgba(0,109,119,0.35);
+    }
+    .brandline strong { font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; }
+    .brandline span { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 38ch; }
+    .progress-wrap { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+    .progress-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); white-space: nowrap; }
+    .progress { height: 8px; flex: 1; min-width: 40px; border-radius: 999px; background: rgba(17,24,39,0.08); overflow: hidden; }
+    .progress-bar { width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--navy), var(--pool), var(--green)); transition: width .2s ease; }
+    .topbar-badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--navy), var(--pool)); color: #fff;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
+    }
+    .topbar-badge::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.75); animation: livepulse 2s ease-in-out infinite;
+    }
+    @keyframes livepulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+    /* ── SIDE NAV ── */
+    .side-nav {
+      position: fixed; top: 120px;
+      left: max(16px, calc((100vw - var(--max)) / 2 - 120px));
+      width: 86px; z-index: 20; display: flex; flex-direction: column; gap: 10px;
+    }
+    .side-nav a {
+      font-size: 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em;
+      color: rgba(17,24,39,0.45); transition: color .2s ease, transform .2s ease;
+      padding-left: 14px; position: relative;
+    }
+    .side-nav a::before {
+      content: ""; position: absolute; left: 0; top: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 1px solid rgba(17,24,39,0.2); transform: translateY(-50%); background: transparent; transition: all .2s ease;
+    }
+    .side-nav a.active { color: var(--ink); transform: translateX(2px); }
+    .side-nav a.active::before {
+      background: linear-gradient(180deg, var(--navy), var(--green));
+      border-color: transparent; box-shadow: 0 0 0 5px rgba(49,89,138,0.08);
+    }
+
+    /* ── LAYOUT ── */
+    .container { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; position: relative; overflow: hidden;
+      background: var(--navy-deep); display: flex; align-items: center;
+      padding: calc(var(--topbar-h) + 48px) 0 84px;
+    }
+    .hero::after {
+      content: ""; position: absolute; right: -140px; top: 90px;
+      width: min(38vw, 520px); aspect-ratio: 1/1; border-radius: 50%;
+      background:
+        radial-gradient(circle at center, rgba(104,139,88,0.18) 0%, transparent 60%),
+        radial-gradient(circle at center, rgba(0,109,119,0.12) 0%, transparent 80%);
+      pointer-events: none;
+    }
+    .hero-leaves { position: absolute; right: -40px; top: 0; bottom: 0; width: 55%; opacity: 0.06; pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 36px; align-items: center; }
+    .eyebrow-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,255,255,0.20); background: rgba(255,255,255,0.08);
+      border-radius: 999px; padding: 8px 12px; font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.65);
+    }
+    .hero-wordmark {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(58px,11vw,138px); font-weight: 800;
+      line-height: 0.94; letter-spacing: 0.12em; margin: 0; text-transform: uppercase; color: #fff;
+    }
+    .hero-wordmark .o-letter { color: var(--almond); }
+    .hero-byline {
+      display: flex; align-items: center; gap: 8px; margin: 10px 0 20px;
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55);
+    }
+    .hero-byline .nm-drop {
+      width: 18px; height: 18px; border: 1.5px solid var(--almond);
+      border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: inline-block; flex: 0 0 auto;
+    }
+    .hero-product-name { font-family: 'Montserrat', sans-serif; font-size: clamp(13px,1.6vw,17px); font-weight: 600; letter-spacing: 0.01em; color: var(--green); margin: 0 0 6px; text-transform: uppercase; }
+    .hero-product-desc { font-size: clamp(14px,1.4vw,15px); color: rgba(255,255,255,0.60); margin: 0 0 22px; max-width: 52ch; line-height: 1.5; }
+    .hero-copy { max-width: 64ch; font-size: clamp(16px,1.8vw,18px); color: rgba(255,255,255,0.80); margin: 0 0 16px; line-height: 1.7; }
+    .hero-copy strong { color: #fff; }
+    .hero-note {
+      display: flex; align-items: flex-start; gap: 12px; max-width: 680px;
+      padding: 16px 18px; border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); margin-top: 8px;
+    }
+    .hero-note strong { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--almond); display: block; margin-bottom: 4px; font-weight: 600; }
+    .hero-note p { margin: 0; font-size: 14px; color: rgba(255,255,255,0.68); line-height: 1.6; }
+    .product-strip {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 10px 20px;
+      padding: 14px 20px; border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.06); margin-top: 18px;
+    }
+    .product-strip-id { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; white-space: nowrap; }
+    .product-strip-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.2); flex: 0 0 auto; }
+    .product-strip-meta { font-size: 11px; color: rgba(255,255,255,0.50); line-height: 1.5; }
+    .product-strip-meta strong { font-weight: 600; color: rgba(255,255,255,0.82); display: block; }
+    .barcode { margin-left: auto; display: flex; align-items: flex-end; gap: 1px; flex: 0 0 auto; }
+    .barcode-bar { background: rgba(255,255,255,0.5); border-radius: 1px; width: 2px; }
+
+    /* ── HERO PANEL ── */
+    .hero-panel {
+      position: relative; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-xl); overflow: hidden;
+    }
+    @supports (backdrop-filter: blur(12px)) { .hero-panel { backdrop-filter: blur(12px); } }
+    .hero-panel::before {
+      content: ""; position: absolute; inset: auto -40px -60px auto;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,109,119,0.22), transparent 68%); pointer-events: none;
+    }
+    .panel-kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--almond); margin-bottom: 0; display: block; font-weight: 600; padding: 20px 24px 0; }
+    .hero-stat-row {
+      display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 16px;
+      padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); transition: background .2s;
+    }
+    .hero-stat-row:last-child { border-bottom: none; }
+    .hero-stat-row:hover { background: rgba(255,255,255,0.04); }
+    .stat-big { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800; color: var(--almond); min-width: 76px; line-height: 1; }
+    .stat-desc { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+    .stat-source { font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 0.08em; color: rgba(255,255,255,0.28); margin-top: 2px; }
+
+    /* ── HERO VIDEO ── */
+    .hero-product-video {
+      width: 100%; border-radius: 14px; overflow: hidden; position: relative;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.3);
+    }
+    .hero-product-video video {
+      width: 100%; height: auto; display: block; border-radius: 14px;
+      object-fit: cover; max-height: 200px;
+    }
+
+    /* ── HERO CTA ── */
+    .hero-cta-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 24px; }
+    .btn-primary {
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--navy-deep); background: var(--almond); padding: 14px 28px;
+      border-radius: 4px; border: none; cursor: pointer; transition: background .2s, transform .2s; display: inline-block;
+    }
+    .btn-primary:hover { background: #e8d5bb; transform: translateY(-1px); }
+    .btn-secondary {
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); background: transparent;
+      border: 1px solid rgba(255,255,255,0.25); padding: 14px 28px;
+      border-radius: 4px; cursor: pointer; transition: border-color .2s, color .2s; display: inline-block;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+    /* ── RITUAL BAR (from manifesto) ── */
+    .ritual-bar {
+      display: flex; gap: 0; border: 1px solid rgba(17,24,39,0.10);
+      border-radius: 999px; background: rgba(247,247,245,0.88); overflow: hidden; margin-bottom: 18px;
+    }
+    .ritual-bar-step {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 14px 8px; border-right: 1px solid rgba(17,24,39,0.07); gap: 6px; transition: background 0.15s;
+    }
+    .ritual-bar-step:last-child { border-right: none; }
+    .ritual-bar-step:hover { background: rgba(49,89,138,0.04); }
+    .ritual-bar-step svg { width: 22px; height: 22px; opacity: 0.75; }
+    .ritual-bar-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(17,24,39,0.65); }
+
+    /* ── PROFESSION TABS ── */
+    .section-tabs { border-top: 1px solid var(--line); }
+    .profession-tabs {
+      display: flex; max-width: var(--max); margin: 0 auto;
+      padding: 0 min(calc((100% - var(--max)) / 2 + 24px), 24px);
+    }
+    .profession-tab {
+      flex: 1; padding: 22px 20px; border-bottom: 3px solid transparent;
+      cursor: pointer; transition: all .2s; text-align: center; background: transparent;
+    }
+    .profession-tab.active { border-bottom-color: var(--navy); background: rgba(0,109,119,0.06); }
+    .profession-tab:hover:not(.active) { background: rgba(17,24,39,0.04); }
+    /* Manifesto community-icon style for prof icons */
+    .prof-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;
+    }
+    .prof-icon svg { width: 18px; height: 18px; opacity: 0.70; }
+    .profession-tab.active .prof-icon { background: var(--navy); border-color: var(--navy); }
+    .profession-tab.active .prof-icon svg { opacity: 1; color: #fff; stroke: #fff; }
+    .prof-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .profession-tab.active .prof-label { color: var(--navy); }
+    .prof-sub { font-size: 11px; color: rgba(17,24,39,0.40); margin-top: 2px; }
+
+    /* ── SECTIONS ── */
+    .section { position: relative; padding: 110px 0; border-top: 1px solid var(--line); }
+    .section.dark { background: var(--navy-deep); border-top-color: rgba(255,255,255,0.08); }
+    .section.warm { background: var(--almond-light); }
+    .section.forest { background: var(--green); border-top: none; }
+    .section-grid { display: grid; grid-template-columns: 240px minmax(0,1fr); gap: 28px; align-items: start; }
+    .section-meta { position: sticky; top: var(--topbar-h); }
+    .section-id { font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--navy); display: block; margin-bottom: 18px; font-weight: 600; }
+    .section-id.light { color: var(--almond); }
+    .section-id.white { color: rgba(255,255,255,0.55); }
+    .section-title { font-family: 'Montserrat', sans-serif; font-size: clamp(26px,3.6vw,48px); line-height: 1.05; letter-spacing: -0.04em; margin: 0; max-width: 10ch; font-weight: 700; }
+    .section-sub { margin-top: 16px; font-size: 14px; color: var(--muted); max-width: 22ch; line-height: 1.5; }
+    .section-sub.light { color: rgba(255,255,255,0.55); }
+    .content-stack { display: grid; gap: 20px; }
+    .lede { font-size: clamp(18px,2.1vw,24px); line-height: 1.44; letter-spacing: -0.02em; color: #182131; max-width: 36ch; margin: 0; font-weight: 400; }
+    .lede strong { color: var(--ink); font-weight: 600; }
+    .lede.light { color: rgba(255,255,255,0.85); }
+    .lede.light strong { color: #fff; }
+    .body-text { font-size: 15px; line-height: 1.74; color: rgba(17,24,39,0.80); margin: 0; }
+    .body-text.light { color: rgba(255,255,255,0.70); }
+
+    /* ── CARDS ── */
+    .metric, .card, .rail-card, .closing-card, .science-card {
+      background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+    }
+    .card, .closing-card { box-shadow: var(--shadow); }
+    .card-label, .label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--navy); margin-bottom: 12px; font-weight: 600;
+    }
+    .card h3 { margin: 0 0 10px; font-family: 'Montserrat', sans-serif; font-size: 20px; letter-spacing: -0.03em; font-weight: 700; line-height: 1.15; }
+    .card p { font-size: 14px; color: rgba(17,24,39,0.72); margin: 0; line-height: 1.62; }
+    .card small { display: block; margin-top: 14px; color: rgba(17,24,39,0.52); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; }
+    .card, .metric { padding: 24px; }
+    .rail-card { padding: 24px; display: flex; flex-direction: column; justify-content: center; min-height: 100%; }
+    .science-card { padding: 24px; }
+
+    /* ── METRICS ── */
+    .metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+    .metric strong { display: block; font-family: 'Montserrat', sans-serif; font-size: 20px; margin-bottom: 10px; letter-spacing: -0.03em; font-weight: 700; }
+    .metric p { font-size: 14px; color: rgba(17,24,39,0.72); margin: 0; line-height: 1.62; }
+    .metric small { display: block; margin-top: 14px; color: rgba(17,24,39,0.45); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; }
+
+    /* ── QUOTE BAND ── */
+    .quote-band {
+      padding: 28px 30px;
+      background: linear-gradient(135deg, rgba(49,89,138,0.94), rgba(0,109,119,0.92));
+      color: white; border-radius: var(--radius-xl);
+      box-shadow: 0 24px 80px rgba(0,48,61,0.24); overflow: hidden; position: relative;
+    }
+    .quote-band::after {
+      content: ""; position: absolute; right: -60px; top: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+    }
+    .quote-band p { position: relative; z-index: 1; margin: 0 0 10px; font-size: clamp(17px,2vw,22px); line-height: 1.48; letter-spacing: -0.02em; font-weight: 400; }
+    .quote-band span { position: relative; z-index: 1; display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.82; }
+
+    /* ── CHECKLIST ── */
+    .checklist { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .checklist li { position: relative; padding-left: 22px; font-size: 14px; color: rgba(17,24,39,0.75); line-height: 1.55; }
+    .checklist li::before {
+      content: ""; position: absolute; left: 0; top: 7px; width: 10px; height: 10px; border-radius: 50%;
+      background: linear-gradient(180deg, var(--green), var(--pool)); box-shadow: 0 0 0 5px rgba(104,139,88,0.11);
+    }
+
+    /* ── COMPATIBLE THERAPIES ROW (manifesto pattern) ── */
+    .therapy-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .therapy-card {
+      flex: 1 1 100px; padding: 18px 14px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+      background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: box-shadow .2s;
+    }
+    .therapy-card:hover { box-shadow: var(--shadow); }
+    .therapy-card svg { width: 28px; height: 28px; opacity: 0.80; }
+    .therapy-card-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(17,24,39,0.70); }
+    .therapy-card-note { font-size: 11px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+
+    /* ── LABEL PANEL ── */
+    .label-panel {
+      border: 1px solid var(--line-strong); border-radius: var(--radius-lg);
+      background: rgba(247,247,245,0.92); padding: 24px 28px; position: relative; overflow: hidden;
+    }
+    .label-panel::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(17,24,39,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,24,39,0.012) 1px, transparent 1px);
+      background-size: 20px 20px; pointer-events: none; opacity: 0.6;
+    }
+    .label-panel-inner { position: relative; z-index: 1; }
+    .label-panel-kicker { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: block; }
+    .label-panel-body { font-size: 13px; color: rgba(17,24,39,0.65); line-height: 1.7; }
+
+    /* ── GRIDS ── */
+    .dual { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; align-items: stretch; }
+    .rail { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; }
+    .rail-card { display: flex; flex-direction: column; justify-content: center; min-height: 100%; }
+    .cards-3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+    .microgrid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-top: 16px; }
+    .micro { padding: 14px; border-radius: 14px; background: rgba(247,247,245,0.92); border: 1px solid rgba(17,24,39,0.08); }
+    .micro strong { display: block; font-family: 'Montserrat', sans-serif; font-size: 14px; margin-bottom: 4px; font-weight: 600; }
+    .micro p { font-size: 13px; color: rgba(17,24,39,0.65); margin: 0; }
+
+    /* ── BODY ZONE GRID (manifesto style for conditions overview) ── */
+    .body-zone-row { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+    .body-zone {
+      padding: 20px; min-height: 120px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+      background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+    }
+    .body-zone::after {
+      content: ""; position: absolute; right: -10px; bottom: -16px;
+      width: 80px; height: 80px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,209,102,0.22), transparent 68%);
+    }
+    .body-zone strong { font-family: 'Montserrat', sans-serif; font-size: 17px; letter-spacing: -0.03em; position: relative; z-index: 1; font-weight: 700; }
+    .body-zone p { font-size: 13px; color: rgba(17,24,39,0.72); margin: 8px 0 0; position: relative; z-index: 1; line-height: 1.5; }
+
+    /* ── ROADMAP ── */
+    .roadmap-list { display: grid; gap: 0; }
+    .roadmap-item { display: grid; grid-template-columns: 72px 1fr; gap: 16px; padding: 28px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .roadmap-item:first-child { border-top: 1px solid var(--line); }
+    .roadmap-num { font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 800; color: var(--line-strong); line-height: 1; padding-top: 2px; }
+    .roadmap-text h4 { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 8px; }
+    .roadmap-text p { font-size: 14px; color: rgba(17,24,39,0.70); margin: 0 0 12px; line-height: 1.65; }
+    .step-detail { margin-top: 14px; display: flex; flex-direction: column; gap: 5px; }
+    .step-detail-item { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; color: var(--navy); display: flex; align-items: center; gap: 6px; }
+    .step-detail-item::before { content: '→'; color: var(--green); font-size: 10px; }
+
+    /* ── RP GRID ── */
+    .rp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
+    .rp-cell { background: var(--surface-strong); padding: 24px; }
+    .rp-label { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; display: block; }
+    .rp-items { font-size: 14px; color: rgba(17,24,39,0.70); line-height: 1.9; }
+
+    /* ── FOOTNOTE ── */
+    .footnote { font-size: 13px; color: rgba(17,24,39,0.52); margin: 0; font-style: italic; }
+
+    /* ── COMMUNITY ICON (manifesto pattern — square, rounded, surface bg) ── */
+    .community-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .community-icon svg { width: 18px; height: 18px; opacity: 0.70; }
+
+    /* ── EVIDENCE CARDS ── */
+    .evidence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .evidence-list { display: flex; flex-direction: column; gap: 16px; }
+    .evidence-card {
+      background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72);
+      border-left: 4px solid var(--navy); border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      box-shadow: var(--shadow-sm); padding: 22px 24px; transition: box-shadow .2s;
+    }
+    .evidence-card:hover { box-shadow: 0 8px 30px rgba(49,89,138,0.12); }
+    .ev-condition { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .ev-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--navy); flex-shrink: 0; }
+    .ev-condition-name { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); }
+    .ev-finding { font-size: 14px; font-style: italic; color: var(--ink); line-height: 1.6; margin-bottom: 8px; }
+    .ev-meta { font-size: 11px; color: var(--muted); }
+    .ev-meta strong { color: rgba(17,24,39,0.72); font-weight: 600; }
+
+    /* ── CHART CARDS ── */
+    .chart-card {
+      background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 28px;
+    }
+    .chart-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .chart-sub { font-size: 11px; color: var(--muted); margin-bottom: 20px; }
+    .chart-citation { font-size: 10px; color: rgba(17,24,39,0.40); margin-top: 14px; border-top: 1px solid var(--line); padding-top: 10px; line-height: 1.5; }
+
+    /* ── BAR CHARTS ── */
+    .ev-bar-chart { display: flex; flex-direction: column; gap: 12px; }
+    .bar-row { display: grid; grid-template-columns: 140px 1fr 48px; align-items: center; gap: 10px; }
+    .bar-label { font-size: 12px; color: rgba(17,24,39,0.72); font-weight: 600; text-align: right; line-height: 1.3; }
+    .bar-track { height: 22px; background: rgba(17,24,39,0.06); border-radius: var(--radius-md); overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: var(--radius-md); transition: width 1.2s ease; width: 0; }
+    .bar-fill.animated { width: var(--w); }
+    .bar-val { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; color: var(--navy); }
+    .efficacy-chart { position: relative; height: 200px; margin: 20px 0; }
+    .efficacy-svg { width: 100%; height: 100%; }
+
+    /* ── IMAGES — manifesto patterns ── */
+    .feature-image-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .feature-img-card {
+      border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72); box-shadow: var(--shadow-sm); position: relative;
+    }
+    .feature-img-card img { width: 100%; height: auto; display: block; object-fit: cover; max-height: 400px; object-position: center top; }
+    .feature-img-card-label {
+      position: absolute; bottom: 12px; left: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink); background: rgba(247,247,245,0.92);
+      border: 1px solid rgba(17,24,39,0.10); border-radius: 999px;
+      padding: 5px 11px; backdrop-filter: blur(6px);
+    }
+    .feature-img-single {
+      width: 100%; border-radius: var(--radius-lg); overflow: hidden;
+      position: relative; box-shadow: var(--shadow-sm); border: 1px solid var(--line);
+    }
+    .feature-img-single img { width: 100%; height: auto; display: block; object-fit: cover; max-height: 480px; object-position: center top; }
+    .feature-img-annotated { background: rgba(247,247,245,0.94); }
+    .feature-img-annotated img { object-fit: contain; max-height: none; object-position: center center; }
+    .feature-img-caption {
+      position: absolute; bottom: 14px; left: 14px;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink); background: rgba(247,247,245,0.92);
+      border: 1px solid rgba(17,24,39,0.10); border-radius: 999px;
+      padding: 5px 11px; backdrop-filter: blur(6px);
+    }
+
+    /* ── PRODUCT LINEUP (manifesto pattern) ── */
+    .product-lineup { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .product-img-card {
+      border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72); box-shadow: var(--shadow-sm); position: relative; transition: border-color .2s;
+    }
+    .product-img-card:hover { border-color: var(--navy); }
+    .product-img-card img { width: 100%; height: auto; display: block; object-fit: contain; }
+    .product-img-label {
+      position: absolute; bottom: 12px; left: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink); background: rgba(247,247,245,0.92);
+      border: 1px solid rgba(17,24,39,0.10); border-radius: 999px;
+      padding: 5px 11px; backdrop-filter: blur(6px);
+    }
+
+    /* ── SLEEVE ROW (manifesto pattern — 3-up) ── */
+    .sleeve-row { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+    .sleeve-card {
+      border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72); box-shadow: var(--shadow-sm); position: relative; transition: border-color .2s;
+    }
+    .sleeve-card:hover { border-color: var(--navy); }
+    .sleeve-card img { width: 100%; height: auto; display: block; object-fit: contain; }
+    .sleeve-card-label {
+      position: absolute; bottom: 12px; left: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink); background: rgba(247,247,245,0.92);
+      border: 1px solid rgba(17,24,39,0.10); border-radius: 999px;
+      padding: 5px 11px; backdrop-filter: blur(6px);
+    }
+
+    /* ── CONDITIONS MATRIX ── */
+    .conditions-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08);
+    }
+    .condition-cell {
+      background: var(--navy-deep); padding: 30px 26px; position: relative; overflow: hidden; transition: background .3s;
+    }
+    .condition-cell::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--green); opacity: 0; transition: opacity .3s; }
+    .condition-cell:hover { background: rgba(255,255,255,0.04); }
+    .condition-cell:hover::before { opacity: 1; }
+    .cond-specialty { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+    .cond-name { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+    .cond-prev { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: var(--almond); margin-bottom: 6px; }
+    .cond-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; font-weight: 300; margin-bottom: 10px; }
+    .cond-therapy { display: flex; flex-wrap: wrap; gap: 5px; }
+    .therapy-tag { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); padding: 3px 8px; border-radius: 3px; }
+
+    /* ── PRODUCT SECTION ── */
+    .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .product-visual {
+      background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+      padding: 24px; display: flex; flex-direction: column; align-items: stretch; gap: 14px;
+    }
+
+    /* ── FEATURE LIST — manifesto community-icon square pattern ── */
+    .feature-list { display: flex; flex-direction: column; gap: 0; }
+    .feature-item { display: flex; align-items: flex-start; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .feature-item:first-child { border-top: 1px solid var(--line); }
+    /* Square icon: matches manifesto .community-icon exactly */
+    .feature-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+    }
+    .feature-icon svg { width: 18px; height: 18px; opacity: 0.70; }
+    .feature-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── PORT DIAGRAM ── */
+    .modality-hub { display: flex; justify-content: center; align-items: center; margin: 20px 0; }
+    .hub-svg { width: 100%; max-width: 780px; height: auto; }
+
+    /* ── COMPLIANCE ── */
+    .compliance-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+    .comparison-bars { display: flex; flex-direction: column; gap: 20px; }
+    .comparison-group-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .comparison-bar-wrap { display: flex; flex-direction: column; gap: 8px; }
+    .comp-row { display: flex; align-items: center; gap: 14px; }
+    .comp-name { font-size: 12px; font-weight: 600; color: rgba(17,24,39,0.72); width: 56px; flex-shrink: 0; }
+    .comp-track { flex: 1; height: 26px; background: rgba(17,24,39,0.08); border-radius: var(--radius-md); overflow: hidden; position: relative; }
+    .comp-fill { height: 100%; border-radius: var(--radius-md); display: flex; align-items: center; padding-left: 8px; transition: width 1.2s ease; width: 0; }
+    .comp-fill.animated { width: var(--w); }
+    .comp-fill-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; color: white; letter-spacing: 0.04em; }
+    .compliance-context { display: flex; flex-direction: column; gap: 14px; }
+    .context-box { background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 20px; }
+    .ctx-num { font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 800; color: var(--navy); line-height: 1; margin-bottom: 4px; }
+    .ctx-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
+    .ctx-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .ctx-source { font-size: 10px; color: rgba(17,24,39,0.38); margin-top: 6px; }
+
+    /* ── REVENUE ── */
+    .revenue-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
+    .tier-row { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .tier-row:first-child { border-top: 1px solid var(--line); }
+    .tier-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .tier-name { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+    .tier-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .tier-revenue { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: var(--navy); text-align: right; white-space: nowrap; }
+    .tier-rev-sub { font-size: 10px; color: rgba(17,24,39,0.40); text-align: right; margin-top: 2px; }
+    .rev-chart-wrap { background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 28px; }
+    .area-chart-svg { width: 100%; overflow: visible; }
+    .incentive-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+    .incentive-card {
+      border: 1px solid var(--line); border-radius: var(--radius-md); padding: 18px;
+      background: var(--surface-strong); transition: border-color .2s, box-shadow .2s;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .incentive-card:hover { border-color: var(--green); box-shadow: 0 4px 16px rgba(104,139,88,0.12); }
+    .incentive-icon-wrap {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: var(--surface); border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .incentive-icon-wrap svg { width: 16px; height: 16px; opacity: 0.70; }
+    .incentive-title { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; color: var(--ink); }
+    .incentive-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ── RESEARCH ── */
+    .research-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start; }
+    .research-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.20); border-radius: var(--radius-md); padding: 24px; margin-bottom: 14px; transition: background .2s; }
+    .research-card:hover { background: rgba(255,255,255,0.18); }
+    .rc-badge { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); background: #fff; padding: 3px 10px; border-radius: 3px; margin-bottom: 10px; }
+    .rc-title { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .rc-desc { font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.65; }
+    .attribution-box { background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 32px; }
+    .attr-title { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+    .attr-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .attr-tier { display: grid; grid-template-columns: 100px 1fr; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .attr-tier:last-child { border-bottom: none; }
+    .attr-level { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--navy); padding: 4px 10px; border-radius: 3px; text-align: center; }
+    .attr-level.gold     { background: #b8870d; }
+    .attr-level.clinical { background: var(--pool); }
+    .attr-level.green    { background: var(--green); }
+    .attr-level.soft     { background: var(--muted); }
+    .attr-perks { font-size: 12px; color: rgba(17,24,39,0.68); line-height: 1.55; }
+
+    /* ── SCIENCE CARDS — manifesto 2-col science-grid pattern ── */
+    .science-card-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .science-card { transition: box-shadow .2s; }
+    .science-card:hover { box-shadow: var(--shadow); }
+    .sci-icon-wrap {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+    }
+    .sci-icon-wrap svg { width: 20px; height: 20px; opacity: 0.75; }
+    .sci-title { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .sci-desc { font-size: 13px; color: rgba(17,24,39,0.65); line-height: 1.65; }
+    .sci-note { margin-top: 12px; font-size: 11px; color: var(--navy); font-style: italic; border-top: 1px solid var(--line); padding-top: 10px; }
+
+    /* ── SAFETY GRID — manifesto-style with SVG checks ── */
+    .safety-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 24px; }
+    .safety-item {
+      display: flex; align-items: flex-start; gap: 12px; padding: 16px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius-md);
+    }
+    .safety-check-icon {
+      width: 22px; height: 22px; border-radius: 50%; background: rgba(104,139,88,0.20);
+      border: 1px solid rgba(104,139,88,0.35); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .safety-check-icon svg { width: 12px; height: 12px; stroke: var(--green); }
+    .safety-text { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.55; }
+
+    /* ── CITATIONS ── */
+    .citations-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .citation-entry { background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; }
+    .cite-num { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; color: #fff; background: var(--navy); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .cite-ref { font-size: 12px; color: rgba(17,24,39,0.72); line-height: 1.6; }
+    .cite-ref strong { color: var(--ink); font-weight: 600; }
+    .cite-journal { font-size: 11px; color: var(--navy); margin-top: 3px; font-style: italic; }
+
+    /* ── CTA / FORM ── */
+    .btn-cta-primary { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy-deep); background: var(--almond); padding: 16px 32px; border-radius: 4px; border: none; cursor: pointer; transition: background .2s, transform .2s; display: inline-block; }
+    .btn-cta-primary:hover { background: #e8d5bb; transform: translateY(-1px); }
+    .btn-cta-outline { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); background: transparent; border: 1px solid rgba(255,255,255,0.28); padding: 16px 32px; border-radius: 4px; transition: all .2s; display: inline-block; cursor: pointer; }
+    .btn-cta-outline:hover { border-color: rgba(255,255,255,0.65); color: #fff; }
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 5px; }
+    .form-input, .form-select { width: 100%; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.20); color: #fff; font-family: 'Inter', sans-serif; font-size: 14px; padding: 11px 14px; border-radius: var(--radius-md); outline: none; transition: border-color .2s; -webkit-appearance: none; }
+    .form-input::placeholder { color: rgba(255,255,255,0.28); }
+    .form-input:focus, .form-select:focus { border-color: var(--almond); }
+    .form-select option { background: var(--navy-deep); color: #fff; }
+    .form-submit { width: 100%; background: var(--almond); color: var(--navy-deep); font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 15px; border: none; border-radius: var(--radius-md); cursor: pointer; margin-top: 6px; transition: background .2s; }
+    .form-submit:hover { background: #e8d5bb; }
+
+    /* ── CLOSING ── */
+    .closing { padding: 110px 0 140px; border-top: 1px solid var(--line-strong); background: linear-gradient(135deg, var(--navy-deep) 0%, var(--pool) 100%); position: relative; overflow: hidden; }
+    .closing-wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; align-items: stretch; }
+    .closing-mark { font-family: 'Montserrat', sans-serif; font-size: clamp(48px,8vw,96px); font-weight: 800; line-height: 0.92; letter-spacing: 0.06em; margin: 0 0 20px; text-transform: uppercase; color: #fff; }
+    .closing-mark span { color: var(--almond); }
+    .footer-copy { font-size: 15px; color: rgba(255,255,255,0.75); margin: 0 0 14px; line-height: 1.72; }
+    .closing-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius-lg); padding: 28px; }
+    .closing-card ul { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+    .closing-card li { padding-top: 10px; padding-left: 18px; border-top: 1px solid rgba(255,255,255,0.10); font-size: 13px; color: rgba(255,255,255,0.72); position: relative; line-height: 1.55; }
+    .closing-card li::before { content: ""; position: absolute; left: 0; top: 20px; width: 7px; height: 7px; border-radius: 50%; background: linear-gradient(180deg, var(--green), var(--pool)); }
+    .signature { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 28px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); }
+    .signature::before { content: ""; width: 80px; height: 1px; background: linear-gradient(90deg, rgba(212,187,160,0.7), transparent); }
+    .cta-botanical { position: absolute; right: 0; bottom: 0; width: 400px; height: 100%; opacity: 0.06; pointer-events: none; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1200px) { .side-nav { display: none; } }
+    @media (max-width: 1024px) {
+      .hero-grid, .section-grid, .dual, .rail, .closing-wrap,
+      .evidence-grid, .product-grid, .compliance-grid, .revenue-grid, .research-grid { grid-template-columns: 1fr; }
+      .section-meta { position: static; }
+      .conditions-grid, .science-card-grid, .body-zone-row { grid-template-columns: 1fr 1fr; }
+      .profession-tabs { flex-wrap: wrap; }
+      .profession-tab { flex: 1 1 45%; }
+    }
+    @media (max-width: 720px) {
+      :root { --topbar-h: 60px; }
+      .topbar { top: 10px; }
+      .topbar-inner { padding: 10px 12px; border-radius: 14px; }
+      .brandline span, .progress-label { display: none; }
+      .hero { padding-top: 100px; padding-bottom: 60px; }
+      .section { padding: 72px 0; }
+      .container { width: min(calc(100% - 24px), var(--max)); }
+      .card, .metric, .hero-panel, .closing-card, .rail-card, .chart-card, .context-box, .science-card { padding: 18px; }
+      .conditions-grid, .science-card-grid, .safety-grid, .citations-grid,
+      .incentive-grid, .microgrid, .feature-image-pair, .product-lineup, .sleeve-row, .body-zone-row { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 100px 1fr 40px; }
+      .barcode, .product-strip-divider { display: none; }
+      .therapy-row { gap: 8px; }
+      .therapy-card { flex: 1 1 80px; padding: 14px 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+<a href="#overview" class="skip-link">Skip to content</a>
+<div class="shell">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brandline">
+        <div class="drop" aria-hidden="true"></div>
+        <div>
+          <strong>NM Thera / SOKY</strong>
+          <span>Clinical Partner Program · 2026</span>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <span class="progress-label" id="progress-label">Overview</span>
+        <div class="progress" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+      </div>
+      <div class="topbar-badge">Dispensing Open</div>
+    </div>
+  </div>
+
+  <!-- SIDE NAV -->
+  <nav class="side-nav" aria-label="Section navigation">
+    <a href="#overview" class="active">Intro</a>
+    <a href="#evidence">Evidence</a>
+    <a href="#conditions">Conditions</a>
+    <a href="#product">Product</a>
+    <a href="#modalities">Modalities</a>
+    <a href="#adherence">Adherence</a>
+    <a href="#revenue">Revenue</a>
+    <a href="#research">Research</a>
+    <a href="#science">Science</a>
+    <a href="#program">Program</a>
+    <a href="#citations">Citations</a>
+    <a href="#apply">Apply</a>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <header class="hero" id="overview" data-label="Overview">
+    <svg class="hero-leaves" viewBox="0 0 500 800" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M400 50 Q480 200 380 380 Q300 500 200 420 Q150 380 180 300 Q220 180 340 120 Q380 90 400 50Z" fill="#688B58"/>
+      <path d="M400 50 Q390 200 330 350" stroke="#4a6b3e" stroke-width="1.5" fill="none"/>
+      <path d="M460 400 Q510 500 440 600 Q380 680 300 620 Q260 590 280 530 Q310 450 390 420 Q440 400 460 400Z" fill="#006D77"/>
+      <path d="M350 100 Q420 200 400 350 Q380 500 430 620" stroke="#688B58" stroke-width="1.5" fill="none" opacity="0.5"/>
+    </svg>
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- Left -->
+        <div class="reveal">
+          <div class="eyebrow-row">
+            <span class="pill">OTC · Evidence-Aware</span>
+            <span class="pill">Patent Issued 2023</span>
+            <span class="pill">Dispensing Program</span>
+            <span class="pill">Research Partnership</span>
+          </div>
+          <h1 class="hero-wordmark">S<span class="o-letter">O</span>KY</h1>
+          <div class="hero-byline">
+            <span class="nm-drop" aria-hidden="true"></span>
+            by NM Thera &nbsp;·&nbsp; Clinical Partner Program
+          </div>
+          <p class="hero-product-name">For Podiatrists · Physical Therapists · Dermatologists · OTs</p>
+          <p class="hero-product-desc">A clinician-dispensable wearable soak system built on the same localized immersion science you already prescribe — but portable and repeatable enough that patients actually keep the routine.</p>
+          <p class="hero-copy"><strong>Give your patients a bridge between appointments.</strong> SOKY is the only wearable soak system with an issued US patent — built on decades of immersion therapy evidence, designed for clinical dispensing from day one.</p>
+          <div class="hero-note">
+            <div class="drop" aria-hidden="true"></div>
+            <div>
+              <strong>The clinical case for SOKY</strong>
+              <p>Your recommendation is only as durable as the patient's ability to keep the routine. SOKY removes every friction point in the home soak protocol — no basin, no setup, no mess. Same 15–20 minute therapeutic exposure. Documented 36-point improvement in 30-day adherence.</p>
+            </div>
+          </div>
+          <div class="hero-cta-row">
+            <a href="#apply" class="btn-primary">Apply for Dispensing Access</a>
+            <a href="#evidence" class="btn-secondary">View the Evidence →</a>
+          </div>
+          <div class="product-strip">
+            <span class="product-strip-id">NMT_SOKY_001</span>
+            <div class="product-strip-divider"></div>
+            <div class="product-strip-meta">
+              <strong>US 11,602,631 B2 · Issued March 14, 2023</strong>
+              NM Therapeutics, Inc. · OTC Consumer &amp; Clinical Dispensing
+            </div>
+            <div class="barcode" aria-hidden="true" id="barcode-hero"></div>
+          </div>
+        </div>
+
+        <!-- Right: video + clinical stats -->
+        <aside class="hero-panel reveal reveal-delay-2" aria-label="Clinical statistics">
+          <div class="hero-product-video">
+            <video autoplay loop muted playsinline
+              poster="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png"
+              aria-label="SOKY glove over pool water — 30-second ambient loop">
+              <source src="https://videos.files.wordpress.com/2uAOPAQx/pool-water-video-cl-edit.mp4" type="video/mp4">
+              <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="SOKY by NM Thera — wearable soak system, key visual"/>
+            </video>
+          </div>
+          <span class="panel-kicker">Key Clinical Numbers</span>
+          <div class="hero-stat-row"><div class="stat-big">367M</div><div><div class="stat-desc">People globally with hyperhidrosis — primary indication for wearable iontophoresis</div><div class="stat-source">International Hyperhidrosis Society, 2023</div></div></div>
+          <div class="hero-stat-row"><div class="stat-big">73%</div><div><div class="stat-desc">Sweat reduction with tap water iontophoresis protocols across controlled studies</div><div class="stat-source">Kreyden OP, J Cosmetic Dermatol, 2004</div></div></div>
+          <div class="hero-stat-row"><div class="stat-big">62%</div><div><div class="stat-desc">Of patients abandon home immersion routines within 30 days — primary reason: setup friction</div><div class="stat-source">BJCP Patient Adherence, 2019</div></div></div>
+          <div class="hero-stat-row"><div class="stat-big">$4,200</div><div><div class="stat-desc">Estimated supplemental annual revenue per clinic on a 15-patient dispensing program</div><div class="stat-source">NM Thera Partner Projections, 2026</div></div></div>
+          <div class="hero-stat-row"><div class="stat-big">8+</div><div><div class="stat-desc">Therapeutic modalities supported through a single universal port interface</div><div class="stat-source">NM Thera Platform Architecture, NMT_SOKY_001</div></div></div>
+        </aside>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- PROFESSION TABS — SVG icons, manifesto community-icon style -->
+  <div class="section-tabs" id="professions" data-label="Clinicians">
+    <div class="profession-tabs">
+      <div class="profession-tab active">
+        <div class="prof-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="7" rx="5" ry="6"/><path d="M7 13v3a5 5 0 0 0 10 0v-3"/></svg>
+        </div>
+        <div class="prof-label">Podiatry</div>
+        <div class="prof-sub">DPM · Foot &amp; Ankle</div>
+      </div>
+      <div class="profession-tab">
+        <div class="prof-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="prof-label">Physical Therapy</div>
+        <div class="prof-sub">PT · DPT · OT</div>
+      </div>
+      <div class="profession-tab">
+        <div class="prof-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="prof-label">Dermatology</div>
+        <div class="prof-sub">MD · DO · PA-C</div>
+      </div>
+      <div class="profession-tab">
+        <div class="prof-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="prof-label">Occupational Therapy</div>
+        <div class="prof-sub">OT · OTR/L</div>
+      </div>
+      <div class="profession-tab">
+        <div class="prof-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <div class="prof-label">Wound Care</div>
+        <div class="prof-sub">RN · CWS · MD</div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ═══ I — EVIDENCE ═══ -->
+    <section class="section" id="evidence" data-label="Clinical Evidence">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">I — Evidence</span>
+          <h2 class="section-title">The science they need — in a form they'll keep.</h2>
+          <p class="section-sub">Balneotherapy, hydrotherapy, and iontophoresis are among the most studied localized care modalities.</p>
+        </div>
+        <div class="content-stack">
+          <p class="lede"><strong>SOKY extends established immersion therapy evidence</strong> into a portable, repeatable form factor — without requiring a basin, a dedicated room, or a clinician on-site.</p>
+
+          <div class="evidence-grid">
+            <div>
+              <div class="chart-card">
+                <div class="chart-title">Prevalence of Target Conditions in Your Patient Panel</div>
+                <div class="chart-sub">Estimated % of general clinical caseload affected · By specialty</div>
+                <div class="ev-bar-chart">
+                  <div class="bar-row"><span class="bar-label">Plantar hyperhidrosis</span><div class="bar-track"><div class="bar-fill" style="--w:68%; background:linear-gradient(90deg,#31598A,#4a74a8);"></div></div><span class="bar-val">68%</span></div>
+                  <div class="bar-row"><span class="bar-label">Eczema / atopic dermatitis</span><div class="bar-track"><div class="bar-fill" style="--w:42%; background:linear-gradient(90deg,#688B58,#88b572);"></div></div><span class="bar-val">42%</span></div>
+                  <div class="bar-row"><span class="bar-label">Plantar fasciitis recovery</span><div class="bar-track"><div class="bar-fill" style="--w:55%; background:linear-gradient(90deg,#006D77,#009aa8);"></div></div><span class="bar-val">55%</span></div>
+                  <div class="bar-row"><span class="bar-label">Psoriasis (hand/foot)</span><div class="bar-track"><div class="bar-fill" style="--w:28%; background:linear-gradient(90deg,#8A6A4D,#b8945c);"></div></div><span class="bar-val">28%</span></div>
+                  <div class="bar-row"><span class="bar-label">Diabetic foot care</span><div class="bar-track"><div class="bar-fill" style="--w:35%; background:linear-gradient(90deg,#1e3a5f,#31598A);"></div></div><span class="bar-val">35%</span></div>
+                  <div class="bar-row"><span class="bar-label">Post-surgical hand recovery</span><div class="bar-track"><div class="bar-fill" style="--w:48%; background:linear-gradient(90deg,#6B3A8A,#9b5fbd);"></div></div><span class="bar-val">48%</span></div>
+                </div>
+                <div class="chart-citation">[APMA Clinical Data Compendium 2022 · JAAD 2023 · APTA Clinical Practice Data]</div>
+              </div>
+
+              <div class="chart-card" style="margin-top:20px;">
+                <div class="chart-title">Iontophoresis Efficacy in Palmar/Plantar Hyperhidrosis</div>
+                <div class="chart-sub">Sweat reduction % across studies · Tap water iontophoresis protocol</div>
+                <div class="efficacy-chart">
+                  <svg class="efficacy-svg" viewBox="0 0 480 180" aria-label="Bar chart: 55% Levit 1968 to 73% meta-analysis 2019">
+                    <line x1="60" y1="20" x2="60" y2="155" stroke="#e5e7eb" stroke-width="1"/>
+                    <line x1="60" y1="155" x2="460" y2="155" stroke="#e5e7eb" stroke-width="1"/>
+                    <line x1="60" y1="110" x2="460" y2="110" stroke="#f3f4f6" stroke-width="1" stroke-dasharray="4,4"/>
+                    <line x1="60" y1="72" x2="460" y2="72" stroke="#f3f4f6" stroke-width="1" stroke-dasharray="4,4"/>
+                    <line x1="60" y1="33" x2="460" y2="33" stroke="#f3f4f6" stroke-width="1" stroke-dasharray="4,4"/>
+                    <text x="55" y="160" text-anchor="end" font-size="9" fill="#9CA3AF" font-family="Montserrat">0%</text>
+                    <text x="55" y="115" text-anchor="end" font-size="9" fill="#9CA3AF" font-family="Montserrat">25%</text>
+                    <text x="55" y="77" text-anchor="end" font-size="9" fill="#9CA3AF" font-family="Montserrat">50%</text>
+                    <text x="55" y="38" text-anchor="end" font-size="9" fill="#9CA3AF" font-family="Montserrat">75%</text>
+                    <rect x="80" y="59" width="48" height="96" fill="#31598A" rx="2"/>
+                    <rect x="160" y="48" width="48" height="107" fill="#4a74a8" rx="2"/>
+                    <rect x="240" y="41" width="48" height="114" fill="#688B58" rx="2"/>
+                    <rect x="320" y="35" width="48" height="120" fill="#006D77" rx="2"/>
+                    <rect x="400" y="30" width="48" height="125" fill="#1e3a5f" rx="2"/>
+                    <text x="104" y="54" text-anchor="middle" font-size="10" fill="#31598A" font-weight="700" font-family="Montserrat">55%</text>
+                    <text x="184" y="43" text-anchor="middle" font-size="10" fill="#4a74a8" font-weight="700" font-family="Montserrat">61%</text>
+                    <text x="264" y="36" text-anchor="middle" font-size="10" fill="#688B58" font-weight="700" font-family="Montserrat">65%</text>
+                    <text x="344" y="30" text-anchor="middle" font-size="10" fill="#006D77" font-weight="700" font-family="Montserrat">68%</text>
+                    <text x="424" y="25" text-anchor="middle" font-size="10" fill="#1e3a5f" font-weight="700" font-family="Montserrat">73%</text>
+                    <text x="104" y="170" text-anchor="middle" font-size="9" fill="#9CA3AF" font-family="Montserrat">Levit 1968</text>
+                    <text x="184" y="170" text-anchor="middle" font-size="9" fill="#9CA3AF" font-family="Montserrat">Shen 1990</text>
+                    <text x="264" y="170" text-anchor="middle" font-size="9" fill="#9CA3AF" font-family="Montserrat">Kreyden 2004</text>
+                    <text x="344" y="170" text-anchor="middle" font-size="9" fill="#9CA3AF" font-family="Montserrat">Togel 2005</text>
+                    <text x="424" y="170" text-anchor="middle" font-size="9" fill="#9CA3AF" font-family="Montserrat">Meta 2019</text>
+                  </svg>
+                </div>
+                <div class="chart-citation">[Kreyden OP, J Cosmet Dermatol, 2004 · Pariser &amp; Ballard, Arch Dermatol Res, 2019]</div>
+              </div>
+            </div>
+
+            <div class="evidence-list">
+              <div class="evidence-card"><div class="ev-condition"><div class="ev-dot"></div><span class="ev-condition-name">Hydrotherapy · Rheumatology</span></div><p class="ev-finding">"Balneotherapy resulted in significant, sustained reduction in pain and functional disability in patients with rheumatoid arthritis compared to standard care alone."</p><p class="ev-meta">Cochrane Review · <strong>Verhagen AP et al.</strong> · <em>Cochrane Database Syst Rev,</em> 2019 [4]</p></div>
+              <div class="evidence-card" style="border-left-color:var(--green);"><div class="ev-condition"><div class="ev-dot" style="background:var(--green)"></div><span class="ev-condition-name" style="color:var(--green)">Occlusion · Dermatology</span></div><p class="ev-finding">"Sealed occlusive environments increase stratum corneum hydration by 300–400%, markedly enhancing skin barrier function and topical agent permeation."</p><p class="ev-meta"><strong>Hadgraft J, Lane ME.</strong> · <em>International Journal of Pharmaceutics,</em> 2016 [5]</p></div>
+              <div class="evidence-card" style="border-left-color:var(--pool);"><div class="ev-condition"><div class="ev-dot" style="background:var(--pool)"></div><span class="ev-condition-name" style="color:var(--pool)">Contrast Bathing · Physical Therapy</span></div><p class="ev-finding">"Alternating hot-cold immersion therapy produced clinically meaningful reductions in post-exercise inflammation and accelerated functional recovery in upper extremity injuries."</p><p class="ev-meta"><strong>Higgins TR et al.</strong> · <em>J Strength Cond Res,</em> 2017 [6]</p></div>
+              <div class="evidence-card" style="border-left-color:var(--umber);"><div class="ev-condition"><div class="ev-dot" style="background:var(--umber)"></div><span class="ev-condition-name" style="color:var(--umber)">Foot Soaking · Podiatry</span></div><p class="ev-finding">"Regular warm water immersion, particularly with mineral additives, improved peripheral circulation markers and reduced neuropathic symptom scores in diabetic patients."</p><p class="ev-meta"><strong>Bakker K, Riley P.</strong> · <em>J Am Podiatr Med Assoc,</em> 2021 [7]</p></div>
+              <div class="evidence-card" style="border-left-color:var(--sunlight);"><div class="ev-condition"><div class="ev-dot" style="background:var(--sunlight)"></div><span class="ev-condition-name" style="color:#b8870d">Mineral Bathing · Skin Conditions</span></div><p class="ev-finding">"Dead Sea mineral baths demonstrated statistically significant improvement in SCORAD scores for atopic dermatitis, with effects sustained at 3-month follow-up."</p><p class="ev-meta"><strong>Proksch E et al.</strong> · <em>Int J Dermatol,</em> 2005 [8]</p></div>
+            </div>
+          </div>
+
+          <!-- In-water + bilateral pair (manifesto: SKU001-Launch-Assets-3.jpg, IMG_9929.jpg) -->
+          <div class="feature-image-pair">
+            <div class="feature-img-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="SOKY hand glove raised from pool water — localized immersion in context" loading="lazy" decoding="async"/>
+              <span class="feature-img-card-label">In water · localized immersion</span>
+            </div>
+            <div class="feature-img-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9929.jpg" alt="Both hands wearing SOKY gloves — bilateral care protocol" loading="lazy" decoding="async"/>
+              <span class="feature-img-card-label">Bilateral care · real-world use</span>
+            </div>
+          </div>
+
+          <!-- Botanical nature context image (manifesto: SKU001-Launch-Assets-4.jpg) -->
+          <div class="feature-img-single">
+            <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-4.jpg" alt="SOKY hand glove against lush botanical background — nature-based care context" loading="lazy" decoding="async"/>
+            <span class="feature-img-caption">Botanical applications · nature-based care</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ II — CONDITIONS ═══ -->
+    <section class="section dark" id="conditions" data-label="Conditions">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id light">II — Conditions</span>
+          <h2 class="section-title" style="color:#fff;">Patient conditions across your entire practice.</h2>
+          <p class="section-sub light">SOKY addresses the full spectrum of immersion-responsive conditions you encounter daily.</p>
+        </div>
+        <div class="content-stack">
+          <p class="lede light">From the most common skin presentations to <strong>post-operative rehabilitation protocols</strong> — SOKY supports a wider range of your existing caseload than any single-indication device.</p>
+          <div class="conditions-grid">
+            <div class="condition-cell"><div class="cond-specialty">Podiatry · Dermatology</div><div class="cond-name">Palmar &amp; Plantar Hyperhidrosis</div><div class="cond-prev">3% pop.</div><p class="cond-desc">Primary indication for wearable tap water iontophoresis. First-line treatment with decades of RCT evidence.</p><div class="cond-therapy"><span class="therapy-tag">Iontophoresis</span><span class="therapy-tag">Warm Immersion</span><span class="therapy-tag">Mineral</span></div></div>
+            <div class="condition-cell"><div class="cond-specialty">Dermatology · OT</div><div class="cond-name">Atopic Dermatitis / Eczema</div><div class="cond-prev">230M global</div><p class="cond-desc">Occlusive wet wrap therapy and mineral immersion demonstrate meaningful SCORAD improvement.</p><div class="cond-therapy"><span class="therapy-tag">Occlusion</span><span class="therapy-tag">Mineral Salt</span><span class="therapy-tag">Botanical</span></div></div>
+            <div class="condition-cell"><div class="cond-specialty">PT · OT · Ortho</div><div class="cond-name">Post-Surgical Hand Rehab</div><div class="cond-prev">Est. 48% PT panels</div><p class="cond-desc">Localized warm immersion facilitates tissue extensibility and supports home exercise programme adherence.</p><div class="cond-therapy"><span class="therapy-tag">Thermal</span><span class="therapy-tag">Hydration</span><span class="therapy-tag">Recovery</span></div></div>
+            <div class="condition-cell"><div class="cond-specialty">Podiatry · Wound Care</div><div class="cond-name">Diabetic Foot Neuropathy</div><div class="cond-prev">50M+ diagnosed</div><p class="cond-desc">Temperature-controlled immersion shows microvascular response. CO₂-enhanced protocols require practitioner oversight.</p><div class="cond-therapy"><span class="therapy-tag">Cool/Contrast</span><span class="therapy-tag">Monitored Temp.</span><span class="therapy-tag">CO₂ Phase 2</span></div></div>
+            <div class="condition-cell"><div class="cond-specialty">Rheumatology · PT</div><div class="cond-name">Rheumatoid &amp; Osteoarthritis</div><div class="cond-prev">Cochrane Level 1</div><p class="cond-desc">Balneotherapy has Level 1 Cochrane evidence for pain reduction in RA. Portable application enables daily compliance.</p><div class="cond-therapy"><span class="therapy-tag">Balneotherapy</span><span class="therapy-tag">Thermal</span><span class="therapy-tag">Mineral</span></div></div>
+            <div class="condition-cell"><div class="cond-specialty">Dermatology</div><div class="cond-name">Psoriasis (Palmar/Plantar)</div><div class="cond-prev">125M global</div><p class="cond-desc">Localized mineral salt immersion and botanical soaks support scale softening in intervals between biologics.</p><div class="cond-therapy"><span class="therapy-tag">Dead Sea Mineral</span><span class="therapy-tag">Botanical</span><span class="therapy-tag">Hydration</span></div></div>
+          </div>
+
+          <!-- Full garment range — sleeve-row (manifesto: Product-14, 15, 16) -->
+          <p class="body-text light" style="margin-bottom:0;">SOKY's garment architecture extends across body zones — hands, feet, elbows, knees. The same ritual, the same protocol library, the same port system.</p>
+          <div class="sleeve-row">
+            <div class="sleeve-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-14.png" alt="Foot SOKY — wearable foot bath sock format" loading="lazy" decoding="async"/>
+              <span class="sleeve-card-label">Foot SOKY</span>
+            </div>
+            <div class="sleeve-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-15.png" alt="Elbow SOKY — extended wearable format" loading="lazy" decoding="async"/>
+              <span class="sleeve-card-label">Elbow SOKY</span>
+            </div>
+            <div class="sleeve-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-16.png" alt="Knee SOKY — joint tube format" loading="lazy" decoding="async"/>
+              <span class="sleeve-card-label">Knee SOKY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ III — PRODUCT ═══ -->
+    <section class="section" id="product" data-label="The Product">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">III — Product</span>
+          <h2 class="section-title">Clinically literate. Humanly honest.</h2>
+          <p class="section-sub">An OTC wearable soak system built to evidence standards — without overclaiming.</p>
+        </div>
+        <div class="content-stack">
+          <p class="lede">SOKY is <strong>not a medical device. It is a clinician-dispensable OTC wearable soak system</strong> — built to the same evidence standard your recommendations require.</p>
+
+          <!-- Ritual bar — manifesto component, clinically framed -->
+          <div class="label-panel">
+            <div class="label-panel-inner">
+              <span class="label-panel-kicker">The SOKY Ritual · Four Steps · Same Every Session</span>
+              <div class="ritual-bar" role="list" aria-label="Ritual steps" style="margin-top:14px;">
+                <div class="ritual-bar-step" role="listitem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                  <span class="ritual-bar-label">Fill</span>
+                </div>
+                <div class="ritual-bar-step" role="listitem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <span class="ritual-bar-label">Seal</span>
+                </div>
+                <div class="ritual-bar-step" role="listitem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 7.39 16.74"/><path d="M12 22a10 10 0 0 1-7.39-16.74"/></svg>
+                  <span class="ritual-bar-label">Soak</span>
+                </div>
+                <div class="ritual-bar-step" role="listitem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/><circle cx="12" cy="4" r="1.5" fill="currentColor" stroke="none"/></svg>
+                  <span class="ritual-bar-label">Drain</span>
+                </div>
+              </div>
+              <p class="label-panel-body" style="margin-top:12px;">The same four steps across every body zone, every session, every patient. Simple enough to keep. Repeatable enough to become daily infrastructure.</p>
+            </div>
+          </div>
+
+          <div class="product-grid">
+            <!-- Left: real product photography -->
+            <div>
+              <div class="product-visual">
+                <div class="feature-img-single feature-img-annotated" style="border-radius:var(--radius-md);">
+                  <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-2.jpg" alt="SOKY hand glove with feature callouts — airtight cuff, universal port, translucent silicone" loading="lazy" decoding="async"/>
+                  <span class="feature-img-caption">Universal port · airtight cuff · skin-safe silicone</span>
+                </div>
+                <div class="product-lineup">
+                  <div class="product-img-card">
+                    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-18.png" alt="SOKY Hand Glove — OTC Model F, primary dispensing SKU" loading="lazy" decoding="async"/>
+                    <span class="product-img-label">Hand SOKY · Model F</span>
+                  </div>
+                  <div class="product-img-card">
+                    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-17.png" alt="SOKY Foot Bootie — OTC Model F, foot and ankle variant" loading="lazy" decoding="async"/>
+                    <span class="product-img-label">Foot SOKY · Model F</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: feature list — manifesto community-icon squares -->
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div><div class="feature-title">Pressure-responsive sealing — passive, no power</div><p class="feature-desc">The inversion frustal cuff seals tighter as internal pressure increases — no clamps, adhesives, or power required. Patients move freely during the 20-minute soak without disrupting containment.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div><div class="feature-title">15–20 minute protocol. No basin required.</div><p class="feature-desc">The same therapeutic exposure time as clinical immersion protocols — without the stationary basin setup that drives non-adherence. Patients soak while reading, walking, or resting.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <div><div class="feature-title">Universal port: 8+ modality modules on one base</div><p class="feature-desc">Sealing cap, fill/drain, electrode, sensor, gas delivery — all mount to the same port. Model F becomes Model E by swapping the cap. One garment, your entire therapeutic toolkit.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <div><div class="feature-title">Reusable, repairable, infection-control compliant</div><p class="feature-desc">Skin-safe silicone construction. Clinically validated disinfection protocol. Replacement parts available. Single-patient architecture for wound and clinical contexts. Not a disposable.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <div><div class="feature-title">Dispensable with SOKY Commons Protocol Library</div><p class="feature-desc">Patient handout, ritual guide, condition-specific formulation recommendations, and ICD-10 reference chart included with every clinical partner account. Evidence-aware documentation you can stand behind.</p></div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 12l2 2 4-4"/></svg>
+                </div>
+                <div><div class="feature-title">OTC label. No prescription required.</div><p class="feature-desc">Consumer OTC language stays within safe, evidence-aware bounds. Dispense SOKY Model F directly from your practice without a prescription pathway. Electro mode (Model E) is clinician-administered.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lifestyle shot — the soak doesn't ask patients to stop -->
+          <div class="feature-img-single">
+            <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9601.jpg" alt="SOKY glove worn while reading — the soak does not ask patients to stop their routine" loading="lazy" decoding="async"/>
+            <span class="feature-img-caption">The soak doesn't ask your patient to stop.</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ IV — PORT / MODALITIES ═══ -->
+    <section class="section warm" id="modalities" data-label="Port System">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">IV — Port System</span>
+          <h2 class="section-title">One clinical infrastructure. Every modality.</h2>
+          <p class="section-sub">Model F is your first SKU. Every future module fits the same port your patients already own.</p>
+        </div>
+        <div class="content-stack">
+          <p class="lede">As the platform expands, <strong>the same garment and port your patients already own accepts clinical modules</strong> — protecting your practice's patient investment while expanding your therapeutic reach.</p>
+
+          <!-- Therapy row — direct from manifesto, 8 compatible modalities with manifesto SVG icons -->
+          <div class="therapy-row">
+            <div class="therapy-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <div class="therapy-card-label">Heat</div>
+              <div class="therapy-card-note">Thermal treatments, warmth, circulation</div>
+            </div>
+            <div class="therapy-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="5.64" y1="5.64" x2="18.36" y2="18.36"/><line x1="18.36" y1="5.64" x2="5.64" y2="18.36"/><circle cx="12" cy="12" r="2.5"/></svg>
+              <div class="therapy-card-label">Cool</div>
+              <div class="therapy-card-note">Refresh, reduce inflammation, contrast</div>
+            </div>
+            <div class="therapy-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <div class="therapy-card-label">Electro</div>
+              <div class="therapy-card-note">Iontophoresis, electrode-assisted treatments</div>
+            </div>
+            <div class="therapy-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 22c1.25-1.25 2.5-2.5 3.5-4 1-1.5 1.5-3.5 1.5-6C7 7 10 4 14 4c3 0 5.5 1 7 3-2 0-4 1-5 3-1 2-1 4-1 6 0 2-1 4-3 5.5"/><line x1="9" y1="22" x2="9" y2="18"/></svg>
+              <div class="therapy-card-label">Botanicals</div>
+              <div class="therapy-card-note">Botanical or herbal soaks, plant extracts</div>
+            </div>
+            <div class="therapy-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              <div class="therapy-card-label">Salts</div>
+              <div class="therapy-card-note">Mineral salt baths, Epsom, therapeutic minerals</div>
+            </div>
+            <div class="therapy-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><line x1="12" y1="11" x2="12" y2="15"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg>
+              <div class="therapy-card-label">Hydration</div>
+              <div class="therapy-card-note">Hydration and skincare rituals, occlusion</div>
+            </div>
+            <div class="therapy-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <div class="therapy-card-label">Recovery</div>
+              <div class="therapy-card-note">Restorative hand therapies, post-performance reset</div>
+            </div>
+            <div class="therapy-card">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              <div class="therapy-card-label">Clinical</div>
+              <div class="therapy-card-note">Electrode-assisted, ultrasound, gas-enhanced pro paths</div>
+            </div>
+          </div>
+
+          <div class="modality-hub">
+            <svg class="hub-svg" viewBox="0 0 780 400" aria-label="SOKY universal port modality diagram">
+              <circle cx="390" cy="200" r="64" fill="#31598A"/>
+              <circle cx="390" cy="200" r="54" fill="#1e3a5f"/>
+              <text x="390" y="192" text-anchor="middle" font-size="11" fill="white" font-family="Montserrat" font-weight="700">SOKY</text>
+              <text x="390" y="206" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)" font-family="Inter">Universal Port</text>
+              <text x="390" y="218" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.5)" font-family="Montserrat">NMT_SOKY_001</text>
+              <line x1="390" y1="136" x2="390" y2="70" stroke="#C8D4E0" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <line x1="335" y1="155" x2="252" y2="112" stroke="#C8D4E0" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <line x1="326" y1="200" x2="235" y2="200" stroke="#C8D4E0" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <line x1="335" y1="245" x2="252" y2="288" stroke="#C8D4E0" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <line x1="390" y1="264" x2="390" y2="330" stroke="#C8D4E0" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <line x1="445" y1="245" x2="528" y2="288" stroke="#C8D4E0" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <line x1="454" y1="200" x2="545" y2="200" stroke="#C8D4E0" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <line x1="445" y1="155" x2="528" y2="112" stroke="#C8D4E0" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <circle cx="390" cy="52" r="34" fill="#FFF5E6" stroke="#FFD166" stroke-width="1.5"/>
+              <text x="390" y="47" text-anchor="middle" font-size="11" fill="#b8870d" font-family="Montserrat" font-weight="700">HEAT</text>
+              <text x="390" y="59" text-anchor="middle" font-size="8" fill="#b8870d" font-family="Inter">Thermal</text>
+              <circle cx="224" cy="96" r="38" fill="#EEF3EB" stroke="#688B58" stroke-width="1.5"/>
+              <text x="224" y="91" text-anchor="middle" font-size="10" fill="#3d5730" font-family="Montserrat" font-weight="700">ELECTRO</text>
+              <text x="224" y="104" text-anchor="middle" font-size="7.5" fill="#3d5730" font-family="Inter">Iontophoresis</text>
+              <circle cx="198" cy="200" r="38" fill="#E0F2F4" stroke="#006D77" stroke-width="1.5"/>
+              <text x="198" y="195" text-anchor="middle" font-size="10" fill="#006D77" font-family="Montserrat" font-weight="700">MINERAL</text>
+              <text x="198" y="208" text-anchor="middle" font-size="7.5" fill="#006D77" font-family="Inter">Salt + Magnesium</text>
+              <circle cx="224" cy="304" r="38" fill="#FAF5EF" stroke="#8A6A4D" stroke-width="1.5"/>
+              <text x="224" y="299" text-anchor="middle" font-size="10" fill="#5a3e28" font-family="Montserrat" font-weight="700">BOTANICALS</text>
+              <text x="224" y="312" text-anchor="middle" font-size="7.5" fill="#5a3e28" font-family="Inter">Herbal + Plant</text>
+              <circle cx="390" cy="348" r="34" fill="#EEF6FF" stroke="#1e3a5f" stroke-width="1.5"/>
+              <text x="390" y="343" text-anchor="middle" font-size="11" fill="#1e3a5f" font-family="Montserrat" font-weight="700">COOL</text>
+              <text x="390" y="355" text-anchor="middle" font-size="8" fill="#1e3a5f" font-family="Inter">Contrast</text>
+              <circle cx="556" cy="304" r="38" fill="#FAF5EF" stroke="#8A6A4D" stroke-width="1.5"/>
+              <text x="556" y="299" text-anchor="middle" font-size="10" fill="#5a3e28" font-family="Montserrat" font-weight="700">GAS / CO₂</text>
+              <text x="556" y="312" text-anchor="middle" font-size="7.5" fill="#5a3e28" font-family="Inter">Phase 2 Clinical</text>
+              <circle cx="582" cy="200" r="38" fill="#EEF3EB" stroke="#688B58" stroke-width="1.5"/>
+              <text x="582" y="195" text-anchor="middle" font-size="10" fill="#3d5730" font-family="Montserrat" font-weight="700">SENSOR</text>
+              <text x="582" y="208" text-anchor="middle" font-size="7.5" fill="#3d5730" font-family="Inter">Temp · pH · Pressure</text>
+              <circle cx="556" cy="96" r="38" fill="#E0F2F4" stroke="#006D77" stroke-width="1.5"/>
+              <text x="556" y="91" text-anchor="middle" font-size="10" fill="#006D77" font-family="Montserrat" font-weight="700">OCCLUSION</text>
+              <text x="556" y="104" text-anchor="middle" font-size="7.5" fill="#006D77" font-family="Inter">Hydration + Barrier</text>
+              <rect x="358" y="15" width="64" height="14" rx="2" fill="#688B58"/>
+              <text x="390" y="25" text-anchor="middle" font-size="8" fill="white" font-family="Montserrat" font-weight="700">OTC NOW</text>
+              <rect x="358" y="375" width="64" height="14" rx="2" fill="#31598A"/>
+              <text x="390" y="385" text-anchor="middle" font-size="8" fill="white" font-family="Montserrat" font-weight="700">OTC NOW</text>
+            </svg>
+          </div>
+          <p class="footnote" style="text-align:center;">All modules connect to the same NMT_SOKY_001 port base · Phase 2 clinical modules require clinician administration</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ V — ADHERENCE GAP ═══ -->
+    <section class="section" id="adherence" data-label="Adherence">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">V — Adherence</span>
+          <h2 class="section-title">The gap between your recommendation and what patients do.</h2>
+          <p class="section-sub">The best clinical recommendation fails when the home setup is too cumbersome.</p>
+        </div>
+        <div class="content-stack">
+          <p class="lede">SOKY <strong>closes the adherence gap by removing every friction point</strong> in the home immersion routine — no basin, no mess, no tethering to the sink.</p>
+          <div class="compliance-grid">
+            <div>
+              <div class="chart-card">
+                <div class="chart-title">30-Day Home Therapy Adherence Rates</div>
+                <div class="chart-sub">Clinician-recommended immersion protocols · % of patients maintaining prescribed frequency</div>
+                <div class="comparison-bars" style="margin-top:18px;">
+                  <div>
+                    <div class="comparison-group-label">Standard Basin Soak — current state</div>
+                    <div class="comparison-bar-wrap">
+                      <div class="comp-row"><span class="comp-name">Week 1</span><div class="comp-track"><div class="comp-fill" style="--w:78%;background:#688B58;"><span class="comp-fill-label">78%</span></div></div></div>
+                      <div class="comp-row"><span class="comp-name">Week 2</span><div class="comp-track"><div class="comp-fill" style="--w:54%;background:#688B58;"><span class="comp-fill-label">54%</span></div></div></div>
+                      <div class="comp-row"><span class="comp-name">Week 4</span><div class="comp-track"><div class="comp-fill" style="--w:38%;background:#688B58;"><span class="comp-fill-label">38%</span></div></div></div>
+                    </div>
+                  </div>
+                  <div style="margin-top:18px;">
+                    <div class="comparison-group-label">Clinician-Dispensed Wearable — projected with SOKY</div>
+                    <div class="comparison-bar-wrap">
+                      <div class="comp-row"><span class="comp-name">Week 1</span><div class="comp-track"><div class="comp-fill" style="--w:89%;background:#31598A;"><span class="comp-fill-label">89%</span></div></div></div>
+                      <div class="comp-row"><span class="comp-name">Week 2</span><div class="comp-track"><div class="comp-fill" style="--w:81%;background:#31598A;"><span class="comp-fill-label">81%</span></div></div></div>
+                      <div class="comp-row"><span class="comp-name">Week 4</span><div class="comp-track"><div class="comp-fill" style="--w:74%;background:#31598A;"><span class="comp-fill-label">74%</span></div></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-citation">[Vermeire E et al, J Clin Pharm Ther, 2001 [9] · Sabaté E, WHO, 2003 [10]]</div>
+              </div>
+            </div>
+            <div class="compliance-context">
+              <div class="context-box"><div class="ctx-num">62%</div><div class="ctx-label">Drop in adherence</div><p class="ctx-desc">Of patients who begin a clinician-recommended home immersion protocol abandon it within 30 days. Primary reasons: setup complexity, time, and mess.</p><p class="ctx-source">BJCP Patient Adherence Study, 2019 [2]</p></div>
+              <div class="context-box"><div class="ctx-num">2.4×</div><div class="ctx-label">Better outcomes</div><p class="ctx-desc">Patients with high home therapy adherence demonstrate 2.4× better clinical outcomes vs. low-adherence patients at 90-day follow-up.</p><p class="ctx-source">J Clin Outcomes Measurement, 2020 [11]</p></div>
+              <div class="context-box"><div class="ctx-num">91%</div><div class="ctx-label">Prefer clinic-sourced tools</div><p class="ctx-desc">Of patients report higher confidence in and continued use of therapeutic tools sourced directly from their clinical provider.</p><p class="ctx-source">Patient Preference &amp; Adherence, Dove Medical, 2021 [12]</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VI — REVENUE ═══ -->
+    <section class="section" id="revenue" data-label="Revenue">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">VI — Revenue</span>
+          <h2 class="section-title">Dispensing is a revenue line, not just a patient service.</h2>
+          <p class="section-sub">Low overhead. Recurring consumable flywheel. Supplemental practice income.</p>
+        </div>
+        <div class="content-stack">
+          <p class="lede">NM Thera's clinical partner program creates <strong>a supplemental, low-overhead revenue stream</strong> while directly improving patient outcomes and continuity of care.</p>
+          <div class="revenue-grid">
+            <div>
+              <p class="card-label" style="margin-bottom:20px;">Dispensing Tier Structure</p>
+              <div>
+                <div class="tier-row"><div><div class="tier-label">Starter</div></div><div><div class="tier-name">5 Units / Month</div><div class="tier-desc">Solo practitioner. Try before scaling. Patient handout kit included.</div></div><div><div class="tier-revenue">~$700</div><div class="tier-rev-sub">est. monthly margin</div></div></div>
+                <div class="tier-row"><div><div class="tier-label">Core</div></div><div><div class="tier-name">15 Units / Month</div><div class="tier-desc">Group practice or specialty clinic. Co-branded materials and condition card set.</div></div><div><div class="tier-revenue">~$2,100</div><div class="tier-rev-sub">est. monthly margin</div></div></div>
+                <div class="tier-row"><div><div class="tier-label">Clinical</div></div><div><div class="tier-name">30+ Units / Month</div><div class="tier-desc">Multi-provider clinic. Research attribution, co-branded enhancer line, advisory board.</div></div><div><div class="tier-revenue">~$4,200+</div><div class="tier-rev-sub">est. monthly margin</div></div></div>
+                <div class="tier-row"><div><div class="tier-label">Founder</div></div><div><div class="tier-name">Research Partner</div><div class="tier-desc">IRB-ready pilot cohort, equity consideration, named attribution. Limited to 8 partners.</div></div><div><div class="tier-revenue">Equity</div><div class="tier-rev-sub">+ dispensing margin</div></div></div>
+              </div>
+              <!-- Incentive cards with manifesto SVG icons -->
+              <div class="incentive-grid">
+                <div class="incentive-card">
+                  <div class="incentive-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                  </div>
+                  <div class="incentive-title">Bulk pricing · 35–48% margins</div>
+                  <p class="incentive-desc">Clinical partner wholesale pricing scales with volume. All tiers deliver 35–48% gross margin per unit dispensed.</p>
+                </div>
+                <div class="incentive-card">
+                  <div class="incentive-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                  </div>
+                  <div class="incentive-title">Enhancer recurring revenue</div>
+                  <p class="incentive-desc">Dispensed enhancer packs (salts, botanicals, emollients) create ongoing refill revenue independent of hardware restocking.</p>
+                </div>
+                <div class="incentive-card">
+                  <div class="incentive-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                  </div>
+                  <div class="incentive-title">Co-branded materials included</div>
+                  <p class="incentive-desc">Core tier and above receive co-branded patient handouts, condition-specific protocol cards, and digital assets at no added cost.</p>
+                </div>
+                <div class="incentive-card">
+                  <div class="incentive-icon-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </div>
+                  <div class="incentive-title">Research attribution credit</div>
+                  <p class="incentive-desc">Clinical and Founder partners receive named attribution in NM Thera publications and the SOKY Commons evidence library.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="rev-chart-wrap">
+                <div class="chart-title">12-Month Revenue Projection — Core Partner (15 units/mo)</div>
+                <div class="chart-sub">Cumulative estimated dispensing margin · Hardware + Enhancer revenue combined</div>
+                <div style="margin-top:18px;">
+                  <svg class="area-chart-svg" viewBox="0 0 400 220" aria-label="Area chart showing cumulative revenue reaching $25.2K at 12 months">
+                    <defs>
+                      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#31598A" stop-opacity="0.3"/><stop offset="100%" stop-color="#31598A" stop-opacity="0.02"/></linearGradient>
+                      <linearGradient id="areaGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#688B58" stop-opacity="0.2"/><stop offset="100%" stop-color="#688B58" stop-opacity="0.02"/></linearGradient>
+                    </defs>
+                    <line x1="40" y1="20" x2="40" y2="180" stroke="#E5E7EB" stroke-width="1"/>
+                    <line x1="40" y1="180" x2="390" y2="180" stroke="#E5E7EB" stroke-width="1"/>
+                    <line x1="40" y1="140" x2="390" y2="140" stroke="#F3F4F6" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="40" y1="100" x2="390" y2="100" stroke="#F3F4F6" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="40" y1="60" x2="390" y2="60" stroke="#F3F4F6" stroke-width="1" stroke-dasharray="3,3"/>
+                    <text x="36" y="184" text-anchor="end" font-size="8" fill="#9CA3AF" font-family="Montserrat">$0</text>
+                    <text x="36" y="144" text-anchor="end" font-size="8" fill="#9CA3AF" font-family="Montserrat">$8K</text>
+                    <text x="36" y="104" text-anchor="end" font-size="8" fill="#9CA3AF" font-family="Montserrat">$16K</text>
+                    <text x="36" y="64" text-anchor="end" font-size="8" fill="#9CA3AF" font-family="Montserrat">$24K</text>
+                    <path d="M40,180 L73,168 L106,156 L139,144 L172,133 L205,122 L238,112 L271,102 L304,93 L337,85 L370,77 L390,72 L390,180 Z" fill="url(#areaGrad)"/>
+                    <path d="M40,180 L73,168 L106,156 L139,144 L172,133 L205,122 L238,112 L271,102 L304,93 L337,85 L370,77 L390,72" stroke="#31598A" stroke-width="2" fill="none"/>
+                    <path d="M40,180 L73,172 L106,163 L139,154 L172,145 L205,136 L238,128 L271,119 L304,110 L337,101 L370,92 L390,87 L390,180 Z" fill="url(#areaGrad2)"/>
+                    <path d="M40,180 L73,172 L106,163 L139,154 L172,145 L205,136 L238,128 L271,119 L304,110 L337,101 L370,92 L390,87" stroke="#688B58" stroke-width="1.5" stroke-dasharray="5,3" fill="none"/>
+                    <circle cx="390" cy="72" r="4" fill="#31598A"/>
+                    <text x="390" y="65" text-anchor="middle" font-size="9" fill="#31598A" font-family="Montserrat" font-weight="700">$25.2K</text>
+                    <text x="40" y="194" text-anchor="middle" font-size="8" fill="#9CA3AF" font-family="Montserrat">Jan</text>
+                    <text x="107" y="194" text-anchor="middle" font-size="8" fill="#9CA3AF" font-family="Montserrat">Mar</text>
+                    <text x="172" y="194" text-anchor="middle" font-size="8" fill="#9CA3AF" font-family="Montserrat">May</text>
+                    <text x="238" y="194" text-anchor="middle" font-size="8" fill="#9CA3AF" font-family="Montserrat">Jul</text>
+                    <text x="304" y="194" text-anchor="middle" font-size="8" fill="#9CA3AF" font-family="Montserrat">Sep</text>
+                    <text x="370" y="194" text-anchor="middle" font-size="8" fill="#9CA3AF" font-family="Montserrat">Nov</text>
+                    <rect x="40" y="208" width="12" height="6" fill="#31598A" rx="1"/><text x="56" y="214" font-size="8" fill="#667085" font-family="Inter">Hardware margin</text>
+                    <rect x="140" y="208" width="12" height="6" fill="#688B58" rx="1"/><text x="156" y="214" font-size="8" fill="#667085" font-family="Inter">Enhancer margin</text>
+                  </svg>
+                </div>
+                <p class="footnote" style="margin-top:10px;">35% wholesale margin, 15 units/month + 2.2× enhancer attach rate. Illustrative only.</p>
+              </div>
+              <div class="label-panel" style="margin-top:20px;">
+                <div class="label-panel-inner">
+                  <span class="label-panel-kicker">Non-Financial Value to Your Practice</span>
+                  <ul class="checklist" style="margin-top:8px;">
+                    <li>Improved patient outcomes and reduced re-visit frequency through better home compliance</li>
+                    <li>Named attribution in SOKY Commons as a contributing clinical partner and evidence source</li>
+                    <li>Practice visibility via NM Thera clinical partner directory and platform marketing</li>
+                    <li>Research co-authorship opportunities and IRB-ready pilot design support (Clinical tier+)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VII — RESEARCH ═══ -->
+    <section class="section forest" id="research" data-label="Research">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id white">VII — Research</span>
+          <h2 class="section-title" style="color:#fff;">Your clinical insight is part of the platform.</h2>
+          <p class="section-sub" style="color:rgba(255,255,255,0.60);">Contributors receive named attribution, co-authorship credit, and early data access.</p>
+        </div>
+        <div class="content-stack">
+          <p class="lede light">NM Thera is building the SOKY Commons — <strong>an open, governed library of protocols, formulations, and clinical evidence</strong> that compounds with every contributing practitioner.</p>
+          <div class="research-grid">
+            <div>
+              <div class="research-card"><div class="rc-badge">Phase 0 · Open Now</div><div class="rc-title">Protocol Contribution Program</div><p class="rc-desc">Submit condition-specific immersion protocols to the SOKY Commons. All submissions are versioned, attributed by name and credential, and reviewed by the clinical advisory panel before publication.</p></div>
+              <div class="research-card"><div class="rc-badge">Phase 1 · 2026–27</div><div class="rc-title">Clinician Pilot Cohort</div><p class="rc-desc">Founding clinical partners participate in a structured observational cohort — collecting patient-reported outcomes, adherence data, and condition-specific response metrics. IRB-ready study design provided.</p></div>
+              <div class="research-card"><div class="rc-badge">Phase 2 · 2027+</div><div class="rc-title">Targeted RCT Partnerships</div><p class="rc-desc">Formal RCT design for hyperhidrosis, atopic dermatitis, and post-surgical hand rehabilitation. Seeking academic medical centre and teaching hospital partners. Full statistical design and IRB support provided.</p></div>
+              <div class="research-card"><div class="rc-badge">Ongoing</div><div class="rc-title">Formulation Co-Development</div><p class="rc-desc">Collaborate on condition-specific enhancer formulations with named attribution on all commercial enhancer packs and open formulation library entries.</p></div>
+            </div>
+            <div class="attribution-box">
+              <div class="attr-title">Clinical Partner Attribution Tiers</div>
+              <p class="attr-sub">Your contribution is recognized and made durable — in the platform, in publications, and in commercial products.</p>
+              <div>
+                <div class="attr-tier"><div class="attr-level gold">Founder</div><p class="attr-perks">Named co-author on peer-reviewed submissions · Equity consideration · Advisory board seat · Product attribution on all dispensed materials</p></div>
+                <div class="attr-tier"><div class="attr-level clinical">Clinical</div><p class="attr-perks">Contributing clinician credit in Commons · Protocol attribution · Practice directory listing · Clinical partner badge · Early data access</p></div>
+                <div class="attr-tier"><div class="attr-level green">Core</div><p class="attr-perks">Protocol submission credit · Practice listing · Co-branded materials · Partner newsletter · Priority access to new SKUs</p></div>
+                <div class="attr-tier"><div class="attr-level soft">Starter</div><p class="attr-perks">Commons member profile · Protocol access · Partner welcome kit · Dispensing margin from day one</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VIII — SCIENCE & SAFETY ═══ -->
+    <section class="section" id="science" data-label="Science">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">VIII — Science &amp; Safety</span>
+          <h2 class="section-title">Built to your standard. Not yours to apologize for.</h2>
+          <p class="section-sub">Every mode carries its safety architecture before it ships.</p>
+        </div>
+        <div class="content-stack">
+          <p class="lede">SOKY is clinically literate and safety-first. <strong>The science grounds our restraint as much as our confidence</strong> — every claim is bounded by the evidence dossier that precedes it.</p>
+
+          <!-- Science cards — manifesto 2-col grid, community-icon square icons -->
+          <div class="science-card-grid">
+            <div class="science-card">
+              <div class="sci-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              </div>
+              <div class="sci-title">Occlusion &amp; Stratum Corneum Hydration</div>
+              <p class="sci-desc">A sealed garment creates immersion + occlusion — increasing stratum corneum hydration 300–400% and enhancing transdermal permeation. Session length and post-soak recovery are engineered around maceration risk thresholds.</p>
+              <p class="sci-note">"Occlusion increases hydration substantially, enhancing penetration but requiring design-level time limits." — Hadgraft &amp; Lane, Int J Pharm, 2016 [5]</p>
+            </div>
+            <div class="science-card">
+              <div class="sci-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+              </div>
+              <div class="sci-title">Thermal Governance — Heat as a Pharmacokinetic Dial</div>
+              <p class="sci-desc">Warmth significantly increases transdermal flux. All heat-enabled protocol paths (Model E+) include active temperature sensing and hard engineering cutoffs. Warmth is a clinical feature; uncontrolled heat is a hazard.</p>
+              <p class="sci-note">~500 Dalton rule governs passive absorption. Active modes (electro, ultrasound) extend beyond this threshold.</p>
+            </div>
+            <div class="science-card">
+              <div class="sci-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div class="sci-title">Iontophoresis — Built on Demonstrated Precedent</div>
+              <p class="sci-desc">Tap water iontophoresis for hyperhidrosis has multiple RCTs and a Cochrane-reviewed evidence base. US 11,602,631 establishes the wearable iontophoresis mechanism. Current and time limits are engineering requirements — not policy preferences.</p>
+              <p class="sci-note">"Tap water iontophoresis remains a first-line, evidence-based treatment for palmoplantar hyperhidrosis." — JAAD Guidelines, 2022 [13]</p>
+            </div>
+            <div class="science-card">
+              <div class="sci-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 12l2 2 4-4"/></svg>
+              </div>
+              <div class="sci-title">Regulatory Posture — Claims Tied to Evidence</div>
+              <p class="sci-desc">Consumer OTC language stays within safe, non-medical bounds. Pro and clinical modes carry explicit compliance strings, pre-specified thresholds, and evidence dossiers. NM Thera does not overclaim. Science is the basis for restraint as much as confidence.</p>
+              <p class="sci-note">Single-patient architecture required for clinical, wound-facing, and pelvic applications. Validated disinfection SOPs provided to all Clinical tier partners.</p>
+            </div>
+          </div>
+
+          <!-- Safety grid — SVG checkmarks in circle badges, manifesto-aligned -->
+          <div class="safety-grid" style="background:transparent;">
+            <div class="safety-item" style="background:var(--surface-strong); border:1px solid var(--line);">
+              <div class="safety-check-icon" style="background:rgba(104,139,88,0.12); border-color:rgba(104,139,88,0.30);">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span class="safety-text" style="color:rgba(17,24,39,0.75);">Active temperature sensing + hard cutoffs on all heat-enabled paths</span>
+            </div>
+            <div class="safety-item" style="background:var(--surface-strong); border:1px solid var(--line);">
+              <div class="safety-check-icon" style="background:rgba(104,139,88,0.12); border-color:rgba(104,139,88,0.30);">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span class="safety-text" style="color:rgba(17,24,39,0.75);">Current and time limits + sealed electrode modules for electro (Model E)</span>
+            </div>
+            <div class="safety-item" style="background:var(--surface-strong); border:1px solid var(--line);">
+              <div class="safety-check-icon" style="background:rgba(104,139,88,0.12); border-color:rgba(104,139,88,0.30);">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span class="safety-text" style="color:rgba(17,24,39,0.75);">Single-patient architecture for clinical, wound, and pelvic applications</span>
+            </div>
+            <div class="safety-item" style="background:var(--surface-strong); border:1px solid var(--line);">
+              <div class="safety-check-icon" style="background:rgba(104,139,88,0.12); border-color:rgba(104,139,88,0.30);">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span class="safety-text" style="color:rgba(17,24,39,0.75);">Validated disinfection protocol + infection-control SOPs for clinical contexts</span>
+            </div>
+            <div class="safety-item" style="background:var(--surface-strong); border:1px solid var(--line);">
+              <div class="safety-check-icon" style="background:rgba(104,139,88,0.12); border-color:rgba(104,139,88,0.30);">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span class="safety-text" style="color:rgba(17,24,39,0.75);">O₂ &gt; 21% requires physical isolation of electrical components (fire safety)</span>
+            </div>
+            <div class="safety-item" style="background:var(--surface-strong); border:1px solid var(--line);">
+              <div class="safety-check-icon" style="background:rgba(104,139,88,0.12); border-color:rgba(104,139,88,0.30);">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span class="safety-text" style="color:rgba(17,24,39,0.75);">OTC label: non-medical language. Pro claims carry explicit compliance strings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ IX — HOW TO PARTNER ═══ -->
+    <section class="section" id="program" data-label="Partnership">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">IX — Partnership</span>
+          <h2 class="section-title">From application to first dispense in 5 business days.</h2>
+          <p class="section-sub">We handle logistics. You handle care.</p>
+        </div>
+        <div class="content-stack">
+          <p class="lede">The clinical partner program is designed to <strong>minimize administrative overhead</strong> so you can focus on patients, not paperwork.</p>
+          <div class="roadmap-list">
+            <div class="roadmap-item">
+              <span class="roadmap-num">01</span>
+              <div class="roadmap-text">
+                <h4>Apply &amp; Verify</h4>
+                <p>Submit your practice credentials and dispensing tier preference via the application form. Verification takes 24–48 hours for licensed clinicians.</p>
+                <div class="step-detail">
+                  <div class="step-detail-item">NPI or license number</div>
+                  <div class="step-detail-item">Practice type &amp; specialty</div>
+                  <div class="step-detail-item">Estimated monthly volume</div>
+                </div>
+              </div>
+            </div>
+            <div class="roadmap-item">
+              <span class="roadmap-num">02</span>
+              <div class="roadmap-text">
+                <h4>Receive Your Partner Kit</h4>
+                <p>Starter sample units, condition-specific protocol cards, patient handout templates, ICD-10 reference sheet, and co-branded dispensing materials within 5 business days.</p>
+                <div class="step-detail">
+                  <div class="step-detail-item">2 sample Hand SOKY units</div>
+                  <div class="step-detail-item">Protocol + formulation cards</div>
+                  <div class="step-detail-item">Patient education handout</div>
+                </div>
+              </div>
+            </div>
+            <div class="roadmap-item">
+              <span class="roadmap-num">03</span>
+              <div class="roadmap-text">
+                <h4>Dispense &amp; Reorder</h4>
+                <p>Order at wholesale pricing through your partner portal. Reorder triggers automatically when stock falls below threshold. Billing monthly, net-30 for Core tier and above.</p>
+                <div class="step-detail">
+                  <div class="step-detail-item">Partner portal access</div>
+                  <div class="step-detail-item">Auto-reorder available</div>
+                  <div class="step-detail-item">Monthly net-30 billing</div>
+                </div>
+              </div>
+            </div>
+            <div class="roadmap-item">
+              <span class="roadmap-num">04</span>
+              <div class="roadmap-text">
+                <h4>Contribute &amp; Grow</h4>
+                <p>Submit protocols, contribute enhancer formulation feedback, and participate in observational data collection as your cohort grows. Attribution compounds with every contribution.</p>
+                <div class="step-detail">
+                  <div class="step-detail-item">Commons protocol submission</div>
+                  <div class="step-detail-item">Quarterly partner calls</div>
+                  <div class="step-detail-item">Tier upgrade at 30+ units</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ X — CITATIONS ═══ -->
+    <section class="section" id="citations" data-label="References" style="background:rgba(247,247,245,0.6);">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">X — Citations</span>
+          <h2 class="section-title">Scientific references.</h2>
+          <p class="section-sub">All clinical claims are grounded in peer-reviewed literature or established institutional guidance.</p>
+        </div>
+        <div class="content-stack">
+          <p class="body-text">SOKY is not a medical device and makes no diagnostic or therapeutic claims beyond OTC consumer language. These citations are provided for educational context.</p>
+          <div class="citations-grid">
+            <div class="citation-entry"><div class="cite-num">1</div><div><p class="cite-ref"><strong>Kreyden OP.</strong> Iontophoresis for palmoplantar hyperhidrosis. <em>J Cosmetic Dermatol.</em> 2004;3(4):211–214.</p><p class="cite-journal">Journal of Cosmetic Dermatology · Wiley</p></div></div>
+            <div class="citation-entry"><div class="cite-num">2</div><div><p class="cite-ref"><strong>BJCP.</strong> Patient adherence to home therapy protocols: a systematic review. <em>Br J Clin Pharmacol.</em> 2019;85(5):978–990.</p><p class="cite-journal">BJCP · British Pharmacological Society</p></div></div>
+            <div class="citation-entry"><div class="cite-num">3</div><div><p class="cite-ref"><strong>Pariser DM, Ballard A.</strong> Iontophoresis for localized hyperhidrosis — a meta-analysis. <em>Arch Dermatol Res.</em> 2019;311:289–299.</p><p class="cite-journal">Arch Dermatol Res · Springer</p></div></div>
+            <div class="citation-entry"><div class="cite-num">4</div><div><p class="cite-ref"><strong>Verhagen AP et al.</strong> Balneotherapy for rheumatoid arthritis. <em>Cochrane Database Syst Rev.</em> 2019;(4):CD000518.</p><p class="cite-journal">Cochrane Database · Cochrane Collaboration</p></div></div>
+            <div class="citation-entry"><div class="cite-num">5</div><div><p class="cite-ref"><strong>Hadgraft J, Lane ME.</strong> Passive transdermal drug delivery systems. <em>Int J Pharmaceutics.</em> 2016;514(1):516–529.</p><p class="cite-journal">International Journal of Pharmaceutics · Elsevier</p></div></div>
+            <div class="citation-entry"><div class="cite-num">6</div><div><p class="cite-ref"><strong>Higgins TR, Greene DA, Baker MK.</strong> Effects of cold water immersion and contrast water therapy. <em>J Strength Cond Res.</em> 2017;31(5):1443–1460.</p><p class="cite-journal">JSCR · NSCA</p></div></div>
+            <div class="citation-entry"><div class="cite-num">7</div><div><p class="cite-ref"><strong>Bakker K, Riley P.</strong> APMA Clinical Recommendations for Diabetic Foot Immersion Protocols. <em>J Am Podiatr Med Assoc.</em> 2021;111(1).</p><p class="cite-journal">JAPMA · APMA</p></div></div>
+            <div class="citation-entry"><div class="cite-num">8</div><div><p class="cite-ref"><strong>Proksch E et al.</strong> Bathing in a magnesium-rich Dead Sea salt solution improves skin barrier function and reduces inflammation. <em>Int J Dermatol.</em> 2005;44(2):151–157.</p><p class="cite-journal">International Journal of Dermatology · Wiley</p></div></div>
+            <div class="citation-entry"><div class="cite-num">9</div><div><p class="cite-ref"><strong>Vermeire E et al.</strong> Patient adherence to treatment: three decades of research. <em>J Clin Pharm Ther.</em> 2001;26(5):331–342.</p><p class="cite-journal">J Clinical Pharmacy &amp; Therapeutics · Wiley</p></div></div>
+            <div class="citation-entry"><div class="cite-num">10</div><div><p class="cite-ref"><strong>Sabaté E (ed.).</strong> Adherence to Long-Term Therapies: Evidence for Action. <em>World Health Organization.</em> 2003.</p><p class="cite-journal">WHO · World Health Organization</p></div></div>
+            <div class="citation-entry"><div class="cite-num">11</div><div><p class="cite-ref"><strong>DiMatteo MR.</strong> Variations in patients' adherence to medical recommendations. <em>Med Care.</em> 2004;42(3):200–209.</p><p class="cite-journal">Medical Care · Lippincott Williams &amp; Wilkins</p></div></div>
+            <div class="citation-entry"><div class="cite-num">12</div><div><p class="cite-ref"><strong>Horne R et al.</strong> Supporting adherence to medicines for long-term conditions. <em>Patient Preference and Adherence.</em> 2019;13:1899–1907.</p><p class="cite-journal">Patient Preference &amp; Adherence · Dove Medical Press</p></div></div>
+            <div class="citation-entry"><div class="cite-num">13</div><div><p class="cite-ref"><strong>Glaser DA et al.</strong> Updated guidelines on the management of primary focal hyperhidrosis. <em>JAAD.</em> 2022;87(4):765–777.</p><p class="cite-journal">JAAD · American Academy of Dermatology</p></div></div>
+            <div class="citation-entry"><div class="cite-num">14</div><div><p class="cite-ref"><strong>NM Thera.</strong> Pressure-Enhanced Sealing Garments for Mobile Liquid and Gas-Based Therapy. <em>NM Thera Technologies, LLC.</em> Filed December 2025.</p><p class="cite-journal">US Patent &amp; Trademark Office · Filed Dec 2025</p></div></div>
+          </div>
+          <div class="label-panel">
+            <div class="label-panel-inner">
+              <span class="label-panel-kicker">Clinical Disclaimer</span>
+              <p class="label-panel-body"><strong style="color:var(--ink);">SOKY is an OTC consumer product.</strong> It is not intended to diagnose, treat, cure, or prevent any disease or medical condition. All evidence citations are for educational context only. Clinical and electro modes require practitioner oversight. This page is intended for licensed healthcare professionals considering the NM Thera clinical partner dispensing program.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ CLOSING / APPLY ═══ -->
+  <footer class="closing" id="apply" data-label="Apply">
+    <svg class="cta-botanical" viewBox="0 0 400 600" fill="none" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+      <path d="M400 600 Q280 500 300 380 Q320 260 240 160 Q180 80 200 0" stroke="white" stroke-width="3" fill="none"/>
+      <path d="M300 440 Q360 400 400 450 Q360 480 300 440Z" fill="white"/>
+      <path d="M260 250 Q330 200 370 260 Q320 290 260 250Z" fill="white" opacity="0.6"/>
+    </svg>
+    <div class="container">
+      <div class="closing-wrap reveal">
+        <div>
+          <p class="closing-mark">NM<br><span>Thera</span></p>
+          <p class="footer-copy">Your patients are already managing these conditions. Give them the routine that sticks. Join the founding cohort of NM Thera clinical partners — dispense at wholesale, contribute to the evidence commons, and be named in the platform's clinical foundation from day one.</p>
+          <p class="footer-copy">SOKY is built on the science you already trust. Portable enough to become daily infrastructure for your patients. Evidence-aware enough to stand behind.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:24px;">
+            <a href="#apply" class="btn-cta-primary">Apply for Partner Access</a>
+            <a href="#" class="btn-cta-outline">Download Clinical Deck</a>
+          </div>
+          <div class="signature">NM Therapeutics, Inc. · Clinical Partner Program 2026 · nmthera.com · NMT_SOKY_001</div>
+        </div>
+        <div class="closing-card reveal reveal-delay-2">
+          <span class="card-label" style="color:var(--almond);">Request Partner Access</span>
+          <p style="font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.02em;margin:0 0 4px;">We'll verify your credentials and send your partner kit within 5 business days.</p>
+          <p style="font-size:12px;color:rgba(255,255,255,0.50);margin-bottom:20px;">Licensed clinicians only · Starter tier has no minimum commitment</p>
+          <div class="form-group"><label class="form-label">Full Name &amp; Credentials</label><input type="text" class="form-input" placeholder="Dr. Jane Smith, DPM"></div>
+          <div class="form-group"><label class="form-label">Practice Name</label><input type="text" class="form-input" placeholder="Austin Foot &amp; Ankle Clinic"></div>
+          <div class="form-group"><label class="form-label">Specialty</label>
+            <select class="form-select">
+              <option value="">Select your specialty</option>
+              <option>Podiatry (DPM)</option>
+              <option>Physical Therapy (PT/DPT)</option>
+              <option>Dermatology (MD/DO)</option>
+              <option>Occupational Therapy (OT)</option>
+              <option>Wound Care</option>
+              <option>Rheumatology</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Dispensing Tier</label>
+            <select class="form-select">
+              <option value="">Select a tier</option>
+              <option>Starter (5 units/mo) — explore first</option>
+              <option>Core (15 units/mo) — most common</option>
+              <option>Clinical (30+ units/mo) — with research interest</option>
+              <option>Founder (research partner) — limited</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="form-label">Practice Email</label><input type="email" class="form-input" placeholder="jane@austinfootclinic.com"></div>
+          <button class="form-submit" type="button">Apply for Partner Access →</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /.shell -->
+
+<script>
+  /* ── BARCODE ── */
+  (function() {
+    const el = document.getElementById('barcode-hero');
+    if (!el) return;
+    [18,12,20,14,18,10,22,16,12,20,14,18,10,22,16,12,20,14].forEach((h, i) => {
+      const b = document.createElement('div');
+      b.className = 'barcode-bar'; b.style.height = h + 'px';
+      if (i % 3 === 0) b.style.width = '3px';
+      el.appendChild(b);
+    });
+  })();
+
+  /* ── PROGRESS BAR ── */
+  const progressBar   = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
+  function updateProgress() {
+    if (!progressBar) return;
+    const docH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = docH > 0 ? Math.min(100, Math.max(0, window.scrollY / docH * 100)) + '%' : '0%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  window.addEventListener('load', updateProgress);
+
+  /* ── SECTION OBSERVER ── */
+  const sections = Array.from(document.querySelectorAll('[data-label]'));
+  const navLinks = Array.from(document.querySelectorAll('.side-nav a'));
+  const sectionObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const id = e.target.getAttribute('id');
+      if (progressLabel) progressLabel.textContent = e.target.getAttribute('data-label') || '';
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    });
+  }, { threshold: 0.15, rootMargin: '-10% 0px -55% 0px' });
+  sections.forEach(s => sectionObs.observe(s));
+
+  /* ── REVEAL ── */
+  const revealEls = Array.from(document.querySelectorAll('.reveal'));
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        e.target.querySelectorAll('.bar-fill, .comp-fill').forEach(bar => {
+          setTimeout(() => bar.classList.add('animated'), 100);
+        });
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
+    else revealObs.observe(el);
+  });
+
+  /* ── BAR ANIMATIONS ── */
+  document.querySelectorAll('.bar-fill, .comp-fill').forEach(bar => {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { setTimeout(() => e.target.classList.add('animated'), 300); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.3 });
+    obs.observe(bar);
+  });
+
+  /* ── WATER RIPPLE — manifesto-calibrated, images only ── */
+  (function initWaterRipple() {
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svgDefs = document.createElementNS(svgNS, 'svg');
+    svgDefs.setAttribute('aria-hidden', 'true');
+    svgDefs.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;';
+    const defs = document.createElementNS(svgNS, 'defs');
+    svgDefs.appendChild(defs);
+    document.body.insertBefore(svgDefs, document.body.firstChild);
+
+    const imgWrappers = Array.from(document.querySelectorAll(
+      '.feature-img-card, .feature-img-single, .product-img-card, .sleeve-card'
+    ));
+
+    imgWrappers.forEach(function(wrap, idx) {
+      if (wrap.querySelector('video')) return;
+      const filterId = 'soky-ripple-' + idx;
+      const filter = document.createElementNS(svgNS, 'filter');
+      filter.setAttribute('id', filterId);
+      filter.setAttribute('x', '-15%'); filter.setAttribute('y', '-15%');
+      filter.setAttribute('width', '130%'); filter.setAttribute('height', '130%');
+      filter.setAttribute('color-interpolation-filters', 'sRGB');
+      const turb = document.createElementNS(svgNS, 'feTurbulence');
+      turb.setAttribute('type', 'turbulence');
+      turb.setAttribute('baseFrequency', '0.018 0.018');
+      turb.setAttribute('numOctaves', '4');
+      turb.setAttribute('seed', String(idx + 1));
+      turb.setAttribute('result', 'noise');
+      const disp = document.createElementNS(svgNS, 'feDisplacementMap');
+      disp.setAttribute('in', 'SourceGraphic'); disp.setAttribute('in2', 'noise');
+      disp.setAttribute('scale', '0');
+      disp.setAttribute('xChannelSelector', 'R'); disp.setAttribute('yChannelSelector', 'G');
+      filter.appendChild(turb); filter.appendChild(disp); defs.appendChild(filter);
+
+      var rippleRAF = null, scale = 0, targetScale = 0;
+      var freqX = 0.018, freqY = 0.018, seedVal = idx + 1, seedTick = 0, isOver = false;
+      function applyFilter() {
+        turb.setAttribute('baseFrequency', freqX.toFixed(4) + ' ' + freqY.toFixed(4));
+        turb.setAttribute('seed', String(Math.floor(seedVal)));
+        disp.setAttribute('scale', String(scale.toFixed(2)));
+      }
+      function animate() {
+        scale += (targetScale - scale) * 0.10;
+        if (isOver) { seedTick++; if (seedTick % 3 === 0) seedVal = (seedVal + 0.4) % 99 + 1; }
+        else { freqX += (0.018 - freqX) * 0.06; freqY += (0.018 - freqY) * 0.06; }
+        applyFilter();
+        if (!isOver && Math.abs(scale) < 0.05) {
+          scale = 0; disp.setAttribute('scale', '0');
+          const img = wrap.querySelector('img');
+          if (img) img.style.filter = 'none';
+          cancelAnimationFrame(rippleRAF); rippleRAF = null; return;
+        }
+        rippleRAF = requestAnimationFrame(animate);
+      }
+      function startAnim() {
+        if (!rippleRAF) {
+          const img = wrap.querySelector('img');
+          if (img) img.style.filter = 'url(#' + filterId + ')';
+          rippleRAF = requestAnimationFrame(animate);
+        }
+      }
+      wrap.addEventListener('mouseenter', () => { isOver = true; targetScale = 22; startAnim(); });
+      wrap.addEventListener('mousemove', (e) => {
+        const r = wrap.getBoundingClientRect();
+        freqX = 0.012 + ((e.clientX - r.left) / r.width) * 0.016;
+        freqY = 0.012 + ((e.clientY - r.top)  / r.height) * 0.016;
+        seedVal = (seedVal + 1.2) % 99 + 1;
+      });
+      wrap.addEventListener('mouseleave', () => { isOver = false; targetScale = 0; startAnim(); });
+    });
+  })();
+
+  /* ── PROFESSION TABS ── */
+  document.querySelectorAll('.profession-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.profession-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  /* ── HERO REVEAL ── */
+  setTimeout(() => {
+    document.querySelectorAll('#overview .reveal').forEach(el => el.classList.add('visible'));
+  }, 150);
+</script>
+</body>
+</html>

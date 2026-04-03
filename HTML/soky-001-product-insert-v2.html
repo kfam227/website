@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOKY 001 — Product Insert | NM Thera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;500;600;700;800;900&family=Mulish:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#31598A;--ink:#111827;--paper:#FFFFFF;--green:#688B58;--umber:#8A6A4D;
+  --pool:#006D77;--heat:#B31D1B;--cool:#1E3A8A;--electro:#7a5c00;
+  --actives:#0D7377;--peptides:#4A5568;--almond:#D4BBA0;
+  --muted:#667085;--line:rgba(17,24,39,0.10);--line-light:rgba(17,24,39,0.06);
+  --head:'Montserrat',system-ui,sans-serif;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sub:'Mulish',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+@page{size:8.5in 11in;margin:0}
+html{-webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:var(--body);color:var(--ink);background:#e4e4e4;font-size:9.5px;line-height:1.5;margin:0;padding:0}
+img{max-width:100%;display:block}
+
+/* ═══ PAGE CONTAINER ═══ */
+.page{
+  width:8.5in;height:11in;
+  padding:0.38in 0.42in 0.32in;
+  background:var(--paper);
+  margin:12px auto;
+  display:flex;flex-direction:column;
+  overflow:hidden;position:relative;
+  box-shadow:0 2px 20px rgba(0,0,0,0.12);
+  page-break-after:always;
+}
+@media print{
+  body{background:#fff}
+  .page{margin:0;box-shadow:none}
+}
+
+/* ═══ SHARED COMPONENTS ═══ */
+.sec-label{font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.sec-label::after{content:'';height:1px;flex:1;background:var(--line)}
+.callout{background:rgba(0,109,119,0.05);border-left:2.5px solid var(--pool);border-radius:0 4px 4px 0;padding:6px 8px}
+.callout-lbl{font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--pool);margin-bottom:1px}
+.callout p{font-family:var(--body);font-size:8.5px;color:rgba(17,24,39,0.7);line-height:1.45;margin:0}
+.callout strong{color:var(--ink)}
+
+/* ════════════════════════════════════════
+   PAGE 1 — FRONT: PRODUCT & RITUAL
+════════════════════════════════════════ */
+
+/* Header */
+.p1-header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:8px;border-bottom:2px solid var(--navy);margin-bottom:10px}
+.p1-brand-mark{font-family:var(--head);font-size:44px;font-weight:900;letter-spacing:0.1em;color:var(--ink);line-height:0.85}
+.p1-brand-by{font-family:var(--sub);font-size:7.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-top:1px;margin-bottom:6px}
+.p1-title{font-family:var(--serif);font-size:20px;color:var(--ink);line-height:1.1}
+.p1-subtitle{font-family:var(--body);font-size:8px;color:var(--muted);margin-top:2px}
+.p1-logo-area{text-align:right;flex-shrink:0;padding-top:2px}
+.p1-logo{width:26px;height:26px;margin-left:auto;margin-bottom:3px}
+.p1-logo-text{font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy)}
+.p1-logo-sub{font-family:var(--body);font-size:6px;color:var(--muted);margin-top:1px}
+
+/* Ritual Strip */
+.ritual-strip{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);border-radius:5px;overflow:hidden;margin-bottom:10px}
+.rs{padding:11px 8px 10px;text-align:center;border-right:1px solid var(--line)}
+.rs:last-child{border-right:none}
+.rs.don{background:rgba(0,109,119,0.035)}
+.rs-n{font-family:var(--head);font-size:24px;font-weight:900;color:var(--navy);line-height:1;margin-bottom:1px}
+.rs.don .rs-n{color:var(--pool)}
+.rs-w{font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink);margin-bottom:2px}
+.rs-t{font-family:var(--body);font-size:7.5px;color:var(--muted);line-height:1.35}
+
+/* Main 2-col */
+.p1-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;flex:1;min-height:0}
+.p1-left,.p1-right{display:flex;flex-direction:column;gap:6px}
+
+/* Ritual details */
+.rd{margin-bottom:6px}
+.rd-title{font-family:var(--sub);font-size:8.5px;font-weight:700;color:var(--ink)}
+.rd-text{font-family:var(--body);font-size:8px;color:var(--muted);line-height:1.4}
+
+/* Specs table */
+.specs{width:100%;border-collapse:collapse;font-family:var(--body);font-size:8px}
+.specs tr{border-bottom:1px solid var(--line-light)}
+.specs td{padding:2.5px 0;vertical-align:top}
+.specs td:first-child{color:var(--muted);width:42%;font-family:var(--sub);font-size:7.5px;font-weight:600}
+.specs td:last-child{text-align:right;color:var(--ink);font-weight:500}
+
+/* IP badges */
+.ip-row{display:flex;gap:6px;align-items:center;margin-top:2px}
+.ip-badge{padding:1.5px 6px;border-radius:999px;font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.ip-badge.issued{background:rgba(49,89,138,0.1);color:var(--navy)}
+.ip-badge.pending{background:rgba(104,139,88,0.1);color:var(--green)}
+.ip-text{font-family:var(--body);font-size:7.5px;color:var(--muted)}
+
+/* Barcode */
+.barcode-area{margin-top:auto;padding-top:6px}
+.barcode-label{font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:0.12em;color:var(--ink);margin-bottom:2px}
+.barcode-svg{height:28px;width:100%;max-width:180px}
+
+/* Image */
+.patent-img{width:100%;border:1px solid var(--line);border-radius:5px;object-fit:contain;background:#fff}
+.img-cap{font-family:var(--body);font-size:6.5px;color:rgba(17,24,39,0.38);font-style:italic;margin-top:1px}
+
+/* Page 1 footer */
+.p1-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--line);padding-top:8px;margin-top:10px}
+.p1-footer-left{font-family:var(--body);font-size:7px;color:rgba(17,24,39,0.38);max-width:58%;line-height:1.4}
+.p1-footer-right{text-align:right}
+.p1-footer-sku{font-family:var(--sub);font-size:6.5px;font-weight:700;letter-spacing:0.1em;color:var(--ink)}
+.p1-footer-brand{font-family:var(--head);font-size:7.5px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy)}
+.p1-footer-url{font-family:var(--body);font-size:6.5px;color:var(--muted)}
+
+/* ════════════════════════════════════════
+   PAGE 2 — BACK: MODES / SYSTEM / COMMUNITY
+════════════════════════════════════════ */
+
+/* Page 2 header */
+.p2-header{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:7px;border-bottom:2px solid var(--navy);margin-bottom:14px}
+.p2-headline{font-family:var(--serif);font-size:26px;font-style:italic;color:var(--ink);line-height:1.05}
+.p2-headline-sub{font-family:var(--sub);font-size:7px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.p2-quote{max-width:260px;text-align:right}
+.p2-quote p{font-family:var(--serif);font-size:8px;font-style:italic;color:rgba(17,24,39,0.6);line-height:1.4}
+.p2-quote-attr{font-family:var(--sub);font-size:5.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+
+/* Modes grid */
+.modes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.mode-item{border:1px solid var(--line);border-radius:5px;padding:10px 10px 9px;position:relative;overflow:hidden}
+.mode-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.mode-item.heat::before{background:var(--heat)}
+.mode-item.cool::before{background:var(--cool)}
+.mode-item.electro::before{background:#C9A227}
+.mode-item.botanical::before{background:var(--green)}
+.mode-item.salts::before{background:var(--umber)}
+.mode-item.actives::before{background:var(--actives)}
+.mode-item.peptides::before{background:var(--peptides)}
+.mode-head{display:flex;align-items:center;gap:5px;margin-bottom:3px}
+.mode-head svg{width:16px;height:16px;flex-shrink:0}
+.mode-name{font-family:var(--sub);font-size:8.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.mode-desc{font-family:var(--body);font-size:8px;color:var(--muted);line-height:1.5}
+
+/* Founder story */
+.founder-block{background:rgba(49,89,138,0.04);border-radius:5px;padding:12px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.founder-text{flex:1}
+.founder-title{font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--navy);margin-bottom:3px}
+.founder-body{font-family:var(--body);font-size:8.5px;color:rgba(17,24,39,0.65);line-height:1.55}
+.founder-body strong{color:var(--ink)}
+
+/* Three-col info */
+.p2-info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:14px}
+
+/* Science strip */
+.science-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;background:rgba(0,109,119,0.03);border-radius:5px;padding:7px 8px}
+.sci-item{}
+.sci-label{font-family:var(--sub);font-size:5.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy)}
+.sci-val{font-family:var(--serif);font-size:16px;color:var(--pool);line-height:1;margin:1px 0}
+.sci-desc{font-family:var(--body);font-size:6px;color:var(--muted);line-height:1.35}
+
+/* Body zones */
+.zone-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:3px}
+.zone-pill{padding:3px 10px;border-radius:999px;font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:0.06em;border:1px solid var(--line)}
+.zone-pill.live{background:rgba(49,89,138,0.1);border-color:var(--navy);color:var(--navy)}
+.zone-pill.next{background:rgba(0,109,119,0.08);border-color:var(--pool);color:var(--pool)}
+.zone-pill.future{color:var(--muted)}
+
+/* Care list */
+.care-list{font-family:var(--body);font-size:8px;color:rgba(17,24,39,0.65);line-height:1.55;list-style:none}
+.care-list li{padding-left:8px;position:relative;margin-bottom:1px}
+.care-list li::before{content:'·';position:absolute;left:0;color:var(--navy);font-weight:700}
+
+/* QR section */
+.qr-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:auto;padding-top:12px;border-top:1.5px solid var(--navy)}
+.qr-item{text-align:center}
+.qr-box{width:56px;height:56px;border:1.5px solid var(--line);border-radius:4px;margin:0 auto 3px;display:flex;align-items:center;justify-content:center;background:rgba(49,89,138,0.03)}
+.qr-box svg{width:40px;height:40px}
+.qr-label{font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink)}
+.qr-sub{font-family:var(--body);font-size:7px;color:var(--muted);line-height:1.3;margin-top:1px}
+
+/* Page 2 footer */
+.p2-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--line);padding-top:8px;margin-top:10px}
+.p2-footer-left{font-family:var(--body);font-size:6.5px;color:rgba(17,24,39,0.35);max-width:62%;line-height:1.4}
+.p2-footer-right{text-align:right}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     PAGE 1 — FRONT: PRODUCT & RITUAL
+══════════════════════════════════════════════════ -->
+<div class="page" id="page1">
+
+  <div class="p1-header">
+    <div>
+      <div class="p1-brand-mark">SOKY</div>
+      <div class="p1-brand-by">by NM Thera</div>
+      <div class="p1-title">Liquid Immersion Glove</div>
+      <div class="p1-subtitle">For any handcare treatment or routine requiring localized liquid immersion or occlusion.</div>
+    </div>
+    <div class="p1-logo-area">
+      <img src="https://nmthera.com/wp-content/uploads/2026/03/Logo-Icon.png" alt="NM Thera" class="p1-logo">
+      <div class="p1-logo-text">SOKY™</div>
+      <div class="p1-logo-sub">Liquid Immersion Ritual Glove<br>by NM Thera</div>
+    </div>
+  </div>
+
+  <!-- Five-step ritual -->
+  <div class="ritual-strip">
+    <div class="rs don"><div class="rs-n">1</div><div class="rs-w">Don</div><div class="rs-t">Fold cuff inward — into itself. Slide hand in steadily. Ball fist: glove swells = sealed.</div></div>
+    <div class="rs"><div class="rs-n">2</div><div class="rs-w">Fill</div><div class="rs-t">Grip cuff fold, bring opening under tap. Fill to preferred level and temperature.</div></div>
+    <div class="rs"><div class="rs-n">3</div><div class="rs-w">Check</div><div class="rs-t">Ball fist — glove swells = you're sealed. Pressure tightens the cuff, not loosens it.</div></div>
+    <div class="rs"><div class="rs-n">4</div><div class="rs-w">Soak</div><div class="rs-t">15–20 min localized immersion. Walk. Read. Rest. The ritual moves with you.</div></div>
+    <div class="rs"><div class="rs-n">5</div><div class="rs-w">Drain</div><div class="rs-t">Slide off over a sink, pour out, rinse inside, air dry. A clean exit invites return.</div></div>
+  </div>
+
+  <!-- Main two-column -->
+  <div class="p1-grid">
+    <div class="p1-left">
+
+      <div style="font-family:var(--body);font-size:8.5px;color:rgba(17,24,39,0.68);line-height:1.6;margin-bottom:2px">
+        <p style="margin-bottom:4px">SOKY started with a single question: what if one of the oldest acts of care — immersing the body in water — could move with the person instead of confining them to a bowl? The answer took eight years to build. Simple inputs — water, salts, botanicals, warmth, time — better organized. No bowls. No stillness requirement. No compromise.</p>
+        <p style="margin-bottom:4px">The inversion frustal cuff converts internal fluid pressure into sealing force. <strong style="color:var(--ink)">The more pressure builds, the tighter the seal becomes.</strong> No clamps. No adhesives. No power. Entirely passive and pressure-responsive.</p>
+        <p>The same garment base accepts interchangeable port modules — transforming a warm-water soak into an electrotherapy session, a botanical infusion, or a peptide delivery system. One ritual. Multiple modes. The platform scales from personal wellness to clinical care.</p>
+      </div>
+
+      <div class="sec-label">The SOKY Ritual — Five Steps. Always This Order.</div>
+
+      <div class="rd"><div class="rd-title">01 — Don</div><div class="rd-text">Fold the cuff inward — into itself. This is the critical and non-intuitive first step. Pinch the fold, guide each finger fully into its sheath until the cuff rests flush at the wrist. No kinks, no gaps.</div></div>
+      <div class="rd"><div class="rd-title">02 — Fill</div><div class="rd-text">Grip the folded cuff to hold the seal. Bring the opening under the tap. Fill to preferred level and temperature. Add salts, botanicals, or emollients — they go in with the water.</div></div>
+      <div class="rd"><div class="rd-title">03 — Flow / Check Seal</div><div class="rd-text">Ball your fist. If the glove swells slightly — you're sealed. The cuff responds to pressure by holding more firmly, not less. Move freely or lay back.</div></div>
+      <div class="rd"><div class="rd-title">04 — Soak</div><div class="rd-text">15–20 minutes of localized immersion. Walk. Read. Rest. The environment holds as you move. The ritual does not ask you to stop.</div></div>
+      <div class="rd"><div class="rd-title">05 — Drain</div><div class="rd-text">Over a sink, slide off and pour out. Rinse inside with mild soap if needed, air dry fully, and store unfolded. A graceful exit invites return.</div></div>
+
+      <div class="callout" style="margin-top:4px">
+        <div class="callout-lbl">Critical — Donning</div>
+        <p>The cuff must always be folded <strong>inward — into itself</strong> to form the watertight/airtight seal. Never outward. This is where the product is used correctly or not at all.</p>
+      </div>
+
+      <div class="sec-label" style="margin-top:4px">Compatible Therapies</div>
+      <div style="font-family:var(--body);font-size:8px;color:var(--muted);line-height:1.55">
+        <strong style="color:var(--ink)">Thermal:</strong> Warm and cool soaks, contrast bathing ·
+        <strong style="color:var(--ink)">Electro:</strong> Iontophoresis, TENS, EMS ·
+        <strong style="color:var(--ink)">Botanical:</strong> Chamomile, lavender, green tea, oat extract ·
+        <strong style="color:var(--ink)">Mineral:</strong> Epsom salt, Dead Sea salt, Himalayan pink ·
+        <strong style="color:var(--ink)">Clinical:</strong> Occlusive wet-wrap, Rx formulations, peptide delivery
+      </div>
+    </div>
+
+    <div class="p1-right">
+      <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-18.png" alt="Patent drawing Fig.1" class="patent-img" style="max-height:220px">
+      <div class="img-cap">Fig. 1 — Perspective view, active sealing state · US 11,602,631 B2</div>
+
+      <div class="sec-label">Specifications</div>
+      <table class="specs">
+        <tr><td>Material</td><td>Medical-grade TPE / Silicone</td></tr>
+        <tr><td>Seal mechanism</td><td>Inversion frustal · passive</td></tr>
+        <tr><td>Port interface</td><td>Universal quick-connect</td></tr>
+        <tr><td>Session length</td><td>15–20 min</td></tr>
+        <tr><td>Designed lifespan</td><td>90+ sessions</td></tr>
+        <tr><td>Temp range</td><td>Cold → 45°C / 113°F</td></tr>
+        <tr><td>Latex-free</td><td>No adhesives · No clamps</td></tr>
+      </table>
+
+      <div class="sec-label" style="margin-top:10px">IP Status</div>
+      <div class="ip-row"><span class="ip-badge issued">Issued</span><span class="ip-text">US 11,602,631 B2 · Valid to 2043</span></div>
+      <div class="ip-row" style="margin-top:2px"><span class="ip-badge pending">Pending</span><span class="ip-text">Platform patent · Dec 2025</span></div>
+
+      <div style="margin-top:10px">
+        <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-17.png" alt="Cuff inversion — active vs inactive" class="patent-img" style="max-height:140px">
+        <div class="img-cap">Inactive (extended) vs Active (sealed) — cuff inverted configuration</div>
+      </div>
+
+      <div style="font-family:var(--serif);font-size:9px;font-style:italic;color:rgba(17,24,39,0.5);margin-top:8px;line-height:1.3">Spa-grade immersion. Anywhere.</div>
+      <div style="font-family:var(--body);font-size:6.5px;color:var(--muted);margin-top:1px">Scan for the SOKY Ritual Guide<br>Patent Pending · NM Thera Technologies<br>Designed for immersive handcare therapies</div>
+
+      <!-- Barcode -->
+      <div class="barcode-area">
+        <div class="barcode-label">NMT_SOKY_001</div>
+        <svg class="barcode-svg" viewBox="0 0 200 32" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="2" height="28" fill="#111827"/><rect x="4" y="0" width="1" height="28" fill="#111827"/><rect x="7" y="0" width="3" height="28" fill="#111827"/><rect x="12" y="0" width="1" height="28" fill="#111827"/><rect x="15" y="0" width="2" height="28" fill="#111827"/><rect x="19" y="0" width="1" height="28" fill="#111827"/><rect x="22" y="0" width="3" height="28" fill="#111827"/><rect x="27" y="0" width="1" height="28" fill="#111827"/><rect x="30" y="0" width="2" height="28" fill="#111827"/><rect x="34" y="0" width="1" height="28" fill="#111827"/><rect x="37" y="0" width="3" height="28" fill="#111827"/><rect x="42" y="0" width="2" height="28" fill="#111827"/><rect x="46" y="0" width="1" height="28" fill="#111827"/><rect x="49" y="0" width="2" height="28" fill="#111827"/><rect x="53" y="0" width="3" height="28" fill="#111827"/><rect x="58" y="0" width="1" height="28" fill="#111827"/><rect x="61" y="0" width="2" height="28" fill="#111827"/><rect x="65" y="0" width="1" height="28" fill="#111827"/><rect x="68" y="0" width="3" height="28" fill="#111827"/><rect x="73" y="0" width="1" height="28" fill="#111827"/><rect x="76" y="0" width="2" height="28" fill="#111827"/><rect x="80" y="0" width="1" height="28" fill="#111827"/><rect x="83" y="0" width="2" height="28" fill="#111827"/><rect x="87" y="0" width="3" height="28" fill="#111827"/><rect x="92" y="0" width="1" height="28" fill="#111827"/><rect x="95" y="0" width="2" height="28" fill="#111827"/><rect x="99" y="0" width="1" height="28" fill="#111827"/><rect x="102" y="0" width="3" height="28" fill="#111827"/><rect x="107" y="0" width="1" height="28" fill="#111827"/><rect x="110" y="0" width="2" height="28" fill="#111827"/><rect x="114" y="0" width="1" height="28" fill="#111827"/><rect x="117" y="0" width="3" height="28" fill="#111827"/><rect x="122" y="0" width="2" height="28" fill="#111827"/><rect x="126" y="0" width="1" height="28" fill="#111827"/><rect x="129" y="0" width="2" height="28" fill="#111827"/><rect x="133" y="0" width="1" height="28" fill="#111827"/><rect x="136" y="0" width="3" height="28" fill="#111827"/><rect x="141" y="0" width="1" height="28" fill="#111827"/><rect x="144" y="0" width="2" height="28" fill="#111827"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="p1-footer">
+    <div class="p1-footer-left">SOKY supports personal care routines. It is not intended to diagnose, treat, cure, or prevent any disease or condition. · Latex-free · Skin-safe silicone · Recyclable packaging components · NM Therapeutics, Inc. · nmthera.com</div>
+    <div class="p1-footer-right">
+      <div class="p1-footer-sku">NMT_SOKY_001</div>
+      <div class="p1-footer-brand">NM Thera</div>
+      <div class="p1-footer-url">Patent No. US 11,602,631 B2 · Provisional Filed Dec 2025 · nmthera.com</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     PAGE 2 — BACK: MODES / EXPANSION / COMMUNITY
+══════════════════════════════════════════════════ -->
+<div class="page" id="page2">
+
+  <div class="p2-header">
+    <div>
+      <div class="p2-headline">Seven ways into the water.</div>
+      <div class="p2-headline-sub">Wearable · Localized · Repeatable · Open Source</div>
+    </div>
+    <div class="p2-quote">
+      <p>"The oldest therapies are the most democratic: water, minerals, botanicals, warmth, time. These are not luxury inputs."</p>
+      <div class="p2-quote-attr">— SOKY Founding Statement · 2026</div>
+    </div>
+  </div>
+
+  <!-- Seven Modes — 4 + 3 grid -->
+  <div class="modes-grid">
+    <div class="mode-item heat">
+      <div class="mode-head">
+        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="5" stroke="#B31D1B" stroke-width="2"/><line x1="14" y1="2" x2="14" y2="5" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="23" x2="14" y2="26" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="14" x2="5" y2="14" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="23" y1="14" x2="26" y2="14" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="mode-name" style="color:var(--heat)">Heat</span>
+      </div>
+      <div class="mode-desc">Warm water 92°F to 104°F (33°C–40°C) boosts blood flow, relaxes muscle tissue, and supports joint mobility. SOKY's sealed environment retains heat for the full 15–20 min session without reheating. Ideal for morning stiffness and arthritis routines. Post-work hand fatigue and morning stiffness respond especially well to sustained thermal contact.</div>
+    </div>
+    <div class="mode-item cool">
+      <div class="mode-head">
+        <svg viewBox="0 0 28 28" fill="none"><line x1="14" y1="2" x2="14" y2="26" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="14" x2="26" y2="14" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><line x1="5.5" y1="5.5" x2="22.5" y2="22.5" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><line x1="22.5" y1="5.5" x2="5.5" y2="22.5" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="14" r="2.5" fill="#1E3A8A"/></svg>
+        <span class="mode-name" style="color:var(--cool)">Cool</span>
+      </div>
+      <div class="mode-desc">Cold immersion 50°F to 59°F (10°C to 15°C) reduces inflammation and numbs pain. Contrast bathing — alternating warm and cool — is clinician-recommended and SOKY makes it practical at home for the first time. For athletes and RSI recovery. No melting ice diluting the effect — the insulated seal maintains temperature throughout.</div>
+    </div>
+    <div class="mode-item electro">
+      <div class="mode-head">
+        <svg viewBox="0 0 28 28" fill="none"><path d="M16 3L7 16H14L12 25L21 12H14L16 3Z" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="mode-name" style="color:var(--electro)">Electro</span>
+      </div>
+      <div class="mode-desc">Model E transforms SOKY into a wearable electrotherapy platform. Iontophoresis delivers 80%+ sweat reduction for hyperhidrosis. TENS and EMS modes use the same sealed liquid-electrode environment. Covered by US Patent through 2043. The universal port accepts the electrode cap without modifying the garment.</div>
+    </div>
+    <div class="mode-item botanical">
+      <div class="mode-head">
+        <svg viewBox="0 0 28 28" fill="none"><path d="M14 24 C14 24 6 18 6 11 C6 7.1 9.1 4 13 4 C13.3 4 13.7 4 14 4.1 C14.3 4 14.7 4 15 4 C18.9 4 22 7.1 22 11 C22 18 14 24 14 24Z" stroke="#688B58" stroke-width="2" fill="rgba(104,139,88,0.12)"/><line x1="14" y1="24" x2="14" y2="14" stroke="#688B58" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="mode-name" style="color:var(--green)">Botanicals</span>
+      </div>
+      <div class="mode-desc">Chamomile, calendula, lavender, green tea — botanical infusions at higher concentration than a basin. One tea bag in a SOKY glove delivers more active contact per cm² than the same bag in a two-liter bowl. Packs coming soon. Gentle enough for daily use.</div>
+    </div>
+  </div>
+  <div class="modes-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="mode-item salts">
+      <div class="mode-head">
+        <svg viewBox="0 0 28 28" fill="none"><path d="M7 23L14 5L21 23Z" stroke="#8A6A4D" stroke-width="2" fill="rgba(138,106,77,0.06)" stroke-linejoin="round"/><circle cx="14" cy="13" r="1.3" fill="#8A6A4D" opacity="0.6"/><circle cx="11" cy="17" r="1" fill="#8A6A4D" opacity="0.5"/><circle cx="17" cy="17" r="1" fill="#8A6A4D" opacity="0.5"/></svg>
+        <span class="mode-name" style="color:var(--umber)">Salts</span>
+      </div>
+      <div class="mode-desc">Epsom salt, Dead Sea salt, Himalayan pink — SOKY's low volume means a tablespoon achieves what a full cup does in a basin. Supports muscle recovery, skin softening, and general relaxation. The sealed environment prevents evaporation and maintains mineral contact for the full session.</div>
+    </div>
+    <div class="mode-item actives">
+      <div class="mode-head">
+        <svg viewBox="0 0 28 28" fill="none"><path d="M10 5H18V16L22 23H6L10 16V5Z" stroke="#0D7377" stroke-width="1.8" fill="rgba(13,115,119,0.06)"/><line x1="10" y1="5" x2="18" y2="5" stroke="#0D7377" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="mode-name" style="color:var(--actives)">Actives</span>
+      </div>
+      <div class="mode-desc">Salicylic acid, urea, menthol, lidocaine, antifungals — concentrated ingredients formulated for SOKY's liquid environment. Clinical-grade soak packs in development for pharmacy-level precision at home. Because SOKY uses less water, your actives work harder at higher concentration right where they're needed.</div>
+    </div>
+    <div class="mode-item peptides">
+      <div class="mode-head">
+        <svg viewBox="0 0 28 28" fill="none"><circle cx="7" cy="14" r="3" stroke="#4A5568" stroke-width="1.8"/><circle cx="14" cy="9" r="3" stroke="#4A5568" stroke-width="1.8"/><circle cx="21" cy="14" r="3" stroke="#4A5568" stroke-width="1.8"/><circle cx="14" cy="19" r="3" stroke="#4A5568" stroke-width="1.8"/><line x1="9.8" y1="12.6" x2="11.2" y2="10.4" stroke="#4A5568" stroke-width="1.5" stroke-linecap="round"/><line x1="16.8" y1="10.4" x2="18.2" y2="12.6" stroke="#4A5568" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="mode-name" style="color:var(--peptides)">Peptides</span>
+      </div>
+      <div class="mode-desc">SOKY's sealed environment increases skin hydration by 300–400%, dramatically improving peptide absorption. Collagen-stimulating, barrier-repair, and neuropeptide soak packs coming — clinical-grade results at home. Collagen-stimulating, barrier-repair, and growth factor peptides are all candidates.</div>
+    </div>
+  </div>
+
+  <!-- Science Principles Strip -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:12px;border-top:1px solid rgba(17,24,39,0.08);padding-top:10px">
+    <div style="text-align:center">
+      <div style="font-family:var(--sub);font-size:6.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);margin-bottom:3px">Occlusion &amp; Hydration</div>
+      <div style="font-family:var(--body);font-size:7.5px;color:var(--muted);line-height:1.45">Containment is an active variable. Sealed immersion expands stratum corneum hydration, raising permeability for sustained topical delivery.</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-family:var(--sub);font-size:6.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);margin-bottom:3px">Thermal Governance</div>
+      <div style="font-family:var(--body);font-size:7.5px;color:var(--muted);line-height:1.45">Temperature modulates transdermal flux. Heat is a pharmacokinetic dial. All thermal paths designed around hard cutoffs. Warmth is a feature — uncontrolled heat is a hazard.</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-family:var(--sub);font-size:6.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);margin-bottom:3px">Pressure-Responsive Seal</div>
+      <div style="font-family:var(--body);font-size:7.5px;color:var(--muted);line-height:1.45">The frustal cuff converts internal fluid pressure into sealing force. The more pressure builds, the tighter the seal. No external mechanism required.</div>
+    </div>
+    <div style="text-align:center">
+      <div style="font-family:var(--sub);font-size:6.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);margin-bottom:3px">Electro Path</div>
+      <div style="font-family:var(--body);font-size:7.5px;color:var(--muted);line-height:1.45">Tap water iontophoresis on demonstrated precedent (US 11,602,631). Same garment, electrode module via universal port — same ritual, extended capability.</div>
+    </div>
+  </div>
+
+  <!-- Founder story -->
+  <div class="founder-block">
+    <div class="founder-text">
+      <div class="founder-title">The Story Behind the Seal</div>
+      <div class="founder-body">The founder lives with palmar hyperhidrosis — excessive sweating of the hands. The pivotal moment was having to <strong>refuse a child's hand</strong>. That experience sparked eight years of development, through a pandemic and personal upheaval, arriving at SOKY: a product and a philosophy built from real constraint, by someone who needed it. Built by hand in Workshop G — a garage in Riverside, California — and now developed across five countries by a team that believes the oldest forms of care deserve better delivery. The oldest forms of care deserve better delivery. That's the work.</div>
+    </div>
+  </div>
+
+  <!-- Three-column: Platform / Expansion / Care -->
+  <div class="p2-info-grid">
+    <div>
+      <div class="sec-label">Platform Architecture</div>
+      <div class="callout" style="border-left-color:var(--navy);background:rgba(49,89,138,0.04);margin-bottom:4px">
+        <p style="font-family:var(--serif);font-size:9.5px;font-style:italic;color:var(--ink)">One port. One ritual. Every body zone.</p>
+      </div>
+      <div style="font-family:var(--body);font-size:8px;color:var(--muted);line-height:1.5">
+        <strong style="color:var(--ink)">Garments</strong> — Gloves, socks, sleeves, joint tubes. Each body zone delivered exactly where needed.<br><br>
+        <strong style="color:var(--ink)">Enhancers</strong> — Salts, minerals, botanicals, emollients, additive packs. Organized by intention.<br><br>
+        <strong style="color:var(--ink)">Universal Port</strong> — Fill/drain, electrode cap, sensor, ultrasound, gas delivery. Model F (OTC) and Model E (clinical) are the same garment — different module attached.
+      </div>
+    </div>
+    <div>
+      <div class="sec-label">Body Zone Expansion</div>
+      <div class="zone-pills">
+        <span class="zone-pill live">Hand ✓ Live</span>
+        <span class="zone-pill next">Foot → Next</span>
+        <span class="zone-pill future">Arm →</span>
+        <span class="zone-pill future">Knee →</span>
+        <span class="zone-pill future">Elbow →</span>
+        <span class="zone-pill future">Pelvic →</span>
+      </div>
+      <div style="font-family:var(--body);font-size:8px;color:var(--muted);line-height:1.5;margin-top:6px">The same patented seal technology extends to every body zone. Foot SOKY is next — expected within 90 days. Each garment uses the same universal port, the same ritual, the same enhancers.</div>
+      <div class="sec-label" style="margin-top:8px">Care &amp; Storage</div>
+      <ul class="care-list">
+        <li>Rinse with clean water after every session</li>
+        <li>Air dry fully before storing — never damp</li>
+        <li>Store unfolded with cuff extended</li>
+        <li>Avoid petroleum-based products or bleach</li>
+        <li>Inspect port and cuff before each session</li>
+        <li>90+ sessions with proper care</li>
+        <li>Do not use with open wounds without consulting your healthcare provider</li>
+      </ul>
+    </div>
+    <div>
+      <div class="sec-label">Science at a Glance</div>
+      <div style="margin-bottom:8px">
+        <div style="font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy)">Occlusive Hydration</div>
+        <div style="font-family:var(--serif);font-size:22px;color:var(--pool);line-height:1">300–400%</div>
+        <div style="font-family:var(--body);font-size:7.5px;color:var(--muted)">Stratum corneum hydration increase under sealed occlusion</div>
+      </div>
+      <div style="margin-bottom:8px">
+        <div style="font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy)">Iontophoresis</div>
+        <div style="font-family:var(--serif);font-size:22px;color:var(--pool);line-height:1">80%+</div>
+        <div style="font-family:var(--body);font-size:7.5px;color:var(--muted)">Sweat reduction — gold standard for hyperhidrosis</div>
+      </div>
+      <div style="margin-bottom:8px">
+        <div style="font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy)">Adherence</div>
+        <div style="font-family:var(--serif);font-size:22px;color:var(--pool);line-height:1">+36 pts</div>
+        <div style="font-family:var(--body);font-size:7.5px;color:var(--muted)">Portable soaking removes the format barrier</div>
+      </div>
+      <div>
+        <div style="font-family:var(--sub);font-size:7px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy)">Conditions</div>
+        <div style="font-family:var(--serif);font-size:22px;color:var(--pool);line-height:1">9+</div>
+        <div style="font-family:var(--body);font-size:7.5px;color:var(--muted)">Hyperhidrosis, eczema, arthritis, psoriasis, PVD, and more</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Codes -->
+  <div class="qr-strip">
+    <div class="qr-item">
+      <div class="qr-box">
+        <!-- Mock QR pattern -->
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="10" height="10" rx="1" fill="#31598A"/><rect x="14" y="2" width="4" height="4" fill="#31598A"/><rect x="28" y="2" width="10" height="10" rx="1" fill="#31598A"/>
+          <rect x="4" y="4" width="6" height="6" rx="0.5" fill="#fff"/><rect x="30" y="4" width="6" height="6" rx="0.5" fill="#fff"/>
+          <rect x="5.5" y="5.5" width="3" height="3" fill="#31598A"/><rect x="31.5" y="5.5" width="3" height="3" fill="#31598A"/>
+          <rect x="2" y="15" width="3" height="3" fill="#31598A"/><rect x="7" y="15" width="3" height="3" fill="#31598A"/><rect x="15" y="15" width="10" height="10" rx="1" fill="#006D77" opacity="0.2"/>
+          <rect x="17" y="17" width="6" height="6" rx="0.5" fill="#006D77"/><rect x="18.5" y="18.5" width="3" height="3" fill="#fff"/>
+          <rect x="2" y="28" width="10" height="10" rx="1" fill="#31598A"/><rect x="4" y="30" width="6" height="6" rx="0.5" fill="#fff"/><rect x="5.5" y="31.5" width="3" height="3" fill="#31598A"/>
+          <rect x="14" y="28" width="3" height="3" fill="#31598A"/><rect x="20" y="28" width="3" height="3" fill="#31598A"/><rect x="28" y="28" width="4" height="4" fill="#31598A"/><rect x="35" y="28" width="3" height="3" fill="#31598A"/>
+          <rect x="28" y="15" width="3" height="3" fill="#31598A"/><rect x="35" y="18" width="3" height="3" fill="#31598A"/>
+        </svg>
+      </div>
+      <div class="qr-label">Ritual Guide</div>
+      <div class="qr-sub">Setup · protocols<br>Video walkthrough</div>
+    </div>
+    <div class="qr-item">
+      <div class="qr-box">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="10" height="10" rx="1" fill="#688B58"/><rect x="14" y="2" width="4" height="4" fill="#688B58"/><rect x="28" y="2" width="10" height="10" rx="1" fill="#688B58"/>
+          <rect x="4" y="4" width="6" height="6" rx="0.5" fill="#fff"/><rect x="30" y="4" width="6" height="6" rx="0.5" fill="#fff"/>
+          <rect x="5.5" y="5.5" width="3" height="3" fill="#688B58"/><rect x="31.5" y="5.5" width="3" height="3" fill="#688B58"/>
+          <rect x="2" y="15" width="3" height="3" fill="#688B58"/><rect x="7" y="15" width="3" height="3" fill="#688B58"/>
+          <rect x="15" y="15" width="10" height="10" rx="1" fill="#688B58" opacity="0.2"/><rect x="17" y="17" width="6" height="6" rx="0.5" fill="#688B58"/><rect x="18.5" y="18.5" width="3" height="3" fill="#fff"/>
+          <rect x="2" y="28" width="10" height="10" rx="1" fill="#688B58"/><rect x="4" y="30" width="6" height="6" rx="0.5" fill="#fff"/><rect x="5.5" y="31.5" width="3" height="3" fill="#688B58"/>
+          <rect x="28" y="28" width="4" height="4" fill="#688B58"/><rect x="35" y="33" width="3" height="3" fill="#688B58"/>
+        </svg>
+      </div>
+      <div class="qr-label">Register</div>
+      <div class="qr-sub">Warranty activation<br>90-day coverage</div>
+    </div>
+    <div class="qr-item">
+      <div class="qr-box">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="10" height="10" rx="1" fill="#006D77"/><rect x="14" y="2" width="4" height="4" fill="#006D77"/><rect x="28" y="2" width="10" height="10" rx="1" fill="#006D77"/>
+          <rect x="4" y="4" width="6" height="6" rx="0.5" fill="#fff"/><rect x="30" y="4" width="6" height="6" rx="0.5" fill="#fff"/>
+          <rect x="5.5" y="5.5" width="3" height="3" fill="#006D77"/><rect x="31.5" y="5.5" width="3" height="3" fill="#006D77"/>
+          <rect x="2" y="15" width="3" height="3" fill="#006D77"/><rect x="7" y="18" width="3" height="3" fill="#006D77"/>
+          <rect x="15" y="15" width="10" height="10" rx="1" fill="#006D77" opacity="0.2"/><rect x="17" y="17" width="6" height="6" rx="0.5" fill="#006D77"/><rect x="18.5" y="18.5" width="3" height="3" fill="#fff"/>
+          <rect x="2" y="28" width="10" height="10" rx="1" fill="#006D77"/><rect x="4" y="30" width="6" height="6" rx="0.5" fill="#fff"/><rect x="5.5" y="31.5" width="3" height="3" fill="#006D77"/>
+          <rect x="28" y="30" width="3" height="3" fill="#006D77"/><rect x="33" y="28" width="5" height="5" fill="#006D77"/>
+        </svg>
+      </div>
+      <div class="qr-label">Co-Dev Sign-Up</div>
+      <div class="qr-sub">Try experimental models<br>Shape what ships next</div>
+    </div>
+    <div class="qr-item">
+      <div class="qr-box">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="10" height="10" rx="1" fill="#8A6A4D"/><rect x="14" y="5" width="4" height="4" fill="#8A6A4D"/><rect x="28" y="2" width="10" height="10" rx="1" fill="#8A6A4D"/>
+          <rect x="4" y="4" width="6" height="6" rx="0.5" fill="#fff"/><rect x="30" y="4" width="6" height="6" rx="0.5" fill="#fff"/>
+          <rect x="5.5" y="5.5" width="3" height="3" fill="#8A6A4D"/><rect x="31.5" y="5.5" width="3" height="3" fill="#8A6A4D"/>
+          <rect x="5" y="15" width="3" height="3" fill="#8A6A4D"/><rect x="10" y="18" width="3" height="3" fill="#8A6A4D"/>
+          <rect x="15" y="15" width="10" height="10" rx="1" fill="#8A6A4D" opacity="0.2"/><rect x="17" y="17" width="6" height="6" rx="0.5" fill="#8A6A4D"/><rect x="18.5" y="18.5" width="3" height="3" fill="#fff"/>
+          <rect x="2" y="28" width="10" height="10" rx="1" fill="#8A6A4D"/><rect x="4" y="30" width="6" height="6" rx="0.5" fill="#fff"/><rect x="5.5" y="31.5" width="3" height="3" fill="#8A6A4D"/>
+          <rect x="28" y="28" width="5" height="5" fill="#8A6A4D"/><rect x="35" y="35" width="3" height="3" fill="#8A6A4D"/>
+        </svg>
+      </div>
+      <div class="qr-label">SOKY Commons</div>
+      <div class="qr-sub">Open-source hardware<br>Community protocols</div>
+    </div>
+  </div>
+
+  <div class="p2-footer">
+    <div class="p2-footer-left">SOKY supports personal care routines. It is not intended to diagnose, treat, cure, or prevent any disease or condition. · Latex-free · Skin-safe silicone · Recyclable packaging components · NM Therapeutics, Inc. · nmthera.com</div>
+    <div class="p2-footer-right">
+      <div class="p1-footer-sku">NMT_SOKY_001</div>
+      <div class="p1-footer-brand">NM Thera</div>
+      <div class="p1-footer-url">Patent No. US 11,602,631 B2 · Provisional Filed Dec 2025 · nmthera.com</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

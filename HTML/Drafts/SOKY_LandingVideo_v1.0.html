@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SOKY by NM Thera — This is SOKY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — exact parity with manifesto
+═══════════════════════════════════════════ */
+:root {
+  --navy:            #31598A;
+  --ink:             #111827;
+  --paper:           #F7F7F5;
+  --green:           #688B58;
+  --umber:           #8A6A4D;
+  --almond:          #D4BBA0;
+  --sunlight:        #FFD166;
+  --pool:            #006D77;
+  --muted:           #667085;
+  --line:            rgba(17, 24, 39, 0.12);
+  --line-strong:     rgba(17, 24, 39, 0.20);
+  --surface:         rgba(255,255,255,0.72);
+  --surface-strong:  rgba(255,255,255,0.84);
+  --shadow:          0 24px 80px rgba(17, 24, 39, 0.12);
+  --shadow-sm:       0 4px 18px rgba(17, 24, 39, 0.07);
+  --radius-xl:       28px;
+  --radius-lg:       20px;
+  --radius-md:       16px;
+  --max:             1180px;
+  --topbar-h:        76px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255,209,102,0.22), transparent 22%),
+    radial-gradient(circle at 85% 8%,  rgba(104,139,88,0.18),  transparent 18%),
+    radial-gradient(circle at 50% 100%,rgba(49,89,138,0.14),   transparent 28%),
+    linear-gradient(180deg, #fcfcfb 0%, var(--paper) 38%, #f3f3ef 100%);
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.65;
+}
+
+/* Subtle grid overlay — exact match to manifesto */
+body::before {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.45;
+  background-image:
+    linear-gradient(rgba(17,24,39,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17,24,39,0.02) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.75), transparent 85%);
+  mask-image:         radial-gradient(circle at center, rgba(0,0,0,0.75), transparent 85%);
+}
+
+a { color: inherit; text-decoration: none; }
+.shell { position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════════
+   TOPBAR — pixel-perfect from manifesto
+═══════════════════════════════════════════ */
+.topbar {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  width: min(calc(100% - 32px), 1260px); z-index: 40; pointer-events: none;
+}
+.topbar-inner {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.82);
+  border-radius: 18px;
+  box-shadow: 0 10px 32px rgba(17,24,39,0.08);
+  pointer-events: auto;
+}
+@supports (backdrop-filter: blur(14px)) {
+  .topbar-inner { background: rgba(255,255,255,0.56); backdrop-filter: blur(14px); }
+}
+.brandline { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.drop {
+  width: 14px; height: 20px;
+  border: 2px solid var(--navy);
+  border-radius: 12px 12px 14px 14px;
+  transform: rotate(45deg); flex: 0 0 auto; position: relative;
+}
+.drop::after {
+  content: ""; position: absolute; inset: 3px;
+  border-radius: 10px 10px 12px 12px;
+  border: 1px solid rgba(0,109,119,0.35);
+}
+.brandline strong {
+  font-family: 'Montserrat', sans-serif; font-size: 12px;
+  letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
+}
+.brandline span { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+/* Pills row */
+.pill-row { display: flex; gap: 6px; align-items: center; }
+.pill {
+  display: inline-flex; align-items: center;
+  border: 1px solid rgba(17,24,39,0.12); background: rgba(255,255,255,0.72);
+  border-radius: 999px; padding: 6px 10px; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  box-shadow: 0 4px 12px rgba(17,24,39,0.04);
+}
+
+/* ═══════════════════════════════════════════
+   HERO — full-viewport video stage
+═══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: calc(var(--topbar-h) + 40px) 24px 60px;
+}
+
+/* ── Reactive canvas background ── */
+#bgCanvas {
+  position: absolute;
+  inset: -8%;
+  width: 116%; height: 116%;
+  /* less blur, more saturation and brightness — makes colors bleed through prominently */
+  filter: blur(48px) saturate(1.8) brightness(0.90) opacity(0.88);
+  z-index: 1;
+  pointer-events: none;
+  will-change: filter;
+}
+
+/* ── Paper tint overlay — much lighter so canvas colors read clearly ── */
+.paper-veil {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 70% 75% at 50% 50%,
+      rgba(247,247,245,0.08) 0%,
+      rgba(247,247,245,0.28) 50%,
+      rgba(247,247,245,0.52) 100%
+    );
+}
+
+/* ── Noise texture ── */
+.noise {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── Ripple rings ── */
+.ripples {
+  position: absolute; inset: 0; z-index: 4;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(49,89,138,0.16);
+  opacity: 0; transform: scale(0.1);
+  animation: ring-pulse 6s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+.ring.r2 { animation-delay: 2s; }
+.ring.r3 { animation-delay: 4s; }
+@keyframes ring-pulse {
+  0%   { opacity: 0.50; transform: scale(1); }
+  60%  { opacity: 0.06; }
+  100% { opacity: 0;    transform: scale(4.5); }
+}
+
+/* ── THE VIDEO ── */
+.video-stage {
+  position: relative; z-index: 10;
+  /* Portrait 9:16 sizing */
+  height: min(80vh, calc(86vw * 16/9));
+  width:  min(calc(80vh * 9/16), 86vw);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.75);
+  box-shadow:
+    var(--shadow),
+    0 0 0 1px rgba(49,89,138,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  background: #0d1a1c;
+  transition: box-shadow 0.4s ease;
+  will-change: transform;
+}
+.video-stage:hover {
+  box-shadow:
+    0 40px 120px rgba(17,24,39,0.20),
+    0 0 0 1px rgba(49,89,138,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+/* Top+bottom gradient lens on the video */
+.video-stage::before {
+  content: ''; position: absolute; inset: 0; z-index: 2;
+  border-radius: inherit;
+  background:
+    linear-gradient(to bottom,
+      rgba(17,24,39,0.55) 0%,
+      transparent 20%,
+      transparent 72%,
+      rgba(17,24,39,0.70) 100%
+    );
+  pointer-events: none;
+}
+/* Subtle inner border highlight */
+.video-stage::after {
+  content: ''; position: absolute; inset: 0; z-index: 3;
+  border-radius: inherit;
+  border: 1px solid rgba(255,255,255,0.18);
+  pointer-events: none;
+}
+
+.video-stage video {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* ── UI overlay on the video ── */
+.video-ui {
+  position: absolute; inset: 0; z-index: 4;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(20px, 5%, 36px);
+  pointer-events: none;
+}
+
+/* top brand block */
+.v-brand {
+  opacity: 0; transform: translateY(-18px);
+  animation: emerge 1s 0.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+.v-eyebrow {
+  font-family: 'Montserrat', sans-serif; font-size: 9px;
+  font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(255,255,255,0.72); margin-bottom: 6px;
+}
+.v-wordmark {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: clamp(42px, 9vw, 88px); line-height: 0.92;
+  /* wide tracked-out kerning like the manifesto hero */
+  letter-spacing: 0.42em; text-transform: uppercase;
+  /* white base — S K Y white */
+  color: #ffffff;
+  text-shadow:
+    0 2px 32px rgba(0,0,0,0.55),
+    0 0 60px rgba(49,89,138,0.35);
+}
+/* O = navy blue, matching manifesto's .o-letter pattern 
+.v-wordmark .o-letter { color: #31598A; }
+*/
+
+/* bottom CTA block */
+.v-cta {
+  opacity: 0; transform: translateY(18px);
+  animation: emerge-up 1s 0.55s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  pointer-events: all;
+}
+.v-tagline {
+  font-family: 'Montserrat', sans-serif; font-size: clamp(11px, 1.8vw, 14px);
+  font-weight: 700; letter-spacing: 0.04em; color: #fff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+  margin-bottom: 14px;
+}
+.v-desc {
+  font-size: clamp(10px, 1.4vw, 12px); font-weight: 400;
+  color: rgba(255,255,255,0.78); letter-spacing: 0.02em;
+  line-height: 1.55; margin-bottom: 18px; max-width: 28ch;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+}
+.v-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(10px, 1.4vw, 12px); font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink);
+  background: rgba(247,247,245,0.92);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 999px;
+  padding: 10px 22px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s, box-shadow 0.25s, transform 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+.v-btn:hover {
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+.v-btn .arrow { display: inline-block; transition: transform 0.25s; }
+.v-btn:hover .arrow { transform: translateX(4px); }
+
+@keyframes emerge    { to { opacity: 1; transform: translateY(0); } }
+@keyframes emerge-up { to { opacity: 1; transform: translateY(0); } }
+
+/* ═══════════════════════════════════════════
+   SCROLL HINT — manifesto scroll indicator style
+═══════════════════════════════════════════ */
+.scroll-hint {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  z-index: 20; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: emerge-up 1s 2.2s ease forwards;
+  pointer-events: none;
+}
+.scroll-hint-label {
+  font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 600;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
+}
+.scroll-bar {
+  width: 1px; height: 36px; position: relative;
+  background: rgba(17,24,39,0.10); overflow: hidden;
+}
+.scroll-bar::after {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 100%; height: 50%;
+  background: linear-gradient(to bottom, var(--navy), var(--pool));
+  animation: scroll-drop 1.8s ease-in-out infinite;
+}
+@keyframes scroll-drop {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}
+
+/* ═══════════════════════════════════════════
+   RITUAL + CTA SECTION below the hero
+═══════════════════════════════════════════ */
+.ritual-section {
+  position: relative; z-index: 1;
+  padding: 100px 0 120px;
+  border-top: 1px solid var(--line);
+}
+.container { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
+
+/* Eyebrow + headline */
+.section-eyebrow {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--navy); display: block; margin-bottom: 14px; font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+}
+.section-headline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(32px, 5vw, 64px); font-weight: 800;
+  letter-spacing: -0.04em; line-height: 0.96;
+  color: var(--ink); margin: 0 0 24px;
+}
+.section-headline .o-letter { color: var(--navy); }
+.section-lede {
+  font-size: clamp(15px, 1.8vw, 18px); font-weight: 400;
+  color: rgba(17,24,39,0.78); max-width: 52ch; line-height: 1.7; margin-bottom: 48px;
+}
+.section-lede strong { color: var(--ink); font-weight: 600; }
+
+/* Ritual bar — from manifesto */
+.ritual-bar {
+  display: flex; gap: 0;
+  border: 1px solid rgba(17,24,39,0.10);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.72);
+  overflow: hidden;
+  max-width: 680px;
+  margin-bottom: 40px;
+  box-shadow: var(--shadow-sm);
+}
+@supports (backdrop-filter: blur(8px)) {
+  .ritual-bar { background: rgba(255,255,255,0.56); backdrop-filter: blur(8px); }
+}
+.ritual-step {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 16px 10px; gap: 7px;
+  border-right: 1px solid rgba(17,24,39,0.07);
+  transition: background 0.15s;
+  cursor: default;
+}
+.ritual-step:last-child { border-right: none; }
+.ritual-step:hover { background: rgba(49,89,138,0.04); }
+.ritual-step svg { width: 22px; height: 22px; opacity: 0.72; }
+.ritual-step-label {
+  font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.10em; text-transform: uppercase; color: rgba(17,24,39,0.65);
+}
+
+/* Card grid */
+.card-row { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; margin-bottom: 48px; }
+.step-card {
+  background: var(--surface-strong);
+  border: 1px solid rgba(255,255,255,0.72);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 22px 20px;
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.step-card:hover { box-shadow: var(--shadow); }
+.step-card::after {
+  content: ""; position: absolute; right: -10px; bottom: -16px;
+  width: 80px; height: 80px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,209,102,0.22), transparent 68%);
+}
+.step-num {
+  font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy);
+  margin-bottom: 10px; display: block;
+}
+.step-card h3 {
+  font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 700;
+  letter-spacing: -0.03em; margin: 0 0 8px; position: relative; z-index: 1;
+}
+.step-card p {
+  font-size: 13px; color: rgba(17,24,39,0.70); line-height: 1.62;
+  margin: 0; position: relative; z-index: 1;
+}
+
+/* Product strip — from manifesto */
+.product-strip {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px 20px;
+  padding: 14px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.60);
+  margin-bottom: 48px;
+  max-width: 700px;
+}
+.product-strip-id {
+  font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink);
+}
+.ps-divider { width: 1px; height: 24px; background: var(--line); }
+.product-strip-meta { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.product-strip-meta strong { font-weight: 600; color: var(--ink); display: block; }
+.barcode { margin-left: auto; display: flex; align-items: flex-end; gap: 1px; }
+.bc-bar { background: var(--ink); border-radius: 1px; width: 2px; opacity: 0.7; }
+
+/* Quote band — from manifesto */
+.quote-band {
+  padding: 28px 30px; max-width: 820px;
+  background: linear-gradient(135deg, rgba(49,89,138,0.94), rgba(0,109,119,0.92));
+  color: white; border-radius: var(--radius-xl);
+  box-shadow: 0 24px 80px rgba(0,48,61,0.22);
+  position: relative; overflow: hidden; margin-bottom: 48px;
+}
+.quote-band::after {
+  content: ""; position: absolute; right: -60px; top: -40px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+}
+.quote-band p {
+  position: relative; z-index: 1; margin: 0 0 10px;
+  font-size: clamp(16px, 2vw, 22px); line-height: 1.48; letter-spacing: -0.02em; font-weight: 400;
+}
+.quote-band span {
+  position: relative; z-index: 1; display: inline-block;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.80;
+}
+
+/* CTA row */
+.cta-row {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+}
+.cta-primary {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink);
+  background: var(--sunlight);
+  border: 1px solid rgba(17,24,39,0.08);
+  border-radius: 999px;
+  padding: 14px 28px;
+  box-shadow: 0 8px 24px rgba(255,209,102,0.28);
+  transition: box-shadow 0.25s, transform 0.2s;
+}
+.cta-primary:hover {
+  box-shadow: 0 14px 38px rgba(255,209,102,0.40);
+  transform: translateY(-2px);
+}
+.cta-secondary {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--navy);
+  background: transparent;
+  border: 1px solid rgba(49,89,138,0.30);
+  border-radius: 999px;
+  padding: 14px 28px;
+  transition: background 0.25s, border-color 0.25s;
+}
+.cta-secondary:hover {
+  background: rgba(49,89,138,0.06);
+  border-color: rgba(49,89,138,0.55);
+}
+.arrow { display: inline-block; transition: transform 0.25s; }
+.cta-primary:hover .arrow,
+.cta-secondary:hover .arrow { transform: translateX(4px); }
+
+/* Mode tags */
+.mode-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+.mode {
+  padding: 8px 14px; border-radius: 999px; font-size: 11px;
+  border: 1px solid rgba(17,24,39,0.08);
+  background: rgba(255,255,255,0.74);
+  font-family: 'Montserrat', sans-serif; font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.mode.warm { box-shadow: inset 0 0 0 1px rgba(179,29,27,0.12); }
+.mode.cool { box-shadow: inset 0 0 0 1px rgba(30,58,138,0.12); }
+.mode.pro  { box-shadow: inset 0 0 0 1px rgba(104,139,88,0.18); }
+
+/* Signature line */
+.sig {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px;
+  margin-top: 48px; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.14em; color: rgba(17,24,39,0.45);
+  border-top: 1px solid var(--line); padding-top: 24px;
+}
+.sig::before {
+  content: ""; width: 60px; height: 1px;
+  background: linear-gradient(90deg, var(--navy), rgba(49,89,138,0));
+}
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root { --topbar-h: 60px; }
+  .topbar { top: 10px; }
+  .topbar-inner { padding: 10px 12px; border-radius: 14px; }
+  .brandline span { display: none; }
+  .pill-row { display: none; }
+  .card-row { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ritual-bar { border-radius: 18px; }
+  .cta-row { flex-direction: column; align-items: flex-start; }
+  .barcode { display: none; }
+}
+@media (max-width: 480px) {
+  .card-row { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .ring { animation: none; opacity: 0; }
+  .scroll-bar::after { animation: none; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- ═══ TOPBAR ═══ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brandline">
+      <div class="drop" aria-hidden="true"></div>
+      <div>
+        <strong>NM Thera / SOKY</strong>
+        <span>Wearable soak system · Hands &amp; feet simplified</span>
+      </div>
+    </div>
+    <div class="pill-row">
+      <span class="pill">Localized care</span>
+      <span class="pill">Wearable soak</span>
+      <span class="pill">Open source</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HERO STAGE ═══ -->
+<section class="hero">
+
+  <!-- Layer 1: reactive canvas bg -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Layer 2: paper veil — keeps it light not dark -->
+  <div class="paper-veil"></div>
+
+  <!-- Layer 3: grain -->
+  <div class="noise"></div>
+
+  <!-- Layer 4: ripple rings -->
+  <div class="ripples" id="rippleContainer">
+    <div class="ring r1" id="ring1"></div>
+    <div class="ring r2" id="ring2"></div>
+    <div class="ring r3" id="ring3"></div>
+  </div>
+
+  <!-- Layer 10: VIDEO -->
+  <div class="video-stage" id="videoStage">
+    <video
+      id="mainVid"
+      autoplay muted loop playsinline
+      aria-label="This is SOKY — wearable soak system by NM Thera"
+    >
+      <source src="https://nmthera.com/wp-content/uploads/2026/03/This-is-SOKY-Clean.mp4" type="video/mp4">
+    </video>
+
+    <!-- UI overlay on video -->
+    <div class="video-ui">
+      <div class="v-brand">
+        <p class="v-eyebrow">NM Thera presents</p>
+        <h1 class="v-wordmark">S<span class="o-letter">O</span>KY</h1>
+      </div>
+      <div class="v-cta">
+        <p class="v-tagline">Spa-grade immersion. Anywhere.</p>
+        <p class="v-desc">Wearable soak system for hands &amp; feet — the ritual that moves with you.</p>
+        <a href="https://nmthera.com" class="v-btn" target="_blank" rel="noopener">
+          Learn more <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-hint">
+    <span class="scroll-hint-label">Scroll</span>
+    <div class="scroll-bar"></div>
+  </div>
+
+</section>
+
+<!-- ═══ RITUAL SECTION ═══ -->
+<section class="ritual-section">
+  <div class="container reveal">
+
+    <span class="section-eyebrow">I — What SOKY is</span>
+    <h2 class="section-headline">S<span class="o-letter">O</span>KY<br>The Ritual</h2>
+    <p class="section-lede">
+      <strong>Fill. Seal. Soak. Drain.</strong> The same four steps whether you're soaking arthritic hands before bed,
+      resetting after competition, or beginning a practitioner protocol. A wearable environment
+      that moves with the person — not a basin they're confined to.
+    </p>
+
+    <!-- Ritual bar -->
+    <div class="ritual-bar" role="list" aria-label="Ritual steps">
+      <div class="ritual-step" role="listitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        <span class="ritual-step-label">Fill</span>
+      </div>
+      <div class="ritual-step" role="listitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span class="ritual-step-label">Seal</span>
+      </div>
+      <div class="ritual-step" role="listitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 7.39 16.74"/><path d="M12 22a10 10 0 0 1-7.39-16.74"/></svg>
+        <span class="ritual-step-label">Soak</span>
+      </div>
+      <div class="ritual-step" role="listitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/><circle cx="12" cy="4" r="1.5" fill="currentColor" stroke="none"/></svg>
+        <span class="ritual-step-label">Drain</span>
+      </div>
+    </div>
+
+    <!-- Step cards -->
+    <div class="card-row">
+      <div class="step-card">
+        <span class="step-num">01 — Fill</span>
+        <h3>Water &amp; whatever the moment calls for.</h3>
+        <p>Salts, botanicals, emollients, a thermal enhancer. Simple inputs, better organized. The enhancer goes in with the water — what you put in is the beginning of the protocol.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">02 — Seal</span>
+        <h3>The ritual is no longer tied to a basin.</h3>
+        <p>Fold the cuff inward. Portable, discrete, pressure-responsive — the seal tightens as you move rather than failing. It travels with the person. Move freely.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">03 — Soak</span>
+        <h3>15–20 minutes. The soak doesn't ask you to stop.</h3>
+        <p>Walk around. Read. Rest. A standard session runs long enough for genuine immersion without demanding a change in schedule. Stillness is not required.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-num">04 — Drain</span>
+        <h3>A graceful exit invites return.</h3>
+        <p>Remove, drain, rinse, air dry. The ritual is designed to end without friction — so the next session is easier to begin than the last one was to finish.</p>
+      </div>
+    </div>
+
+    <!-- Product strip -->
+    <div class="product-strip">
+      <span class="product-strip-id">NMT_SOKY_001</span>
+      <div class="ps-divider"></div>
+      <div class="product-strip-meta">
+        <strong>Patent No. US 11,602,631</strong>
+        NM Thera Technologies · Steward-Owned · Open Source Platform
+      </div>
+      <div class="barcode" aria-hidden="true" id="bc"></div>
+    </div>
+
+    <!-- Quote band -->
+    <div class="quote-band">
+      <p>The oldest therapies are the most democratic: water, minerals, botanicals, warmth, cooling, attention, and a vessel that lets the body stay with them. SOKY's work is to maximize what people already have — and remove every reason not to begin.</p>
+      <span>Foundational principle · conservation over novelty</span>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-row">
+      <a href="https://nmthera.com" class="cta-primary" target="_blank" rel="noopener">
+        Discover SOKY <span class="arrow">→</span>
+      </a>
+      <a href="https://nmthera.com" class="cta-secondary" target="_blank" rel="noopener">
+        Read the manifesto <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="mode-row" aria-label="Mode concepts">
+      <span class="mode warm">Warm / heat-ready</span>
+      <span class="mode cool">Cool / refresh-ready</span>
+      <span class="mode">Salts &amp; botanicals</span>
+      <span class="mode pro">Pro clinical paths</span>
+      <span class="mode">Electro / iontophoresis</span>
+    </div>
+
+    <div class="sig">NM Thera · nmthera.com · NMT_SOKY_001 · Spa-grade immersion, anywhere.</div>
+
+  </div>
+</section>
+
+</div><!-- /.shell -->
+
+<script>
+/* ═══════════════════════════════════════════
+   REACTIVE CANVAS BACKGROUND
+   Renders the portrait video cover-filled behind
+   everything. CSS blur + paper veil = warm aura
+   on a light background instead of a dark one.
+═══════════════════════════════════════════ */
+(function() {
+  const canvas = document.getElementById('bgCanvas');
+  const ctx    = canvas.getContext('2d');
+  const video  = document.getElementById('mainVid');
+  let w, h, raf;
+
+  function resize() {
+    w = canvas.width  = Math.ceil(window.innerWidth  * 1.16);
+    h = canvas.height = Math.ceil(window.innerHeight * 1.16);
+  }
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+
+  function tick() {
+    raf = requestAnimationFrame(tick);
+    if (!video.videoWidth) return;
+    const vw = video.videoWidth, vh = video.videoHeight;
+    const scale = Math.max(w / vw, h / vh) * 1.06;
+    const dw = vw * scale, dh = vh * scale;
+    ctx.drawImage(video, (w - dw) / 2, (h - dh) / 2, dw, dh);
+  }
+
+  video.addEventListener('loadeddata', () => {
+    if (raf) cancelAnimationFrame(raf);
+    tick();
+  });
+  setTimeout(() => { if (!raf) tick(); }, 600);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { cancelAnimationFrame(raf); raf = null; }
+    else if (!raf) tick();
+  });
+})();
+
+
+/* ═══════════════════════════════════════════
+   RIPPLE RING SIZING — matches video diagonal
+═══════════════════════════════════════════ */
+(function() {
+  const stage = document.getElementById('videoStage');
+  const rings = document.querySelectorAll('.ring');
+
+  function size() {
+    const r = stage.getBoundingClientRect();
+    const d = Math.hypot(r.width, r.height) * 0.82;
+    rings.forEach(ring => {
+      ring.style.width  = d + 'px';
+      ring.style.height = d + 'px';
+    });
+  }
+  window.addEventListener('resize', size, { passive: true });
+  requestAnimationFrame(() => requestAnimationFrame(size));
+})();
+
+
+/* ═══════════════════════════════════════════
+   SCROLL PARALLAX
+   Video drifts upward gently; UI overlay fades
+═══════════════════════════════════════════ */
+(function() {
+  const stage = document.getElementById('videoStage');
+
+  window.addEventListener('scroll', () => {
+    const sy = window.scrollY;
+    const drift  = sy * 0.10;
+    const shrink = Math.max(0.90, 1 - sy * 0.00025);
+    stage.style.transform = `translateY(${drift}px) scale(${shrink})`;
+  }, { passive: true });
+})();
+
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL — IntersectionObserver
+═══════════════════════════════════════════ */
+(function() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.10, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight) el.classList.add('visible');
+    else obs.observe(el);
+  });
+})();
+
+
+/* ═══════════════════════════════════════════
+   BARCODE — from manifesto
+═══════════════════════════════════════════ */
+(function() {
+  const el = document.getElementById('bc');
+  if (!el) return;
+  [18,12,20,14,18,10,22,16,12,20,14,18,10,22,16,12,20,14].forEach((h, i) => {
+    const b = document.createElement('div');
+    b.className = 'bc-bar';
+    b.style.height = h + 'px';
+    if (i % 3 === 0) b.style.width = '3px';
+    el.appendChild(b);
+  });
+})();
+</script>
+
+</body>
+</html>

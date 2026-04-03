@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOKY — Wearable Soak System | NM Thera</title>
+<meta name="description" content="SOKY is a patented wearable soak system for hands and feet. Portable immersion — spa-grade care that moves with you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;500;600;700;800;900&family=Mulish:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   BSG v3.0 — SOKY HOMEPAGE TOKENS
+═══════════════════════════════════════ */
+:root{
+  --navy:#31598A;--ink:#111827;--paper:#F7F7F5;--green:#688B58;--umber:#8A6A4D;
+  --almond:#D4BBA0;--sunlight:#FFD166;--pool:#006D77;--heat:#B31D1B;--cool:#1E3A8A;
+  --electro:#7a5c00;--actives:#0D7377;--peptides:#4A5568;
+  --muted:#667085;--line:rgba(17,24,39,0.09);--line-md:rgba(17,24,39,0.14);
+  --surface:rgba(255,255,255,0.88);--surface-strong:rgba(255,255,255,0.94);
+  --r-xl:28px;--r-lg:20px;--r-md:14px;--r-sm:8px;
+  --shadow:0 20px 56px rgba(17,24,39,0.10);--shadow-sm:0 3px 14px rgba(17,24,39,0.06);
+  --max:1200px;
+  --head:'Montserrat',system-ui,sans-serif;--serif:'DM Serif Display',Georgia,serif;
+  --sub:'Mulish',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{font-family:var(--body);background:linear-gradient(180deg,#fcfcfb 0%,var(--paper) 38%,#f3f3ef 100%);color:var(--ink);font-size:14px;line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.3;background-image:linear-gradient(rgba(17,24,39,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(17,24,39,0.015) 1px,transparent 1px);background-size:26px 26px;-webkit-mask-image:radial-gradient(circle at center,rgba(0,0,0,0.6),transparent 85%);mask-image:radial-gradient(circle at center,rgba(0,0,0,0.6),transparent 85%)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.shell{position:relative;z-index:1;width:100%;overflow-x:hidden}
+.container{width:min(calc(100% - 40px),var(--max));margin:0 auto}
+
+/* ═══ TOPBAR ═══ */
+.topbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:min(calc(100vw - 24px),1320px);z-index:100;pointer-events:none}
+.topbar-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px 20px;border:1px solid rgba(255,255,255,0.75);background:rgba(255,255,255,0.56);border-radius:16px;box-shadow:0 8px 28px rgba(17,24,39,0.07);pointer-events:auto;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background .3s,border-color .3s}
+.topbar.is-dark .topbar-inner{background:rgba(12,21,32,0.6);border-color:rgba(255,255,255,0.1);backdrop-filter:blur(18px)}
+.brand-link{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-logo{width:22px;height:22px;object-fit:contain;border-radius:4px;transition:filter .3s}
+.topbar.is-dark .brand-logo{filter:brightness(1.8)}
+.brand-name{font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);transition:color .3s}
+.topbar.is-dark .brand-name{color:rgba(255,255,255,0.8)}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-family:var(--sub);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.topbar.is-dark .nav-links a{color:rgba(255,255,255,0.45)}
+.nav-links a:hover{color:var(--navy)}
+.topbar.is-dark .nav-links a:hover{color:#fff}
+.nav-cta{display:flex;align-items:center;gap:6px;padding:7px 16px;border-radius:999px;background:linear-gradient(135deg,var(--navy),var(--pool));color:#fff;font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 8px rgba(49,89,138,0.25)}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(49,89,138,0.35)}
+
+/* ═══ HERO — CINEMATIC FULL-BLEED ═══ */
+.hero{position:relative;width:100vw;min-height:100vh;overflow:hidden;display:flex;align-items:stretch;margin-left:calc(-50vw + 50%);padding-bottom:0}
+#heroBg{position:absolute;inset:0;width:100%;height:100%;filter:blur(56px) saturate(1.5) brightness(0.75);z-index:1;pointer-events:none}
+.hero-veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(135deg,rgba(12,21,32,0.84) 0%,rgba(12,21,32,0.5) 50%,rgba(12,21,32,0.74) 100%)}
+.hero-content{position:relative;z-index:10;display:flex;flex-direction:row;align-items:center;gap:clamp(32px,5vw,64px);width:100%;max-width:1320px;margin:0 auto;padding:140px clamp(2rem,5vw,4rem) 160px}
+/* Video stage */
+.hero-vid-stage{position:relative;width:clamp(240px,28vw,360px);aspect-ratio:9/16;min-height:420px;border-radius:var(--r-xl);overflow:hidden;border:1px solid rgba(255,255,255,0.18);box-shadow:0 30px 80px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.15);background:rgba(12,21,32,0.3);flex-shrink:0;order:2}
+.hero-vid-stage video{width:100%;height:100%;object-fit:cover;display:block}
+.hero-vid-stage::before{content:'';position:absolute;inset:0;z-index:2;border-radius:inherit;background:linear-gradient(to bottom,rgba(12,21,32,0.3) 0%,transparent 15%,transparent 80%,rgba(12,21,32,0.45) 100%);pointer-events:none}
+.hero-vid-ui{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(12px,3%,20px);pointer-events:none}
+.hv-brand{opacity:0;transform:translateY(-10px);animation:fadeUp .8s .3s ease forwards}
+.hv-eyebrow{font-family:var(--sub);font-size:7px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:2px}
+.hv-wordmark{font-family:var(--head);font-weight:800;font-size:clamp(14px,2.5vw,22px);line-height:1;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.5);text-shadow:0 1px 8px rgba(0,0,0,0.3)}
+.hv-bottom{opacity:0;transform:translateY(10px);animation:fadeUp .8s .6s ease forwards;pointer-events:all}
+.hv-tagline{font-family:var(--sub);font-size:clamp(8px,1.2vw,10px);font-weight:600;letter-spacing:0.06em;color:rgba(255,255,255,0.65);text-shadow:0 1px 4px rgba(0,0,0,0.3);margin-bottom:8px}
+.hv-mute{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:5px 10px 5px 8px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,0.5);font-family:var(--sub);font-size:8px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.hv-mute:hover{background:rgba(255,255,255,0.2);color:#fff}
+.hv-mute svg{width:13px;height:13px;fill:currentColor;flex-shrink:0}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+/* Hero text */
+.hero-text{position:relative;z-index:10;text-align:left;flex:1;min-width:0;order:1}
+.hero-eyebrow{font-family:var(--sub);font-size:9.5px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:1rem;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::after{content:'';height:1px;width:40px;background:rgba(255,255,255,0.25)}
+.hero-title{font-family:var(--head);font-size:clamp(52px,9vw,120px);font-weight:900;line-height:.88;letter-spacing:.10em;text-transform:uppercase;color:#fff;margin-bottom:.5rem}
+.hero-tagline{font-family:var(--head);font-size:clamp(12px,1.6vw,17px);font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:1.5rem}
+.hero-tagline strong{font-weight:600;color:rgba(255,255,255,0.6)}
+.hero-desc{font-family:var(--body);font-size:clamp(12px,1.2vw,14px);font-weight:300;color:rgba(255,255,255,0.48);line-height:1.7;max-width:500px;margin-bottom:1.5rem}
+.hero-desc em{font-style:italic;color:rgba(255,255,255,0.62)}
+.hero-badges{display:flex;flex-wrap:wrap;gap:7px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:999px;padding:5px 12px;font-family:var(--sub);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.38)}
+.hero-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--pool);flex-shrink:0}
+.hero-badge.hl{background:rgba(49,89,138,0.3);border-color:rgba(49,89,138,0.5);color:rgba(255,255,255,0.65)}
+.hero-badge.hl::before{background:#7bb8e8}
+/* Scroll hint */
+.scroll-cue{position:absolute;bottom:100px;left:clamp(4rem,8vw,8rem);z-index:20;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 2s ease forwards;pointer-events:none}
+.scroll-cue span{font-family:var(--head);font-size:8px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+.scroll-cue-bar{width:1px;height:32px;position:relative;background:rgba(255,255,255,0.06);overflow:hidden}
+.scroll-cue-bar::after{content:'';position:absolute;top:0;left:0;width:100%;height:50%;background:linear-gradient(to bottom,rgba(255,255,255,0.45),rgba(0,109,119,0.5));animation:scrollDrop 1.8s ease-in-out infinite}
+@keyframes scrollDrop{0%{transform:translateY(-100%)}100%{transform:translateY(300%)}}
+/* Hero bottom */
+.hero-bottom{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:1.2rem clamp(2rem,5vw,4rem);background:rgba(12,21,32,0.4);display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;min-height:60px}
+.hero-meta{font-family:var(--sub);font-size:10px;color:rgba(255,255,255,0.25);line-height:1.8}
+.hero-meta strong{color:rgba(255,255,255,0.4);font-weight:600}
+.hero-contact{text-align:right;font-family:var(--sub);font-size:10px;color:rgba(255,255,255,0.25);line-height:1.8}
+.hero-contact a{color:rgba(255,255,255,0.35)}
+
+/* ═══ SECTION DIVIDER ═══ */
+.divider{border:none;border-top:1px solid var(--line);margin:0;position:relative}
+.divider::after{content:'· · ·';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--paper);padding:0 1rem;font-family:var(--sub);font-size:10px;color:var(--line-md);letter-spacing:.3em}
+
+/* ═══ SECTION PATTERNS ═══ */
+.sec{padding:clamp(4rem,8vw,7rem) 0}
+.sec-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);margin-bottom:.5rem;display:flex;align-items:center;gap:10px}
+.sec-eyebrow::after{content:'';height:1px;flex:1;background:var(--line)}
+.sec-heading{font-family:var(--serif);font-size:clamp(26px,4vw,44px);color:var(--ink);margin-bottom:.5rem;line-height:1.12}
+.sec-sub{font-family:var(--body);font-size:14px;color:var(--muted);max-width:560px;margin-bottom:2.5rem;line-height:1.7}
+
+/* ═══ QUOTE BAND ═══ */
+.quote-band{padding:clamp(1rem,3vw,1.75rem);background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92));color:#fff;border-radius:var(--r-xl);box-shadow:0 24px 80px rgba(0,48,61,0.2);overflow:hidden;position:relative}
+.quote-band::after{content:'';position:absolute;right:-60px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.15),transparent 70%)}
+.quote-band blockquote{position:relative;z-index:1;font-family:var(--serif);font-size:clamp(17px,2vw,24px);line-height:1.45;font-style:italic;margin-bottom:10px}
+.quote-band cite{position:relative;z-index:1;display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;opacity:.65;font-style:normal;font-family:var(--sub);font-weight:600}
+
+/* ═══ CINEMATIC VIDEO BREAK ═══ */
+.vid-break{width:100%;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow);position:relative;background:#0c1520}
+.vid-break video{width:100%;height:auto;display:block;max-height:520px;object-fit:cover}
+.vid-break .vid-mute{position:absolute;bottom:14px;right:14px;z-index:5;display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.15);border-radius:999px;padding:6px 12px 6px 8px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,0.6);font-family:var(--sub);font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.vid-break .vid-mute:hover{background:rgba(0,0,0,0.7);color:#fff}
+.vid-break .vid-mute.is-on{background:rgba(0,109,119,0.6);border-color:rgba(0,109,119,0.4);color:#fff}
+.vid-break .vid-mute.is-on:hover{background:rgba(0,109,119,0.8)}
+.vid-break .vid-mute svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+.vid-break-cap{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.25rem .8rem;background:linear-gradient(0deg,rgba(12,21,32,0.65) 0%,transparent 100%);font-family:var(--sub);font-size:9.5px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,0.5);font-style:italic}
+
+/* ═══ EDITORIAL IMAGE ═══ */
+.ed-img{width:100%;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow);position:relative;background:#0e1720}
+.ed-img img{width:100%;display:block;object-fit:cover;object-position:center 40%}
+.ed-img.tall img{height:480px}
+.ed-img.med img{height:420px}
+.ed-img.short img{height:280px}
+.ed-img-cap{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 1.25rem .8rem;background:linear-gradient(0deg,rgba(12,21,32,0.65) 0%,transparent 100%);font-family:var(--sub);font-size:9.5px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,0.5);font-style:italic}
+/* Image grid */
+.img-grid{display:grid;gap:12px}
+.img-grid.cols-2{grid-template-columns:1fr 1fr}
+.img-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+.img-grid img{width:100%;height:280px;object-fit:cover;border-radius:var(--r-md);border:1px solid var(--line);transition:transform .3s}
+.img-grid img:hover{transform:scale(1.015)}
+.img-grid img.contain{object-fit:contain;background:#fff;padding:.5rem}
+
+/* ═══ RITUAL STEPS ═══ */
+.ritual{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:2rem}
+.rstep{padding:1.4rem 1rem;text-align:center;border-right:1px solid var(--line);position:relative;transition:background .2s;cursor:default}
+.rstep:last-child{border-right:none}
+.rstep:hover{background:rgba(49,89,138,0.03)}
+.rstep.don{background:rgba(0,109,119,0.04)}
+.rstep-n{font-family:var(--head);font-size:34px;font-weight:900;color:var(--navy);line-height:1;margin-bottom:.3rem}
+.rstep.don .rstep-n{color:var(--pool)}
+.rstep-word{font-family:var(--sub);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-bottom:.5rem}
+.rstep-desc{font-family:var(--body);font-size:11px;color:var(--muted);line-height:1.55}
+
+/* ═══ DON CALLOUT ═══ */
+.callout{border-left:3px solid var(--navy);background:rgba(49,89,138,0.05);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:1rem 1.3rem}
+.callout.pool{border-left-color:var(--pool);background:rgba(0,109,119,0.05)}
+.callout.green{border-left-color:var(--green);background:rgba(104,139,88,0.05)}
+.callout-lbl{font-family:var(--sub);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.3rem}
+.callout .callout-lbl{color:var(--navy)}
+.callout.pool .callout-lbl{color:var(--pool)}
+.callout.green .callout-lbl{color:var(--green)}
+.callout p{font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.72);line-height:1.7}
+
+/* ═══ SCIENCE STATS ═══ */
+.sci-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:2.5rem}
+.sci-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1.5rem;box-shadow:var(--shadow-sm);text-align:center;transition:transform .2s,box-shadow .2s}
+.sci-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.sci-val{font-family:var(--serif);font-size:clamp(28px,4vw,40px);color:var(--pool);line-height:1;margin-bottom:.35rem}
+.sci-lbl{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:.4rem}
+.sci-desc{font-family:var(--body);font-size:11.5px;color:var(--muted);line-height:1.5}
+
+/* ═══ MODE CARDS (EXPANDABLE) ═══ */
+.mode-cards{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:1rem}
+.modes-cta{text-align:center;padding:1.5rem 1rem 0;max-width:520px;margin:0 auto 2rem}
+.modes-cta-label{font-family:var(--sub);font-size:9.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:0.4rem}
+.modes-cta p{font-size:13px;color:var(--muted);line-height:1.6}
+.mode-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;flex:0 0 calc(25% - 6px);min-width:140px;max-width:200px}
+.mode-card:hover{border-color:rgba(49,89,138,0.25);box-shadow:var(--shadow);transform:translateY(-2px)}
+.mode-card-hd{display:flex;align-items:center;gap:10px;padding:14px 16px}
+.mode-card-icon{width:32px;height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.mode-card-icon svg{width:100%;height:100%}
+.mode-card-info{flex:1;min-width:0}
+.mode-card-name{font-family:var(--sub);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.mode-card-tag{font-family:var(--body);font-size:10px;color:var(--muted);margin-top:1px}
+.mode-card-chev{width:14px;height:14px;color:var(--muted);transition:transform .3s;flex-shrink:0}
+.mode-card.open .mode-card-chev{transform:rotate(180deg)}
+.mode-card-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.mode-card.open .mode-card-body{max-height:400px}
+.mode-card-body-inner{padding:0 16px 14px;font-family:var(--body);font-size:12px;color:rgba(17,24,39,0.7);line-height:1.65;border-top:1px solid var(--line);padding-top:12px}
+
+/* ═══ ENGINEERING SVG ═══ */
+.eng-box{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:2rem;box-shadow:var(--shadow-sm);margin-bottom:2rem}
+.eng-box svg{width:100%;height:auto;display:block}
+.eng-title{font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:4px}
+.eng-desc{font-family:var(--body);font-size:12px;color:var(--muted);margin-bottom:1.25rem;line-height:1.6}
+
+/* ═══ SKU OFFER CARDS ═══ */
+.sku-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:2rem}
+.sku-c{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);position:relative;transition:transform .2s,box-shadow .2s}
+.sku-c:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.sku-c::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sku-c.research::before{background:linear-gradient(90deg,var(--pool),var(--green))}
+.sku-c.core::before{background:linear-gradient(90deg,var(--navy),var(--pool))}
+.sku-c.kit::before{background:linear-gradient(90deg,var(--green),var(--navy))}
+.sku-c-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#f0eeeb}
+.sku-c-body{padding:1.25rem}
+.sku-c-id{font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.sku-c-price{font-family:var(--serif);font-size:32px;color:var(--ink);line-height:1;margin-bottom:.25rem}
+.sku-c-tag{display:inline-flex;align-items:center;font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-bottom:.5rem}
+.tag-r{background:rgba(0,109,119,0.1);color:var(--pool)}.tag-co{background:rgba(49,89,138,0.1);color:var(--navy)}.tag-k{background:rgba(104,139,88,0.1);color:var(--green)}
+.sku-c-name{font-family:var(--sub);font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.45rem}
+.sku-c-desc{font-family:var(--body);font-size:11.5px;color:var(--muted);line-height:1.55;margin-bottom:.7rem}
+.sku-c-persona{font-family:var(--body);font-size:10.5px;color:rgba(17,24,39,0.5);font-style:italic;line-height:1.5;border-top:1px solid var(--line);padding-top:.5rem}
+.sku-stock-bar{display:flex;align-items:center;gap:6px;margin-top:.6rem}
+.stk-bar{flex:1;height:6px;border-radius:999px;background:var(--line);overflow:hidden}
+.stk-fill{height:100%;border-radius:999px}
+.stk-lbl{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+
+/* ═══ BATCH BAR ═══ */
+.batch-wrap{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1.25rem;box-shadow:var(--shadow-sm)}
+.batch-hd{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:.6rem}
+.batch-bar{display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px;margin-bottom:.5rem}
+.batch-seg{border-radius:999px}
+.batch-labels{display:flex;gap:1.5rem;flex-wrap:wrap}
+.batch-lbl{font-family:var(--sub);font-size:10px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:5px}
+.batch-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ═══ FAQ ═══ */
+.faq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.faq-item{border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;cursor:pointer;transition:all .2s;background:var(--surface-strong)}
+.faq-item:hover{border-color:rgba(49,89,138,0.25);background:#fff}
+.faq-q{font-family:var(--sub);font-size:11px;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.faq-arrow{color:var(--muted);flex-shrink:0;font-size:12px;transition:transform .2s}
+.faq-item.open .faq-arrow{transform:rotate(90deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-a{max-height:300px}
+.faq-a-inner{padding-top:8px;font-family:var(--body);font-size:12px;color:var(--muted);line-height:1.6}
+
+/* ═══ CTA BAND ═══ */
+.cta-band{padding:clamp(2rem,4vw,3rem);background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92));color:#fff;border-radius:var(--r-xl);text-align:center;margin:4rem 0;box-shadow:0 24px 80px rgba(0,48,61,0.2);position:relative;overflow:hidden}
+.cta-band::after{content:'';position:absolute;right:-60px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%)}
+.cta-heading{font-family:var(--serif);font-size:clamp(20px,3vw,32px);font-style:italic;margin-bottom:.75rem;position:relative;z-index:1}
+.cta-sub{font-family:var(--body);font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;position:relative;z-index:1;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-buttons{display:flex;gap:12px;justify-content:center;position:relative;z-index:1;flex-wrap:wrap}
+.cta-btn{padding:11px 28px;border-radius:999px;font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;transition:all .2s}
+.cta-btn.primary{background:#fff;color:var(--navy)}
+.cta-btn.primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(255,255,255,0.3)}
+.cta-btn.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.3)}
+.cta-btn.secondary:hover{background:rgba(255,255,255,0.1)}
+
+/* ═══ FOOTER ═══ */
+.site-footer{padding:3rem 0;border-top:1px solid var(--line)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.5fr;gap:2rem;margin-bottom:2rem}
+.footer-col h4{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-bottom:.75rem}
+.footer-col a,.footer-col p{font-family:var(--body);font-size:12px;color:var(--muted);line-height:2;display:block;transition:color .15s}
+.footer-col a:hover{color:var(--navy)}
+.footer-brand{font-family:var(--head);font-size:18px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-bottom:.5rem}
+.footer-brand-sub{font-family:var(--body);font-size:11px;color:var(--muted);line-height:1.6;max-width:240px;margin-bottom:1rem}
+.footer-newsletter{display:flex;gap:6px}
+.footer-newsletter input{flex:1;padding:8px 12px;border:1px solid var(--line);border-radius:var(--r-sm);font-family:var(--body);font-size:12px;background:#fff;outline:none}
+.footer-newsletter input:focus{border-color:var(--navy)}
+.footer-newsletter button{padding:8px 16px;border:none;border-radius:var(--r-sm);background:var(--navy);color:#fff;font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.footer-newsletter button:hover{background:var(--pool)}
+.footer-bottom{font-family:var(--body);font-size:10px;color:var(--muted);text-align:center;padding-top:1rem;border-top:1px solid var(--line)}
+.footer-compliance{font-family:var(--body);font-size:9.5px;color:rgba(17,24,39,0.35);text-align:center;margin-top:.75rem;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* ═══ RIPPLE CANVAS OVERLAY ═══ */
+#rippleCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+}
+#rippleCanvas.disabled { display: none }
+
+/* ═══ NOISE TEXTURE OVERLAY ═══ */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ═══ READING PROGRESS BAR ═══ */
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  max-width: 120px;
+}
+.progress {
+  height: 4px;
+  flex: 1;
+  min-width: 40px;
+  border-radius: 999px;
+  background: rgba(17,24,39,0.08);
+  overflow: hidden;
+}
+.topbar.is-dark .progress {
+  background: rgba(255,255,255,0.1);
+}
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--navy), var(--pool), var(--green));
+  transition: width 0.2s ease;
+}
+
+/* ═══ CONNECTION BAND ═══ */
+.connection-band {
+  text-align: center;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  max-width: 720px;
+  margin: 0 auto;
+}
+.conn-eyebrow {
+  font-family: var(--sub);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pool);
+  margin-bottom: 0.75rem;
+}
+.conn-heading {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.5vw, 38px);
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+.conn-body {
+  font-family: var(--body);
+  font-size: 14px;
+  color: rgba(17,24,39, 0.68);
+  line-height: 1.78;
+  margin-bottom: 1rem;
+}
+.conn-coda {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2vw, 20px);
+  font-style: italic;
+  color: var(--pool);
+  line-height: 1.4;
+}
+
+/* ═══ PERSONA CARDS ═══ */
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 2rem;
+}
+.persona-card {
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s, box-shadow .2s;
+}
+.persona-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.persona-icon {
+  margin-bottom: 0.75rem;
+}
+.persona-label {
+  font-family: var(--sub);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.persona-title {
+  font-family: var(--serif);
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+.persona-desc {
+  font-family: var(--body);
+  font-size: 12.5px;
+  color: rgba(17,24,39,0.68);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+.persona-conditions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.persona-conditions span {
+  font-family: var(--sub);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(49,89,138,0.06);
+  color: var(--navy);
+  border: 1px solid rgba(49,89,138,0.1);
+}
+
+/* ═══ SCROLL-MARGIN FOR ANCHOR OFFSETS ═══ */
+#ritual, #science, #offers, #faq, #modes, #who {
+  scroll-margin-top: 100px;
+}
+
+/* ═══ LIQUID ACCENT DIVIDER ═══ */
+.liquid-accent{height:4px;border:none;margin:0;background:linear-gradient(90deg,transparent 0%,rgba(0,109,119,0.15) 15%,rgba(49,89,138,0.25) 35%,rgba(0,109,119,0.3) 50%,rgba(104,139,88,0.2) 70%,rgba(49,89,138,0.15) 85%,transparent 100%);filter:blur(1px)}
+
+/* ═══ REFUSE / PURSUE BLOCK ═══ */
+.refuse-pursue{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:680px;margin:0 auto;padding:clamp(1.5rem,3vw,2.5rem) 0}
+.rp-col{padding-left:14px}
+.rp-col.refuse{border-left:2px solid var(--heat)}
+.rp-col.pursue{border-left:2px solid var(--green)}
+.rp-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.6rem}
+.rp-col.refuse .rp-eyebrow{color:var(--heat)}
+.rp-col.pursue .rp-eyebrow{color:var(--green)}
+.rp-col li{font-family:var(--body);font-size:11px;color:rgba(17,24,39,0.58);line-height:1.7;list-style:none;padding:2px 0}
+
+/* ═══ STICKY CTA BAR ═══ */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:90;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,4vw,3rem);background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);transform:translateY(100%);transition:transform .3s ease;pointer-events:none}
+.sticky-cta.visible{transform:translateY(0);pointer-events:auto}
+.sticky-cta-label{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.sticky-cta-btn{padding:6px 18px;border-radius:999px;background:linear-gradient(135deg,var(--navy),var(--pool));color:#fff;font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 8px rgba(49,89,138,0.25)}
+.sticky-cta-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(49,89,138,0.35)}
+
+/* ═══ EMAIL CAPTURE POPUP ═══ */
+.email-popup-overlay{position:fixed;inset:0;z-index:9998;background:rgba(12,21,32,0.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.email-popup-overlay.active{opacity:1;pointer-events:auto}
+.email-popup{position:relative;width:min(420px,calc(100vw - 40px));padding:clamp(1.5rem,4vw,2.5rem);border-radius:var(--r-xl);background:linear-gradient(135deg,rgba(49,89,138,0.96),rgba(0,109,119,0.94));color:#fff;box-shadow:0 30px 80px rgba(0,0,0,0.35);text-align:center}
+.email-popup-close{position:absolute;top:12px;right:12px;width:28px;height:28px;border:none;background:rgba(255,255,255,0.12);border-radius:50%;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.email-popup-close:hover{background:rgba(255,255,255,0.25)}
+.email-popup h3{font-family:var(--serif);font-size:clamp(20px,3vw,26px);font-style:italic;margin-bottom:.5rem}
+.email-popup p{font-family:var(--body);font-size:12px;color:rgba(255,255,255,0.65);line-height:1.65;margin-bottom:1.25rem;max-width:340px;margin-left:auto;margin-right:auto}
+.email-popup-form{display:flex;gap:6px;max-width:320px;margin:0 auto}
+.email-popup-form input{flex:1;padding:9px 14px;border:1px solid rgba(255,255,255,0.25);border-radius:999px;background:rgba(255,255,255,0.1);color:#fff;font-family:var(--body);font-size:12px;outline:none}
+.email-popup-form input::placeholder{color:rgba(255,255,255,0.35)}
+.email-popup-form input:focus{border-color:rgba(255,255,255,0.5)}
+.email-popup-form button{padding:9px 18px;border:none;border-radius:999px;background:#fff;color:var(--navy);font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:transform .15s}
+.email-popup-form button:hover{transform:translateY(-1px)}
+
+/* ═══ REVEAL ═══ */
+.reveal{transition:opacity .7s ease,transform .7s ease}
+html.js .reveal{opacity:0;transform:translateY(24px)}
+html.js .reveal.vis{opacity:1;transform:translateY(0)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  .hero{min-height:100vh}
+  .hero-content{flex-direction:row;flex-wrap:wrap;align-items:flex-start;padding:calc(80px + 20px) clamp(1.5rem,4vw,2.5rem) 160px;gap:20px}
+  .hero-vid-stage{width:clamp(220px,35vw,300px);order:2;flex-shrink:0}
+  .hero-text{order:1;flex:1;min-width:55%}
+  .hero-bottom{flex-direction:column;align-items:flex-start;gap:.6rem;padding:0.9rem clamp(1.5rem,4vw,2.5rem) 1rem;overflow:hidden}
+  .hero-contact{text-align:left}
+  .scroll-cue{display:none}
+  .sci-grid{grid-template-columns:1fr 1fr}
+  .mode-card{flex:0 0 calc(25% - 6px);min-width:120px}
+  .sku-cards{grid-template-columns:1fr}
+  .ritual{grid-template-columns:repeat(3,1fr)}.rstep:nth-child(4){border-top:1px solid var(--line)}.rstep:nth-child(3){border-right:none}
+  .faq-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .nav-links a:not(.nav-cta){display:none}
+  .refuse-pursue{grid-template-columns:1fr 1fr;gap:1.5rem}
+  /* Mobile performance optimizations */
+  body::before{display:none !important}
+  .noise-overlay{display:none !important}
+  .topbar-inner{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;background:rgba(255,255,255,0.92) !important}
+  .topbar.is-dark .topbar-inner{background:rgba(12,21,32,0.88) !important}
+  :root{--shadow:0 4px 12px rgba(17,24,39,0.08);--shadow-sm:0 1px 4px rgba(17,24,39,0.05)}
+  html{scroll-behavior:auto !important}
+  #heroBg{filter:blur(40px) saturate(1.2) brightness(0.8) !important;will-change:auto !important}
+  .hero-veil{background:rgba(12,21,32,0.72) !important}
+  .persona-grid{grid-template-columns:1fr}
+  .img-grid.cols-2{grid-template-columns:1fr}
+  .img-grid.cols-3{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .hero{min-height:auto;padding-bottom:0;flex-direction:column}
+  .hero-content{flex-direction:column;align-items:center;gap:24px;padding-bottom:0}
+  .hero-vid-stage{width:min(300px,55vw);order:1;align-self:center}
+  .hero-text{order:2;text-align:left;align-self:flex-start;min-width:0;flex:none;width:100%}
+  .hero-bottom{position:relative;padding:1rem clamp(1.5rem,4vw,2.5rem);overflow:hidden}
+  .hero-meta,.hero-contact{overflow-wrap:break-word;word-break:break-word;max-width:100%}
+  .scroll-cue{display:none}
+  .persona-grid{grid-template-columns:1fr}
+  .img-grid.cols-2{grid-template-columns:1fr}
+  .refuse-pursue{grid-template-columns:1fr;gap:1rem}
+}
+@media(max-width:600px){
+  .hero-vid-stage{width:min(220px,55vw);min-height:360px}
+  .hero-title{font-size:clamp(40px,12vw,72px);letter-spacing:.06em}
+  .ritual{grid-template-columns:1fr 1fr}
+  .rstep:nth-child(3){border-right:1px solid var(--line);border-top:1px solid var(--line)}
+  .rstep:nth-child(5){grid-column:span 2;border-top:1px solid var(--line)}
+  .sci-grid{grid-template-columns:1fr}
+  .mode-card{flex:0 0 calc(50% - 4px);min-width:0;max-width:none}
+  .faq-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .img-grid.cols-3{grid-template-columns:1fr}
+  .img-grid img{height:220px}
+  .cta-band{padding:2rem 1.25rem;border-radius:var(--r-lg)}
+  .progress-wrap{display:none}
+  .sticky-cta{display:none !important}
+}
+@media(max-width:480px){
+  .hero{min-height:auto;padding-bottom:0}
+  .hero-content{flex-direction:column;align-items:center;padding:calc(80px + 16px) 1.25rem 0;gap:16px}
+  .hero-vid-stage{width:min(200px,55vw);order:1;align-self:center}
+  .hero-text{order:2;text-align:left;align-self:flex-start}
+  .hero-bottom{position:relative;padding:1rem 1.25rem}
+  .hero-meta,.hero-contact{font-size:9px;line-height:1.7}
+}
+@media(max-width:380px){
+  .hero-vid-stage{width:min(220px,65vw)}
+}
+@media print{
+  .topbar,.scroll-cue,.vid-break .vid-mute,#rippleCanvas,.noise-overlay{display:none}
+  .reveal{opacity:1!important;transform:none!important}
+  .hero{min-height:auto;page-break-after:always}
+  .hero-vid-stage,.vid-break video,#heroBg,.hero-veil{display:none}
+}
+</style>
+</head>
+<body>
+<canvas id="rippleCanvas" aria-hidden="true"></canvas>
+<div class="noise-overlay" aria-hidden="true"></div>
+<script>document.documentElement.classList.add('js');</script>
+<div class="shell">
+
+<!-- ═══ TOPBAR ═══ -->
+<div class="topbar" id="topbar">
+<div class="topbar-inner">
+  <a href="https://nmthera.com" class="brand-link">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Logo-Icon.png" alt="NM Thera" class="brand-logo">
+    <span class="brand-name">NM Thera</span>
+  </a>
+  <div class="nav-links">
+    <a href="#ritual">The Ritual</a>
+    <a href="#science">Science</a>
+    <a href="#offers">Shop</a>
+    <a href="#faq">FAQ</a>
+    <a href="#offers" class="nav-cta">Shop Now</a>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress" aria-label="Reading progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════
+   HERO — CINEMATIC FULL-BLEED
+═══════════════════════════════════ -->
+<div class="hero" id="heroSection">
+  <canvas id="heroBg" aria-hidden="true"></canvas>
+  <div class="hero-veil" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-vid-stage">
+      <video id="heroVid" autoplay muted loop playsinline preload="metadata" poster="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg">
+        <source src="https://nmthera.com/wp-content/uploads/2026/03/26Mar2026-KV-BLUE.mp4" type="video/mp4">
+      </video>
+      <div class="hero-vid-ui">
+        <div class="hv-brand">
+          <p class="hv-eyebrow">NM Thera presents</p>
+          <div class="hv-wordmark">SOKY</div>
+        </div>
+        <div class="hv-bottom">
+          <p class="hv-tagline">Spa-grade immersion. Anywhere.</p>
+          <button class="hv-mute" id="heroMuteBtn" aria-label="Toggle sound">
+            <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>
+            <span id="heroMuteLbl">Unmute</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-text">
+      <div class="hero-eyebrow">Wearable Soak Platform</div>
+      <h1 class="hero-title">SOKY</h1>
+      <div class="hero-tagline"><strong>Hand &amp; Footcare</strong> Reimagined.</div>
+      <p class="hero-desc"><em>What if one of the oldest acts of personal care — immersing the body in water — could move with the person?</em> A patented silicone glove that seals water, warmth, and therapeutic agents around your hand while you move freely. No bowls. No basins. No sitting still.</p>
+      <div class="hero-badges">
+        <span class="hero-badge hl">US Patent · Valid to 2043</span>
+        <span class="hero-badge">3 Offers Available Now</span>
+        <span class="hero-badge">Medical-Grade Silicone</span>
+      </div>
+      <div style="font-family:var(--sub);font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:1rem">~8 Min Read · Scroll to explore</div>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-cue-bar"></div></div>
+
+  <div class="hero-bottom">
+    <div class="hero-meta"><strong>NM Therapeutics, Inc.</strong> · Wearable soak systems for hands &amp; feet</div>
+    <div class="hero-contact"><a href="mailto:kenny@nmthera.com">kenny@nmthera.com</a> · nmthera.com</div>
+  </div>
+</div>
+
+<!-- ═══ BODY CONTENT ═══ -->
+<div style="padding:0 0 4rem">
+
+<!-- ─── WHAT WE REFUSE / WHAT WE PURSUE ─── -->
+<div class="container" style="padding-top:clamp(2rem,4vw,3rem)">
+  <div class="refuse-pursue reveal">
+    <div class="rp-col refuse">
+      <div class="rp-eyebrow">What We Refuse</div>
+      <ul>
+        <li>Complexity disguised as innovation</li>
+        <li>Care that demands stillness</li>
+        <li>Products designed to be replaced</li>
+      </ul>
+    </div>
+    <div class="rp-col pursue">
+      <div class="rp-eyebrow">What We Pursue</div>
+      <ul>
+        <li>Simplicity earned through discipline</li>
+        <li>Rituals that move with the person</li>
+        <li>Tools built to be kept and repaired</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOUNDING INSIGHT ─── -->
+<div class="sec">
+<div class="container">
+  <div class="quote-band reveal" style="margin-bottom:2rem">
+    <blockquote>"Care for the hands is care for everything the hands make possible. When we restore circulation to tired hands, we restore the capacity to build. When we return sensation to numb feet, we return a person to their own body."</blockquote>
+    <cite>— NM Thera Manifesto, 2026</cite>
+  </div>
+
+  <div class="ed-img med reveal" style="margin-bottom:2rem">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_0152.jpg" alt="SOKY in a home setting — the dog approves" loading="lazy" style="object-position:center 50%">
+    <div class="ed-img-cap">A real soak session at home — the ritual fits wherever life happens</div>
+  </div>
+
+  <div style="max-width:680px;margin:0 auto;text-align:center" class="reveal">
+    <p style="font-family:var(--serif);font-size:clamp(18px,2.2vw,24px);color:rgba(17,24,39,0.85);line-height:1.45;font-style:italic;margin-bottom:1rem">The ritual of soaking has existed in every human culture that left records.</p>
+    <p style="font-family:var(--body);font-size:14px;color:var(--muted);line-height:1.75;max-width:540px;margin:0 auto">Warm water, time, and attention are among the most powerful therapeutic forces available. SOKY makes them <strong style="color:var(--ink)">portable</strong> — so the ritual can finally move with the person who needs it.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── LIQUID ACCENT ─── -->
+<hr class="liquid-accent">
+
+<!-- ─── HUMAN CONNECTION ─── -->
+<div class="container" style="margin-bottom:2rem">
+  <div class="connection-band reveal">
+    <div class="conn-eyebrow">The Deeper Idea</div>
+    <h2 class="conn-heading">The hand is where connection begins.</h2>
+    <p class="conn-body">A handshake. A child's grip. A steadying touch on someone's shoulder. The moments that matter most in a complex world happen through our hands — and millions of people avoid them. Sweating, cracking, aching, or simply neglected, the hands become a barrier instead of a bridge. SOKY exists to remove that barrier. Not with complexity, but with water, warmth, and a ritual simple enough to keep.</p>
+    <p class="conn-coda">When we restore care to the hands, we restore the capacity to reach out.</p>
+  </div>
+</div>
+
+<!-- ─── WHO IT'S FOR ─── -->
+<div class="sec" id="who">
+<div class="container">
+  <div class="sec-eyebrow">Who It's For</div>
+  <h2 class="sec-heading">Built for people, not personas alone.</h2>
+  <p class="sec-sub">SOKY should feel warm enough for self-care, structured enough for clinical guidance, and efficient enough for recovery — because real people are usually all three.</p>
+
+  <div class="persona-grid reveal">
+    <div class="persona-card">
+      <div class="persona-icon" style="color:var(--pool)">
+        <svg viewBox="0 0 32 32" fill="none" width="36" height="36"><circle cx="16" cy="10" r="5" stroke="currentColor" stroke-width="2"/><path d="M6 28c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="persona-label">Self / Personal Care</div>
+      <h3 class="persona-title">The calm-seeker</h3>
+      <p class="persona-desc">You're looking for rituals of restoration — hydration, relief, cleanliness, discretion, and everyday confidence. Care that fits into the rhythm of a real life rather than interrupting it. You've never had a hand care routine that actually stuck. SOKY is how you begin.</p>
+      <div class="persona-conditions">
+        <span>Dry, cracked skin</span><span>Hand fatigue</span><span>Daily wellness</span><span>Relaxation</span>
+      </div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-icon" style="color:var(--navy)">
+        <svg viewBox="0 0 32 32" fill="none" width="36" height="36"><rect x="7" y="4" width="18" height="24" rx="3" stroke="currentColor" stroke-width="2"/><line x1="12" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="14" x2="18" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="22" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="persona-label">Clinician-Adjacent</div>
+      <h3 class="persona-title">The practitioner &amp; guidance-seeker</h3>
+      <p class="persona-desc">You value safe, supportive tools that complement clinical practice. Your recommendation is only as durable as the patient's ability to keep the routine — SOKY removes every friction point in the home soak protocol.</p>
+      <div class="persona-conditions">
+        <span>Hyperhidrosis</span><span>Eczema</span><span>Arthritis</span><span>Post-surgical</span>
+      </div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-icon" style="color:var(--green)">
+        <svg viewBox="0 0 32 32" fill="none" width="36" height="36"><path d="M16 4l3 6h7l-5.5 4.5 2 7L16 17l-6.5 4.5 2-7L6 10h7l3-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="persona-label">Performance / Recovery</div>
+      <h3 class="persona-title">The efficiency-minded</h3>
+      <p class="persona-desc">Athletes and active people who want a portable reset, short workflows, easy cleanup, and body-part specific recovery that fits into training life — not around it. 15 minutes, targeted, done.</p>
+      <div class="persona-conditions">
+        <span>Exercise recovery</span><span>Inflammation</span><span>Muscle relief</span><span>Plantar fasciitis</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── THE RITUAL ─── -->
+<div class="sec" id="ritual">
+<div class="container">
+  <div class="sec-eyebrow">How It Works</div>
+  <h2 class="sec-heading">The SOKY Ritual — Five Steps.</h2>
+  <p class="sec-sub">Every product. Always this order. The ritual never changes — it's the shared language of portable immersion care.</p>
+
+  <div class="ritual reveal">
+    <div class="rstep don">
+      <div class="rstep-n">1</div><div class="rstep-word">Don</div>
+      <div class="rstep-desc">Fold the cuff <strong>inward</strong> — into itself. Slide the glove on, each finger fully into its sheath.</div>
+    </div>
+    <div class="rstep">
+      <div class="rstep-n">2</div><div class="rstep-word">Fill</div>
+      <div class="rstep-desc">Hold the seal. Bring the opening under the tap. Fill to your preferred level.</div>
+    </div>
+    <div class="rstep">
+      <div class="rstep-n">3</div><div class="rstep-word">Seal</div>
+      <div class="rstep-desc">Ball your fist — if the glove swells, you're sealed. The cuff tightens with pressure, not loosens.</div>
+    </div>
+    <div class="rstep">
+      <div class="rstep-n">4</div><div class="rstep-word">Soak</div>
+      <div class="rstep-desc">15–20 minutes. Walk. Read. Rest. The ritual doesn't ask you to stop — it moves with you.</div>
+    </div>
+    <div class="rstep">
+      <div class="rstep-n">5</div><div class="rstep-word">Drain</div>
+      <div class="rstep-desc">Slide off, pour out, rinse, air dry. A clean exit invites return.</div>
+    </div>
+  </div>
+
+  <div class="callout pool reveal" style="margin-bottom:2.5rem">
+    <div class="callout-lbl">Don — The Critical First Step</div>
+    <p>The cuff must always be folded <strong>inward — into itself</strong> to form the watertight seal. This step is non-intuitive. It is where the product is either used correctly or not at all.</p>
+  </div>
+
+  <div class="img-grid cols-2 reveal" style="margin-bottom:2rem">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-17.png" alt="Cuff inversion — active vs inactive" loading="lazy" class="contain" style="height:320px">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9921.jpg" alt="Clasped hands — seal holds under compression" loading="lazy" style="object-position:center 45%;height:320px">
+  </div>
+</div>
+</div>
+
+<!-- ─── CINEMATIC VIDEO BREAK — POOL ─── -->
+<div class="container" style="margin-bottom:4rem">
+  <div class="vid-break reveal">
+    <video id="poolVid" muted loop playsinline preload="none">
+      <source src="https://videos.files.wordpress.com/2uAOPAQx/pool-water-video-cl-edit.mp4" type="video/mp4">
+    </video>
+    <button class="vid-mute" onclick="toggleMute('poolVid',this)">
+      <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>
+      <span>Sound</span>
+    </button>
+    <div class="vid-break-cap">Caustic light playing over water and silicone — the product in its element</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── SEVEN MODES ─── -->
+<div class="sec" id="modes">
+<div class="container">
+  <div class="sec-eyebrow">Enhancement System</div>
+  <h2 class="sec-heading">Seven ways into the water.</h2>
+  <p class="sec-sub">What goes into the water defines the ritual. Same garment. Same port. Same five-step ritual. Every mode unlocks a different outcome.</p>
+
+  <div class="mode-cards reveal">
+    <div class="mode-card" onclick="toggleMode(this)"><div class="mode-card-hd"><div class="mode-card-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="5" stroke="#B31D1B" stroke-width="2"/><line x1="14" y1="2" x2="14" y2="5" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="23" x2="14" y2="26" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="14" x2="5" y2="14" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/><line x1="23" y1="14" x2="26" y2="14" stroke="#B31D1B" stroke-width="2" stroke-linecap="round"/></svg></div><div class="mode-card-info"><div class="mode-card-name" style="color:var(--heat)">Heat</div><div class="mode-card-tag">Circulation · Muscle Relief</div></div><svg class="mode-card-chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mode-card-body"><div class="mode-card-body-inner">Warm water immersion promotes vasodilation and increased blood flow. Effective for muscle tension, joint stiffness, and circulation support. 15–20 min at 38–42°C.</div></div></div>
+
+    <div class="mode-card" onclick="toggleMode(this)"><div class="mode-card-hd"><div class="mode-card-icon"><svg viewBox="0 0 28 28" fill="none"><line x1="14" y1="2" x2="14" y2="26" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="14" x2="26" y2="14" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><line x1="5.5" y1="5.5" x2="22.5" y2="22.5" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><line x1="22.5" y1="5.5" x2="5.5" y2="22.5" stroke="#1E3A8A" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="14" r="2.5" fill="#1E3A8A"/></svg></div><div class="mode-card-info"><div class="mode-card-name" style="color:var(--cool)">Cool</div><div class="mode-card-tag">Inflammation · Recovery</div></div><svg class="mode-card-chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mode-card-body"><div class="mode-card-body-inner">Cold immersion reduces inflammation and numbs pain signals. Used for acute injury, post-exercise recovery, and swelling reduction. 5–15 min at 10–15°C.</div></div></div>
+
+    <div class="mode-card" onclick="toggleMode(this)"><div class="mode-card-hd"><div class="mode-card-icon"><svg viewBox="0 0 28 28" fill="none"><path d="M16 3L7 16H14L12 25L21 12H14L16 3Z" stroke="#F7C041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mode-card-info"><div class="mode-card-name" style="color:var(--electro)">Electro</div><div class="mode-card-tag">Iontophoresis · TENS · EMS</div></div><svg class="mode-card-chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mode-card-body"><div class="mode-card-body-inner">Iontophoresis delivers ionic medication through the skin using mild electrical current. Clinically proven for hyperhidrosis (80%+ sweat reduction). Also supports TENS and EMS modalities via the universal port.</div></div></div>
+
+    <div class="mode-card" onclick="toggleMode(this)"><div class="mode-card-hd"><div class="mode-card-icon"><svg viewBox="0 0 28 28" fill="none"><path d="M14 24 C14 24 6 18 6 11 C6 7.1 9.1 4 13 4 C13.3 4 13.7 4 14 4.1 C14.3 4 14.7 4 15 4 C18.9 4 22 7.1 22 11 C22 18 14 24 14 24Z" stroke="#688B58" stroke-width="2" fill="rgba(104,139,88,0.12)"/><line x1="14" y1="24" x2="14" y2="14" stroke="#688B58" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="mode-card-info"><div class="mode-card-name" style="color:var(--green)">Botanicals</div><div class="mode-card-tag">Herbal · Skin Nourishment</div></div><svg class="mode-card-chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mode-card-body"><div class="mode-card-body-inner">Herbal and plant-based soak formulations — chamomile, tea tree, lavender, calendula. Supports skin nourishment, calming rituals, and aromatic therapy.</div></div></div>
+
+    <div class="mode-card" onclick="toggleMode(this)"><div class="mode-card-hd"><div class="mode-card-icon"><svg viewBox="0 0 28 28" fill="none"><path d="M7 23L14 5L21 23Z" stroke="#8A6A4D" stroke-width="2" fill="rgba(138,106,77,0.06)" stroke-linejoin="round"/><circle cx="14" cy="13" r="1.3" fill="#8A6A4D" opacity=".6"/></svg></div><div class="mode-card-info"><div class="mode-card-name" style="color:var(--umber)">Salts</div><div class="mode-card-tag">Mineral · Epsom · Dead Sea</div></div><svg class="mode-card-chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mode-card-body"><div class="mode-card-body-inner">Epsom salt (magnesium sulfate), Dead Sea minerals, and mineral blends. Supports muscle relaxation, skin hydration, and electrolyte absorption through the skin.</div></div></div>
+
+    <div class="mode-card" onclick="toggleMode(this)"><div class="mode-card-hd"><div class="mode-card-icon"><svg viewBox="0 0 28 28" fill="none"><path d="M10 5H18V16L22 23H6L10 16V5Z" stroke="#0D7377" stroke-width="1.8" fill="rgba(13,115,119,0.06)"/><line x1="10" y1="5" x2="18" y2="5" stroke="#0D7377" stroke-width="2" stroke-linecap="round"/></svg></div><div class="mode-card-info"><div class="mode-card-name" style="color:var(--actives)">Actives</div><div class="mode-card-tag">OTC &amp; Rx Precision</div></div><svg class="mode-card-chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mode-card-body"><div class="mode-card-body-inner">Concentrated OTC and Rx-grade formulations — salicylic acid, urea, menthol, antifungals. SOKY's reduced fluid volume delivers higher concentrations at the treatment site.</div></div></div>
+
+    <div class="mode-card" onclick="toggleMode(this)"><div class="mode-card-hd"><div class="mode-card-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="7" cy="14" r="3" stroke="#4A5568" stroke-width="1.8"/><circle cx="14" cy="9" r="3" stroke="#4A5568" stroke-width="1.8"/><circle cx="21" cy="14" r="3" stroke="#4A5568" stroke-width="1.8"/><circle cx="14" cy="19" r="3" stroke="#4A5568" stroke-width="1.8"/></svg></div><div class="mode-card-info"><div class="mode-card-name" style="color:var(--peptides)">Peptides</div><div class="mode-card-tag">Transdermal · Precision Skincare</div></div><svg class="mode-card-chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mode-card-body"><div class="mode-card-body-inner">Topical peptide soaks for precision skincare — collagen-stimulating, barrier-repair, growth factor, and copper peptides. Sealed occlusion increases stratum corneum hydration 300–400%, enhancing permeation.</div></div></div>
+  </div>
+
+  <div class="modes-cta reveal">
+    <div class="modes-cta-label">Built to Grow With You</div>
+    <p>Start with water. Add salts when you're ready. Explore peptides as your routine evolves.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── SCIENCE ─── -->
+<div class="sec" id="science">
+<div class="container">
+  <div class="sec-eyebrow">The Science</div>
+  <h2 class="sec-heading">The seal that pressure makes tighter.</h2>
+  <p class="sec-sub">SOKY doesn't invent new science — it makes proven therapies accessible, repeatable, and portable for the first time.</p>
+
+  <div class="sci-grid reveal">
+    <div class="sci-card">
+      <div class="sci-lbl">Occlusive Hydration</div>
+      <div class="sci-val">300–400%</div>
+      <div class="sci-desc">Stratum corneum hydration increase under sealed occlusive conditions.</div>
+    </div>
+    <div class="sci-card">
+      <div class="sci-lbl">Iontophoresis Efficacy</div>
+      <div class="sci-val">80%+</div>
+      <div class="sci-desc">Sweat reduction via iontophoresis — gold standard for hyperhidrosis.</div>
+    </div>
+    <div class="sci-card">
+      <div class="sci-lbl">Adherence Improvement</div>
+      <div class="sci-val">+36 pts</div>
+      <div class="sci-desc">Adherence improvement when format friction is removed.</div>
+    </div>
+    <div class="sci-card">
+      <div class="sci-lbl">Conditions Supported</div>
+      <div class="sci-val">9+</div>
+      <div class="sci-desc">Conditions supported across consumer and clinical pathways.</div>
+    </div>
+  </div>
+
+  <!-- Engineering diagram — Seal mechanism (rebuilt with patent-accurate silhouette) -->
+  <div class="eng-box reveal">
+    <div class="eng-title">How the Seal Works — Inversion Frustal Cuff</div>
+    <div class="eng-desc">Every prior wearable immersion device failed at the same point: when the garment moves, hydrostatic pressure peels the seal away from the skin. SOKY inverts this failure mode entirely. The inversion frustal cuff — a tapered, thin-walled elastomeric shell — folds inward at the wrist or ankle, creating an axial overlap region with at least two cuff layers contacting skin. When internal pressure increases, liquid enters a pocket between layers and presses the inner layer more firmly against the skin. <strong>The more pressure builds, the tighter the seal becomes.</strong></div>
+
+    <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:720px;height:auto;display:block;margin:0 auto" aria-label="Cross-section diagram of the SOKY inversion frustal cuff seal">
+      <!-- Forearm/Wrist entering from left -->
+      <ellipse cx="60" cy="130" rx="50" ry="40" fill="#F5E6D3" stroke="#D4BBA0" stroke-width="1.2"/>
+      <text x="60" y="128" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#8A6A4D">Forearm</text>
+      <text x="60" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#8A6A4D">/ Wrist</text>
+
+      <!-- Glove body — patent-style silhouette with finger sheaths -->
+      <path d="M260 68 L290 50 Q295 46 298 50 L298 72
+               M310 58 L310 40 Q313 36 316 40 L316 72
+               M328 58 L328 34 Q331 30 334 34 L334 72
+               M348 58 L348 40 Q351 36 354 40 L354 72
+               M366 68 L376 54 Q380 50 383 56 L374 72"
+            fill="none" stroke="#31598A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Palm/body of glove -->
+      <path d="M250 72 Q252 68 260 68 L374 72 Q388 74 392 84 L396 130 L392 176 Q388 186 374 188 L260 192 Q252 192 250 188Z"
+            fill="rgba(0,109,119,0.07)" stroke="#31598A" stroke-width="1.3" stroke-linejoin="round"/>
+      <!-- Water fill indication inside glove -->
+      <path d="M260 100 Q290 95 330 98 Q370 101 388 108 L390 155 Q380 172 340 175 Q300 178 265 172 L260 100Z"
+            fill="rgba(0,109,119,0.06)" stroke="none"/>
+      <text x="322" y="132" text-anchor="middle" font-family="Mulish,sans-serif" font-size="8.5" font-weight="700" letter-spacing=".12em" fill="#006D77">GLOVE BODY</text>
+      <text x="322" y="146" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="rgba(0,109,119,0.55)">Water + Additives Inside</text>
+
+      <!-- Cuff zone — dashed highlight box -->
+      <rect x="110" y="62" width="65" height="136" rx="5" fill="rgba(49,89,138,0.06)" stroke="#31598A" stroke-width="1.2" stroke-dasharray="5,3"/>
+      <text x="142" y="56" text-anchor="middle" font-family="Mulish,sans-serif" font-size="7" font-weight="700" fill="#31598A" letter-spacing=".1em">CUFF ZONE</text>
+
+      <!-- Cuff layers — inner sealing layer (180) -->
+      <path d="M110 80 Q120 78 140 78 Q170 78 180 80 L240 80 Q248 82 250 88 L250 172 Q248 178 240 180 L180 180 Q170 182 140 182 Q120 182 110 180"
+            fill="rgba(0,109,119,0.12)" stroke="#006D77" stroke-width="1.3"/>
+      <!-- Outer retaining layer (182) -->
+      <path d="M100 72 Q118 70 138 70 Q168 70 178 72 L178 188 Q168 190 138 190 Q118 190 100 188"
+            fill="none" stroke="#31598A" stroke-width="1.2" stroke-dasharray="3,2"/>
+
+      <!-- Hinge region (184) — fold point marker -->
+      <line x1="140" y1="70" x2="140" y2="190" stroke="#006D77" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.5"/>
+      <circle cx="140" cy="70" r="2.5" fill="#006D77" opacity="0.4"/>
+      <circle cx="140" cy="190" r="2.5" fill="#006D77" opacity="0.4"/>
+
+      <!-- Overlap sealing region (186) — highlighted band -->
+      <rect x="110" y="82" width="30" height="96" rx="2" fill="rgba(0,109,119,0.08)" stroke="#006D77" stroke-width="0.8" opacity="0.6"/>
+
+      <!-- Pressure pocket (188) — between layers -->
+      <path d="M142 80 Q155 82 170 82 L170 178 Q155 178 142 180" fill="rgba(49,89,138,0.08)" stroke="none"/>
+
+      <!-- Pressure arrows — hydrostatic force pushing inward -->
+      <polygon points="158,100 148,97 148,103" fill="#B31D1B" opacity=".75"/>
+      <polygon points="158,118 148,115 148,121" fill="#B31D1B" opacity=".75"/>
+      <polygon points="158,136 148,133 148,139" fill="#B31D1B" opacity=".75"/>
+      <polygon points="158,154 148,151 148,157" fill="#B31D1B" opacity=".75"/>
+
+      <!-- Leader lines + labels -->
+      <!-- Glove Body leader -->
+      <line x1="322" y1="160" x2="322" y2="195" stroke="rgba(17,24,39,0.2)" stroke-width="0.7" stroke-dasharray="2,2"/>
+      <circle cx="322" cy="195" r="1.5" fill="rgba(17,24,39,0.3)"/>
+      <text x="322" y="210" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="rgba(17,24,39,0.45)">Garment Body (12)</text>
+
+      <!-- Pressure pocket leader -->
+      <line x1="156" y1="130" x2="190" y2="220" stroke="rgba(49,89,138,0.3)" stroke-width="0.7" stroke-dasharray="2,2"/>
+      <circle cx="190" cy="220" r="1.5" fill="rgba(49,89,138,0.4)"/>
+      <text x="192" y="234" font-family="Inter,sans-serif" font-size="8" fill="rgba(49,89,138,0.7)">Pressure Pocket (188)</text>
+
+      <!-- Overlap seal leader -->
+      <line x1="125" y1="130" x2="80" y2="220" stroke="rgba(0,109,119,0.3)" stroke-width="0.7" stroke-dasharray="2,2"/>
+      <circle cx="80" cy="220" r="1.5" fill="rgba(0,109,119,0.4)"/>
+      <text x="82" y="234" font-family="Inter,sans-serif" font-size="8" fill="rgba(0,109,119,0.7)">Overlap Seal (186)</text>
+
+      <!-- Hinge leader -->
+      <line x1="140" y1="195" x2="140" y2="245" stroke="rgba(0,109,119,0.25)" stroke-width="0.7" stroke-dasharray="2,2"/>
+      <circle cx="140" cy="245" r="1.5" fill="rgba(0,109,119,0.35)"/>
+      <text x="142" y="256" font-family="Inter,sans-serif" font-size="8" fill="rgba(0,109,119,0.6)">Hinge (184)</text>
+
+      <!-- Finger sheaths label -->
+      <line x1="334" y1="36" x2="380" y2="20" stroke="rgba(17,24,39,0.15)" stroke-width="0.7" stroke-dasharray="2,2"/>
+      <circle cx="380" cy="20" r="1.5" fill="rgba(17,24,39,0.25)"/>
+      <text x="384" y="24" font-family="Inter,sans-serif" font-size="8" fill="rgba(17,24,39,0.45)">Finger Sheaths (18)</text>
+
+      <!-- Right-side callout text -->
+      <text x="460" y="80" font-family="Mulish,sans-serif" font-size="10" font-weight="700" fill="#B31D1B">→ Hydrostatic Pressure</text>
+      <text x="460" y="96" font-family="Inter,sans-serif" font-size="9" fill="#667085">Internal pressure enters the pocket</text>
+      <text x="460" y="110" font-family="Inter,sans-serif" font-size="9" fill="#667085">between cuff layers and pushes the</text>
+      <text x="460" y="124" font-family="Inter,sans-serif" font-size="9" fill="#667085">inner layer against skin.</text>
+
+      <text x="460" y="148" font-family="Mulish,sans-serif" font-size="9.5" font-weight="700" fill="#006D77">Result:</text>
+      <text x="460" y="164" font-family="Inter,sans-serif" font-size="9" fill="#667085">More pressure = tighter seal</text>
+      <text x="460" y="178" font-family="Inter,sans-serif" font-size="9" fill="#667085">No clamps · No adhesives · No power</text>
+
+      <!-- Patent badges -->
+      <rect x="460" y="198" width="240" height="22" rx="11" fill="rgba(104,139,88,0.1)" stroke="rgba(104,139,88,0.2)" stroke-width="1"/>
+      <text x="580" y="213" text-anchor="middle" font-family="Mulish,sans-serif" font-size="7" font-weight="700" fill="#688B58" letter-spacing=".08em">US 11,602,631 B2 · ISSUED · VALID TO 2043</text>
+
+      <rect x="460" y="226" width="240" height="22" rx="11" fill="rgba(247,192,65,0.1)" stroke="rgba(247,192,65,0.25)" stroke-width="1"/>
+      <text x="580" y="241" text-anchor="middle" font-family="Mulish,sans-serif" font-size="7" font-weight="700" fill="#9A7B2E" letter-spacing=".08em">PLATFORM PATENT · PENDING · FULL FRUSTAL FAMILY</text>
+    </svg>
+
+    <!-- Expanded science content -->
+    <div style="margin-top:2rem">
+      <div class="eng-title" style="margin-bottom:.35rem">Why the Geometry Matters</div>
+      <div class="eng-desc" style="margin-bottom:1.25rem">The cuff is not a rubber band. It is a frustum-like shell — a continuously tapered structure whose cross-sectional area varies along its length. This taper distributes sealing forces over an axial band rather than concentrating them on a single circumferential line. The result: the seal works on wet skin, hairy skin, perspiring skin, and across anatomical asymmetries that would defeat a simple elastic ring.<br><br>The pending platform patent expands IP coverage beyond the hand to the full family of frustal geometries — feet, arms, legs, knees, elbows, and pelvic regions — with circular, elliptical, parabolic, and superelliptical cross-section profiles. Each new body zone uses the same inversion sealing principle: fold inward, fill, and let pressure do the work.</div>
+
+      <div class="eng-title" style="margin-bottom:.35rem">Sealing Without Power</div>
+      <div class="eng-desc">The overlap seal maintains integrity without external clamps, straps, adhesives, vacuum evacuation, or electrical power. Sealing pressures on the order of 0.5–2.0 psi provide a substantially fluid-tight seal during ordinary motion — walking, reading, reaching, and daily tasks — for treatment sessions of 15–20 minutes or longer. The pocket/pouch region acts as a dynamic pressure buffer: it expands when fluid loads increase (user lifts their hand) and flattens when loads decrease (user lowers their hand), providing resilient sealing across posture changes.</div>
+    </div>
+  </div>
+
+  <div class="img-grid cols-2 reveal">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-18.png" alt="Patent drawing — perspective view of seal mechanism" loading="lazy" class="contain" style="height:320px">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9929.jpg" alt="Full finger mobility while sealed" loading="lazy" style="object-position:center 50%;height:320px">
+  </div>
+</div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── CINEMATIC VIDEO BREAK — TRAVEL KIT ─── -->
+<div class="container" style="margin-bottom:4rem">
+  <div class="vid-break reveal">
+    <video id="kitVid" muted loop playsinline preload="none">
+      <source src="https://nmthera.com/wp-content/uploads/2026/03/0227.mp4" type="video/mp4">
+    </video>
+    <button class="vid-mute" onclick="toggleMute('kitVid',this)">
+      <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>
+      <span>Sound</span>
+    </button>
+    <div class="vid-break-cap">Travel kit in caustic light — gloves, towel, and bag in luminal space</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── THREE OFFERS ─── -->
+<div class="sec" id="offers">
+<div class="container">
+  <div class="sec-eyebrow">Choose Your Entry</div>
+  <h2 class="sec-heading">Three offers. 200 units. First drop.</h2>
+  <p class="sec-sub">Every offer ships the same patented glove — identical silicone, identical seal, identical ritual. Pick the one that fits your path.</p>
+
+  <div class="sku-cards reveal">
+    <div class="sku-c research">
+      <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Research Access" loading="lazy" style="object-position:center 60%">
+      <div class="sku-c-body">
+        <div class="sku-c-id">HandSOKY_B_M_000</div>
+        <div class="sku-c-price">$45</div>
+        <span class="sku-c-tag tag-r">Research Access · 20 Units</span>
+        <div class="sku-c-name">Hand SOKY — Research Access</div>
+        <div class="sku-c-desc">Identical glove. 90-day feedback commitment. Application-based — 20 per drop.</div>
+        <div class="sku-stock-bar"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--pool),var(--green))"></div></div><span class="stk-lbl">20 / 20</span></div>
+      </div>
+    </div>
+    <div class="sku-c core">
+      <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Core" loading="lazy" style="object-position:center 45%">
+      <div class="sku-c-body">
+        <div class="sku-c-id">HandSOKY_B_M_001</div>
+        <div class="sku-c-price">$85</div>
+        <span class="sku-c-tag tag-co">Core · Most Popular</span>
+        <div class="sku-c-name">Hand SOKY</div>
+        <div class="sku-c-desc">One pair, Size Medium. The essential starting point — everything you need for the full ritual.</div>
+        <div class="sku-stock-bar"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--navy),var(--pool))"></div></div><span class="stk-lbl">80 / 80</span></div>
+      </div>
+    </div>
+    <div class="sku-c kit">
+      <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="Hand SOKY Travel System" loading="lazy" style="object-position:center center">
+      <div class="sku-c-body">
+        <div class="sku-c-id">HandSOKY_B_M_002</div>
+        <div class="sku-c-price">$150</div>
+        <span class="sku-c-tag tag-k">Travel System · Best Value</span>
+        <div class="sku-c-name">Hand SOKY Travel System</div>
+        <div class="sku-c-desc">Gloves + towel + bag + instructions. Gift-ready. The complete experience from day one.</div>
+        <div class="sku-stock-bar"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--green),var(--navy))"></div></div><span class="stk-lbl">100 / 100</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="batch-wrap reveal">
+    <div class="batch-hd">Batch 1 Allocation — 200 Units Total</div>
+    <div class="batch-bar"><div class="batch-seg" style="width:10%;background:var(--pool)"></div><div class="batch-seg" style="width:40%;background:var(--navy)"></div><div class="batch-seg" style="width:50%;background:var(--green)"></div></div>
+    <div class="batch-labels"><span class="batch-lbl"><span class="batch-dot" style="background:var(--pool)"></span>Research — 20 (10%)</span><span class="batch-lbl"><span class="batch-dot" style="background:var(--navy)"></span>Core — 80 (40%)</span><span class="batch-lbl"><span class="batch-dot" style="background:var(--green)"></span>Travel — 100 (50%)</span></div>
+  </div>
+</div>
+</div>
+
+<!-- ─── PLATFORM VISION ─── -->
+<div class="container" style="margin-bottom:3rem">
+  <div class="eng-box reveal">
+    <div class="eng-title">Where It's Going — Platform Expansion</div>
+    <div class="eng-desc">Each new body zone adds a new garment mold — same port, same ritual, incremental market. Hands and feet are just the beginning.</div>
+    <svg viewBox="0 0 680 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;height:auto;display:block;margin:0 auto" aria-label="Body zone expansion roadmap">
+      <rect x="0" y="0" width="160" height="72" rx="8" fill="rgba(0,109,119,0.08)" stroke="rgba(0,109,119,0.2)" stroke-width="1"/>
+      <text x="80" y="16" text-anchor="middle" font-family="Mulish,sans-serif" font-size="7.5" font-weight="700" letter-spacing=".12em" fill="#006D77">PHASE 1 · NOW</text>
+      <text x="44" y="38" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="12" font-weight="800" fill="#31598A">Hands</text>
+      <text x="122" y="38" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="12" font-weight="800" fill="#31598A">Feet</text>
+      <text x="80" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="rgba(17,24,39,0.45)">Molds 1–2</text>
+      <line x1="168" y1="36" x2="178" y2="36" stroke="rgba(17,24,39,0.2)" stroke-width="1.5"/><polygon points="176,32 184,36 176,40" fill="rgba(17,24,39,0.2)"/>
+      <rect x="188" y="0" width="160" height="72" rx="8" fill="rgba(49,89,138,0.06)" stroke="rgba(49,89,138,0.15)" stroke-width="1"/>
+      <text x="268" y="16" text-anchor="middle" font-family="Mulish,sans-serif" font-size="7.5" font-weight="700" letter-spacing=".12em" fill="#31598A">PHASE 2 · SCALE</text>
+      <text x="230" y="38" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" fill="rgba(17,24,39,0.6)">Arms</text>
+      <text x="306" y="38" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" fill="rgba(17,24,39,0.6)">Legs</text>
+      <text x="268" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="rgba(17,24,39,0.4)">Adult + Kids</text>
+      <line x1="356" y1="36" x2="366" y2="36" stroke="rgba(17,24,39,0.2)" stroke-width="1.5"/><polygon points="364,32 372,36 364,40" fill="rgba(17,24,39,0.2)"/>
+      <rect x="376" y="0" width="160" height="72" rx="8" fill="rgba(104,139,88,0.06)" stroke="rgba(104,139,88,0.15)" stroke-width="1"/>
+      <text x="456" y="16" text-anchor="middle" font-family="Mulish,sans-serif" font-size="7.5" font-weight="700" letter-spacing=".12em" fill="#688B58">PHASE 3 · EXPAND</text>
+      <text x="420" y="38" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="10" font-weight="700" fill="rgba(17,24,39,0.6)">Knees</text>
+      <text x="492" y="38" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="10" font-weight="700" fill="rgba(17,24,39,0.6)">Elbows</text>
+      <text x="456" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="rgba(17,24,39,0.4)">Sleeve Family</text>
+      <line x1="544" y1="36" x2="554" y2="36" stroke="rgba(17,24,39,0.2)" stroke-width="1.5"/><polygon points="552,32 560,36 552,40" fill="rgba(17,24,39,0.2)"/>
+      <rect x="564" y="0" width="110" height="72" rx="8" fill="rgba(179,29,27,0.05)" stroke="rgba(179,29,27,0.15)" stroke-width="1"/>
+      <text x="619" y="16" text-anchor="middle" font-family="Mulish,sans-serif" font-size="7.5" font-weight="700" letter-spacing=".12em" fill="#B31D1B">PHASE 4</text>
+      <text x="619" y="38" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="10" font-weight="700" fill="rgba(17,24,39,0.6)">Pelvic</text>
+      <text x="619" y="58" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="rgba(17,24,39,0.4)">Sitz SOKY</text>
+    </svg>
+  </div>
+
+  <div class="img-grid cols-2 reveal">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-14.png" alt="Foot SOKY — active and inactive" loading="lazy" class="contain" style="height:300px">
+    <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-15.png" alt="Knee SOKY — extending the platform" loading="lazy" class="contain" style="height:300px">
+  </div>
+</div>
+
+<!-- ─── EDITORIAL GALLERY ─── -->
+<div class="container" style="margin:3rem auto">
+  <div class="img-grid cols-2 reveal">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9940.jpg" alt="Fist sealed — demonstrating seal hold" loading="lazy" style="object-position:center 50%">
+    <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_1196.jpg" alt="SOKY against spa tile backdrop" loading="lazy" style="object-position:center 45%">
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ─── FAQ ─── -->
+<div class="sec" id="faq">
+<div class="container">
+  <div class="sec-eyebrow">Frequently Asked Questions</div>
+  <h2 class="sec-heading">Questions answered.</h2>
+  <p class="sec-sub">Everything you need to know before your first soak.</p>
+
+  <div class="faq-grid reveal">
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">What can SOKY help with?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">SOKY supports personal care routines for hands and feet — hydration, relaxation, post-exercise recovery, and general skin wellness. It pairs with salts, botanicals, and warm water for portable immersion.</div></div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Will SOKY leak?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">When donned correctly — cuff folded inward, fingers fully seated — the patented inversion seal holds firmly. The seal actually tightens with movement.</div></div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Can I walk or use my hands?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">Yes — that's the whole point. SOKY maintains the seal while you move freely. Read, walk, work, or rest.</div></div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Can I use salts or additives?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">Absolutely. Epsom salts, essential oils, botanical extracts all work beautifully. SOKY's lower volume concentrates the ingredients for better delivery.</div></div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">How long should I soak?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">15–20 minutes is recommended. Adjust based on your comfort and routine.</div></div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">What is your return policy?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">30-day satisfaction guarantee. If sizing or comfort isn't right, contact us for a full exchange or refund. No questions asked.</div></div></div>
+  </div>
+</div>
+</div>
+
+<!-- ─── CTA ─── -->
+<div class="container">
+  <div class="cta-band reveal">
+    <h2 class="cta-heading">"Because your hands deserve meaningful care and everyday confidence."</h2>
+    <p class="cta-sub">Three offers. 200 units. The first drop of a patented platform — your hands have been waiting long enough.</p>
+    <div class="cta-buttons">
+      <a href="#offers" class="cta-btn primary">Shop Now</a>
+      <a href="mailto:kenny@nmthera.com" class="cta-btn secondary">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- /body content -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+<div class="container">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">NM Thera</div>
+      <p class="footer-brand-sub">Wearable soak systems for hands &amp; feet. Patented. Portable. Ready.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#offers">Hand SOKY</a>
+      <a href="#offers">Travel System</a>
+      <a href="#offers">Research Access</a>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <a href="#ritual">How It Works</a>
+      <a href="#science">The Science</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Join the Commons</h4>
+      <p style="margin-bottom:.75rem">Be part of the founding cohort. First-drop updates, ritual tips, and early access to what's next.</p>
+      <div class="footer-newsletter">
+        <input type="email" placeholder="Enter email address">
+        <button>Join</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">Copyright &copy; 2026 NM Thera · NM Therapeutics, Inc.</div>
+  <p class="footer-compliance">SOKY supports personal care routines. It is not intended to diagnose, treat, cure, or prevent any disease or medical condition.</p>
+</div>
+</footer>
+
+<!-- ═══ STICKY CTA BAR ═══ -->
+<div class="sticky-cta" id="stickyCta">
+  <span class="sticky-cta-label">SOKY — Wearable Soak System</span>
+  <a href="#offers" class="sticky-cta-btn">Shop Now &rarr;</a>
+</div>
+
+<!-- ═══ EMAIL CAPTURE POPUP ═══ -->
+<div class="email-popup-overlay" id="emailPopup">
+  <div class="email-popup">
+    <button class="email-popup-close" id="emailPopupClose" aria-label="Close">&times;</button>
+    <h3>Join the Founding Cohort</h3>
+    <p>Get the SOKY Founders Brief — early access, first-drop updates, and community insights. No spam. Just the ritual.</p>
+    <div class="email-popup-form">
+      <input type="email" placeholder="Your email address">
+      <button>Join the Commons</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /shell -->
+
+<script>
+/* ═══ HERO MUTE ═══ */
+(function(){
+  var btn=document.getElementById('heroMuteBtn'),vid=document.getElementById('heroVid'),lbl=document.getElementById('heroMuteLbl');
+  if(!btn||!vid)return;
+  btn.addEventListener('click',function(){
+    vid.muted=!vid.muted;
+    lbl.textContent=vid.muted?'Unmute':'Mute';
+    var svg=btn.querySelector('svg');
+    if(svg){svg.innerHTML=vid.muted?'<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/>':'<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';}
+  });
+})();
+
+/* ═══ GENERIC VIDEO MUTE ═══ */
+function toggleMute(id,btn){
+  var v=document.getElementById(id);if(!v)return;
+  v.muted=!v.muted;
+  btn.classList.toggle('is-on',!v.muted);
+  var s=btn.querySelector('span');if(s)s.textContent=v.muted?'Sound':'Mute';
+  var svg=btn.querySelector('svg');
+  if(svg){svg.innerHTML=v.muted?'<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/>':'<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';}
+}
+
+/* ═══ MODE CARD EXPAND ═══ */
+function toggleMode(el){
+  var was=el.classList.contains('open');
+  document.querySelectorAll('.mode-card.open').forEach(function(c){c.classList.remove('open')});
+  if(!was)el.classList.add('open');
+}
+
+/* ═══ TOPBAR DARK/LIGHT + READING PROGRESS ═══ */
+(function(){
+  var topbar=document.getElementById('topbar'),hero=document.getElementById('heroSection'),progressBar=document.getElementById('progressBar');
+  if(!topbar||!hero)return;
+  function check(){
+    topbar.classList.toggle('is-dark',window.scrollY<hero.offsetHeight*0.85);
+    if(progressBar){
+      var s=window.scrollY||0;
+      var dH=document.documentElement.scrollHeight-window.innerHeight;
+      var pct=dH>0?Math.min(100,Math.max(0,(s/dH)*100)):0;
+      progressBar.style.width=pct+'%';
+    }
+  }
+  check();window.addEventListener('scroll',check,{passive:true});window.addEventListener('resize',check,{passive:true});
+})();
+
+/* ═══ REACTIVE HERO CANVAS ═══ */
+(function(){
+  var canvas=document.getElementById('heroBg');if(!canvas)return;
+  var ctx=canvas.getContext('2d'),video=document.getElementById('heroVid'),cover=document.getElementById('heroSection');
+  var isMobile=window.innerWidth<=900,SCALE=isMobile?0.25:1,INTERVAL=isMobile?100:0;
+  var w,h,raf,lastDraw=0;
+  function resize(){
+    var box=cover?cover.getBoundingClientRect():{width:window.innerWidth,height:window.innerHeight};
+    w=canvas.width=Math.ceil(box.width*SCALE);h=canvas.height=Math.ceil(box.height*SCALE);
+    if(isMobile){canvas.style.width=Math.ceil(box.width)+'px';canvas.style.height=Math.ceil(box.height)+'px';}
+  }
+  window.addEventListener('resize',resize,{passive:true});resize();
+  function tick(ts){
+    raf=requestAnimationFrame(tick);
+    if(!video||!video.videoWidth||video.paused)return;
+    if(isMobile&&ts-lastDraw<INTERVAL)return;lastDraw=ts;
+    var vw=video.videoWidth,vh=video.videoHeight,scale=Math.max(w/vw,h/vh)*1.06;
+    var dw=vw*scale,dh=vh*scale;ctx.drawImage(video,(w-dw)/2,(h-dh)/2,dw,dh);
+  }
+  if(video){video.addEventListener('loadeddata',function(){if(raf)cancelAnimationFrame(raf);tick(0)});setTimeout(function(){if(!raf)tick(0)},600);}
+  document.addEventListener('visibilitychange',function(){if(document.hidden){if(raf){cancelAnimationFrame(raf);raf=null}}else if(!raf)tick(0)});
+})();
+
+/* ═══ LAZY VIDEO PLAY/PAUSE ═══ */
+(function(){
+  var ids=['poolVid','kitVid'];
+  if(!('IntersectionObserver' in window))return;
+  var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)en.target.play().catch(function(){});else en.target.pause()})},{threshold:0.15});
+  ids.forEach(function(id){var v=document.getElementById(id);if(v)obs.observe(v)});
+})();
+
+/* ═══ HERO VIDEO PAUSE ON MOBILE OFF-SCREEN ═══ */
+(function(){
+  if(window.innerWidth>900)return;
+  var v=document.getElementById('heroVid');if(!v)return;
+  var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)v.play().catch(function(){});else v.pause()})},{threshold:0.05});
+  obs.observe(v);
+})();
+
+/* ═══ SCROLL REVEALS ═══ */
+(function(){
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('vis')});return;}
+  var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('vis');obs.unobserve(en.target)}})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('vis');
+    else obs.observe(el);
+  });
+  setTimeout(function(){document.querySelectorAll('.reveal:not(.vis)').forEach(function(el){el.classList.add('vis')})},5000);
+})();
+
+/* ═══ WATER RIPPLE CANVAS OVERLAY ═══ */
+(function(){
+  var canvas=document.getElementById('rippleCanvas');
+  if(!canvas)return;
+  if(window.innerWidth<=900){canvas.classList.add('disabled');return;}
+  var ctx=canvas.getContext('2d');
+  var W,H,buf1,buf2,ripOn=true;
+
+  function resize(){
+    W=canvas.width=Math.ceil(window.innerWidth/4);
+    H=canvas.height=Math.ceil(window.innerHeight/4);
+    buf1=new Float32Array(W*H);
+    buf2=new Float32Array(W*H);
+  }
+  resize();
+  window.addEventListener('resize',resize,{passive:true});
+
+  var mx=-1,my=-1,lastMx=-1,lastMy=-1;
+  document.addEventListener('mousemove',function(e){
+    mx=Math.floor(e.clientX/4);
+    my=Math.floor(e.clientY/4);
+  },{passive:true});
+
+  function dropAt(x,y,r,str){
+    for(var dy=-r;dy<=r;dy++)
+      for(var dx=-r;dx<=r;dx++){
+        var px=x+dx,py=y+dy;
+        if(px>=0&&px<W&&py>=0&&py<H&&dx*dx+dy*dy<=r*r)
+          buf1[py*W+px]+=str;
+      }
+  }
+
+  function step(){
+    requestAnimationFrame(step);
+    if(!ripOn)return;
+    if(mx>=0&&mx<W&&my>=0&&my<H){
+      var speed=Math.hypot(mx-lastMx,my-lastMy);
+      var str=Math.min(speed*8,180);
+      if(str>2)dropAt(mx,my,Math.max(1,Math.min(3,Math.floor(speed/3))),str);
+      lastMx=mx;lastMy=my;
+    }
+    for(var y=1;y<H-1;y++)
+      for(var x=1;x<W-1;x++){
+        var i=y*W+x;
+        buf2[i]=((buf1[i-1]+buf1[i+1]+buf1[i-W]+buf1[i+W])*0.5-buf2[i])*0.985;
+      }
+    var t=buf1;buf1=buf2;buf2=t;
+    var img=ctx.createImageData(W,H);
+    var d=img.data;
+    for(var i=0;i<W*H;i++){
+      var v=Math.floor(128+buf1[i]*0.4);
+      v=Math.max(0,Math.min(255,v));
+      var idx=i*4;
+      d[idx]=d[idx+1]=d[idx+2]=v;
+      d[idx+3]=Math.abs(buf1[i])>0.5?Math.min(255,Math.floor(Math.abs(buf1[i])*1.2)):0;
+    }
+    ctx.putImageData(img,0,0);
+  }
+  step();
+})();
+
+/* ═══ STICKY CTA BAR ═══ */
+(function(){
+  var bar=document.getElementById('stickyCta'),hero=document.getElementById('heroSection');
+  if(!bar||!hero)return;
+  function check(){
+    bar.classList.toggle('visible',window.scrollY>hero.offsetHeight*0.85);
+  }
+  check();window.addEventListener('scroll',check,{passive:true});
+})();
+
+/* ═══ EMAIL CAPTURE POPUP ═══ */
+(function(){
+  if(sessionStorage.getItem('soky_popup_shown'))return;
+  var overlay=document.getElementById('emailPopup');
+  var closeBtn=document.getElementById('emailPopupClose');
+  if(!overlay||!closeBtn)return;
+  var triggered=false;
+  function show(){
+    if(triggered)return;triggered=true;
+    overlay.classList.add('active');
+    sessionStorage.setItem('soky_popup_shown','1');
+  }
+  function hide(){overlay.classList.remove('active')}
+  closeBtn.addEventListener('click',hide);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)hide()});
+  function checkScroll(){
+    var pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    if(pct>0.18){show();window.removeEventListener('scroll',checkScroll)}
+  }
+  window.addEventListener('scroll',checkScroll,{passive:true});
+})();
+</script>
+</body>
+</html>

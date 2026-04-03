@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NM Thera — Investor Overview · SOKY · Wearable Therapeutics v1.3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ─── DESIGN TOKENS — verbatim from v17 ─── */
+    :root {
+      --navy:    #31598A;
+      --ink:     #111827;
+      --paper:   #F7F7F5;
+      --green:   #688B58;
+      --umber:   #8A6A4D;
+      --almond:  #D4BBA0;
+      --sunlight:#FFD166;
+      --pool:    #006D77;
+      --red:     #B31D1B;
+      --blue:    #1E3A8A;
+      --muted:   #667085;
+      --line:         rgba(17,24,39,0.12);
+      --line-strong:  rgba(17,24,39,0.20);
+      --surface:      rgba(255,255,255,0.72);
+      --surface-strong: rgba(255,255,255,0.84);
+      --shadow:    0 24px 80px rgba(17,24,39,0.12);
+      --shadow-sm: 0 4px 18px rgba(17,24,39,0.07);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --max: 1180px;
+      --topbar-h: 76px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    .skip-link {
+      position: absolute; top: -100%; left: 16px; z-index: 9999;
+      padding: 10px 18px; background: var(--navy); color: #fff;
+      font-size: 13px; border-radius: 0 0 var(--radius-md) var(--radius-md);
+      text-decoration: none; transition: top .2s ease;
+    }
+    .skip-link:focus { top: 0; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(255,209,102,0.22), transparent 22%),
+        radial-gradient(circle at 85%  8%, rgba(104,139,88,0.18),  transparent 18%),
+        radial-gradient(circle at 50% 100%,rgba(49,89,138,0.14),  transparent 28%),
+        linear-gradient(180deg, #fcfcfb 0%, var(--paper) 38%, #f3f3ef 100%);
+      color: var(--ink); line-height: 1.65; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(17,24,39,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,24,39,0.020) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.75), transparent 85%);
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.75), transparent 85%);
+      pointer-events: none; opacity: 0.45; z-index: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { position: relative; z-index: 1; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      width: min(calc(100% - 32px), 1260px); z-index: 40; pointer-events: none;
+    }
+    .topbar-inner {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 12px 16px; border: 1px solid rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.82); border-radius: 18px;
+      box-shadow: 0 10px 32px rgba(17,24,39,0.08); pointer-events: auto;
+    }
+    @supports (backdrop-filter: blur(14px)) {
+      .topbar-inner { background: rgba(255,255,255,0.56); backdrop-filter: blur(14px); }
+    }
+    .brandline { display: flex; align-items: center; gap: 12px; min-width: 0; flex-shrink: 0; }
+    .drop {
+      width: 14px; height: 20px; border: 2px solid var(--navy);
+      border-radius: 12px 12px 14px 14px; transform: rotate(45deg);
+      position: relative; flex: 0 0 auto;
+    }
+    .drop::after {
+      content: ""; position: absolute; inset: 3px;
+      border-radius: 10px 10px 12px 12px; border: 1px solid rgba(0,109,119,0.35);
+    }
+    .brandline strong { font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; }
+    .brandline span   { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 38ch; }
+    .progress-wrap  { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+    .progress-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); white-space: nowrap; }
+    .progress { height: 8px; flex: 1; min-width: 40px; border-radius: 999px; background: rgba(17,24,39,0.08); overflow: hidden; }
+    .progress-bar { width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--navy), var(--pool), var(--green)); transition: width .2s ease; }
+    .topbar-badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--navy), var(--pool)); color: #fff;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
+    }
+    .topbar-badge::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.75); animation: livepulse 2s ease-in-out infinite;
+    }
+    @keyframes livepulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+    /* ── SIDE NAV ── */
+    .side-nav {
+      position: fixed; top: 120px;
+      left: max(16px, calc((100vw - var(--max)) / 2 - 120px));
+      width: 86px; z-index: 20; display: flex; flex-direction: column; gap: 10px;
+    }
+    .side-nav a {
+      font-size: 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.12em;
+      color: rgba(17,24,39,0.45); transition: color .2s ease, transform .2s ease;
+      padding-left: 14px; position: relative;
+    }
+    .side-nav a::before {
+      content: ""; position: absolute; left: 0; top: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 1px solid rgba(17,24,39,0.2); transform: translateY(-50%);
+      background: transparent; transition: all .2s ease;
+    }
+    .side-nav a.active { color: var(--ink); transform: translateX(2px); }
+    .side-nav a.active::before {
+      background: linear-gradient(180deg, var(--navy), var(--green));
+      border-color: transparent; box-shadow: 0 0 0 5px rgba(49,89,138,0.08);
+    }
+
+    /* ── LAYOUT ── */
+    .container { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: calc(var(--topbar-h) + 48px) 0 84px; position: relative;
+    }
+    .hero::after {
+      content: ""; position: absolute; right: -140px; top: 90px;
+      width: min(38vw, 520px); aspect-ratio: 1/1; border-radius: 50%;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.66) 0%, rgba(255,255,255,0.14) 52%, transparent 72%),
+        radial-gradient(circle at center, rgba(49,89,138,0.08) 0%, transparent 70%);
+      border: 1px solid rgba(49,89,138,0.12); filter: blur(0.2px); pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 36px; align-items: end; }
+    .eyebrow-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(17,24,39,0.12); background: rgba(255,255,255,0.72);
+      border-radius: 999px; padding: 8px 12px; font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+      box-shadow: 0 12px 30px rgba(17,24,39,0.04);
+    }
+    .hero-wordmark {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(58px,11vw,138px); font-weight: 800;
+      line-height: 0.94; letter-spacing: 0.12em; margin: 0; text-transform: uppercase;
+    }
+    .hero-wordmark .o-letter { color: var(--navy); }
+    .hero-byline {
+      display: flex; align-items: center; gap: 8px; margin: 10px 0 20px;
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    }
+    .hero-byline .nm-drop {
+      width: 18px; height: 18px; border: 1.5px solid var(--navy);
+      border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: inline-block; flex: 0 0 auto;
+    }
+    .hero-product-name { font-family: 'Montserrat', sans-serif; font-size: clamp(13px,1.6vw,17px); font-weight: 600; letter-spacing: 0.01em; color: rgba(17,24,39,0.55); margin: 0 0 6px; text-transform: uppercase; }
+    .hero-product-desc { font-size: clamp(14px,1.4vw,15px); font-weight: 400; color: rgba(17,24,39,0.60); margin: 0 0 22px; max-width: 52ch; line-height: 1.5; }
+    .hero-copy { max-width: 64ch; font-size: clamp(16px,1.8vw,18px); font-weight: 400; color: rgba(17,24,39,0.80); margin: 0 0 16px; line-height: 1.7; }
+    .hero-copy strong { color: var(--ink); }
+    .hero-note {
+      display: flex; align-items: flex-start; gap: 12px; max-width: 680px;
+      padding: 16px 18px; border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(255,255,255,0.84), rgba(212,187,160,0.22));
+      border: 1px solid rgba(17,24,39,0.10); box-shadow: var(--shadow); margin-top: 8px;
+    }
+    .hero-note strong { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--navy); display: block; margin-bottom: 4px; font-weight: 600; }
+    .hero-note p { margin: 0; font-size: 14px; color: rgba(17,24,39,0.75); line-height: 1.6; }
+    .hero-tagline-line {
+      margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line);
+      font-family: 'Montserrat', sans-serif; font-size: clamp(16px,1.8vw,20px); font-weight: 700; letter-spacing: -0.02em; color: var(--ink);
+    }
+    .product-strip {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 10px 20px;
+      padding: 14px 20px; border: 1px solid var(--line); border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.60); margin-top: 18px;
+    }
+    .product-strip-id { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+    .product-strip-divider { width: 1px; height: 24px; background: var(--line); flex: 0 0 auto; }
+    .product-strip-meta { font-size: 11px; color: var(--muted); line-height: 1.5; }
+    .product-strip-meta strong { font-weight: 600; color: var(--ink); display: block; }
+    .barcode { margin-left: auto; display: flex; align-items: flex-end; gap: 1px; flex: 0 0 auto; }
+    .barcode-bar { background: var(--ink); border-radius: 1px; width: 2px; opacity: 0.7; }
+
+    /* ── HERO PANEL ── */
+    .hero-panel {
+      position: relative;
+      background: linear-gradient(160deg, rgba(255,255,255,0.92), rgba(255,255,255,0.72));
+      border: 1px solid rgba(255,255,255,0.70); border-radius: 30px;
+      padding: 28px; box-shadow: var(--shadow); overflow: hidden;
+    }
+    @supports (backdrop-filter: blur(12px)) {
+      .hero-panel { background: linear-gradient(160deg, rgba(255,255,255,0.86), rgba(255,255,255,0.55)); backdrop-filter: blur(12px); }
+    }
+    .hero-panel::before {
+      content: ""; position: absolute; inset: auto -40px -60px auto;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,109,119,0.18), transparent 68%); pointer-events: none;
+    }
+    .panel-kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--navy); margin-bottom: 14px; display: inline-block; font-weight: 600; }
+
+    /* ── HERO VIDEO — verbatim from v17 ── */
+    .hero-product-video {
+      width: 100%; border-radius: 22px; overflow: hidden;
+      margin-bottom: 22px; position: relative;
+      box-shadow: 0 32px 96px rgba(17,24,39,0.18);
+      border: 1px solid rgba(255,255,255,0.65);
+      background: #0a1a1a;
+    }
+    .hero-product-video video {
+      width: 100%; height: auto; display: block; border-radius: 22px; object-fit: cover;
+    }
+
+    /* ── RITUAL BAR — verbatim from v17 ── */
+    .ritual-bar {
+      display: flex; gap: 0; border: 1px solid rgba(17,24,39,0.10);
+      border-radius: 999px; background: rgba(247,247,245,0.88);
+      overflow: hidden; margin-bottom: 16px;
+    }
+    .ritual-bar-step {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 12px 8px;
+      border-right: 1px solid rgba(17,24,39,0.07); gap: 5px; transition: background 0.15s;
+    }
+    .ritual-bar-step:last-child { border-right: none; }
+    .ritual-bar-step:hover { background: rgba(49,89,138,0.04); }
+    .ritual-bar-step svg { width: 20px; height: 20px; opacity: 0.75; }
+    .ritual-bar-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(17,24,39,0.65); }
+
+    /* ── SECTIONS ── */
+    .section { position: relative; padding: 110px 0; border-top: 1px solid var(--line); }
+    .section-grid { display: grid; grid-template-columns: 240px minmax(0,1fr); gap: 28px; align-items: start; }
+    .section-meta { position: sticky; top: var(--topbar-h); }
+    .section-id { font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--navy); display: block; margin-bottom: 18px; font-weight: 600; }
+    .section-title { font-family: 'Montserrat', sans-serif; font-size: clamp(26px,3.6vw,48px); line-height: 1.05; letter-spacing: -0.04em; margin: 0; max-width: 10ch; font-weight: 700; }
+    .section-sub { margin-top: 16px; font-size: 14px; color: var(--muted); max-width: 22ch; line-height: 1.5; }
+    .content-stack { display: grid; gap: 20px; }
+    .lede { font-size: clamp(18px,2.1vw,24px); line-height: 1.44; letter-spacing: -0.02em; color: #182131; max-width: 36ch; margin: 0; font-weight: 400; }
+    .lede strong { color: var(--ink); font-weight: 600; }
+    .body-text { font-size: 15px; font-weight: 400; line-height: 1.74; color: rgba(17,24,39,0.80); margin: 0; }
+    .body-text strong { font-weight: 600; color: var(--ink); }
+
+    /* ── CARDS — verbatim from v17 ── */
+    .metric, .card, .body-zone, .audience-card,
+    .charter-card, .commons-card, .rail-card,
+    .closing-card, .science-card, .community-card {
+      background: var(--surface-strong);
+      border: 1px solid rgba(255,255,255,0.72);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+    }
+    .card, .closing-card { box-shadow: var(--shadow); }
+    .card-label, .label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--navy); margin-bottom: 12px; font-weight: 600;
+    }
+    .card h3 { margin: 0 0 10px; font-family: 'Montserrat', sans-serif; font-size: 20px; letter-spacing: -0.03em; font-weight: 700; line-height: 1.15; }
+    .card p, .metric p, .closing-card p { font-size: 14px; color: rgba(17,24,39,0.72); margin: 0; line-height: 1.62; }
+    .card small { display: block; margin-top: 14px; color: rgba(17,24,39,0.52); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; }
+
+    /* ── METRICS ── */
+    .metrics  { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+    .metrics-4 { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+    .metric { padding: 20px; }
+    .metric strong { display: block; font-family: 'Montserrat', sans-serif; font-size: 20px; margin-bottom: 10px; letter-spacing: -0.03em; font-weight: 700; }
+
+    /* ── QUOTE BAND ── */
+    .quote-band {
+      padding: 28px 30px;
+      background: linear-gradient(135deg, rgba(49,89,138,0.94), rgba(0,109,119,0.92));
+      color: white; border-radius: var(--radius-xl);
+      box-shadow: 0 24px 80px rgba(0,48,61,0.24); overflow: hidden; position: relative;
+    }
+    .quote-band::after {
+      content: ""; position: absolute; right: -60px; top: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
+    }
+    .quote-band p { position: relative; z-index: 1; margin: 0 0 10px; font-size: clamp(17px,2vw,24px); line-height: 1.48; letter-spacing: -0.02em; font-weight: 400; }
+    .quote-band span { position: relative; z-index: 1; display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.82; }
+
+    /* ── CHECKLIST ── */
+    .checklist { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .checklist li { position: relative; padding-left: 22px; font-size: 14px; color: rgba(17,24,39,0.75); line-height: 1.55; }
+    .checklist li::before {
+      content: ""; position: absolute; left: 0; top: 7px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: linear-gradient(180deg, var(--green), var(--pool));
+      box-shadow: 0 0 0 5px rgba(104,139,88,0.11);
+    }
+
+    /* ── LABEL PANEL ── */
+    .label-panel {
+      border: 1px solid var(--line-strong); border-radius: var(--radius-lg);
+      background: rgba(247,247,245,0.92); padding: 24px 28px; position: relative; overflow: hidden;
+    }
+    .label-panel::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(17,24,39,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,24,39,0.012) 1px, transparent 1px);
+      background-size: 20px 20px; pointer-events: none; opacity: 0.6;
+    }
+    .label-panel-inner { position: relative; z-index: 1; }
+    .label-panel-kicker { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; display: block; }
+    .label-panel-body { font-size: 13px; color: rgba(17,24,39,0.65); line-height: 1.7; }
+    .ritual-panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 4px; }
+
+    /* ── IMAGE SYSTEM — verbatim from v17 ── */
+    .product-lineup { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 4px; }
+    .product-img-card {
+      border-radius: var(--radius-lg); overflow: hidden;
+      border: 1px solid var(--line); background: rgba(255,255,255,0.72);
+      box-shadow: var(--shadow-sm); position: relative;
+    }
+    .product-img-card img { width: 100%; height: auto; display: block; object-fit: contain; }
+    .product-img-label {
+      position: absolute; bottom: 12px; left: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink); background: rgba(247,247,245,0.92);
+      border: 1px solid rgba(17,24,39,0.10); border-radius: 999px;
+      padding: 5px 11px; backdrop-filter: blur(6px);
+    }
+    .sleeve-row { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; margin-top: 4px; }
+    .sleeve-card {
+      border-radius: var(--radius-lg); overflow: hidden;
+      border: 1px solid var(--line); background: rgba(255,255,255,0.72);
+      box-shadow: var(--shadow-sm); position: relative;
+    }
+    .sleeve-card img { width: 100%; height: auto; display: block; object-fit: contain; }
+    .sleeve-card-label {
+      position: absolute; bottom: 12px; left: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink); background: rgba(247,247,245,0.92);
+      border: 1px solid rgba(17,24,39,0.10); border-radius: 999px;
+      padding: 5px 11px; backdrop-filter: blur(6px);
+    }
+    .feature-img-single {
+      width: 100%; border-radius: var(--radius-lg); overflow: hidden;
+      position: relative; box-shadow: var(--shadow-sm); border: 1px solid var(--line);
+    }
+    .feature-img-single img {
+      width: 100%; height: auto; display: block;
+      object-fit: cover; max-height: 520px; object-position: center top;
+    }
+    .feature-img-annotated { background: rgba(247,247,245,0.94); }
+    .feature-img-annotated img { object-fit: contain; max-height: none; object-position: center center; }
+    .feature-img-caption {
+      position: absolute; bottom: 14px; left: 14px;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink); background: rgba(247,247,245,0.92);
+      border: 1px solid rgba(17,24,39,0.10); border-radius: 999px;
+      padding: 5px 11px; backdrop-filter: blur(6px);
+    }
+    .feature-image-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .feature-img-card {
+      border-radius: var(--radius-lg); overflow: hidden;
+      border: 1px solid var(--line); background: rgba(255,255,255,0.72);
+      box-shadow: var(--shadow-sm); position: relative;
+    }
+    .feature-img-card img {
+      width: 100%; height: auto; display: block;
+      object-fit: cover; max-height: 420px; object-position: center top;
+    }
+    .feature-img-card-label {
+      position: absolute; bottom: 12px; left: 12px;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink); background: rgba(247,247,245,0.92);
+      border: 1px solid rgba(17,24,39,0.10); border-radius: 999px;
+      padding: 5px 11px; backdrop-filter: blur(6px);
+    }
+
+    /* ── GRIDS ── */
+    .dual    { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; align-items: stretch; }
+    .cards-3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+    .cards-4 { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; }
+    .rail    { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; }
+    .rail-card { padding: 24px; display: flex; flex-direction: column; justify-content: center; min-height: 100%; }
+    .microgrid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-top: 16px; }
+    .micro { padding: 14px; border-radius: 14px; background: rgba(247,247,245,0.92); border: 1px solid rgba(17,24,39,0.08); }
+    .micro strong { display: block; font-family: 'Montserrat', sans-serif; font-size: 14px; margin-bottom: 4px; font-weight: 600; }
+    .micro p { font-size: 13px; color: rgba(17,24,39,0.65); margin: 0; }
+
+    /* ── ROADMAP ── */
+    .roadmap-list { display: grid; gap: 0; }
+    .roadmap-item { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 24px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .roadmap-item:first-child { border-top: 1px solid var(--line); }
+    .roadmap-num { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: var(--navy); letter-spacing: 0.1em; text-transform: uppercase; padding-top: 3px; }
+    .roadmap-text h4 { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 8px; }
+    .roadmap-text p { font-size: 14px; color: rgba(17,24,39,0.70); margin: 0; line-height: 1.65; }
+
+    /* ── REFUSE / PURSUE ── */
+    .rp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
+    .rp-cell { background: var(--surface-strong); padding: 24px; }
+    .rp-label { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; display: block; }
+    .rp-items { font-size: 14px; color: rgba(17,24,39,0.70); line-height: 1.9; }
+
+    /* ── STAT BLOCKS ── */
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .stat-block { padding: 16px; border-radius: var(--radius-md); background: rgba(247,247,245,0.90); border: 1px solid rgba(17,24,39,0.08); }
+    .stat-num { font-family: 'Montserrat', sans-serif; font-size: clamp(20px,3vw,28px); font-weight: 800; letter-spacing: -0.03em; color: var(--ink); display: block; line-height: 1; }
+    .stat-num sup { font-size: 0.5em; vertical-align: super; }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 5px; display: block; }
+    .stat-sub   { font-size: 10px; color: rgba(17,24,39,0.42); margin-top: 2px; display: block; }
+    .patent-strip {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      padding: 12px 14px; border-radius: var(--radius-md); margin-top: 16px;
+      border: 1px solid rgba(49,89,138,0.18); background: rgba(247,247,245,0.88);
+    }
+    .patent-icon { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--navy), var(--pool)); display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+    .patent-icon svg { width: 16px; height: 16px; fill: #fff; }
+    .patent-text strong { display: block; font-size: 12px; font-weight: 700; color: var(--ink); }
+    .patent-text span   { font-size: 11px; color: var(--muted); }
+
+    /* ── TAM BARS ── */
+    .tam-visual { display: grid; gap: 10px; margin-top: 16px; }
+    .tam-row { display: grid; grid-template-columns: 56px 1fr 72px; gap: 10px; align-items: center; }
+    .tam-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--navy); }
+    .tam-bar-wrap { background: rgba(17,24,39,0.07); border-radius: 999px; height: 8px; overflow: hidden; }
+    .tam-bar { height: 100%; border-radius: 999px; width: 0%; transition: width 1.2s cubic-bezier(0.34,1.2,0.64,1); }
+    .tam-bar.tam { background: linear-gradient(90deg, var(--navy), var(--pool)); }
+    .tam-bar.sam { background: linear-gradient(90deg, var(--pool), var(--green)); }
+    .tam-bar.som { background: linear-gradient(90deg, var(--green), var(--sunlight)); }
+    .tam-value { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: var(--muted); text-align: right; }
+
+    /* ── PRODUCT LINE STRIP ── */
+    .product-line-strip {
+      display: flex; align-items: flex-start; gap: 14px; padding: 20px 22px;
+      border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.72);
+      background: var(--surface-strong); box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    }
+    .product-line-strip::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 3px 0 0 3px;
+    }
+    .product-line-strip.otc::before  { background: linear-gradient(180deg, var(--green), var(--sunlight)); }
+    .product-line-strip.rx::before   { background: linear-gradient(180deg, var(--navy), var(--pool)); }
+    .product-line-strip.plus::before { background: linear-gradient(180deg, var(--umber), var(--almond)); }
+    .product-line-strip.app::before  { background: linear-gradient(180deg, var(--pool), var(--green)); }
+    .pls-name { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 2px; }
+    .pls-type { font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--muted); display: block; margin-bottom: 8px; }
+    .pls-price { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); margin: 0 0 10px; display: block; }
+
+    /* ── REVENUE TABLE ── */
+    .rev-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .rev-table th { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 8px 14px; border-bottom: 2px solid var(--line-strong); text-align: left; }
+    .rev-table td { padding: 11px 14px; border-bottom: 1px solid var(--line); color: rgba(17,24,39,0.80); }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-year { font-weight: 700; color: var(--ink); }
+    .rev-val  { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--navy); font-size: 14px; }
+    .rev-table .highlight-row td { background: rgba(49,89,138,0.04); }
+    .rev-table .highlight-row .rev-val { font-size: 17px; }
+
+    /* ── BAR CHART ── */
+    .bar-chart { display: grid; gap: 8px; margin-top: 16px; }
+    .bar-row { display: grid; grid-template-columns: 110px 1fr 76px; gap: 10px; align-items: center; }
+    .bar-name { font-size: 11px; color: var(--muted); text-align: right; }
+    .bar-name.nm { font-weight: 700; color: var(--navy); }
+    .bar-outer { background: rgba(17,24,39,0.07); border-radius: 999px; height: 8px; overflow: hidden; }
+    .bar-inner { height: 100%; border-radius: 999px; width: 0%; transition: width 1.3s cubic-bezier(0.34,1.2,0.64,1); }
+    .bar-val { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: var(--ink); }
+    .bar-val.nm { color: var(--navy); }
+
+    /* ── VALUATION ── */
+    .valuation-list { display: grid; gap: 12px; }
+    .valuation-item {
+      display: grid; grid-template-columns: 100px 1fr 140px; gap: 16px; align-items: center;
+      padding: 18px 20px; border-radius: var(--radius-md);
+      background: var(--surface-strong); border: 1px solid rgba(255,255,255,0.72); box-shadow: var(--shadow-sm);
+    }
+    .val-stage { font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); }
+    .val-details strong { display: block; font-size: 14px; color: var(--ink); font-weight: 700; margin-bottom: 3px; }
+    .val-details p { font-size: 12px; color: rgba(17,24,39,0.60); margin: 0; }
+    .val-figure { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; color: var(--navy); text-align: right; }
+
+    /* ── PHASE TRACK ── */
+    .phase-track { position: relative; }
+    .phase-track::before {
+      content: ""; position: absolute; left: 27px; top: 28px; bottom: 28px; width: 2px;
+      background: linear-gradient(180deg, var(--navy), var(--pool), var(--green)); border-radius: 2px;
+    }
+    .phase-item { display: grid; grid-template-columns: 56px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .phase-item:last-child { border-bottom: none; }
+    .phase-dot {
+      width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase; position: relative; z-index: 1;
+    }
+    .phase-dot.p1 { background: rgba(49,89,138,0.10);  border: 2px solid rgba(49,89,138,0.22);  color: var(--navy); }
+    .phase-dot.p2 { background: rgba(0,109,119,0.10);  border: 2px solid rgba(0,109,119,0.22);  color: var(--pool); }
+    .phase-dot.p3 { background: rgba(104,139,88,0.10); border: 2px solid rgba(104,139,88,0.22); color: var(--green); }
+    .phase-text h4 { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.025em; margin: 0 0 2px; }
+    .phase-amount { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); display: block; margin-bottom: 10px; }
+    .phase-text p { font-size: 14px; color: rgba(17,24,39,0.70); margin: 0; line-height: 1.65; }
+    .roi-tag {
+      display: inline-block; margin-top: 10px; padding: 4px 12px; border-radius: 999px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase;
+      background: rgba(104,139,88,0.10); border: 1px solid rgba(104,139,88,0.22); color: var(--green);
+    }
+
+    /* ── SUPPLY TABLE ── */
+    .supply-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .supply-table th { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 8px 14px; border-bottom: 2px solid var(--line-strong); text-align: left; }
+    .supply-table td { padding: 11px 14px; border-bottom: 1px solid var(--line); color: rgba(17,24,39,0.78); vertical-align: top; }
+    .supply-table tr:last-child td { border-bottom: none; }
+    .supply-table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+    .supply-table td:nth-child(2) { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+    /* ── TEAM CARDS ── */
+    .team-card { padding: 22px; }
+    .team-avatar { width: 40px; height: 40px; border-radius: 50%; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; color: #fff; }
+    .team-name  { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 2px; }
+    .team-role  { font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--navy); display: block; margin-bottom: 10px; font-weight: 600; }
+    .team-card p { font-size: 13px; color: rgba(17,24,39,0.68); margin: 0; line-height: 1.55; }
+
+    /* ── CLOSING ── */
+    .closing { padding: 110px 0 140px; border-top: 1px solid var(--line-strong); }
+    .closing-wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; align-items: stretch; }
+    .closing-mark { font-family: 'Montserrat', sans-serif; font-size: clamp(48px,8vw,96px); font-weight: 800; line-height: 0.92; letter-spacing: 0.06em; margin: 0 0 20px; text-transform: uppercase; }
+    .closing-mark span { color: var(--navy); }
+    .footer-copy { font-size: 15px; color: rgba(17,24,39,0.78); margin: 0 0 14px; line-height: 1.72; }
+    .closing-card { padding: 24px; }
+    .closing-card ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; }
+    .closing-card li { padding-top: 12px; padding-left: 18px; border-top: 1px solid rgba(17,24,39,0.08); font-size: 13px; color: rgba(17,24,39,0.72); position: relative; line-height: 1.55; }
+    .closing-card li::before { content: ""; position: absolute; left: 0; top: 22px; width: 7px; height: 7px; border-radius: 50%; background: linear-gradient(180deg, var(--navy), var(--pool)); }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 28px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--navy), var(--pool)); color: #fff;
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      box-shadow: 0 8px 24px rgba(49,89,138,0.26); transition: transform .2s ease, box-shadow .2s ease; margin-top: 20px;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(49,89,138,0.32); }
+    .contact-row { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); margin-top: 9px; }
+    .contact-row svg { width: 15px; height: 15px; opacity: 0.55; flex-shrink: 0; }
+    .signature { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 28px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(17,24,39,0.58); }
+    .signature::before { content: ""; width: 80px; height: 1px; background: linear-gradient(90deg, var(--navy), rgba(49,89,138,0)); }
+    .footnote { font-size: 13px; color: rgba(17,24,39,0.52); margin: 0; font-style: italic; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1200px) { .side-nav { display: none; } }
+    @media (max-width: 1024px) {
+      .hero-grid, .dual, .section-grid, .rail, .closing-wrap { grid-template-columns: 1fr; }
+      .section-meta { position: static; }
+      .metrics, .metrics-4, .cards-3, .cards-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .rp-grid, .sleeve-row { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .feature-image-pair { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 720px) {
+      :root { --topbar-h: 60px; }
+      .topbar { top: 10px; width: min(calc(100% - 20px), 1260px); }
+      .topbar-inner { padding: 10px 12px; border-radius: 14px; }
+      .brandline span { display: none; }
+      .progress-label { display: none; }
+      .hero { min-height: auto; padding-top: 100px; padding-bottom: 60px; }
+      .hero::after { display: none; }
+      .metrics, .metrics-4, .cards-3, .cards-4, .microgrid, .rp-grid,
+      .stat-grid, .sleeve-row, .feature-image-pair { grid-template-columns: 1fr; }
+      .section { padding: 72px 0; }
+      .container { width: min(calc(100% - 24px), var(--max)); }
+      .card, .metric, .hero-panel, .closing-card, .rail-card, .team-card { padding: 20px; }
+      .label-panel { padding: 18px 20px; }
+      .barcode, .product-strip-divider { display: none; }
+      .bar-row { grid-template-columns: 80px 1fr 60px; }
+      .valuation-item { grid-template-columns: 1fr; }
+      .product-lineup { grid-template-columns: 1fr; }
+      .ritual-panel-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+<a href="#overview" class="skip-link">Skip to content</a>
+
+<div class="shell">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brandline">
+        <div class="drop" aria-hidden="true"></div>
+        <div>
+          <strong>NM Thera / SOKY</strong>
+          <span>Investor Overview · NM Therapeutics, Inc.</span>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <span class="progress-label" id="progress-label">Overview</span>
+        <div class="progress" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+      </div>
+      <div class="topbar-badge">Pre-Seed · Open</div>
+    </div>
+  </div>
+
+  <!-- SIDE NAV -->
+  <nav class="side-nav" aria-label="Section navigation">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#opportunity">Market</a>
+    <a href="#product">Product</a>
+    <a href="#technology">IP</a>
+    <a href="#financials">Financials</a>
+    <a href="#team">Team</a>
+    <a href="#funding">Funding</a>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════ -->
+  <header class="hero container" id="overview" data-label="Overview">
+    <div class="hero-grid">
+
+      <!-- LEFT: main copy -->
+      <div class="reveal">
+        <div class="eyebrow-row">
+          <span class="pill">Pre-Seed · $2.83M</span>
+          <span class="pill">Delaware C-Corp</span>
+          <span class="pill">Patent Issued 2023</span>
+          <span class="pill">Orange County, CA</span>
+        </div>
+        <h1 class="hero-wordmark">S<span class="o-letter">O</span>KY</h1>
+        <div class="hero-byline">
+          <span class="nm-drop" aria-hidden="true"></span>
+          by NM Thera &nbsp;·&nbsp; NM Therapeutics, Inc.
+        </div>
+        <p class="hero-product-name">Wearable Soak System · Investor Overview</p>
+        <p class="hero-product-desc">A modular, patented platform for localized liquid immersion care — beginning with hands and feet, designed to extend across every body zone.</p>
+        <p class="hero-copy">
+          <strong>SOKY is the world's first wearable soak system.</strong> Eight years in development. One issued US patent. A team of six across three continents. Now seeking pre-seed capital to bring SOKY to market.
+        </p>
+        <p class="hero-copy">
+          The founding question: <strong>what if the most ancient act of care — immersing the body in water — could move with the person</strong> instead of confining them to a bowl, a tub, or a clinic station? The answer is patented. The product is ready. The market is waiting.
+        </p>
+        <div class="hero-note">
+          <div class="drop" aria-hidden="true"></div>
+          <div>
+            <strong>The founding moment</strong>
+            <p>The founder lives with palmar hyperhidrosis. The pivotal experience — having to refuse a child's outstretched hand — sparked eight years of development. SOKY is not just a glove. It is a platform for turning simple, ancient inputs — water, salts, botanicals, warmth, time — into localized rituals people can actually keep. The tools were always there. We removed the reason not to begin.</p>
+          </div>
+        </div>
+        <div class="hero-tagline-line">Hand &amp; Footcare Simplified. &nbsp;<span style="color:var(--muted);font-weight:400;font-size:0.85em;">Spa-grade immersion, anywhere.</span></div>
+        <div class="product-strip">
+          <span class="product-strip-id">NMT_SOKY_INV_001</span>
+          <div class="product-strip-divider"></div>
+          <div class="product-strip-meta">
+            <strong>US 11,602,631 B2 — Issued March 14, 2023</strong>
+            NM Therapeutics, Inc. · Delaware C-Corp · Steward-Owned Vision
+          </div>
+          <div class="barcode" aria-hidden="true" id="barcode-hero"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: hero panel — video at top, funding stats below -->
+      <aside class="hero-panel reveal" aria-label="Key visual and funding snapshot">
+
+        <!-- PRIMARY KEY VISUAL: pool water loop — verbatim from v17 -->
+        <div class="hero-product-video">
+          <video autoplay loop muted playsinline
+            poster="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png"
+            aria-label="SOKY glove over pool water — ambient product loop">
+            <source src="https://videos.files.wordpress.com/2uAOPAQx/pool-water-video-cl-edit.mp4" type="video/mp4">
+            <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="SOKY by NM Thera — wearable soak system" />
+          </video>
+        </div>
+
+        <!-- Ritual bar — shows product USP immediately beneath the video -->
+        <span class="panel-kicker">The SOKY Ritual — same four steps across every body zone</span>
+        <div class="ritual-bar" role="list" aria-label="Ritual steps">
+          <div class="ritual-bar-step" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            <span class="ritual-bar-label">Fill</span>
+          </div>
+          <div class="ritual-bar-step" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span class="ritual-bar-label">Seal</span>
+          </div>
+          <div class="ritual-bar-step" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 7.39 16.74"/><path d="M12 22a10 10 0 0 1-7.39-16.74"/></svg>
+            <span class="ritual-bar-label">Soak</span>
+          </div>
+          <div class="ritual-bar-step" role="listitem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/><circle cx="12" cy="4" r="1.5" fill="currentColor" stroke="none"/></svg>
+            <span class="ritual-bar-label">Drain</span>
+          </div>
+        </div>
+
+        <!-- Funding snapshot stats -->
+        <span class="panel-kicker" style="margin-top:4px;">Funding Snapshot</span>
+        <div class="stat-grid">
+          <div class="stat-block">
+            <span class="stat-num">$2.83<sup>M</sup></span>
+            <span class="stat-label">Total Capital Sought</span>
+            <span class="stat-sub">18-month runway to EBITDA+</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num">$72<sup>M</sup></span>
+            <span class="stat-label">Year 10 Revenue Target</span>
+            <span class="stat-sub">Conservative projection</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num">30<sup>×</sup></span>
+            <span class="stat-label">Phase 1 ROI Potential</span>
+            <span class="stat-sub">10-year horizon</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-num">$597<sup>B</sup></span>
+            <span class="stat-label">Total Addressable Market</span>
+            <span class="stat-sub">Consolidated verticals</span>
+          </div>
+        </div>
+
+        <div class="patent-strip">
+          <div class="patent-icon">
+            <svg viewBox="0 0 20 20"><path d="M10 1a9 9 0 100 18A9 9 0 0010 1zm.75 13.25h-1.5v-5.5h1.5v5.5zm0-7h-1.5v-1.5h1.5v1.5z"/></svg>
+          </div>
+          <div class="patent-text">
+            <strong>US 11,602,631 B2 · Issued 2023 · Valid to 2043</strong>
+            <span>Method and Apparatus for Treatment of Hyperhidrosis</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ══════════════════════════════════════════
+         II — MARKET
+    ══════════════════════════════════════════ -->
+    <section class="section" id="opportunity" data-label="Market">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">II — Market</span>
+          <h2 class="section-title">A vast, untapped opportunity.</h2>
+          <p class="section-sub">Multiple converging markets. One platform.</p>
+        </div>
+        <div class="content-stack">
+
+          <p class="lede"><strong>NM Thera's Total Addressable Market spans approximately $597 billion</strong> across hyperhidrosis, hand and foot care, wellness, and adjacent therapeutic verticals — with SOKY as the only wearable soak platform.</p>
+
+          <div class="label-panel">
+            <div class="label-panel-inner">
+              <span class="label-panel-kicker">TAM · SAM · SOM — Primary Markets · 1% Penetration Model</span>
+              <div class="tam-visual">
+                <div class="tam-row">
+                  <span class="tam-label">TAM</span>
+                  <div class="tam-bar-wrap"><div class="tam-bar tam" data-width="100"></div></div>
+                  <span class="tam-value">$596.8B</span>
+                </div>
+                <div class="tam-row">
+                  <span class="tam-label">SAM</span>
+                  <div class="tam-bar-wrap"><div class="tam-bar sam" data-width="45"></div></div>
+                  <span class="tam-value">$5.97B</span>
+                </div>
+                <div class="tam-row">
+                  <span class="tam-label">SOM</span>
+                  <div class="tam-bar-wrap"><div class="tam-bar som" data-width="8"></div></div>
+                  <span class="tam-value">$59.7M</span>
+                </div>
+              </div>
+              <p class="label-panel-body" style="margin-top:14px;">SAM = 1% of TAM. SOM = 1% of SAM. At 1% SAM penetration, NM Thera projects annual revenues of $50–$100M by Year 10 — a conservative first-capture assumption for a patented product with no direct competitor.</p>
+            </div>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <strong>$646M</strong>
+              <p>Hyperhidrosis Market TAM — 3.85M people globally. SOKY's founding market, supported by the issued iontophoresis patent.</p>
+              <small>Source: Cognitive Market Research, 2023</small>
+            </div>
+            <div class="metric">
+              <strong>$12.2B</strong>
+              <p>Hand &amp; Foot Care TAM — 1.6B people globally. SOKY disrupts the $2B foot spa bath market forecast for 2025.</p>
+              <small>Source: Mordor Intelligence, 2024</small>
+            </div>
+            <div class="metric">
+              <strong>$1.5T</strong>
+              <p>Wellness Market TAM — 2B people globally. SOKY's therapeutic care applications sit squarely in the personal wellness megatrend.</p>
+              <small>Source: McKinsey, 2024</small>
+            </div>
+          </div>
+
+          <div class="metrics-4">
+            <div class="metric"><strong>$34B→$120B</strong><p>Wearable medical devices · 28% CAGR 2023–2030.</p></div>
+            <div class="metric"><strong>$9.6B</strong><p>Arthritis &amp; pain relief by 2026 · targeted soak therapy.</p></div>
+            <div class="metric"><strong>$8.4B</strong><p>Sports medicine by 2026 · recovery and rehabilitation.</p></div>
+            <div class="metric"><strong>$189B</strong><p>Eczema &amp; skincare by 2027 · localized dermatological soaks.</p></div>
+          </div>
+
+          <div class="quote-band">
+            <p>The acquisition of PowerDot by Therabody for approximately $34M underscores the high value and potential within the wearable therapeutic device market. NM Thera's broader market focus, deeper IP, and platform architecture position it favorably for comparable or superior exits.</p>
+            <span>LA Business Journal, 2021 · Acquisition precedent for category</span>
+          </div>
+
+          <div class="dual">
+            <div class="card">
+              <span class="card-label">Five forces aligning now</span>
+              <h3>Why this moment is the right moment.</h3>
+              <ul class="checklist">
+                <li>Consumer shift toward at-home therapeutic care accelerated post-pandemic</li>
+                <li>Wearable medical devices growing at 28% CAGR — fastest category in health tech</li>
+                <li>Rising demand for drug-free pain management across all age groups</li>
+                <li>Proven adjacent Amazon demand from HoMedics, Epielle, TheraIce, Dr. Teals</li>
+                <li>No direct competitor for a wearable, portable, localized immersion system</li>
+              </ul>
+            </div>
+            <div class="card">
+              <span class="card-label">Target acquirers</span>
+              <h3>Built to grow. Positioned to exit.</h3>
+              <p>Potential acquirers include Therabody, Johnson &amp; Johnson, Medtronic, Abbott, Zimmer Biomet, and Samsung Health — all active in wearable therapeutics and personal health devices.</p>
+              <p style="margin-top:12px;">NM Thera's steward-owned governance structure ensures the mission survives any deal. That is a feature for mission-aligned acquirers, not a liability.</p>
+              <small>Exit paths: Acquisition · IPO · Licensing · Strategic merger</small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         III — PRODUCT
+    ══════════════════════════════════════════ -->
+    <section class="section" id="product" data-label="Product">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">III — Product</span>
+          <h2 class="section-title">Four lines. One platform.</h2>
+          <p class="section-sub">DIY → OTC → Rx → Digital health.</p>
+        </div>
+        <div class="content-stack">
+
+          <p class="lede">SOKY is not a single product. It is <strong>a modular platform</strong> across consumer wellness, clinical medical devices, consumable enhancers, and a digital health app — each line reinforcing the others.</p>
+
+          <!-- PROOF OF CONCEPT: glove in water + lifestyle shot — shows the product works -->
+          <div class="feature-image-pair">
+            <div class="feature-img-card">
+              <img
+                src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg"
+                alt="SOKY hand glove raised from pool water — localized immersion in context"
+                loading="lazy" decoding="async"
+              />
+              <span class="feature-img-card-label">In water · localized immersion</span>
+            </div>
+            <div class="feature-img-card">
+              <img
+                src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9929.jpg"
+                alt="Both hands wearing SOKY gloves — bilateral care, at rest"
+                loading="lazy" decoding="async"
+              />
+              <span class="feature-img-card-label">Bilateral care · real-world use</span>
+            </div>
+          </div>
+
+          <!-- Ritual detail inside label panel -->
+          <div class="label-panel">
+            <div class="label-panel-inner">
+              <span class="label-panel-kicker">The Ritual · Four Steps · Same Every Time · Same Across Every Body Zone</span>
+              <div class="ritual-panel-grid">
+                <div>
+                  <p style="font-size:13px;color:rgba(17,24,39,0.65);margin:0 0 12px;line-height:1.7;"><strong style="color:var(--ink);font-weight:600;">1 — Fill</strong><br>Pour water — warm or cool, depending on the use case — directly into the glove. Then add whatever the moment calls for: mineral salts, botanicals, emollients, a targeted solution. What you put in is the beginning of the protocol.</p>
+                  <p style="font-size:13px;color:rgba(17,24,39,0.65);margin:0;line-height:1.7;"><strong style="color:var(--ink);font-weight:600;">2 — Seal</strong><br>Fold the cuff inward. The self-sealing design contains the environment — portable, discrete, pressure-responsive. The ritual is no longer tied to a basin. It travels with the person.</p>
+                </div>
+                <div>
+                  <p style="font-size:13px;color:rgba(17,24,39,0.65);margin:0 0 12px;line-height:1.7;"><strong style="color:var(--ink);font-weight:600;">3 — Soak</strong><br>A standard session runs 15–20 minutes. Walk around. Rest. Read. The soak does not require stillness. That is the whole point.</p>
+                  <p style="font-size:13px;color:rgba(17,24,39,0.65);margin:0;line-height:1.7;"><strong style="color:var(--ink);font-weight:600;">4 — Drain</strong><br>Finish cleanly. Remove, drain, rinse, air-dry. A graceful exit invites return. The ritual is designed to end without friction — so the next session is easier to begin than the last one was to finish.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- "The soak doesn't ask you to stop" — lifestyle proof for investor -->
+          <div class="feature-img-single">
+            <img
+              src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9601.jpg"
+              alt="SOKY glove worn while reading — in-use lifestyle, the care moves with you"
+              loading="lazy" decoding="async"
+            />
+            <span class="feature-img-caption">The soak doesn't ask you to stop · care that fits into real life</span>
+          </div>
+
+          <!-- Four product lines -->
+          <div class="content-stack">
+            <div class="product-line-strip otc">
+              <div>
+                <p class="pls-name">SOKY OTC</p>
+                <span class="pls-type">Consumer · Class I Medical Device</span>
+                <span class="pls-price">$120 – $250 per unit</span>
+                <p style="font-size:14px;color:rgba(17,24,39,0.70);margin:0;line-height:1.62;">DIY and OTC wearable soak for wellness and self-treatment. Passive thermotherapy — warm or cool. Gloves and socks initially, expanding across all body zones. No therapeutic claims required at launch. 25 SKUs at full lineup across sizes XS–XL. Target: 1,000 units/SKU/month at launch via Amazon + DTC.</p>
+              </div>
+            </div>
+            <div class="product-line-strip rx">
+              <div>
+                <p class="pls-name">SOKY Rx</p>
+                <span class="pls-type">Medical Device · Class II · Clinical &amp; Professional</span>
+                <span class="pls-price">$750 – $1,000 per unit</span>
+                <p style="font-size:14px;color:rgba(17,24,39,0.70);margin:0;line-height:1.62;">Electrotherapy, iontophoresis, drug delivery, TENS/EMS, hyperbaric oxygen therapy. The same garment base as SOKY OTC — a different port module activates advanced modalities. FDA 510(k) / De Novo pathway. B2B sales to hospitals, clinics, physical therapy, and dermatology practices.</p>
+              </div>
+            </div>
+            <div class="product-line-strip plus">
+              <div>
+                <p class="pls-name">SOKY Plus</p>
+                <span class="pls-type">Consumables · Accessories · Recurring Revenue</span>
+                <span class="pls-price">$15 – $250</span>
+                <p style="font-size:14px;color:rgba(17,24,39,0.70);margin:0;line-height:1.62;">Bath salts, mineral oils, botanical enhancers, antifungal solutions, iontophoresis mineral packs, pain-relief bath mixes. Creates the consumable flywheel tied to every SOKY garment sold.</p>
+              </div>
+            </div>
+            <div class="product-line-strip app">
+              <div>
+                <p class="pls-name">SOKY Wellness</p>
+                <span class="pls-type">Digital Health · Telehealth · Subscription</span>
+                <span class="pls-price">$0 – $50 / month</span>
+                <p style="font-size:14px;color:rgba(17,24,39,0.70);margin:0;line-height:1.62;">Companion app evolving into a full digital-health platform. Telehealth services, personalized treatment plans, real-time tracking, practitioner marketplace. Acts as the omnichannel hub for all SOKY products and the entry point for recurring software revenue.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product render lineup — Hand + Foot SOKY -->
+          <div class="product-lineup">
+            <div class="product-img-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-18.png" alt="SOKY Hand Glove — wearable soak glove, NMT_SOKY_001" loading="lazy" decoding="async"/>
+              <span class="product-img-label">Hand SOKY · OTC Launch SKU</span>
+            </div>
+            <div class="product-img-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-17.png" alt="SOKY Foot Bootie — wearable soak foot format" loading="lazy" decoding="async"/>
+              <span class="product-img-label">Foot SOKY · Phase 1 Expansion</span>
+            </div>
+          </div>
+
+          <!-- Body zone expansion + sleeve renders -->
+          <div class="dual">
+            <div class="card">
+              <span class="card-label">Body Zone Expansion Arc</span>
+              <h3>One platform. Every body zone.</h3>
+              <p>Each new zone unlocks incremental TAM without new manufacturing infrastructure — only new garment molds. The universal port interface means every enhancement module works across the entire product family.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+                <span class="pill" style="border-color:rgba(49,89,138,0.24);color:var(--navy);">Hands ✓</span>
+                <span class="pill">Feet → Next</span>
+                <span class="pill">Arms</span>
+                <span class="pill">Knees</span>
+                <span class="pill">Elbows</span>
+                <span class="pill">Legs</span>
+                <span class="pill">Pelvic / Sitz</span>
+              </div>
+            </div>
+            <div class="card">
+              <span class="card-label">Revenue stream diversity</span>
+              <h3>Nine active streams by Year 5.</h3>
+              <ul class="checklist" style="margin-top:12px;">
+                <li>SOKY OTC — e-commerce, Amazon, retail</li>
+                <li>SOKY Rx — clinical B2B &amp; insurance reimbursement</li>
+                <li>SOKY Plus — recurring consumables</li>
+                <li>Wellness App — subscription tiers</li>
+                <li>Licensing &amp; IP partnerships</li>
+                <li>Data monetization (anonymized research)</li>
+                <li>Practitioner service fees</li>
+                <li>Content sales &amp; educational licensing</li>
+                <li>Mobile app advertising &amp; sponsorship</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sleeve renders — Foot, Elbow, Knee -->
+          <div class="sleeve-row">
+            <div class="sleeve-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-14.png" alt="Foot SOKY — wearable foot soak bootie" loading="lazy" decoding="async"/>
+              <span class="sleeve-card-label">Foot SOKY</span>
+            </div>
+            <div class="sleeve-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-15.png" alt="Elbow SOKY — joint sleeve format" loading="lazy" decoding="async"/>
+              <span class="sleeve-card-label">Elbow SOKY</span>
+            </div>
+            <div class="sleeve-card">
+              <img src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-16.png" alt="Knee SOKY — knee sleeve format" loading="lazy" decoding="async"/>
+              <span class="sleeve-card-label">Knee SOKY</span>
+            </div>
+          </div>
+          <p class="footnote">The same core ritual, the same seal logic, the same enhancer system, and the same protocol library serve the whole body in turn. Each new garment form is an incremental revenue unlock, not a new R&amp;D programme.</p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         IV — IP & TECHNOLOGY
+    ══════════════════════════════════════════ -->
+    <section class="section" id="technology" data-label="IP &amp; Tech">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">IV — IP &amp; Technology</span>
+          <h2 class="section-title">The seal that no competitor can copy.</h2>
+          <p class="section-sub">Pressure-responsive. Passive. Patented across the full geometry family.</p>
+        </div>
+        <div class="content-stack">
+
+          <p class="lede">Every prior wearable immersion device failed at the same point: the seal. SOKY solves this with a <strong>pressure-responsive inversion mechanism</strong> — the more internal pressure builds, the tighter the seal becomes.</p>
+
+          <!-- Annotated engineering callout image — the product proving the mechanism -->
+          <div class="feature-img-single feature-img-annotated">
+            <img
+              src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-2.jpg"
+              alt="SOKY hand glove — feature callouts showing airtight cuff design, fully contained soaks, translucent silicone, skin-safe construction"
+              loading="lazy" decoding="async"
+            />
+            <span class="feature-img-caption">Airtight cuff · translucent silicone · skin-safe construction · pressure-responsive seal</span>
+          </div>
+
+          <div class="quote-band">
+            <p>The Inversion Frustal Cuff creates a pocket region between the inner sealing layer and the outer retaining layer. When the user lifts their hand and fluid shifts, water enters that pocket — and instead of peeling the seal away, it presses the inner layer more firmly against the skin. No clamps. No adhesives. No vacuum. No power. Entirely passive.</p>
+            <span>Core invention · US 11,602,631 B2 · Issued March 14, 2023</span>
+          </div>
+
+          <div class="dual">
+            <div class="card">
+              <span class="card-label">The Core Invention</span>
+              <h3>Inversion Frustal Cuff</h3>
+              <p>A tapered elastomeric thin-walled frustal shell segment that folds inward about a reversible hinge region. The fold creates an axial overlap where at least two cuff layers press against the skin simultaneously — that is the seal. When internal pressure increases, the pocket between layers converts the force into greater sealing pressure.</p>
+              <ul class="checklist" style="margin-top:16px;">
+                <li>No clamps, adhesives, vacuum, or power source required</li>
+                <li>Seal tightens under conditions that would defeat conventional designs</li>
+                <li>Patent claims the full frustal geometry family — no taper-angle workaround</li>
+                <li>Single motion transitions cuff from donning state to sealing state</li>
+              </ul>
+            </div>
+            <div class="card">
+              <span class="card-label">Universal Port Interface</span>
+              <h3>One port. Every modality.</h3>
+              <p>A standardized multi-piece port assembly clamps through the garment wall. Model F (passive soak) and Model E (clinical electro) are the same garment base — a different module activates advanced modalities.</p>
+              <div class="microgrid">
+                <div class="micro"><strong>Fill / Drain</strong><p>Standard sealing cap and flow module.</p></div>
+                <div class="micro"><strong>Electrode cap</strong><p>Electrotherapy and iontophoresis.</p></div>
+                <div class="micro"><strong>Sensor cap</strong><p>Temp, pressure, pH, conductivity.</p></div>
+                <div class="micro"><strong>Gas delivery</strong><p>O₂, CO₂, humidified gas therapy.</p></div>
+              </div>
+              <small>Same garment · different module · entire therapy spectrum</small>
+            </div>
+          </div>
+
+          <!-- Botanical context image — shows breadth of therapy spectrum -->
+          <div class="feature-img-single">
+            <img
+              src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-4.jpg"
+              alt="SOKY hand glove raised against lush botanical background — nature-based care, SOKY Plus enhancers context"
+              loading="lazy" decoding="async"
+            />
+            <span class="feature-img-caption">SOKY Plus · botanical applications · compatible enhancers</span>
+          </div>
+
+          <div class="roadmap-list">
+            <div class="roadmap-item">
+              <span class="roadmap-num">IP 01</span>
+              <div class="roadmap-text">
+                <h4>US 11,602,631 B2 — Issued · Active · Valid to 2043</h4>
+                <p>Method and Apparatus for Treatment of Hyperhidrosis. Assignee: NM Therapeutics, LLC. Inventors: Kenny Pham &amp; Jennifer Nguyen. Filed: June 2018 (provisional). Classification: A61N 1/325 · A61N 1/0448. 15 claims covering the water-filled glove, inversion cuff seal, iontophoresis circuit, and mobility-in-use.</p>
+              </div>
+            </div>
+            <div class="roadmap-item">
+              <span class="roadmap-num">IP 02</span>
+              <div class="roadmap-text">
+                <h4>Pending: Method and Apparatus for Localized Immersion</h4>
+                <p>The platform patent. Expands claims beyond hyperhidrosis to the full modality and body-zone spectrum. Claims the full frustal profile family — conical, parabolic, hyperbolic, superelliptical, spline-defined, and anatomically conformal profiles. Competitors cannot design around these claims by changing taper angle.</p>
+              </div>
+            </div>
+            <div class="roadmap-item">
+              <span class="roadmap-num">IP 03</span>
+              <div class="roadmap-text">
+                <h4>Trademark: "NM Thera" — Registered &nbsp;·&nbsp; "SOKY" — Pending</h4>
+                <p>Brand identity protections across the full product and platform namespace. The water-drop logo mark is the visual cornerstone of the brand system across all product lines and marketing.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-label">Technical defensibility summary</span>
+            <h3>Why this IP cannot be replicated.</h3>
+            <div class="microgrid">
+              <div class="micro"><strong>Geometry family claims</strong><p>Patent covers every frustal profile — no taper-angle workaround.</p></div>
+              <div class="micro"><strong>Universal port platform</strong><p>One interface for every modality — moat deepens with each module launched.</p></div>
+              <div class="micro"><strong>8 years of iteration</strong><p>Prototype batches produced. COGS validated. Mold tooling costed.</p></div>
+              <div class="micro"><strong>Regulatory runway</strong><p>OTC first as Class I. Rx follows on the same garment base — no re-certification of the seal.</p></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         V — FINANCIALS
+    ══════════════════════════════════════════ -->
+    <section class="section" id="financials" data-label="Financials">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">V — Financials</span>
+          <h2 class="section-title">Revenue to $72M by Year 10.</h2>
+          <p class="section-sub">Anchored to real Amazon incumbent data.</p>
+        </div>
+        <div class="content-stack">
+
+          <p class="lede">NM Thera's projections are benchmarked against <strong>what comparable products actually generate on Amazon</strong>, aggregated via JungleScout analytics — not theoretical market-share models.</p>
+
+          <div class="card">
+            <span class="card-label">Revenue Projection — Conservative Case</span>
+            <table class="rev-table" style="margin-top:10px;">
+              <thead>
+                <tr>
+                  <th>Period</th><th>SKUs Active</th><th>Revenue</th><th>Key Milestone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="rev-year">Y1 – Y1.5</td><td>2 (Glove + Sock Med)</td><td class="rev-val">—</td><td>Start-up phase · pre-revenue</td></tr>
+                <tr><td class="rev-year">Year 2</td><td>2 → 10 SKUs</td><td class="rev-val">$3.65M</td><td>First revenue · 33,717 units</td></tr>
+                <tr><td class="rev-year">Year 3</td><td>10 → 25 SKUs</td><td class="rev-val">$20.4M</td><td>Full OTC size run · 177K+ units</td></tr>
+                <tr><td class="rev-year">Year 5</td><td>25 → 50 SKUs</td><td class="rev-val">$48.1M</td><td>SOKY Rx + App subscription launch</td></tr>
+                <tr class="highlight-row"><td class="rev-year">Year 10</td><td>50 full SKUs</td><td class="rev-val">$72M</td><td>Full platform · valuation $361M+</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <span class="card-label">Amazon Annual Revenue — Comparable Products · JungleScout 2024</span>
+            <p style="font-size:13px;color:var(--muted);margin:4px 0 16px;">NM Thera Year 10 target is set to match Therabody's actual Amazon performance.</p>
+            <div class="bar-chart" id="bar-chart">
+              <div class="bar-row"><span class="bar-name">HoMedics Footbath</span><div class="bar-outer"><div class="bar-inner" style="background:linear-gradient(90deg,rgba(49,89,138,0.4),rgba(49,89,138,0.55))" data-width="7"></div></div><span class="bar-val">$5.2M</span></div>
+              <div class="bar-row"><span class="bar-name">Epielle</span><div class="bar-outer"><div class="bar-inner" style="background:linear-gradient(90deg,rgba(49,89,138,0.45),rgba(49,89,138,0.60))" data-width="8"></div></div><span class="bar-val">$5.8M</span></div>
+              <div class="bar-row"><span class="bar-name">Dr. Teals</span><div class="bar-outer"><div class="bar-inner" style="background:linear-gradient(90deg,rgba(49,89,138,0.50),rgba(0,109,119,0.65))" data-width="16"></div></div><span class="bar-val">$11.8M</span></div>
+              <div class="bar-row"><span class="bar-name">TheraIce</span><div class="bar-outer"><div class="bar-inner" style="background:linear-gradient(90deg,rgba(0,109,119,0.55),rgba(0,109,119,0.75))" data-width="21"></div></div><span class="bar-val">$14.9M</span></div>
+              <div class="bar-row"><span class="bar-name">Carpe</span><div class="bar-outer"><div class="bar-inner" style="background:linear-gradient(90deg,rgba(0,109,119,0.60),rgba(104,139,88,0.70))" data-width="28"></div></div><span class="bar-val">$19.9M</span></div>
+              <div class="bar-row"><span class="bar-name">HyperIce</span><div class="bar-outer"><div class="bar-inner" style="background:linear-gradient(90deg,rgba(104,139,88,0.60),rgba(104,139,88,0.80))" data-width="46"></div></div><span class="bar-val">$33.2M</span></div>
+              <div class="bar-row"><span class="bar-name nm">NM Thera Y10 ↑</span><div class="bar-outer" style="box-shadow:0 0 0 1px rgba(49,89,138,0.18)"><div class="bar-inner" style="background:linear-gradient(90deg,var(--navy),var(--pool))" data-width="99"></div></div><span class="bar-val nm">$72M</span></div>
+              <div class="bar-row"><span class="bar-name">Therabody</span><div class="bar-outer"><div class="bar-inner" style="background:linear-gradient(90deg,var(--green),#4a7a3a)" data-width="100"></div></div><span class="bar-val">$72.6M</span></div>
+            </div>
+          </div>
+
+          <div class="dual">
+            <div class="card">
+              <span class="card-label">Unit Economics — SOKY OTC</span>
+              <h3>Based on 2021 MorphoMFG prototypes.</h3>
+              <div class="rp-grid" style="margin-top:14px;">
+                <div class="rp-cell">
+                  <span class="rp-label">COGS</span>
+                  <div class="rp-items">Manufacturing &nbsp;$12–$22.50/unit<br>Packaging &nbsp;$1.50/unit<br>Labor + overhead &nbsp;$3–$10/unit<br><strong style="display:block;margin-top:8px;color:var(--ink);">Total: $16 – $27/unit</strong></div>
+                </div>
+                <div class="rp-cell">
+                  <span class="rp-label">Revenue</span>
+                  <div class="rp-items">SOKY OTC &nbsp;$120–$250<br>SOKY Rx &nbsp;$750–$1,000<br>SOKY Plus &nbsp;$15–$250<br><strong style="display:block;margin-top:8px;color:var(--navy);">Gross margin: ~80%+</strong></div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <span class="card-label">Valuation Trajectory</span>
+              <h3>Conservative revenue multiples.</h3>
+              <div class="valuation-list" style="margin-top:14px;">
+                <div class="valuation-item">
+                  <span class="val-stage">Pre-Seed</span>
+                  <div class="val-details"><strong>Tangible Assets + IP</strong><p>IP $500K · Sweat Equity $500K · Investment $85K</p></div>
+                  <span class="val-figure">$1.1M</span>
+                </div>
+                <div class="valuation-item">
+                  <span class="val-stage">End Year 2</span>
+                  <div class="val-details"><strong>3× Revenue Multiple</strong><p>$3.65M revenue</p></div>
+                  <span class="val-figure">$12M</span>
+                </div>
+                <div class="valuation-item">
+                  <span class="val-stage">End Year 5</span>
+                  <div class="val-details"><strong>4× Revenue Multiple</strong><p>$48.1M revenue</p></div>
+                  <span class="val-figure">$193M</span>
+                </div>
+                <div class="valuation-item">
+                  <span class="val-stage">End Year 10</span>
+                  <div class="val-details"><strong>5× Revenue Multiple</strong><p>$72M revenue</p></div>
+                  <span class="val-figure">$361M</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         VI — TEAM
+    ══════════════════════════════════════════ -->
+    <section class="section" id="team" data-label="Team">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">VI — Team</span>
+          <h2 class="section-title">Six operators across three continents.</h2>
+          <p class="section-sub">Neuroscience · Regulatory · Hardware · Marketing · UX.</p>
+        </div>
+        <div class="content-stack">
+
+          <p class="lede">The NM Thera team combines neuroscience, medical device sales, regulatory affairs, hardware product development, growth marketing, and UX design — in exactly the roles that matter most at this stage.</p>
+
+          <div class="cards-3">
+            <div class="card team-card">
+              <div class="team-avatar" style="background:linear-gradient(135deg,var(--navy),var(--pool))">KP</div>
+              <p class="team-name">Kenny Pham</p>
+              <span class="team-role">Co-Founder / CEO</span>
+              <p>Inventor of SOKY. Background in neuroscience, stem cell manufacturing, medical device &amp; pharmaceutical sales. Former: Blaine Labs, Calico Life Sciences, PrimeGen Biotech, UC Riverside.</p>
+            </div>
+            <div class="card team-card">
+              <div class="team-avatar" style="background:linear-gradient(135deg,var(--pool),#005060)">KN</div>
+              <p class="team-name">Kenichiro Nishii</p>
+              <span class="team-role">Co-Founder / COO</span>
+              <p>Regulatory affairs and business development specialist. Former: CureApp North America, Globizz Corporation, Miami University. Leads FDA pathway compliance strategy.</p>
+            </div>
+            <div class="card team-card">
+              <div class="team-avatar" style="background:linear-gradient(135deg,var(--green),#4a7a3a)">ST</div>
+              <p class="team-name">Sean Tan</p>
+              <span class="team-role">CTO</span>
+              <p>Hardware and software product development veteran. Former: Posifa Technologies, AiCare, UTStarcom, Brocade, BASIS Science, Huawei. Extensive IoT and medical device hardware background.</p>
+            </div>
+            <div class="card team-card">
+              <div class="team-avatar" style="background:linear-gradient(135deg,var(--umber),#6a4a2e)">TD</div>
+              <p class="team-name">Tiffany Duong</p>
+              <span class="team-role">Commercialization Manager</span>
+              <p>Product development and project management in consumer goods. Former: Hero Cosmetics, Weckerle Cosmetics. Drives market strategy, product lifecycle, and distribution partnerships.</p>
+            </div>
+            <div class="card team-card">
+              <div class="team-avatar" style="background:linear-gradient(135deg,#6A5A8A,#4A3A6A)">CL</div>
+              <p class="team-name">Chi Le</p>
+              <span class="team-role">Marketing Manager</span>
+              <p>Growth marketing and analytics. Former: Cerebral, bitFlyer Group, Ticketmaster. Performance marketing across DTC, e-commerce, and consumer health categories.</p>
+            </div>
+            <div class="card team-card">
+              <div class="team-avatar" style="background:linear-gradient(135deg,#4A6A7A,#2A4A5A)">YM</div>
+              <p class="team-name">Yu Tiffany Morimoto</p>
+              <span class="team-role">UI/UX Manager</span>
+              <p>UX researcher and design lead. Former: CureApp, Accenture Song, Hulu, Mercari, adidas Group. Leads the SOKY Wellness app and wearable UX design.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <span class="card-label">Supply chain — key manufacturing partners</span>
+            <h3>Production-ready. COGS validated.</h3>
+            <table class="supply-table" style="margin-top:14px;">
+              <thead><tr><th>Partner</th><th>Type</th><th>Role in SOKY</th></tr></thead>
+              <tbody>
+                <tr><td>MorphoMFG</td><td>Contract Mfg / Silicone</td><td>Full-service: design, sourcing, QC, logistics, prototyping, mass manufacturing. Primary production route for silicone SOKY OTC.</td></tr>
+                <tr><td>Nai Gai Gloves</td><td>Cut &amp; Sewn / Neoprene</td><td>Quick-turnaround neoprene and Gore-Tex garments. Low-volume, customizable. Early-batch SOKY OTC production partner.</td></tr>
+                <tr><td>Blaine Labs</td><td>Topical Pharmaceuticals</td><td>30+ FDA-registered products in skin care, wound care, fungal care, and pain management. SOKY Plus formulation partner.</td></tr>
+                <tr><td>Polyzen</td><td>TPE/TPU Medical</td><td>Medical-grade polymer-based materials and films for Class II device components.</td></tr>
+                <tr><td>3LINX Fulfillment</td><td>3PL Logistics</td><td>Global fulfillment center network for DTC and B2B order management at scale.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         VII — FUNDING
+    ══════════════════════════════════════════ -->
+    <section class="section" id="funding" data-label="Funding">
+      <div class="container section-grid reveal">
+        <div class="section-meta">
+          <span class="section-id">VII — Funding</span>
+          <h2 class="section-title">Three phases. One runway.</h2>
+          <p class="section-sub">$2.83M to EBITDA positive in 18 months.</p>
+        </div>
+        <div class="content-stack">
+
+          <p class="lede">NM Thera structures its pre-seed ask in three tranches — each unlocking the next stage of production, team, and market entry. <strong>Investors may enter at any phase.</strong></p>
+
+          <div class="phase-track">
+            <div class="phase-item">
+              <div class="phase-dot p1">P1</div>
+              <div class="phase-text">
+                <h4>Phase 1 — Foundation</h4>
+                <span class="phase-amount">$250,000</span>
+                <p>Establish low-volume neoprene production. Produce first SOKY OTC Glove and Sock prototypes. Begin silicone compression mold tooling. CEO and Marketing Manager onboard as FTEs. Demo to early customers and investors. Kickstarter pre-sales campaign launch.</p>
+                <span class="roi-tag">ROI · 5–10× (5yr) · 10–30× (10yr)</span>
+              </div>
+            </div>
+            <div class="phase-item">
+              <div class="phase-dot p2">P2</div>
+              <div class="phase-text">
+                <h4>Phase 2 — Scale</h4>
+                <span class="phase-amount">$750,000</span>
+                <p>Scale to full five sizes (XS–XL) for Gloves and Socks. Finalize silicone molds for high-volume production. Expand core team. Launch targeted marketing campaigns. Secure initial bulk orders and distribution partnerships. Begin SOKY Rx development track.</p>
+                <span class="roi-tag" style="background:rgba(0,109,119,0.08);border-color:rgba(0,109,119,0.20);color:var(--pool);">ROI · 3–5× (5yr) · 5–10× (10yr)</span>
+              </div>
+            </div>
+            <div class="phase-item">
+              <div class="phase-dot p3">P3</div>
+              <div class="phase-text">
+                <h4>Phase 3 — Market Entry</h4>
+                <span class="phase-amount">$1,830,000</span>
+                <p>Full-scale production of all SOKY OTC SKUs. Aggressive marketing execution. Complete regulatory compliance for OTC. Submit SOKY Rx regulatory filings. Launch SOKY Wellness App. National distribution partnerships. EBITDA of $59,041 projected at Month 18 — end of startup period, commencement of profitability.</p>
+                <span class="roi-tag" style="background:rgba(104,139,88,0.08);border-color:rgba(104,139,88,0.20);color:var(--green);">ROI · 2–4× (5yr) · 3–6× (10yr)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="label-panel">
+            <div class="label-panel-inner">
+              <span class="label-panel-kicker">Full Expenditure for Start-Up Phase · 18 Months · $2,830,000 Total</span>
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px 32px;margin-top:10px;">
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">R&amp;D: Technical Development</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$300,000</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">R&amp;D: Low-Volume Cut &amp; Sewn</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$50,000</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">CAPEX: High-Volume Molds &amp; Tooling</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$250,000</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">CAPEX: Computers &amp; Equipment</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$50,000</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">CAPEX: IP Development</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$30,000</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">COGS (first production batches)</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$100,000</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">Sales &amp; Marketing</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$350,000</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">Operating Expenses</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$200,000</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">Rent &amp; Utilities</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$250,000</strong></div>
+                <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span class="label-panel-body">Payroll (18 months, 6 FTEs)</span><strong style="font-family:'Montserrat',sans-serif;font-size:13px;color:var(--ink);">$1,250,000</strong></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:2px solid var(--line-strong)">
+                <span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);">Total</span>
+                <strong style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--navy);">$2,830,000</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="dual">
+            <div class="card">
+              <span class="card-label">Go-to-market — Phase 1 channels</span>
+              <h3>E-commerce first. B2B from day one.</h3>
+              <div class="roadmap-list">
+                <div class="roadmap-item">
+                  <span class="roadmap-num">DTC</span>
+                  <div class="roadmap-text"><h4>Brand Website + Amazon</h4><p>PPC-driven launch. 1,000 units/SKU/month target. Amazon listings secured alongside brand e-commerce during Phase 1.</p></div>
+                </div>
+                <div class="roadmap-item">
+                  <span class="roadmap-num">CS</span>
+                  <div class="roadmap-text"><h4>Kickstarter Campaign</h4><p>Pre-sales, early adopter community, brand buzz, and supplementary capital. Compelling storytelling and product demonstration assets built in Phase 1.</p></div>
+                </div>
+                <div class="roadmap-item" style="border-bottom:none">
+                  <span class="roadmap-num">B2B</span>
+                  <div class="roadmap-text"><h4>Direct Outreach</h4><p>Dedicated sales team for wellness centers, physical therapists, podiatrists, and medical practitioners.</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <span class="card-label">Corporate structure</span>
+              <h3>Built for investment. Built to last.</h3>
+              <p>NM Thera operates as NM Therapeutics, Inc. — a Delaware C Corporation transitioned from a California LLC. Authorized: 10,000 shares Common + 10,000 shares Preferred ($0.001 par value).</p>
+              <p style="margin-top:12px;">The long-term governance vision is a <strong>steward-owned Benefit Corporation</strong> with a SOKY Commons Foundation holding board seats — designed to preserve the open-source protocol commons and protect the mission through leadership changes and acquisition events.</p>
+              <small>Delaware C-Corp · Investor-ready · Steward-owned vision</small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       CLOSING
+  ══════════════════════════════════════════ -->
+  <footer class="closing" id="contact" data-label="Contact">
+    <div class="container">
+      <div class="closing-wrap">
+
+        <div>
+          <p class="closing-mark">NM<br><span>Thera</span></p>
+          <p class="footer-copy">NM Thera is not just a business. It is a vision for a healthier, more empowered future — where every person whose skin condition, pain, or injury makes daily life feel impossible has access to tools that actually move with them.</p>
+          <p class="footer-copy">The SOKY platform is built to last: a patented garment system, a modular port interface that expands into every therapeutic modality, a consumable flywheel, and a digital health platform that turns one-time buyers into a lifelong community of care. Eight years to build. One clear runway ahead.</p>
+
+          <a href="mailto:kenny@nmthera.com" class="cta-btn">
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+            Request Investor Package
+          </a>
+
+          <div class="contact-row" style="margin-top:16px;">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+            kenny@nmthera.com
+          </div>
+          <div class="contact-row">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+            Kenny Pham · Founder · 714-782-2843
+          </div>
+          <div class="contact-row">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16A8 8 0 0010 2zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.559-.499-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.559.499.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clip-rule="evenodd"/></svg>
+            nmthera.com
+          </div>
+
+          <div class="signature">NM Therapeutics, Inc. · Orange County, CA · Business Plan Summer '24 · NMT_SOKY_INV_003</div>
+        </div>
+
+        <div class="closing-card">
+          <span class="card-label">Why invest now</span>
+          <h3 style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.03em;margin:0 0 10px;">A structural market gap with a patented first-mover solution.</h3>
+          <ul>
+            <li>Issued US patent with geometry family claims — no workaround possible</li>
+            <li>Production-ready: COGS validated with MorphoMFG, mold tooling costed</li>
+            <li>Revenue model anchored to actual Amazon incumbent data via JungleScout</li>
+            <li>Multi-vertical TAM of $597B · SOKY is the only wearable soak platform</li>
+            <li>Clear regulatory pathway — OTC first, Rx on the same garment base</li>
+            <li>Experienced team: medical devices, regulatory affairs, hardware, growth</li>
+            <li>Steward-owned governance built for long-term mission integrity</li>
+            <li>$72M revenue target modeled on Therabody's proven Amazon performance</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /.shell -->
+
+<script>
+  /* BARCODE */
+  (function() {
+    const el = document.getElementById('barcode-hero');
+    if (!el) return;
+    [18,12,20,14,18,10,22,16,12,20,14,18,10,22,16,12,20,14].forEach((h, i) => {
+      const b = document.createElement('div');
+      b.className = 'barcode-bar'; b.style.height = h + 'px';
+      if (i % 3 === 0) b.style.width = '3px';
+      el.appendChild(b);
+    });
+  })();
+
+  /* PROGRESS BAR */
+  const progressBar   = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
+  function updateProgress() {
+    if (!progressBar) return;
+    const docH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = docH > 0 ? Math.min(100, Math.max(0, window.scrollY / docH * 100)) + '%' : '0%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  window.addEventListener('load', updateProgress);
+
+  /* SECTION OBSERVER */
+  const sections = Array.from(document.querySelectorAll('[data-label]'));
+  const navLinks = Array.from(document.querySelectorAll('.side-nav a'));
+  const sectionObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const id = e.target.getAttribute('id');
+      if (progressLabel) progressLabel.textContent = e.target.getAttribute('data-label') || '';
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    });
+  }, { threshold: 0.15, rootMargin: '-10% 0px -55% 0px' });
+  sections.forEach(s => sectionObs.observe(s));
+
+  /* REVEAL */
+  const revealEls = Array.from(document.querySelectorAll('.reveal'));
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
+    else revealObs.observe(el);
+  });
+
+  /* ANIMATED BAR CHART */
+  const barChart = document.getElementById('bar-chart');
+  if (barChart) {
+    const barObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll('.bar-inner[data-width]').forEach((bar, i) => {
+          setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, i * 60);
+        });
+        barObs.unobserve(e.target);
+      });
+    }, { threshold: 0.2 });
+    barObs.observe(barChart);
+  }
+
+  /* ANIMATED TAM BARS */
+  document.querySelectorAll('.tam-visual').forEach(vis => {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll('.tam-bar[data-width]').forEach((bar, i) => {
+          setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, i * 120 + 100);
+        });
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.3 });
+    obs.observe(vis);
+  });
+
+  /* WATER RIPPLE — verbatim from v17, applied to all image wrappers */
+  (function initWaterRipple() {
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svgDefs = document.createElementNS(svgNS, 'svg');
+    svgDefs.setAttribute('aria-hidden', 'true');
+    svgDefs.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;';
+    const defs = document.createElementNS(svgNS, 'defs');
+    svgDefs.appendChild(defs);
+    document.body.insertBefore(svgDefs, document.body.firstChild);
+
+    const imgWrappers = Array.from(document.querySelectorAll(
+      '.product-img-card, .sleeve-card, .feature-img-card, .feature-img-single'
+    ));
+
+    imgWrappers.forEach(function(wrap, idx) {
+      if (wrap.querySelector('video')) return;
+      const filterId = 'soky-ripple-' + idx;
+      const filter = document.createElementNS(svgNS, 'filter');
+      filter.setAttribute('id', filterId);
+      filter.setAttribute('x', '-15%'); filter.setAttribute('y', '-15%');
+      filter.setAttribute('width', '130%'); filter.setAttribute('height', '130%');
+      filter.setAttribute('color-interpolation-filters', 'sRGB');
+      const turb = document.createElementNS(svgNS, 'feTurbulence');
+      turb.setAttribute('type', 'turbulence');
+      turb.setAttribute('baseFrequency', '0.018 0.018');
+      turb.setAttribute('numOctaves', '4');
+      turb.setAttribute('seed', String(idx + 1));
+      turb.setAttribute('result', 'noise');
+      const disp = document.createElementNS(svgNS, 'feDisplacementMap');
+      disp.setAttribute('in', 'SourceGraphic'); disp.setAttribute('in2', 'noise');
+      disp.setAttribute('scale', '0');
+      disp.setAttribute('xChannelSelector', 'R'); disp.setAttribute('yChannelSelector', 'G');
+      filter.appendChild(turb); filter.appendChild(disp); defs.appendChild(filter);
+
+      var rippleRAF = null, scale = 0, targetScale = 0;
+      var freqX = 0.018, freqY = 0.018, seedVal = idx + 1, seedTick = 0, isOver = false;
+
+      function applyFilter() {
+        turb.setAttribute('baseFrequency', freqX.toFixed(4) + ' ' + freqY.toFixed(4));
+        turb.setAttribute('seed', String(Math.floor(seedVal)));
+        disp.setAttribute('scale', String(scale.toFixed(2)));
+      }
+      function animate() {
+        scale += (targetScale - scale) * 0.10;
+        if (isOver) { seedTick++; if (seedTick % 3 === 0) seedVal = (seedVal + 0.4) % 99 + 1; }
+        else { freqX += (0.018 - freqX) * 0.06; freqY += (0.018 - freqY) * 0.06; }
+        applyFilter();
+        if (!isOver && Math.abs(scale) < 0.05) {
+          scale = 0; disp.setAttribute('scale', '0');
+          const img = wrap.querySelector('img');
+          if (img) img.style.filter = 'none';
+          cancelAnimationFrame(rippleRAF); rippleRAF = null; return;
+        }
+        rippleRAF = requestAnimationFrame(animate);
+      }
+      function startAnim() {
+        if (!rippleRAF) {
+          const img = wrap.querySelector('img');
+          if (img) img.style.filter = 'url(#' + filterId + ')';
+          rippleRAF = requestAnimationFrame(animate);
+        }
+      }
+      wrap.addEventListener('mouseenter', () => { isOver = true; targetScale = 22; startAnim(); });
+      wrap.addEventListener('mousemove', (e) => {
+        const r = wrap.getBoundingClientRect();
+        freqX = 0.012 + ((e.clientX - r.left) / r.width)  * 0.016;
+        freqY = 0.012 + ((e.clientY - r.top)  / r.height) * 0.016;
+        seedVal = (seedVal + 1.2) % 99 + 1;
+      });
+      wrap.addEventListener('mouseleave', () => { isOver = false; targetScale = 0; startAnim(); });
+    });
+  })();
+</script>
+</body>
+</html>

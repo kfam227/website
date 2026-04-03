@@ -1,0 +1,41 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Business Plan",
+      "runtimeExecutable": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+      "runtimeArgs": ["-c", "powershell -ExecutionPolicy Bypass -File 'C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/serve.ps1' -Port 8080"],
+      "port": 8080
+    },
+    {
+      "name": "Clinical Deck",
+      "runtimeExecutable": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+      "runtimeArgs": ["-c", "powershell -ExecutionPolicy Bypass -File 'C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/serve.ps1' -Port 8081"],
+      "port": 8081
+    },
+    {
+      "name": "Investor Deck",
+      "runtimeExecutable": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+      "runtimeArgs": ["-c", "powershell -ExecutionPolicy Bypass -File 'C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/serve.ps1' -Port 8082"],
+      "port": 8082
+    },
+    {
+      "name": "Landing Video",
+      "runtimeExecutable": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+      "runtimeArgs": ["-c", "powershell -ExecutionPolicy Bypass -File 'C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/serve.ps1' -Port 8083"],
+      "port": 8083
+    },
+    {
+      "name": "Manifesto",
+      "runtimeExecutable": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+      "runtimeArgs": ["-c", "powershell -ExecutionPolicy Bypass -File 'C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/serve.ps1' -Port 8084"],
+      "port": 8084
+    },
+    {
+      "name": "PDP",
+      "runtimeExecutable": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+      "runtimeArgs": ["-c", "powershell -ExecutionPolicy Bypass -File 'C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/serve.ps1' -Port 8085"],
+      "port": 8085
+    }
+  ]
+}
