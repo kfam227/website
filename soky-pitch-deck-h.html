@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=0.85, user-scalable=no">
 <title>SOKY — Investor Pitch Deck · Spring 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -289,10 +289,11 @@ img{max-width:100%;display:block}
   .conf-badge{display:none}
 }
 @media(max-width:600px){
+  body{font-size:12px}
   .sg3,.scr{grid-template-columns:1fr 1fr}
   .h-t{font-size:clamp(36px,11vw,56px);letter-spacing:.06em}
   .rb{grid-template-columns:1fr 1fr}.rs:nth-child(3){border-right:1px solid var(--line);border-top:1px solid var(--line)}.rs:nth-child(5){grid-column:span 2;border-top:1px solid var(--line)}
-  .slide-inner{width:min(calc(100% - 28px),1060px)}
+  .slide-inner{width:min(calc(100% - 28px),1060px);padding:1rem 0.75rem}
   .hvs{width:min(180px,45vw)}
   .bottom-nav{padding:6px 12px;gap:8px;bottom:12px}
   .nav-btn{width:28px;height:28px;font-size:13px}
@@ -300,6 +301,7 @@ img{max-width:100%;display:block}
   .dot.active{width:16px}
 }
 @media(max-width:480px){
+  .slide-inner{transform:scale(0.92);transform-origin:top center}
   .hero-inner{padding:130px 1.25rem 100px}
   .hvs{align-self:center;width:min(160px,50vw)}
   .hero-bot{padding:.75rem 1.25rem;font-size:8px}
