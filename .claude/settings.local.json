@@ -38,7 +38,9 @@
       "Bash(powershell -Command \"Get-Command python -ErrorAction SilentlyContinue | Select-Object Name,Source; Get-Command node -ErrorAction SilentlyContinue | Select-Object Name,Source\")",
       "Bash(powershell -Command \"Write-Host ''PS works''; [System.Environment]::OSVersion.VersionString\")",
       "Bash(powershell -ExecutionPolicy Bypass -File apply_media.ps1 -InputPath NMThera_BusinessPlan_2026_v6.html -OutputPath business-plan-enhanced.html)",
-      "Bash(find C:UsersAdministratorDesktopNMT_Claude_WorkshopG -name *sitemap* -o -name *homepage* -o -name *home*)"
+      "Bash(find C:UsersAdministratorDesktopNMT_Claude_WorkshopG -name *sitemap* -o -name *homepage* -o -name *home*)",
+      "Bash(find . -not -path ./.git/* -not -path ./.claude/* -type f)",
+      "Bash(find . -not -path ./.git/* -not -path ./.claude/* -type f -exec wc -l {} +)"
     ]
   }
 }
