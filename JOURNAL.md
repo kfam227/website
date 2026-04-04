@@ -15,6 +15,20 @@
 7. **KV Blue video compression** — Compressed the hero video from 268 MB to 32 MB using HandBrake. Uploaded to `Videos/` folder on the repo for GitHub Pages hosting (`f30ae44`).
 8. **Mobile autoplay fix** — YouTube iframe embeds do not autoplay on mobile inside WordPress iframes. Tested YouTube iframe first (`32e73c1`), then switched to self-hosted `<video>` with `autoplay muted loop playsinline` (`2c20cc1`). Applied same swap to business plan and pitch deck (`e6ef55f`).
 9. **Mobile autoplay confirmed** — Self-hosted `<video playsinline>` autoplays successfully through the WordPress iframe on `nmthera.com/pd_s26` on iOS Safari and Android Chrome.
+10. **Team roster updated — pitch deck** — Updated S10 (Team slide) in `HTML/soky-pitch-deck-h.html` with full accurate roster: 6 core team members (Kenny, Kenichiro, Chi, Hameed, Tiffany, Jenn), 4 advisors (Dr. Heller, Dr. Salem Lebada, Sean Tan, Jennifer Nguyen), 2 investors (Seymour Everett, Sosimo Roman). Profiles sourced from uploaded LinkedIn PDFs.
+11. **Team roster updated — business plan** — Updated team section in `HTML/business-plan-enhanced.html` with full long-form profiles for all 12 team members, advisors, and investors. Three distinct groups with visual separation.
+12. **iframe fix — business plan** — Added `<meta http-equiv="Content-Security-Policy" content="frame-ancestors *">` to `business-plan-enhanced.html` to resolve X-Frame-Options block preventing WordPress iframe embed.
+13. **WordPress iframe — bp_s26** — Set up full-screen iframe on `nmthera.com/bp_s26` serving business plan from GitHub Pages. Same `position:fixed; z-index:99999` pattern as pitch deck.
+14. **WordPress iframe — home2** — Set up full-screen iframe on `nmthera.com/home2` serving sitemap superpage from GitHub Pages.
+15. **KV Blue video — sitemap superpage** — Swapped WordPress-hosted KV Blue URL to self-hosted GitHub Pages video in `HTML/nmthera-sitemap-superpage.html`. Confirmed mobile autoplay working.
+16. **Git workflow established across two machines** — Desktop (NMT_Claude_WorkshopG) and laptop (Claude Local Laptop Folder) both connected to `kfam227/website`. Documented pull-before-work, push-when-done rhythm. Confirmed Claude Code can git pull and push on command.
+17. **Repo organized** — Moved `soky-pitch-deck-h.html` from root into `HTML/` folder. Updated all WordPress iframe URLs accordingly. Deleted unused file from root.
+18. **SOKY Rx margin fix** — Changed "High" to "Available upon request" in pitch deck unit economics table (S6). Updated `og:url` meta tag to correct `HTML/` subfolder path.
+19. **Team update one-pager built** — Created `HTML/nmthera-team-update-q2.html` — BSG v3.0 styled internal team update with: dark cover hero with 3 live links, Asana board progress bar (49%/528 tasks), 5-node launch timeline, traction stats, 4 swim lanes (Yellow/Red/Blue/Green teams), 3 horizons (Now/Near/Beyond), honest context callout, manifesto quote.
+20. **Team update rebuilt as multi-tab** — Rebuilt `HTML/nmthera-team-update-q2.html` into 4-tab page matching sitemap superpage architecture: Tab 1 Overview, Tab 2 Roadmap (Gantt-style campaign timeline), Tab 3 Build Log (from JOURNAL.md), Tab 4 Links & Assets.
+21. **WordPress iframe — team-update slug** — Set up iframe on `nmthera.com/team-update` pointing to GitHub Pages team update. Diagnosed mobile rendering issue — provided div wrapper fix using `100dvh`.
+22. **Q2 team message drafted** — Wrote internal team update message referencing Feb 12 launch, 250K Reddit views, 2 sales, honest leadership accountability note, Q2 bandwidth ask, and investor pitch deck share request.
+23. **JOURNAL.md initialized and backfilled** — Created JOURNAL.md with all sessions from March 13 through April 3. Reversed to newest-first order.
 
 ### Key Decisions
 
@@ -22,6 +36,10 @@
 - **GitHub Pages as CDN** — Serving compressed video (32 MB) directly from GitHub Pages rather than WordPress media library. Faster, no plugin dependencies, version-controlled.
 - **OG image standardized** — All files point to `NM-THERA-LOGO-SITE-IMAGE.png` on nmthera.com as the shared social preview image.
 - **Print layouts left as-is** — `soky-001-product-insert-v2.html` and `soky-002-kit-insert.html` are intentionally non-responsive (fixed 8.5x11in print layouts). No responsive fixes applied.
+- **WordPress iframe pattern locked** — Every major HTML file now follows the same pattern: GitHub Pages URL → `position:fixed; z-index:99999` iframe → WordPress Elementor HTML widget. No more copy-pasting code into WordPress.
+- **Team update as living document** — `nmthera-team-update-q2.html` is designed to be periodically updated via Claude Code + git push. WordPress page never needs to be touched again.
+- **Full team roster sourced from LinkedIn PDFs** — All 12 profiles (6 team, 4 advisors, 2 investors) verified against uploaded LinkedIn profile PDFs before being written into pitch deck and business plan.
+- **Honest framing in team comms** — Team update explicitly acknowledges leadership follow-through gaps, not just team bandwidth. Sets tone for Q2 accountability on both sides.
 
 ### Files Changed
 
@@ -62,16 +80,37 @@ f30ae44  add compressed KV Blue hero video
 
 f27f60f  initial commit — desktop workshop files
          27 files (full repo)
+
+ec1d9f5  rebuild team update — multi-tab with roadmap, build log, and links
+         HTML/nmthera-team-update-q2.html
+
+25dbc70  added team update html file
+         HTML/nmthera-team-update-q2.html
+
+989a597  update team slide — full roster with accurate profiles
+         HTML/soky-pitch-deck-h.html
+
+4b9b7f6  update team section — full roster with accurate profiles — business plan
+         HTML/business-plan-enhanced.html
+
+85946bd  add frame-ancestors CSP — business plan iframe fix
+         HTML/business-plan-enhanced.html
+
+53555c6  final fixes — SOKY Rx margin and OG url — pitch deck
+         HTML/soky-pitch-deck-h.html
+
+4b42eae  swap KV Blue to self-hosted video — sitemap superpage
+         HTML/nmthera-sitemap-superpage.html
 ```
 
 ### Next Steps
 
-- Verify all video sources load correctly on GitHub Pages (cache propagation can take a few minutes)
-- Test pitch deck iframe embed on additional mobile devices and browsers
-- Consider adding a lower-bitrate mobile variant of KV Blue for bandwidth-constrained connections
-- Address remaining audit items: remove `console.log` calls from sitemap superpage, add skip-links, fix heading hierarchy gaps in draft files
-- Review "Coming Soon" labels across product inserts — update any that have since launched
-- Sync the Apply Media CSS drift (standalone `.css` vs embedded copies in scripts)
+- Pull latest on laptop before next session (`git pull`)
+- Connect WooCommerce Add-to-Cart to front-end store pages
+- Build email capture flow on nmthera.com
+- Each team member confirms Q2 bandwidth this week
+- Broadcast push target: April 14-21
+- April 30 — Campaign 1 sell-through milestone
 
 ---
 
