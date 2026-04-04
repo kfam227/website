@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NM Thera — Q2 Team Update · April 2026</title>
+<meta name="description" content="NM Thera Q2 2026 team update — launch status, campaign roadmap, build log, and asset links for the SOKY wearable soak platform.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nmthera.com/wp-content/uploads/2026/03/NM-THERA-LOGO-SITE-IMAGE.png">
+<meta property="og:url" content="https://kfam227.github.io/website/HTML/nmthera-team-update-q2.html">
+<meta property="og:title" content="NM Thera — Q2 Team Update · April 2026">
+<meta property="og:description" content="NM Thera Q2 2026 team update — launch status, campaign roadmap, build log, and asset links for the SOKY wearable soak platform.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nmthera.com/wp-content/uploads/2026/03/NM-THERA-LOGO-SITE-IMAGE.png">
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors *">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;600;700;800;900&family=Mulish:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -24,11 +33,41 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.25;background-image:linear-gradient(rgba(17,24,39,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(17,24,39,0.015) 1px,transparent 1px);background-size:26px 26px}
-.shell{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem) 5rem}
 a{color:inherit;text-decoration:none}
 
+/* ── TOPBAR ── */
+.topbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:min(calc(100vw - 24px),1120px);z-index:99999;pointer-events:none}
+.topbar-inner{display:flex;align-items:center;gap:16px;padding:10px 20px;border:1px solid rgba(255,255,255,0.75);background:rgba(255,255,255,0.56);border-radius:16px;box-shadow:0 8px 28px rgba(17,24,39,0.07);pointer-events:auto;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background .3s,border-color .3s}
+.topbar.is-dark .topbar-inner{background:rgba(12,21,32,0.6);border-color:rgba(255,255,255,0.1);backdrop-filter:blur(18px)}
+.topbar.is-dark .brand-name{color:rgba(255,255,255,0.8)}
+.topbar.is-dark .nav-tab{color:rgba(255,255,255,0.45)}
+.topbar.is-dark .nav-tab:hover{color:#fff}
+.topbar.is-dark .nav-tab.active{color:#fff;border-bottom-color:rgba(255,255,255,0.5)}
+.brand-link{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;cursor:pointer}
+.brand-name{font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink)}
+.nav-tabs{display:flex;gap:0;align-items:stretch;flex:1;min-width:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-left:clamp(12px,2vw,28px)}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:0 clamp(8px,1.2vw,16px);height:50px;display:flex;align-items:center;cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;user-select:none}
+.nav-tab:hover{color:var(--navy)}
+.nav-tab.active{color:var(--navy);border-bottom-color:var(--pool);font-weight:700}
+
+/* ── PAGE PANELS ── */
+.page-panel{display:none;min-height:calc(100vh - 80px)}
+.page-panel.active{display:block}
+.page-panel.has-cover{padding-top:0}
+.page-panel:not(.has-cover){padding-top:80px}
+
+/* ── PAGE HERO ── */
+.page-hero{padding:clamp(3rem,6vw,5rem) 0 clamp(2rem,4vw,3rem);border-bottom:1px solid var(--line)}
+.page-hero-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pool);margin-bottom:.5rem}
+.page-hero-title{font-family:var(--serif);font-size:clamp(28px,5vw,48px);color:var(--ink);line-height:1.1;margin-bottom:.75rem}
+.page-hero-sub{font-family:var(--body);font-size:15px;color:var(--muted);max-width:600px;line-height:1.75}
+
+/* ── SHELL ── */
+.shell{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem) 5rem}
+
 /* ── COVER ── */
-.cover{background:linear-gradient(135deg,#0c1520 0%,#162033 50%,#0e1720 100%);margin-left:calc(-50vw + 50%);width:100vw;padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem);position:relative;overflow:hidden;margin-bottom:3rem}
+.cover{background:linear-gradient(135deg,#0c1520 0%,#162033 50%,#0e1720 100%);margin-left:calc(-50vw + 50%);width:100vw;padding:clamp(6rem,8vw,8rem) clamp(2rem,5vw,4rem) clamp(3rem,6vw,5rem);position:relative;overflow:hidden;margin-bottom:3rem}
 .cover::before{content:'';position:absolute;inset:0;opacity:0.2;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:26px 26px}
 .cover-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
 .cover-top{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap;margin-bottom:2rem}
@@ -45,7 +84,7 @@ a{color:inherit;text-decoration:none}
 .cover-link.secondary{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
 .cover-link.secondary:hover{background:rgba(255,255,255,0.12);color:#fff}
 
-/* ── LAUNCH STATUS BAR ── */
+/* ── STATUS BAR ── */
 .status-bar{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow-sm)}
 .status-bar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem}
 .status-lbl{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy)}
@@ -54,9 +93,7 @@ a{color:inherit;text-decoration:none}
 .timeline-track::before{content:'';position:absolute;top:10px;left:10%;right:10%;height:2px;background:var(--line-md);z-index:0}
 .tl-node{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
 .tl-dot{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0}
-.tl-dot.done{background:var(--green)}
-.tl-dot.active{background:var(--navy);box-shadow:0 0 0 4px rgba(49,89,138,0.15)}
-.tl-dot.next{background:var(--line-md);color:var(--muted)}
+.tl-dot.done{background:var(--green)}.tl-dot.active{background:var(--navy);box-shadow:0 0 0 4px rgba(49,89,138,0.15)}.tl-dot.next{background:var(--line-md);color:var(--muted)}
 .tl-label{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-align:center;color:var(--ink)}
 .tl-date{font-family:var(--body);font-size:9px;color:var(--muted);text-align:center}
 
@@ -65,7 +102,6 @@ a{color:inherit;text-decoration:none}
 .sec-hd{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem}
 .sec-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--navy)}
 .sec-eyebrow::after{content:'';height:1px;flex:1;background:var(--line);display:inline-block;vertical-align:middle;margin-left:12px}
-.sec-title{font-family:var(--serif);font-size:clamp(20px,2.5vw,28px);color:var(--ink);line-height:1.15;margin-bottom:0.5rem}
 .sec-sub{font-family:var(--body);font-size:13px;color:var(--muted);line-height:1.65;max-width:640px;margin-bottom:1.5rem}
 
 /* ── STAT ROW ── */
@@ -82,8 +118,7 @@ a{color:inherit;text-decoration:none}
 .lane-title{font-family:var(--sub);font-size:11px;font-weight:700;color:#fff;flex:1}
 .lane-dept{font-family:var(--sub);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
 .lane-body{padding:1rem 1.1rem}
-.lane-section{margin-bottom:0.85rem}
-.lane-section:last-child{margin-bottom:0}
+.lane-section{margin-bottom:0.85rem}.lane-section:last-child{margin-bottom:0}
 .lane-section-lbl{font-family:var(--sub);font-size:8.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
 .task-list{list-style:none}
 .task-item{font-family:var(--body);font-size:12px;color:rgba(17,24,39,0.75);padding:0.3rem 0 0.3rem 1.4rem;border-bottom:1px solid var(--line);position:relative;line-height:1.4}
@@ -113,13 +148,13 @@ a{color:inherit;text-decoration:none}
 .callout.heat{border-left-color:var(--heat);background:rgba(179,29,27,0.04)}
 .callout.green{border-left-color:var(--green);background:rgba(104,139,88,0.05)}
 .callout.sun{border-left-color:var(--sunlight);background:rgba(255,209,102,0.07)}
+.callout.pool{border-left-color:var(--pool);background:rgba(0,109,119,0.05)}
 .callout-lbl{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy);margin-bottom:0.3rem}
-.callout.heat .callout-lbl{color:var(--heat)}.callout.green .callout-lbl{color:var(--green)}.callout.sun .callout-lbl{color:#7a5c00}
+.callout.heat .callout-lbl{color:var(--heat)}.callout.green .callout-lbl{color:var(--green)}.callout.sun .callout-lbl{color:#7a5c00}.callout.pool .callout-lbl{color:var(--pool)}
 .callout p{font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.75);line-height:1.65}
 
 /* ── BOARD OVERVIEW ── */
 .board-overview{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;box-shadow:var(--shadow-sm);margin-bottom:2rem}
-.board-title{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem}
 .board-progress{display:flex;height:10px;border-radius:999px;overflow:hidden;margin-bottom:0.75rem;gap:2px}
 .board-seg-done{background:var(--green);border-radius:999px}
 .board-seg-open{background:var(--navy);border-radius:999px;opacity:0.25}
@@ -138,288 +173,285 @@ a{color:inherit;text-decoration:none}
 .doc-footer-brand{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink)}
 .doc-footer-meta{font-family:var(--body);font-size:11px;color:var(--muted)}
 
+/* ═══ ROADMAP TAB ═══ */
+.gantt-wrap{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;box-shadow:var(--shadow-sm);margin-bottom:2rem;overflow-x:auto}
+.gantt-header{display:grid;grid-template-columns:140px repeat(5,1fr);gap:0;margin-bottom:4px}
+.gantt-q{font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center;padding:4px 0;border-bottom:1px solid var(--line)}
+.gantt-row{display:grid;grid-template-columns:140px repeat(5,1fr);gap:0;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.gantt-row:last-child{border-bottom:none}
+.gantt-label{font-family:var(--sub);font-size:11px;font-weight:700;color:var(--ink);padding-right:8px}
+.gantt-label small{display:block;font-size:9px;font-weight:600;color:var(--muted);margin-top:1px}
+.gantt-bar-cell{position:relative;height:24px}
+.gantt-bar{position:absolute;top:2px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.milestone-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:2rem}
+.milestone{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1rem;box-shadow:var(--shadow-sm);text-align:center;position:relative}
+.milestone::before{content:'◆';display:block;font-size:16px;margin-bottom:4px}
+.milestone.missed::before{color:var(--heat)}.milestone.current::before{color:var(--navy)}
+.milestone-date{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.milestone-target{font-family:var(--sub);font-size:11px;font-weight:700;color:var(--ink)}
+.milestone-status{font-family:var(--body);font-size:9px;color:var(--muted);margin-top:2px}
+.milestone.missed .milestone-status{color:var(--heat)}.milestone.current .milestone-status{color:var(--navy);font-weight:600}
+
+/* ═══ BUILD LOG TAB ═══ */
+.log-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem 1.75rem;box-shadow:var(--shadow-sm);margin-bottom:1.25rem}
+.log-date{font-family:var(--head);font-size:14px;font-weight:800;color:var(--navy);margin-bottom:.75rem;letter-spacing:.02em}
+.log-section-lbl{font-family:var(--sub);font-size:8.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pool);margin-bottom:.4rem;margin-top:.85rem}
+.log-section-lbl:first-child{margin-top:0}
+.log-list{list-style:none;margin-bottom:.5rem}
+.log-list li{font-family:var(--body);font-size:12px;color:rgba(17,24,39,0.75);padding:0.25rem 0 0.25rem 1.2rem;position:relative;line-height:1.5}
+.log-list li::before{content:'';position:absolute;left:0;top:0.6rem;width:5px;height:5px;border-radius:50%;background:var(--pool)}
+.log-list.files li::before{background:var(--muted);width:4px;height:4px;top:0.65rem}
+.log-list.files li{font-family:'Courier New',monospace;font-size:11px;color:var(--muted);padding:0.15rem 0 0.15rem 1rem}
+.log-list.actions li::before{content:'→';background:none;width:auto;height:auto;font-size:10px;color:var(--navy);top:0.28rem;left:0}
+.log-decision{border-left:2px solid var(--pool);background:rgba(0,109,119,0.04);padding:0.6rem 1rem;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:.5rem 0;font-family:var(--body);font-size:12px;color:rgba(17,24,39,0.75);line-height:1.55}
+
+/* ═══ LINKS TAB ═══ */
+.link-group{margin-bottom:2rem}
+.link-group-title{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1rem}
+.link-group-title.live{color:var(--green)}.link-group-title.staging{color:var(--navy)}.link-group-title.draft{color:var(--muted)}
+.link-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.link-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1rem 1.1rem;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:6px;transition:transform .15s,box-shadow .15s}
+.link-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.link-card-title{font-family:var(--sub);font-size:12px;font-weight:700;color:var(--ink)}
+.link-card-desc{font-family:var(--body);font-size:11px;color:var(--muted);line-height:1.5;flex:1}
+.link-card-btn{display:inline-flex;align-items:center;gap:4px;font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;width:fit-content;margin-top:auto}
+.link-card-btn.live{background:rgba(104,139,88,0.12);color:var(--green)}
+.link-card-btn.staging{background:rgba(49,89,138,0.1);color:var(--navy)}
+.link-card-btn.draft{background:rgba(102,112,133,0.1);color:var(--muted)}
+
 /* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .topbar-inner{padding:0 clamp(0.5rem,2vw,1rem);gap:8px}
+  .nav-tabs{gap:0;margin-left:8px}
+  .nav-tab{padding:0 8px;font-size:8.5px;height:46px}
+  .brand-name{font-size:10px;letter-spacing:0.1em}
+  .page-hero-title{font-size:clamp(22px,6vw,36px)}
+  .page-hero-sub{font-size:13px}
+}
 @media(max-width:760px){
   .swim-lanes,.next-grid,.stat-row{grid-template-columns:1fr}
   .timeline-track{grid-template-columns:1fr;gap:12px}
   .timeline-track::before{display:none}
+  .gantt-header,.gantt-row{grid-template-columns:100px repeat(5,1fr)}
+  .gantt-label{font-size:9px}
+  .milestone-row{grid-template-columns:1fr 1fr}
+  .link-grid{grid-template-columns:1fr}
 }
+@media print{.topbar{display:none !important}.page-panel{padding-top:0 !important}}
 </style>
 </head>
 <body>
+
+<!-- ═══ TOPBAR ═══ -->
+<div class="topbar" id="topbar">
+<div class="topbar-inner">
+  <div class="brand-link" onclick="switchTab('overview')">
+    <span class="brand-name">NM Thera</span>
+  </div>
+  <div class="nav-tabs" id="navTabs">
+    <div class="nav-tab active" data-tab="overview">Overview</div>
+    <div class="nav-tab" data-tab="roadmap">Roadmap</div>
+    <div class="nav-tab" data-tab="buildlog">Build Log</div>
+    <div class="nav-tab" data-tab="links">Links & Assets</div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ TAB 1: OVERVIEW ═══ -->
+<div class="page-panel has-cover active" id="page-overview">
 <div class="cover">
   <div class="cover-inner">
     <div class="cover-top">
       <div class="cover-badge">NM Thera · Internal</div>
       <div class="cover-date">April 4, 2026 · Q2 Kickoff</div>
     </div>
-    <div class="cover-title">
-      <span>Team Update</span>
-      SOKY is live.<br>Now we broadcast.
-    </div>
+    <div class="cover-title"><span>Team Update</span>SOKY is live.<br>Now we broadcast.</div>
     <p class="cover-sub">Happy Friday and happy Q2 — here's where we stand, what's happened, and what each of us needs to do next. The product is real. The window is open. Let's move together.</p>
     <div class="cover-links">
-      <a href="https://nmthera.com/home2" target="_blank" class="cover-link primary">🌐 Website</a>
-      <a href="https://nmthera.com/bp_s26" target="_blank" class="cover-link secondary">📋 Business Plan</a>
-      <a href="https://nmthera.com/pd_s26" target="_blank" class="cover-link secondary">🎯 Investor Pitch Deck</a>
+      <a href="https://nmthera.com/home2" target="_blank" class="cover-link primary">Website</a>
+      <a href="https://nmthera.com/bp_s26" target="_blank" class="cover-link secondary">Business Plan</a>
+      <a href="https://nmthera.com/pd_s26" target="_blank" class="cover-link secondary">Investor Pitch Deck</a>
     </div>
   </div>
 </div>
-
 <div class="shell">
-
-  <!-- LAUNCH TIMELINE -->
   <div class="sec">
     <div class="sec-hd"><span class="sec-eyebrow">Launch Status</span></div>
     <div class="status-bar">
-      <div class="status-bar-top">
-        <div class="status-lbl">2026 Master Coordinator — Asana Board</div>
-        <div class="status-pct">49% complete · 258 / 528 tasks done</div>
-      </div>
+      <div class="status-bar-top"><div class="status-lbl">2026 Master Coordinator — Asana Board</div><div class="status-pct">49% complete · 258 / 528 tasks done</div></div>
       <div class="board-overview" style="margin-bottom:1.25rem;padding:1rem">
-        <div class="board-progress">
-          <div class="board-seg-done" style="width:49%"></div>
-          <div class="board-seg-open" style="width:51%"></div>
-        </div>
-        <div class="board-stats">
-          <div class="board-stat"><div class="board-stat-dot" style="background:var(--green)"></div><span>258 completed</span></div>
-          <div class="board-stat"><div class="board-stat-dot" style="background:rgba(49,89,138,0.4)"></div><span>270 open</span></div>
-          <div class="board-stat" style="color:var(--muted)"><span>⛵ 2026 Master Coordinator</span></div>
-        </div>
+        <div class="board-progress"><div class="board-seg-done" style="width:49%"></div><div class="board-seg-open" style="width:51%"></div></div>
+        <div class="board-stats"><div class="board-stat"><div class="board-stat-dot" style="background:var(--green)"></div><span>258 completed</span></div><div class="board-stat"><div class="board-stat-dot" style="background:rgba(49,89,138,0.4)"></div><span>270 open</span></div><div class="board-stat" style="color:var(--muted)"><span>2026 Master Coordinator</span></div></div>
       </div>
       <div class="timeline-track">
-        <div class="tl-node">
-          <div class="tl-dot done">✓</div>
-          <div class="tl-label">Product Ready</div>
-          <div class="tl-date">Oct 2025</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot done">✓</div>
-          <div class="tl-label">Soft Launch</div>
-          <div class="tl-date">Feb 12 · Live</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot active">◉</div>
-          <div class="tl-label">Infrastructure</div>
-          <div class="tl-date">Now · Apr 2026</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot next">→</div>
-          <div class="tl-label">Full Broadcast</div>
-          <div class="tl-date">~Apr 14–21</div>
-        </div>
-        <div class="tl-node">
-          <div class="tl-dot next">→</div>
-          <div class="tl-label">Sell Through</div>
-          <div class="tl-date">Apr 30 target</div>
-        </div>
+        <div class="tl-node"><div class="tl-dot done">&#10003;</div><div class="tl-label">Product Ready</div><div class="tl-date">Oct 2025</div></div>
+        <div class="tl-node"><div class="tl-dot done">&#10003;</div><div class="tl-label">Soft Launch</div><div class="tl-date">Feb 12 · Live</div></div>
+        <div class="tl-node"><div class="tl-dot active">&#9673;</div><div class="tl-label">Infrastructure</div><div class="tl-date">Now · Apr 2026</div></div>
+        <div class="tl-node"><div class="tl-dot next">&#8594;</div><div class="tl-label">Full Broadcast</div><div class="tl-date">~Apr 14-21</div></div>
+        <div class="tl-node"><div class="tl-dot next">&#8594;</div><div class="tl-label">Sell Through</div><div class="tl-date">Apr 30 target</div></div>
       </div>
     </div>
   </div>
-
-  <!-- TRACTION STATS -->
   <div class="sec">
     <div class="sec-hd"><span class="sec-eyebrow">Traction So Far</span></div>
     <div class="stat-row">
-      <div class="stat-card"><div class="stat-val" style="color:var(--pool)">250K</div><div class="stat-lbl">Reddit views · Feb–Mar</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--pool)">250K</div><div class="stat-lbl">Reddit views · Feb-Mar</div></div>
       <div class="stat-card"><div class="stat-val" style="color:var(--navy)">2</div><div class="stat-lbl">Sales from first wave</div></div>
       <div class="stat-card"><div class="stat-val" style="color:var(--green)">$180K</div><div class="stat-lbl">Raised to date</div></div>
       <div class="stat-card"><div class="stat-val" style="color:var(--heat)">27</div><div class="stat-lbl">Days to broadcast push</div></div>
     </div>
-    <div class="callout heat">
-      <div class="callout-lbl">Honest Assessment</div>
-      <p>Reddit showed the product resonates — 250K views with no budget. Two sales from cold reach isn't failure, it's signal. The problem hasn't been the product. It's been coordination and consistency. That's fixable, and that's what Q2 is for.</p>
-    </div>
+    <div class="callout heat"><div class="callout-lbl">Honest Assessment</div><p>Reddit showed the product resonates — 250K views with no budget. Two sales from cold reach isn't failure, it's signal. The problem hasn't been the product. It's been coordination and consistency. That's fixable, and that's what Q2 is for.</p></div>
   </div>
-
-  <!-- SWIM LANES -->
   <div class="sec">
     <div class="sec-hd"><span class="sec-eyebrow">Team Swim Lanes — What We Need From Each Team</span></div>
     <p class="sec-sub">Four teams, one board. Here's what's open, what's urgent, and what each team needs to bring into Q2.</p>
     <div class="swim-lanes">
-
-      <!-- YELLOW: Company Operations -->
-      <div class="lane">
-        <div class="lane-head" style="background:linear-gradient(135deg,#92400e,#b45309)">
-          <div class="lane-dot" style="background:var(--sunlight)"></div>
-          <div>
-            <div class="lane-title">🟡 Company Operations</div>
-            <div class="lane-dept">Admin · Legal · Finance · HR</div>
-          </div>
-        </div>
-        <div class="lane-body">
-          <div class="lane-section">
-            <div class="lane-section-lbl">Status</div>
-            <ul class="task-list">
-              <li class="task-item done">Payroll — Feb completed</li>
-              <li class="task-item done">Legal structure — C Corp / LLC active</li>
-              <li class="task-item open">Equity grants formalization (June target)</li>
-              <li class="task-item urgent">LLC vs C-Corp decision — June milestone</li>
-            </ul>
-          </div>
-          <div class="lane-section">
-            <div class="lane-section-lbl">Q2 Ask</div>
-            <ul class="task-list">
-              <li class="task-item open">Confirm Sy's availability for SAFE docs</li>
-              <li class="task-item open">Investor wire process — confirm mechanics</li>
-            </ul>
-          </div>
-          <span class="ask-badge" style="background:rgba(245,158,11,0.12);color:#92400e">Low urgency · High stakes</span>
-        </div>
-      </div>
-
-      <!-- RED: Go-To-Market -->
-      <div class="lane">
-        <div class="lane-head" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c)">
-          <div class="lane-dot" style="background:#fca5a5"></div>
-          <div>
-            <div class="lane-title">🔴 Go-To-Market</div>
-            <div class="lane-dept">Marketing · Sales · Fulfillment · Support</div>
-          </div>
-        </div>
-        <div class="lane-body">
-          <div class="lane-section">
-            <div class="lane-section-lbl">Status</div>
-            <ul class="task-list">
-              <li class="task-item done">Reddit campaign — 250K views</li>
-              <li class="task-item done">Instagram posted (limited reach)</li>
-              <li class="task-item urgent">Broadcast campaign NOT yet launched</li>
-              <li class="task-item urgent">Email list — not yet built</li>
-            </ul>
-          </div>
-          <div class="lane-section">
-            <div class="lane-section-lbl">Q2 Ask — Chi, Jenn</div>
-            <ul class="task-list">
-              <li class="task-item urgent">Content calendar for broadcast push</li>
-              <li class="task-item urgent">Email capture flow — set up now</li>
-              <li class="task-item open">Instagram account growth strategy</li>
-              <li class="task-item open">Confirm bandwidth for Apr 14–21 push</li>
-            </ul>
-          </div>
-          <span class="ask-badge" style="background:rgba(220,38,38,0.1);color:#7f1d1d">Critical path · Needs clarity now</span>
-        </div>
-      </div>
-
-      <!-- BLUE: Product & Manufacturing -->
-      <div class="lane">
-        <div class="lane-head" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8)">
-          <div class="lane-dot" style="background:#93c5fd"></div>
-          <div>
-            <div class="lane-title">🔵 Product & Manufacturing</div>
-            <div class="lane-dept">R&D · Production · Quality · Regulatory</div>
-          </div>
-        </div>
-        <div class="lane-body">
-          <div class="lane-section">
-            <div class="lane-section-lbl">Status</div>
-            <ul class="task-list">
-              <li class="task-item done">Mold 1 complete — Hand SOKY</li>
-              <li class="task-item done">TopSheng (ISO 13485) — confirmed</li>
-              <li class="task-item done">250 units Batch 1 — in progress</li>
-              <li class="task-item open">Foot SOKY mold — pending sell-through</li>
-            </ul>
-          </div>
-          <div class="lane-section">
-            <div class="lane-section-lbl">Q2 Ask — Kenichiro, Hameed</div>
-            <ul class="task-list">
-              <li class="task-item urgent">Confirm Batch 1 ship date</li>
-              <li class="task-item open">Website back-end — WooCommerce connect</li>
-              <li class="task-item open">Product insert QR codes — verify live</li>
-            </ul>
-          </div>
-          <span class="ask-badge" style="background:rgba(37,99,235,0.1);color:#1e3a8a">In good shape · Back-end is the gap</span>
-        </div>
-      </div>
-
-      <!-- GREEN: Strategic Initiatives -->
-      <div class="lane">
-        <div class="lane-head" style="background:linear-gradient(135deg,#14532d,#16a34a)">
-          <div class="lane-dot" style="background:#86efac"></div>
-          <div>
-            <div class="lane-title">🟢 Strategic Initiatives</div>
-            <div class="lane-dept">Investors · Advisors · Partnerships · Clinical</div>
-          </div>
-        </div>
-        <div class="lane-body">
-          <div class="lane-section">
-            <div class="lane-section-lbl">Status</div>
-            <ul class="task-list">
-              <li class="task-item done">$180K raised — Sosimo + Seymour</li>
-              <li class="task-item done">Dr. Heller (Stanford) — confirmed advisor</li>
-              <li class="task-item done">Dr. Lebada + Jennifer Nguyen — onboarded</li>
-              <li class="task-item done">Pitch deck live — pd_s26</li>
-            </ul>
-          </div>
-          <div class="lane-section">
-            <div class="lane-section-lbl">Q2 Ask — Everyone</div>
-            <ul class="task-list">
-              <li class="task-item urgent">Share pd_s26 with 1+ warm investor contact</li>
-              <li class="task-item open">$70K LOI — follow up with distributor</li>
-              <li class="task-item open">Clinical outreach — 5 engaged, close one</li>
-            </ul>
-          </div>
-          <span class="ask-badge" style="background:rgba(22,163,74,0.1);color:#14532d">Strongest area · Keep momentum</span>
-        </div>
-      </div>
-
+      <div class="lane"><div class="lane-head" style="background:linear-gradient(135deg,#92400e,#b45309)"><div class="lane-dot" style="background:var(--sunlight)"></div><div><div class="lane-title">Yellow Team | Company Operations</div><div class="lane-dept">Admin · Legal · Finance · HR</div></div></div><div class="lane-body"><div class="lane-section"><div class="lane-section-lbl">Status</div><ul class="task-list"><li class="task-item done">Payroll — Feb completed</li><li class="task-item done">Legal structure — C Corp / LLC active</li><li class="task-item open">Equity grants formalization (June target)</li><li class="task-item urgent">LLC vs C-Corp decision — June milestone</li></ul></div><div class="lane-section"><div class="lane-section-lbl">Q2 Ask</div><ul class="task-list"><li class="task-item open">Confirm Sy's availability for SAFE docs</li><li class="task-item open">Investor wire process — confirm mechanics</li></ul></div><span class="ask-badge" style="background:rgba(245,158,11,0.12);color:#92400e">Low urgency · High stakes</span></div></div>
+      <div class="lane"><div class="lane-head" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c)"><div class="lane-dot" style="background:#fca5a5"></div><div><div class="lane-title">Red Team | Go-To-Market</div><div class="lane-dept">Marketing · Sales · Fulfillment · Support</div></div></div><div class="lane-body"><div class="lane-section"><div class="lane-section-lbl">Status</div><ul class="task-list"><li class="task-item done">Reddit campaign — 250K views</li><li class="task-item done">Instagram posted (limited reach)</li><li class="task-item urgent">Broadcast campaign NOT yet launched</li><li class="task-item urgent">Email list — not yet built</li></ul></div><div class="lane-section"><div class="lane-section-lbl">Q2 Ask — Chi, Jenn</div><ul class="task-list"><li class="task-item urgent">Content calendar for broadcast push</li><li class="task-item urgent">Email capture flow — set up now</li><li class="task-item open">Instagram account growth strategy</li><li class="task-item open">Confirm bandwidth for Apr 14-21 push</li></ul></div><span class="ask-badge" style="background:rgba(220,38,38,0.1);color:#7f1d1d">Critical path · Needs clarity now</span></div></div>
+      <div class="lane"><div class="lane-head" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8)"><div class="lane-dot" style="background:#93c5fd"></div><div><div class="lane-title">Blue Team | Product & Manufacturing</div><div class="lane-dept">R&D · Production · Quality · Regulatory</div></div></div><div class="lane-body"><div class="lane-section"><div class="lane-section-lbl">Status</div><ul class="task-list"><li class="task-item done">Mold 1 complete — Hand SOKY</li><li class="task-item done">TopSheng (ISO 13485) — confirmed</li><li class="task-item done">250 units Batch 1 — in progress</li><li class="task-item open">Foot SOKY mold — pending sell-through</li></ul></div><div class="lane-section"><div class="lane-section-lbl">Q2 Ask — Kenichiro, Hameed</div><ul class="task-list"><li class="task-item urgent">Confirm Batch 1 ship date</li><li class="task-item open">Website back-end — WooCommerce connect</li><li class="task-item open">Product insert QR codes — verify live</li></ul></div><span class="ask-badge" style="background:rgba(37,99,235,0.1);color:#1e3a8a">In good shape · Back-end is the gap</span></div></div>
+      <div class="lane"><div class="lane-head" style="background:linear-gradient(135deg,#14532d,#16a34a)"><div class="lane-dot" style="background:#86efac"></div><div><div class="lane-title">Green Team | Strategic Initiatives</div><div class="lane-dept">Investors · Advisors · Partnerships · Clinical</div></div></div><div class="lane-body"><div class="lane-section"><div class="lane-section-lbl">Status</div><ul class="task-list"><li class="task-item done">$180K raised — Sosimo + Seymour</li><li class="task-item done">Dr. Heller (Stanford) — confirmed advisor</li><li class="task-item done">Dr. Lebada + Jennifer Nguyen — onboarded</li><li class="task-item done">Pitch deck live — pd_s26</li></ul></div><div class="lane-section"><div class="lane-section-lbl">Q2 Ask — Everyone</div><ul class="task-list"><li class="task-item urgent">Share pd_s26 with 1+ warm investor contact</li><li class="task-item open">$70K LOI — follow up with distributor</li><li class="task-item open">Clinical outreach — 5 engaged, close one</li></ul></div><span class="ask-badge" style="background:rgba(22,163,74,0.1);color:#14532d">Strongest area · Keep momentum</span></div></div>
     </div>
   </div>
-
-  <!-- WHAT'S NEXT -->
   <div class="sec">
     <div class="sec-hd"><span class="sec-eyebrow">What's Next — The Three Horizons</span></div>
     <div class="next-grid">
-      <div class="next-card now">
-        <div class="next-phase">Now · This Week</div>
-        <div class="next-title">Close the back-end gap</div>
-        <ul class="next-items">
-          <li>WooCommerce Add-to-Cart connected</li>
-          <li>Email capture live on nmthera.com</li>
-          <li>Each team confirms Q2 bandwidth</li>
-          <li>Investor links shared in your networks</li>
-        </ul>
-      </div>
-      <div class="next-card near">
-        <div class="next-phase">Near · Apr 14–21</div>
-        <div class="next-title">Full broadcast push</div>
-        <ul class="next-items">
-          <li>Coordinated Instagram + Reddit launch</li>
-          <li>Email campaign to warm list</li>
-          <li>Investor outreach — SAFE docs ready</li>
-          <li>Clinical partner outreach — first close</li>
-        </ul>
-      </div>
-      <div class="next-card beyond">
-        <div class="next-phase">Beyond · Apr 30+</div>
-        <div class="next-title">Sell through → Batch 2</div>
-        <ul class="next-items">
-          <li>200 units sold → Foot SOKY mold funded</li>
-          <li>WeFundr / Kickstarter from warm base</li>
-          <li>Seed round from Campaign 1 traction</li>
-          <li>Research Access cohort → Commons seeds</li>
-        </ul>
-      </div>
+      <div class="next-card now"><div class="next-phase">Now · This Week</div><div class="next-title">Close the back-end gap</div><ul class="next-items"><li>WooCommerce Add-to-Cart connected</li><li>Email capture live on nmthera.com</li><li>Each team confirms Q2 bandwidth</li><li>Investor links shared in your networks</li></ul></div>
+      <div class="next-card near"><div class="next-phase">Near · Apr 14-21</div><div class="next-title">Full broadcast push</div><ul class="next-items"><li>Coordinated Instagram + Reddit launch</li><li>Email campaign to warm list</li><li>Investor outreach — SAFE docs ready</li><li>Clinical partner outreach — first close</li></ul></div>
+      <div class="next-card beyond"><div class="next-phase">Beyond · Apr 30+</div><div class="next-title">Sell through → Batch 2</div><ul class="next-items"><li>200 units sold → Foot SOKY mold funded</li><li>WeFundr / Kickstarter from warm base</li><li>Seed round from Campaign 1 traction</li><li>Research Access cohort → Commons seeds</li></ul></div>
     </div>
   </div>
-
-  <!-- CONTEXT NOTE -->
-  <div class="callout sun">
-    <div class="callout-lbl">From Kenny — Honest Context</div>
-    <p>The quiet stretch since February wasn't just bandwidth — I've been deep in the details and my follow-through on clear direction has been inconsistent. That's on me. What changed this week: the infrastructure is real. We have a deployment pipeline, live pages, an updated pitch deck with every team member's accurate profile, and a system for pushing changes fast. I need each of you to show up now, tell me what you have to give, and let's divide the work accordingly. This will move forward with or without full team coordination — but we will do so much better together.</p>
-  </div>
-
-  <!-- QUOTE -->
-  <div class="quote-band">
-    <blockquote>"Care for the hands is care for everything the hands make possible. When we restore care to the hands, we restore the capacity to reach out."</blockquote>
-    <cite>— NM Thera Manifesto, 2026</cite>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="doc-footer">
-    <div class="doc-footer-brand">NM Therapeutics, Inc.</div>
-    <div class="doc-footer-meta">kenny@nmthera.com · 714-782-2843 · Q2 2026 · Confidential — Team Only</div>
-  </div>
-
+  <div class="callout sun"><div class="callout-lbl">From Kenny — Honest Context</div><p>The quiet stretch since February wasn't just bandwidth — I've been deep in the details and my follow-through on clear direction has been inconsistent. That's on me. What changed this week: the infrastructure is real. We have a deployment pipeline, live pages, an updated pitch deck with every team member's accurate profile, and a system for pushing changes fast. I need each of you to show up now, tell me what you have to give, and let's divide the work accordingly. This will move forward with or without full team coordination — but we will do so much better together.</p></div>
+  <div class="quote-band"><blockquote>"Care for the hands is care for everything the hands make possible. When we restore care to the hands, we restore the capacity to reach out."</blockquote><cite>— NM Thera Manifesto, 2026</cite></div>
+  <div class="doc-footer"><div class="doc-footer-brand">NM Therapeutics, Inc.</div><div class="doc-footer-meta">kenny@nmthera.com · 714-782-2843 · Q2 2026 · Confidential — Team Only</div></div>
 </div>
+</div>
+
+<!-- ═══ TAB 2: ROADMAP ═══ -->
+<div class="page-panel" id="page-roadmap">
+<div class="shell">
+  <div class="page-hero"><div class="page-hero-eyebrow">Campaign Roadmap</div><h1 class="page-hero-title">2026 Master Coordinator — Timeline View</h1><p class="page-hero-sub">528 tasks. 258 done. 270 open. Six sections spanning Pre-Launch through Q4. Sourced from Asana SOT.</p></div>
+  <div class="sec" style="margin-top:2rem">
+    <div class="sec-hd"><span class="sec-eyebrow">Campaign Gantt</span></div>
+    <div class="gantt-wrap">
+      <div class="gantt-header"><div class="gantt-q"></div><div class="gantt-q">Q4 2025</div><div class="gantt-q">Q1 2026</div><div class="gantt-q">Q2 2026</div><div class="gantt-q">Q3 2026</div><div class="gantt-q">Q4 2026</div></div>
+      <div class="gantt-row"><div class="gantt-label">Pre-Launch<small>Oct - Jan</small></div><div class="gantt-bar-cell"><div class="gantt-bar" style="left:30%;right:0;background:var(--green)">DONE</div></div><div class="gantt-bar-cell"><div class="gantt-bar" style="left:0;right:60%;background:var(--green)"></div></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"></div></div>
+      <div class="gantt-row"><div class="gantt-label">Campaign 1<small>Feb - Apr 30</small></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"><div class="gantt-bar" style="left:30%;right:0;background:linear-gradient(90deg,var(--navy),var(--pool))"></div></div><div class="gantt-bar-cell"><div class="gantt-bar" style="left:0;right:0;background:linear-gradient(90deg,var(--pool),var(--navy))">ACTIVE</div></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"></div></div>
+      <div class="gantt-row"><div class="gantt-label">Campaign 2<small>May - Jun</small></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"><div class="gantt-bar" style="left:30%;right:0;background:rgba(49,89,138,0.2)"></div></div><div class="gantt-bar-cell"><div class="gantt-bar" style="left:0;right:60%;background:rgba(49,89,138,0.2)">PLANNED</div></div><div class="gantt-bar-cell"></div></div>
+      <div class="gantt-row"><div class="gantt-label">Campaign 3<small>Jul - Aug</small></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"><div class="gantt-bar" style="left:0;right:0;background:rgba(49,89,138,0.15);color:var(--muted)">PLANNED</div></div><div class="gantt-bar-cell"></div></div>
+      <div class="gantt-row"><div class="gantt-label">Campaign 4+<small>Sep - Dec</small></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"></div><div class="gantt-bar-cell"><div class="gantt-bar" style="left:60%;right:0;background:rgba(49,89,138,0.08);color:var(--muted)"></div></div><div class="gantt-bar-cell"><div class="gantt-bar" style="left:0;right:0;background:rgba(49,89,138,0.08);color:var(--muted)">FUTURE</div></div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-eyebrow">All Hands OKR Goals</span></div>
+    <div class="stat-row" style="grid-template-columns:1fr 1fr"><div class="stat-card"><div class="stat-val" style="color:var(--navy)">10,000</div><div class="stat-lbl">Model F Unit Sales · Year-End Target</div></div><div class="stat-card"><div class="stat-val" style="color:var(--pool)">1,000</div><div class="stat-lbl">Model E Program Sign-Ups · Year-End Target</div></div></div>
+  </div>
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-eyebrow">Milestones</span></div>
+    <div class="milestone-row">
+      <div class="milestone missed"><div class="milestone-date">Feb 6</div><div class="milestone-target">250 Units Sold</div><div class="milestone-status">Missed</div></div>
+      <div class="milestone missed"><div class="milestone-date">Feb 28</div><div class="milestone-target">250 Units Sold</div><div class="milestone-status">Missed</div></div>
+      <div class="milestone missed"><div class="milestone-date">Mar 31</div><div class="milestone-target">250 Units Sold & Fulfilled</div><div class="milestone-status">Missed</div></div>
+      <div class="milestone current"><div class="milestone-date">Apr 30</div><div class="milestone-target">250 Units Sold & Fulfilled</div><div class="milestone-status">Current Target</div></div>
+    </div>
+  </div>
+  <div class="callout sun"><div class="callout-lbl">Asana Health Note</div><p>The board reflects planned timelines. Real-world progress on Campaign 1 is behind the original schedule. Apr 30 sell-through is the current critical milestone. If achieved, the downstream campaign timeline holds. If not, expect rightward shift.</p></div>
+  <div class="doc-footer"><div class="doc-footer-brand">NM Therapeutics, Inc.</div><div class="doc-footer-meta">Sourced from Asana SOT · 2026 Master Coordinator</div></div>
+</div>
+</div>
+
+<!-- ═══ TAB 3: BUILD LOG ═══ -->
+<div class="page-panel" id="page-buildlog">
+<div class="shell">
+  <div class="page-hero"><div class="page-hero-eyebrow">Build Log</div><h1 class="page-hero-title">The working record.</h1><p class="page-hero-sub">16 sessions logged · March 13 - April 3, 2026 · Major workstreams: Web infrastructure, Investor materials, Product formulation, Asana operations, Dev environment setup.</p></div>
+  <div class="sec" style="margin-top:2rem">
+    <div class="callout pool"><div class="callout-lbl">About This Log</div><p>This log is Kenny's working record — it reflects the actual build pace, what got done, and what's next. It is not sanitized. It is the honest picture of how this company is being built.</p></div>
+
+    <div class="log-card"><div class="log-date">April 3, 2026</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Dev environment setup — VS Code on desktop and laptop, Git initialized, both machines connected to GitHub</li><li>GitHub Pages enabled for live HTML previews</li><li>WordPress iframe embed — full-screen on nmthera.com/pd_s26</li><li>Mobile zoom fix — initial-scale=0.85 on horizontal pitch deck</li><li>Full repo audit — 23 files, identified missing meta tags, accessibility gaps, placeholder content</li><li>Audit fixes — OG/Twitter Card tags on all 16 HTML files, meta descriptions on 11 files, TBD pricing replaced</li><li>KV Blue video compression — 268 MB to 32 MB via HandBrake, hosted on GitHub Pages</li><li>Mobile autoplay fix — switched from YouTube iframe to self-hosted video with playsinline</li><li>Mobile autoplay confirmed on iOS Safari and Android Chrome through WordPress iframe</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Self-hosted video over YouTube embeds — YouTube iframes fail to autoplay inside cross-origin iframes on mobile.</div><div class="log-decision">GitHub Pages as CDN — serving compressed video directly, no WordPress dependency.</div><div class="log-section-lbl">Files Changed</div><ul class="log-list files"><li>16 HTML files (OG tags + meta descriptions)</li><li>Videos/26Mar2026 Kv Blue.mp4</li><li>HTML/business-plan-enhanced.html</li><li>HTML/soky-pitch-deck-h.html</li><li>HTML/community-feed-3-card (1).html</li></ul></div>
+
+    <div class="log-card"><div class="log-date">March 23, 2026</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Luminescent fluid formulation research — bioluminescence aesthetic for SOKY glove</li><li>Formulation document NMT-FL-001 v0.1 "Luminal Ritual Fluid" produced</li><li>Procurement-ready spec — full ingredient list, concentrations, mixing protocol</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Long-term target is true mechanoluminescent microencapsulates — current formulation uses chemical chemiluminescence as a bridge.</div></div>
+
+    <div class="log-card"><div class="log-date">March 20, 2026 — Session 7</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Investor valuation analysis HTML — nine Chart.js interactive visualizations</li><li>Blended valuation — Base $3.2M, Bear $1.5M, Bull $6.5M</li><li>Exit modeling — Year 10 exit $240M-$361M (~113x return)</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Three-method blended valuation — no single method reliable for pre-revenue hardware startups.</div><div class="log-section-lbl">Files Changed</div><ul class="log-list files"><li>HTML/Drafts/NMThera_Valuation_Analysis_2026.html</li></ul></div>
+
+    <div class="log-card"><div class="log-date">March 20, 2026 — Session 6</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Claude Code Windows setup resolved — Git Bash path issue fixed</li><li>Working pattern established — Claude Chat for strategy, Claude Code for file execution</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Git Bash is the required terminal for Claude Code on Windows.</div></div>
+
+    <div class="log-card"><div class="log-date">March 20, 2026 — Session 5</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Investor outreach asset stack designed — full journey mapped</li><li>Single-page investor journey HTML — 10 panels from problem stats to valuation milestone grid</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Sequence matters — hero video, email gate, dashboard, full plan, ask.</div><div class="log-section-lbl">Files Changed</div><ul class="log-list files"><li>HTML/Drafts/SOKY_Investor_v1.3.html</li></ul></div>
+
+    <div class="log-card"><div class="log-date">March 20, 2026 — Session 4</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Investor business plan HTML (v3 to v4) — BSG v1.2 design tokens</li><li>Six-mode enhancement system documented</li><li>Topical peptide soaks added as precision frontier</li><li>IP section corrected — all four items</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Premium editorial presentation over standard business doc formatting.</div><div class="log-section-lbl">Files Changed</div><ul class="log-list files"><li>HTML/Drafts/NMThera_BusinessPlan_2026_v4.html</li></ul></div>
+
+    <div class="log-card"><div class="log-date">March 20, 2026 — Session 3</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Skill file corrections — fixed five locations overstating governance structure</li><li>Corporate structure clarified — Delaware C Corp parent, California LLC subsidiary</li><li>Section 18 added — Asana Operating System with campaign roadmap</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Never describe NM Thera as steward-owned or foundation-governed — aspirational only.</div></div>
+
+    <div class="log-card"><div class="log-date">March 20, 2026 — Session 2</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Asana Master Coordinator audit — full review of 2026 board</li><li>Six-campaign sequential drop schedule mapped (Apr-Dec 2026)</li><li>15 unassigned Campaign 1 subtasks identified</li><li>Campaign 1 due date updated to April 30</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Asana is the company operating system — Claude must actively maintain it.</div></div>
+
+    <div class="log-card"><div class="log-date">March 20, 2026 — Session 1</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Development tool comparison — GitHub, VS Code, Claude Code, Claude Chat</li><li>Task-to-tool routing established</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Primary rhythm: Claude Chat for strategy/copy, Claude Code for file-system work.</div></div>
+
+    <div class="log-card"><div class="log-date">March 19, 2026 — Session 3</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Code architecture reference tables for all three core HTML documents</li><li>Cross-document analysis — inconsistencies, errors, consolidation opportunities</li><li>Found: duplicate product label, incorrect patent status, spaced wordmark error</li></ul></div>
+
+    <div class="log-card"><div class="log-date">March 19, 2026 — Session 2</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Clinical Partner Program page refined (v1.3 to v1.4) — real photography added</li><li>SVG stroke icon system ported from manifesto (38x38 rounded squares)</li><li>Manifesto v2.0 final output produced</li><li>Clinical tier badge fixed to pool (#006D77)</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Stroke-only icon system, no emoji — zero emoji across any document.</div><div class="log-section-lbl">Files Changed</div><ul class="log-list files"><li>HTML/Drafts/SOKY_Clinical_v1.2.html</li><li>HTML/Drafts/SOKY_Manifesto_v2.0.html</li></ul></div>
+
+    <div class="log-card"><div class="log-date">March 19, 2026 — Session 1</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>HTML architecture fundamentals — comparison to C++, CSS variables, download buttons</li><li>3D model viewer feasibility explored (Three.js/Babylon.js)</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">HTML5 is the correct standard — XHTML is legacy.</div></div>
+
+    <div class="log-card"><div class="log-date">March 18, 2026 — Session 2</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Video landing page with portrait video (9:16) and reactive blurred canvas background</li><li>Canvas mirror system — draws video edge pixels in real time</li><li>Three iterations to full BSG design system parity</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Canvas draws video cover-filled at 116% viewport — CSS filter handles blur to avoid CORS taint.</div><div class="log-section-lbl">Files Changed</div><ul class="log-list files"><li>HTML/Drafts/SOKY_LandingVideo_v1.0.html</li></ul></div>
+
+    <div class="log-card"><div class="log-date">March 18, 2026 — Session 1</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>SOKY Manifesto refined from v0.6 to v1.3</li><li>Audiences grid expanded to six cards, ninth charter principle added</li><li>Commons governance card rewritten</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Manifesto serves all six audiences simultaneously — no audience-specific forks.</div></div>
+
+    <div class="log-card"><div class="log-date">March 17, 2026</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Built foundational SOKY/NM Thera skill file (v1.0 to v1.2)</li><li>Encoded full company knowledge base — identity, product architecture, IP, competitors, pricing, brand voice</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">Skill file established as single source of truth for all future Claude sessions.</div></div>
+
+    <div class="log-card"><div class="log-date">March 13, 2026</div><div class="log-section-lbl">What We Did</div><ul class="log-list"><li>Silicone glove recycling and circular economy research</li><li>HCR vs LSR materials, overmolding strategies, at-home patching</li><li>Closed-loop manufacturing partnerships explored (Dow, Momentive, Wacker)</li></ul><div class="log-section-lbl">Key Decisions</div><div class="log-decision">LSR overmolded onto TPU skeleton — most promising end-of-life design concept.</div></div>
+  </div>
+  <div class="doc-footer"><div class="doc-footer-brand">NM Therapeutics, Inc.</div><div class="doc-footer-meta">Build log sourced from JOURNAL.md · Updated April 3, 2026</div></div>
+</div>
+</div>
+
+<!-- ═══ TAB 4: LINKS & ASSETS ═══ -->
+<div class="page-panel" id="page-links">
+<div class="shell">
+  <div class="page-hero"><div class="page-hero-eyebrow">Links & Assets</div><h1 class="page-hero-title">Everything in one place.</h1><p class="page-hero-sub">Live production pages, GitHub Pages staging previews, and draft documents. All links open in new tabs.</p></div>
+  <div class="sec" style="margin-top:2rem">
+    <div class="link-group"><div class="link-group-title live">Live Pages — nmthera.com</div><div class="link-grid">
+      <a href="https://nmthera.com/home2" target="_blank" class="link-card"><div class="link-card-title">Website Homepage</div><div class="link-card-desc">Primary public-facing homepage for NM Thera and the SOKY product line.</div><div class="link-card-btn live">Open →</div></a>
+      <a href="https://nmthera.com/pd_s26" target="_blank" class="link-card"><div class="link-card-title">Investor Pitch Deck</div><div class="link-card-desc">Spring 2026 horizontal pitch deck via GitHub Pages iframe.</div><div class="link-card-btn live">Open →</div></a>
+      <a href="https://nmthera.com/bp_s26" target="_blank" class="link-card"><div class="link-card-title">Business Plan</div><div class="link-card-desc">Comprehensive plan with financials, team, IP, and roadmap.</div><div class="link-card-btn live">Open →</div></a>
+      <a href="https://nmthera.com/team-update" target="_blank" class="link-card"><div class="link-card-title">Team Update (This Page)</div><div class="link-card-desc">Q2 2026 team update with roadmap, build log, and links.</div><div class="link-card-btn live">Open →</div></a>
+    </div></div>
+    <div class="link-group"><div class="link-group-title staging">GitHub Pages — Preview / Staging</div><div class="link-grid">
+      <a href="https://kfam227.github.io/website/HTML/soky-homepage.html" target="_blank" class="link-card"><div class="link-card-title">SOKY Homepage</div><div class="link-card-desc">Product homepage with hero video, feature grid, and ritual flow.</div><div class="link-card-btn staging">Open →</div></a>
+      <a href="https://kfam227.github.io/website/HTML/soky-pdp-v2.html" target="_blank" class="link-card"><div class="link-card-title">Product Detail Page</div><div class="link-card-desc">Shop page with product photography, pricing, and add-to-cart.</div><div class="link-card-btn staging">Open →</div></a>
+      <a href="https://kfam227.github.io/website/HTML/nmthera-sitemap-superpage.html" target="_blank" class="link-card"><div class="link-card-title">Sitemap Superpage</div><div class="link-card-desc">Full multi-tab site architecture — all pages in one document.</div><div class="link-card-btn staging">Open →</div></a>
+      <a href="https://kfam227.github.io/website/HTML/soky-pitch-deck-h.html" target="_blank" class="link-card"><div class="link-card-title">Pitch Deck (Staging)</div><div class="link-card-desc">Horizontal investor pitch deck — GitHub Pages source.</div><div class="link-card-btn staging">Open →</div></a>
+      <a href="https://kfam227.github.io/website/HTML/business-plan-enhanced.html" target="_blank" class="link-card"><div class="link-card-title">Business Plan (Staging)</div><div class="link-card-desc">Full business plan — GitHub Pages source.</div><div class="link-card-btn staging">Open →</div></a>
+      <a href="https://kfam227.github.io/website/HTML/nmthera-team-update-q2.html" target="_blank" class="link-card"><div class="link-card-title">Team Update (Staging)</div><div class="link-card-desc">This page — GitHub Pages source.</div><div class="link-card-btn staging">Open →</div></a>
+    </div></div>
+    <div class="link-group"><div class="link-group-title draft">Drafts — GitHub Pages</div><div class="link-grid">
+      <a href="https://kfam227.github.io/website/HTML/Drafts/SOKY_Manifesto_v2.0.html" target="_blank" class="link-card"><div class="link-card-title">SOKY Manifesto v2.0</div><div class="link-card-desc">Brand manifesto — philosophy, science, and mission.</div><div class="link-card-btn draft">Open →</div></a>
+      <a href="https://kfam227.github.io/website/HTML/Drafts/SOKY_Clinical_v1.2.html" target="_blank" class="link-card"><div class="link-card-title">Clinical Partner Program</div><div class="link-card-desc">Clinical evidence page with research and partner tiers.</div><div class="link-card-btn draft">Open →</div></a>
+      <a href="https://kfam227.github.io/website/HTML/Drafts/SOKY_Investor_v1.3.html" target="_blank" class="link-card"><div class="link-card-title">Investor Overview</div><div class="link-card-desc">10-panel scrolling investor journey with TAM/SAM/SOM.</div><div class="link-card-btn draft">Open →</div></a>
+      <a href="https://kfam227.github.io/website/HTML/Drafts/NMThera_BusinessPlan_2026_v6.html" target="_blank" class="link-card"><div class="link-card-title">Business Plan v6</div><div class="link-card-desc">Latest draft with Chart.js financial visualizations.</div><div class="link-card-btn draft">Open →</div></a>
+    </div></div>
+  </div>
+  <div class="doc-footer"><div class="doc-footer-brand">NM Therapeutics, Inc.</div><div class="doc-footer-meta">All links verified April 3, 2026</div></div>
+</div>
+</div>
+
+<script>
+function switchTab(tabId){
+  document.querySelectorAll('.page-panel').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
+  var panel=document.getElementById('page-'+tabId);
+  if(panel)panel.classList.add('active');
+  var tab=document.querySelector('.nav-tab[data-tab="'+tabId+'"]');
+  if(tab){tab.classList.add('active');tab.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})}
+  window.scrollTo({top:0,behavior:'instant'});
+  history.replaceState(null,null,'#'+tabId);
+  updateTopbar();
+}
+function updateTopbar(){
+  var topbar=document.getElementById('topbar');
+  var activePanel=document.querySelector('.page-panel.active');
+  if(activePanel&&activePanel.classList.contains('has-cover')){topbar.classList.add('is-dark')}else{topbar.classList.remove('is-dark')}
+}
+document.querySelectorAll('.nav-tab').forEach(function(tab){tab.addEventListener('click',function(){switchTab(this.getAttribute('data-tab'))})});
+window.addEventListener('popstate',function(){var hash=window.location.hash.replace('#','');if(hash&&document.getElementById('page-'+hash)){switchTab(hash)}});
+(function(){var hash=window.location.hash.replace('#','');if(hash&&document.getElementById('page-'+hash)){switchTab(hash)}else{updateTopbar()}})();
+</script>
 </body>
 </html>
