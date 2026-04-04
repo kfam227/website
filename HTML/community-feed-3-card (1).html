@@ -208,11 +208,11 @@ var zR=document.getElementById('zoneRight');
 
 /* YouTube card → left zone */
 var ytHtml='';
-ytHtml+='<a href="https://www.youtube.com/watch?v=64eIdY9GQN4&t=1914s" target="_blank" rel="noopener" class="feed-panel card-yt" style="text-decoration:none;color:inherit">';
-ytHtml+='<div class="yt-link"><img src="https://img.youtube.com/vi/64eIdY9GQN4/maxresdefault.jpg" alt="Watch on YouTube" loading="lazy"></div>';
+ytHtml+='<div class="feed-panel card-yt">';
+ytHtml+='<iframe src="https://www.youtube.com/embed/xH7JYZQ3jnw?autoplay=1&muted=1&loop=1&controls=0&playlist=xH7JYZQ3jnw&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen style="width:100%;aspect-ratio:16/9;border:none;border-radius:var(--r-lg);display:block"></iframe>';
 ytHtml+='<div class="feed-header"><div class="feed-header-left"><div class="feed-icon" style="background:#FF0000"><svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:#fff"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg></div>';
 ytHtml+='<div class="feed-titles"><div class="feed-title">The Water Protocol</div><div class="feed-sub">Ambient · SOKY Ritual Soundtrack</div></div></div></div>';
-ytHtml+='</a>';
+ytHtml+='</div>';
 zL.innerHTML=ytHtml;
 
 /* Reddit pill cards → center zone */
