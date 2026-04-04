@@ -40,7 +40,16 @@
       "Bash(powershell -ExecutionPolicy Bypass -File apply_media.ps1 -InputPath NMThera_BusinessPlan_2026_v6.html -OutputPath business-plan-enhanced.html)",
       "Bash(find C:UsersAdministratorDesktopNMT_Claude_WorkshopG -name *sitemap* -o -name *homepage* -o -name *home*)",
       "Bash(find . -not -path ./.git/* -not -path ./.claude/* -type f)",
-      "Bash(find . -not -path ./.git/* -not -path ./.claude/* -type f -exec wc -l {} +)"
+      "Bash(find . -not -path ./.git/* -not -path ./.claude/* -type f -exec wc -l {} +)",
+      "Bash(wc -l -c \"C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/HTML/soky-homepage.html\" \"C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/HTML/soky-pdp-v2.html\" \"C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/HTML/soky-001-product-insert-v2.html\" \"C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/HTML/soky-002-kit-insert.html\" \"C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/HTML/business-plan-enhanced.html\" \"C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/HTML/nmthera-sitemap-superpage.html\" \"C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/HTML/community-feed-3-card \\(1\\).html\" \"C:/Users/Administrator/Desktop/NMT_Claude_WorkshopG/HTML/soky-pitch-deck \\(1\\).html\")",
+      "Bash(grep -E '\\\\.html$')",
+      "Read(//c/Users/Administrator/Desktop/NMT_Claude_WorkshopG/**)",
+      "Bash(done)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
