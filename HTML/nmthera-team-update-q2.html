@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NM Thera — Q2 Team Update · April 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;600;700;800;900&family=Mulish:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#31598A;--ink:#111827;--paper:#F7F7F5;--green:#688B58;--umber:#8A6A4D;
+  --sunlight:#FFD166;--pool:#006D77;--heat:#B31D1B;--muted:#667085;
+  --line:rgba(17,24,39,0.09);--line-md:rgba(17,24,39,0.14);
+  --surface:rgba(255,255,255,0.88);--surface-strong:rgba(255,255,255,0.96);
+  --r-xl:28px;--r-lg:20px;--r-md:14px;--r-sm:8px;
+  --shadow:0 20px 56px rgba(17,24,39,0.10);--shadow-sm:0 3px 14px rgba(17,24,39,0.06);
+  --head:'Montserrat',system-ui,sans-serif;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sub:'Mulish',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --yellow:#F59E0B;--red:#DC2626;--blue:#2563EB;--ggreen:#16A34A;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.72;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.25;background-image:linear-gradient(rgba(17,24,39,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(17,24,39,0.015) 1px,transparent 1px);background-size:26px 26px}
+.shell{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem) 5rem}
+a{color:inherit;text-decoration:none}
+
+/* ── COVER ── */
+.cover{background:linear-gradient(135deg,#0c1520 0%,#162033 50%,#0e1720 100%);margin-left:calc(-50vw + 50%);width:100vw;padding:clamp(3rem,6vw,5rem) clamp(2rem,5vw,4rem);position:relative;overflow:hidden;margin-bottom:3rem}
+.cover::before{content:'';position:absolute;inset:0;opacity:0.2;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:26px 26px}
+.cover-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+.cover-top{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap;margin-bottom:2rem}
+.cover-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5)}
+.cover-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.cover-date{font-family:var(--sub);font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+.cover-title{font-family:var(--head);font-size:clamp(28px,5vw,52px);font-weight:900;color:#fff;letter-spacing:0.04em;text-transform:uppercase;line-height:0.95;margin-bottom:0.5rem}
+.cover-title span{color:rgba(255,255,255,0.35);font-weight:300;letter-spacing:0.18em;font-size:clamp(12px,1.6vw,16px);display:block;text-transform:uppercase;margin-bottom:0.5rem}
+.cover-sub{font-family:var(--body);font-size:14px;color:rgba(255,255,255,0.45);max-width:600px;line-height:1.7;margin-bottom:2rem}
+.cover-links{display:flex;gap:10px;flex-wrap:wrap}
+.cover-link{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:999px;font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:all .2s;cursor:pointer}
+.cover-link.primary{background:linear-gradient(135deg,var(--navy),var(--pool));color:#fff;box-shadow:0 4px 14px rgba(49,89,138,0.4)}
+.cover-link.secondary{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6)}
+.cover-link.secondary:hover{background:rgba(255,255,255,0.12);color:#fff}
+
+/* ── LAUNCH STATUS BAR ── */
+.status-bar{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow-sm)}
+.status-bar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem}
+.status-lbl{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy)}
+.status-pct{font-family:var(--head);font-size:22px;font-weight:900;color:var(--navy)}
+.timeline-track{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;position:relative}
+.timeline-track::before{content:'';position:absolute;top:10px;left:10%;right:10%;height:2px;background:var(--line-md);z-index:0}
+.tl-node{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
+.tl-dot{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0}
+.tl-dot.done{background:var(--green)}
+.tl-dot.active{background:var(--navy);box-shadow:0 0 0 4px rgba(49,89,138,0.15)}
+.tl-dot.next{background:var(--line-md);color:var(--muted)}
+.tl-label{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-align:center;color:var(--ink)}
+.tl-date{font-family:var(--body);font-size:9px;color:var(--muted);text-align:center}
+
+/* ── SECTION ── */
+.sec{margin-bottom:3rem}
+.sec-hd{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem}
+.sec-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--navy)}
+.sec-eyebrow::after{content:'';height:1px;flex:1;background:var(--line);display:inline-block;vertical-align:middle;margin-left:12px}
+.sec-title{font-family:var(--serif);font-size:clamp(20px,2.5vw,28px);color:var(--ink);line-height:1.15;margin-bottom:0.5rem}
+.sec-sub{font-family:var(--body);font-size:13px;color:var(--muted);line-height:1.65;max-width:640px;margin-bottom:1.5rem}
+
+/* ── STAT ROW ── */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:2rem}
+.stat-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1rem;box-shadow:var(--shadow-sm);text-align:center}
+.stat-val{font-family:var(--head);font-size:clamp(22px,3vw,32px);font-weight:900;line-height:1;margin-bottom:0.2rem}
+.stat-lbl{font-family:var(--sub);font-size:9.5px;color:var(--muted);line-height:1.4}
+
+/* ── SWIM LANES ── */
+.swim-lanes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:2rem}
+.lane{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+.lane-head{padding:0.85rem 1.1rem;display:flex;align-items:center;gap:10px}
+.lane-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.lane-title{font-family:var(--sub);font-size:11px;font-weight:700;color:#fff;flex:1}
+.lane-dept{font-family:var(--sub);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
+.lane-body{padding:1rem 1.1rem}
+.lane-section{margin-bottom:0.85rem}
+.lane-section:last-child{margin-bottom:0}
+.lane-section-lbl{font-family:var(--sub);font-size:8.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
+.task-list{list-style:none}
+.task-item{font-family:var(--body);font-size:12px;color:rgba(17,24,39,0.75);padding:0.3rem 0 0.3rem 1.4rem;border-bottom:1px solid var(--line);position:relative;line-height:1.4}
+.task-item:last-child{border-bottom:none}
+.task-item::before{position:absolute;left:0;top:0.38rem;font-size:10px}
+.task-item.open::before{content:'○';color:var(--muted)}
+.task-item.urgent::before{content:'!';color:var(--heat);font-weight:700}
+.task-item.done::before{content:'✓';color:var(--green);font-weight:700}
+.task-item.done{color:var(--muted);text-decoration:line-through}
+.ask-badge{display:inline-flex;align-items:center;margin-top:0.5rem;gap:5px;padding:4px 9px;border-radius:999px;font-family:var(--sub);font-size:8.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
+
+/* ── WHAT'S NEXT ── */
+.next-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:2rem}
+.next-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1.1rem;box-shadow:var(--shadow-sm);position:relative}
+.next-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-md) var(--r-md) 0 0}
+.next-card.now::before{background:linear-gradient(90deg,var(--heat),#f97316)}
+.next-card.near::before{background:linear-gradient(90deg,var(--sunlight),var(--green))}
+.next-card.beyond::before{background:linear-gradient(90deg,var(--navy),var(--pool))}
+.next-phase{font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem}
+.next-title{font-family:var(--sub);font-size:13px;font-weight:700;color:var(--ink);margin-bottom:0.6rem}
+.next-items{list-style:none}
+.next-items li{font-family:var(--body);font-size:11.5px;color:rgba(17,24,39,0.72);padding:0.2rem 0 0.2rem 1.1rem;position:relative;line-height:1.45}
+.next-items li::before{content:'→';position:absolute;left:0;color:var(--navy);font-size:10px;top:0.25rem}
+
+/* ── CALLOUT ── */
+.callout{border-left:3px solid var(--navy);background:rgba(49,89,138,0.05);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:1rem 1.3rem;margin-bottom:1.25rem}
+.callout.heat{border-left-color:var(--heat);background:rgba(179,29,27,0.04)}
+.callout.green{border-left-color:var(--green);background:rgba(104,139,88,0.05)}
+.callout.sun{border-left-color:var(--sunlight);background:rgba(255,209,102,0.07)}
+.callout-lbl{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy);margin-bottom:0.3rem}
+.callout.heat .callout-lbl{color:var(--heat)}.callout.green .callout-lbl{color:var(--green)}.callout.sun .callout-lbl{color:#7a5c00}
+.callout p{font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.75);line-height:1.65}
+
+/* ── BOARD OVERVIEW ── */
+.board-overview{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;box-shadow:var(--shadow-sm);margin-bottom:2rem}
+.board-title{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem}
+.board-progress{display:flex;height:10px;border-radius:999px;overflow:hidden;margin-bottom:0.75rem;gap:2px}
+.board-seg-done{background:var(--green);border-radius:999px}
+.board-seg-open{background:var(--navy);border-radius:999px;opacity:0.25}
+.board-stats{display:flex;gap:2rem;font-family:var(--sub);font-size:10px}
+.board-stat{display:flex;align-items:center;gap:6px}
+.board-stat-dot{width:8px;height:8px;border-radius:50%}
+
+/* ── QUOTE BAND ── */
+.quote-band{padding:1.5rem 1.75rem;background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92));color:#fff;border-radius:var(--r-xl);box-shadow:0 24px 80px rgba(0,48,61,0.2);overflow:hidden;position:relative;margin-bottom:2rem}
+.quote-band::after{content:'';position:absolute;right:-60px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%)}
+.quote-band blockquote{position:relative;z-index:1;font-family:var(--serif);font-size:clamp(16px,2vw,20px);line-height:1.45;font-style:italic;margin-bottom:10px}
+.quote-band cite{position:relative;z-index:1;display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;opacity:0.65;font-style:normal;font-family:var(--sub);font-weight:600}
+
+/* ── FOOTER ── */
+.doc-footer{border-top:1px solid var(--line);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.doc-footer-brand{font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink)}
+.doc-footer-meta{font-family:var(--body);font-size:11px;color:var(--muted)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:760px){
+  .swim-lanes,.next-grid,.stat-row{grid-template-columns:1fr}
+  .timeline-track{grid-template-columns:1fr;gap:12px}
+  .timeline-track::before{display:none}
+}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-top">
+      <div class="cover-badge">NM Thera · Internal</div>
+      <div class="cover-date">April 4, 2026 · Q2 Kickoff</div>
+    </div>
+    <div class="cover-title">
+      <span>Team Update</span>
+      SOKY is live.<br>Now we broadcast.
+    </div>
+    <p class="cover-sub">Happy Friday and happy Q2 — here's where we stand, what's happened, and what each of us needs to do next. The product is real. The window is open. Let's move together.</p>
+    <div class="cover-links">
+      <a href="https://nmthera.com/home2" target="_blank" class="cover-link primary">🌐 Website</a>
+      <a href="https://nmthera.com/bp_s26" target="_blank" class="cover-link secondary">📋 Business Plan</a>
+      <a href="https://nmthera.com/pd_s26" target="_blank" class="cover-link secondary">🎯 Investor Pitch Deck</a>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- LAUNCH TIMELINE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-eyebrow">Launch Status</span></div>
+    <div class="status-bar">
+      <div class="status-bar-top">
+        <div class="status-lbl">2026 Master Coordinator — Asana Board</div>
+        <div class="status-pct">49% complete · 258 / 528 tasks done</div>
+      </div>
+      <div class="board-overview" style="margin-bottom:1.25rem;padding:1rem">
+        <div class="board-progress">
+          <div class="board-seg-done" style="width:49%"></div>
+          <div class="board-seg-open" style="width:51%"></div>
+        </div>
+        <div class="board-stats">
+          <div class="board-stat"><div class="board-stat-dot" style="background:var(--green)"></div><span>258 completed</span></div>
+          <div class="board-stat"><div class="board-stat-dot" style="background:rgba(49,89,138,0.4)"></div><span>270 open</span></div>
+          <div class="board-stat" style="color:var(--muted)"><span>⛵ 2026 Master Coordinator</span></div>
+        </div>
+      </div>
+      <div class="timeline-track">
+        <div class="tl-node">
+          <div class="tl-dot done">✓</div>
+          <div class="tl-label">Product Ready</div>
+          <div class="tl-date">Oct 2025</div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot done">✓</div>
+          <div class="tl-label">Soft Launch</div>
+          <div class="tl-date">Feb 12 · Live</div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot active">◉</div>
+          <div class="tl-label">Infrastructure</div>
+          <div class="tl-date">Now · Apr 2026</div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot next">→</div>
+          <div class="tl-label">Full Broadcast</div>
+          <div class="tl-date">~Apr 14–21</div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot next">→</div>
+          <div class="tl-label">Sell Through</div>
+          <div class="tl-date">Apr 30 target</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACTION STATS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-eyebrow">Traction So Far</span></div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-val" style="color:var(--pool)">250K</div><div class="stat-lbl">Reddit views · Feb–Mar</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--navy)">2</div><div class="stat-lbl">Sales from first wave</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--green)">$180K</div><div class="stat-lbl">Raised to date</div></div>
+      <div class="stat-card"><div class="stat-val" style="color:var(--heat)">27</div><div class="stat-lbl">Days to broadcast push</div></div>
+    </div>
+    <div class="callout heat">
+      <div class="callout-lbl">Honest Assessment</div>
+      <p>Reddit showed the product resonates — 250K views with no budget. Two sales from cold reach isn't failure, it's signal. The problem hasn't been the product. It's been coordination and consistency. That's fixable, and that's what Q2 is for.</p>
+    </div>
+  </div>
+
+  <!-- SWIM LANES -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-eyebrow">Team Swim Lanes — What We Need From Each Team</span></div>
+    <p class="sec-sub">Four teams, one board. Here's what's open, what's urgent, and what each team needs to bring into Q2.</p>
+    <div class="swim-lanes">
+
+      <!-- YELLOW: Company Operations -->
+      <div class="lane">
+        <div class="lane-head" style="background:linear-gradient(135deg,#92400e,#b45309)">
+          <div class="lane-dot" style="background:var(--sunlight)"></div>
+          <div>
+            <div class="lane-title">🟡 Company Operations</div>
+            <div class="lane-dept">Admin · Legal · Finance · HR</div>
+          </div>
+        </div>
+        <div class="lane-body">
+          <div class="lane-section">
+            <div class="lane-section-lbl">Status</div>
+            <ul class="task-list">
+              <li class="task-item done">Payroll — Feb completed</li>
+              <li class="task-item done">Legal structure — C Corp / LLC active</li>
+              <li class="task-item open">Equity grants formalization (June target)</li>
+              <li class="task-item urgent">LLC vs C-Corp decision — June milestone</li>
+            </ul>
+          </div>
+          <div class="lane-section">
+            <div class="lane-section-lbl">Q2 Ask</div>
+            <ul class="task-list">
+              <li class="task-item open">Confirm Sy's availability for SAFE docs</li>
+              <li class="task-item open">Investor wire process — confirm mechanics</li>
+            </ul>
+          </div>
+          <span class="ask-badge" style="background:rgba(245,158,11,0.12);color:#92400e">Low urgency · High stakes</span>
+        </div>
+      </div>
+
+      <!-- RED: Go-To-Market -->
+      <div class="lane">
+        <div class="lane-head" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c)">
+          <div class="lane-dot" style="background:#fca5a5"></div>
+          <div>
+            <div class="lane-title">🔴 Go-To-Market</div>
+            <div class="lane-dept">Marketing · Sales · Fulfillment · Support</div>
+          </div>
+        </div>
+        <div class="lane-body">
+          <div class="lane-section">
+            <div class="lane-section-lbl">Status</div>
+            <ul class="task-list">
+              <li class="task-item done">Reddit campaign — 250K views</li>
+              <li class="task-item done">Instagram posted (limited reach)</li>
+              <li class="task-item urgent">Broadcast campaign NOT yet launched</li>
+              <li class="task-item urgent">Email list — not yet built</li>
+            </ul>
+          </div>
+          <div class="lane-section">
+            <div class="lane-section-lbl">Q2 Ask — Chi, Jenn</div>
+            <ul class="task-list">
+              <li class="task-item urgent">Content calendar for broadcast push</li>
+              <li class="task-item urgent">Email capture flow — set up now</li>
+              <li class="task-item open">Instagram account growth strategy</li>
+              <li class="task-item open">Confirm bandwidth for Apr 14–21 push</li>
+            </ul>
+          </div>
+          <span class="ask-badge" style="background:rgba(220,38,38,0.1);color:#7f1d1d">Critical path · Needs clarity now</span>
+        </div>
+      </div>
+
+      <!-- BLUE: Product & Manufacturing -->
+      <div class="lane">
+        <div class="lane-head" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8)">
+          <div class="lane-dot" style="background:#93c5fd"></div>
+          <div>
+            <div class="lane-title">🔵 Product & Manufacturing</div>
+            <div class="lane-dept">R&D · Production · Quality · Regulatory</div>
+          </div>
+        </div>
+        <div class="lane-body">
+          <div class="lane-section">
+            <div class="lane-section-lbl">Status</div>
+            <ul class="task-list">
+              <li class="task-item done">Mold 1 complete — Hand SOKY</li>
+              <li class="task-item done">TopSheng (ISO 13485) — confirmed</li>
+              <li class="task-item done">250 units Batch 1 — in progress</li>
+              <li class="task-item open">Foot SOKY mold — pending sell-through</li>
+            </ul>
+          </div>
+          <div class="lane-section">
+            <div class="lane-section-lbl">Q2 Ask — Kenichiro, Hameed</div>
+            <ul class="task-list">
+              <li class="task-item urgent">Confirm Batch 1 ship date</li>
+              <li class="task-item open">Website back-end — WooCommerce connect</li>
+              <li class="task-item open">Product insert QR codes — verify live</li>
+            </ul>
+          </div>
+          <span class="ask-badge" style="background:rgba(37,99,235,0.1);color:#1e3a8a">In good shape · Back-end is the gap</span>
+        </div>
+      </div>
+
+      <!-- GREEN: Strategic Initiatives -->
+      <div class="lane">
+        <div class="lane-head" style="background:linear-gradient(135deg,#14532d,#16a34a)">
+          <div class="lane-dot" style="background:#86efac"></div>
+          <div>
+            <div class="lane-title">🟢 Strategic Initiatives</div>
+            <div class="lane-dept">Investors · Advisors · Partnerships · Clinical</div>
+          </div>
+        </div>
+        <div class="lane-body">
+          <div class="lane-section">
+            <div class="lane-section-lbl">Status</div>
+            <ul class="task-list">
+              <li class="task-item done">$180K raised — Sosimo + Seymour</li>
+              <li class="task-item done">Dr. Heller (Stanford) — confirmed advisor</li>
+              <li class="task-item done">Dr. Lebada + Jennifer Nguyen — onboarded</li>
+              <li class="task-item done">Pitch deck live — pd_s26</li>
+            </ul>
+          </div>
+          <div class="lane-section">
+            <div class="lane-section-lbl">Q2 Ask — Everyone</div>
+            <ul class="task-list">
+              <li class="task-item urgent">Share pd_s26 with 1+ warm investor contact</li>
+              <li class="task-item open">$70K LOI — follow up with distributor</li>
+              <li class="task-item open">Clinical outreach — 5 engaged, close one</li>
+            </ul>
+          </div>
+          <span class="ask-badge" style="background:rgba(22,163,74,0.1);color:#14532d">Strongest area · Keep momentum</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WHAT'S NEXT -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-eyebrow">What's Next — The Three Horizons</span></div>
+    <div class="next-grid">
+      <div class="next-card now">
+        <div class="next-phase">Now · This Week</div>
+        <div class="next-title">Close the back-end gap</div>
+        <ul class="next-items">
+          <li>WooCommerce Add-to-Cart connected</li>
+          <li>Email capture live on nmthera.com</li>
+          <li>Each team confirms Q2 bandwidth</li>
+          <li>Investor links shared in your networks</li>
+        </ul>
+      </div>
+      <div class="next-card near">
+        <div class="next-phase">Near · Apr 14–21</div>
+        <div class="next-title">Full broadcast push</div>
+        <ul class="next-items">
+          <li>Coordinated Instagram + Reddit launch</li>
+          <li>Email campaign to warm list</li>
+          <li>Investor outreach — SAFE docs ready</li>
+          <li>Clinical partner outreach — first close</li>
+        </ul>
+      </div>
+      <div class="next-card beyond">
+        <div class="next-phase">Beyond · Apr 30+</div>
+        <div class="next-title">Sell through → Batch 2</div>
+        <ul class="next-items">
+          <li>200 units sold → Foot SOKY mold funded</li>
+          <li>WeFundr / Kickstarter from warm base</li>
+          <li>Seed round from Campaign 1 traction</li>
+          <li>Research Access cohort → Commons seeds</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTEXT NOTE -->
+  <div class="callout sun">
+    <div class="callout-lbl">From Kenny — Honest Context</div>
+    <p>The quiet stretch since February wasn't just bandwidth — I've been deep in the details and my follow-through on clear direction has been inconsistent. That's on me. What changed this week: the infrastructure is real. We have a deployment pipeline, live pages, an updated pitch deck with every team member's accurate profile, and a system for pushing changes fast. I need each of you to show up now, tell me what you have to give, and let's divide the work accordingly. This will move forward with or without full team coordination — but we will do so much better together.</p>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-band">
+    <blockquote>"Care for the hands is care for everything the hands make possible. When we restore care to the hands, we restore the capacity to reach out."</blockquote>
+    <cite>— NM Thera Manifesto, 2026</cite>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="doc-footer-brand">NM Therapeutics, Inc.</div>
+    <div class="doc-footer-meta">kenny@nmthera.com · 714-782-2843 · Q2 2026 · Confidential — Team Only</div>
+  </div>
+
+</div>
+</body>
+</html>
