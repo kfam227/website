@@ -2,6 +2,361 @@
 
 ---
 
+## Session — March 13, 2026
+
+### What We Did
+
+1. **Silicone glove recycling and circular economy research** — Explored end-of-life design strategies for SOKY gloves. Covered HCR vs LSR material properties, overmolding strategies, at-home patching techniques, and closed-loop manufacturing partnerships (Dow, Momentive, Wacker).
+2. **Repurposing pathways** — Mapped options for glove second-life use and material recovery.
+
+### Key Decisions
+
+- **LSR overmolded onto TPU skeleton** selected as the most promising end-of-life design concept — enables material separation at recycling and extends usable life through structural reinforcement.
+
+### Files Changed
+
+- None (research session — no code output)
+
+### Next Steps
+
+- Investigate Dow/Momentive take-back programs for post-consumer LSR
+- Model cost impact of TPU skeleton on BOM
+- Draft circular economy section for business plan
+
+---
+
+## Session — March 17, 2026
+
+### What We Did
+
+1. **Built foundational SOKY/NM Thera skill file** — Created the persistent reference system (v1.0 → v1.2) using the Claude skill-creator framework.
+2. **Encoded full company knowledge base** — Company identity, product architecture (5 SKUs), engineering mechanics, IP portfolio, competitor landscape, pricing strategy, brand voice rules, audience segmentation, and patent drawing visual reference library.
+
+### Key Decisions
+
+- **Skill file established as the single source of truth** for all future Claude sessions — eliminates re-briefing overhead and ensures consistency across Chat and Code contexts.
+
+### Files Changed
+
+- `.claude/skills/SOKY_NM_Thera_Foundational_Reference_System_v12_20Mar2026.skill` (initial creation, later renamed)
+
+### Next Steps
+
+- Test skill file persistence across new Claude sessions
+- Add Asana operating system section
+- Encode campaign roadmap and team structure
+
+---
+
+## Session — March 18, 2026 — Session 1
+
+### What We Did
+
+1. **SOKY Manifesto refinement** — Iterated from v0.6 to v1.3. Standardized the ritual sequence, expanded audiences grid from four to six cards, added ninth charter principle on conservation.
+2. **Commons governance card rewrite** — Strengthened the open-platform governance language.
+3. **Closing section rework** — Tightened the manifesto's closing statement.
+
+### Key Decisions
+
+- **Manifesto serves all six audiences simultaneously** — consumers, partners, collaborators, developers, practitioners, and investors. Single document, no audience-specific forks.
+
+### Files Changed
+
+- `HTML/Drafts/SOKY_Manifesto_v2.0.html` (predecessor versions)
+
+### Next Steps
+
+- Port manifesto to final v2.0 HTML with full BSG design system
+- Add real product photography replacing placeholder content
+
+---
+
+## Session — March 18, 2026 — Session 2
+
+### What We Did
+
+1. **Video landing page block** — Built HTML landing page featuring portrait video (9:16 aspect ratio) with reactive blurred canvas background.
+2. **Canvas mirror system** — Canvas draws video edge pixels in real time, creating a blurred ambient light effect behind the video frame.
+3. **Three design iterations** — Achieved full BSG design system parity: navy/pool/sunlight/paper palette, Montserrat 800, frosted glass panels, water ripple effect.
+
+### Key Decisions
+
+- **Canvas draws video cover-filled at 116% viewport** — CSS `filter` handles blur and saturation to avoid CORS taint issues with cross-origin video sources.
+
+### Files Changed
+
+- `HTML/Drafts/SOKY_LandingVideo_v1.0.html`
+
+### Next Steps
+
+- Test canvas performance on mobile devices (GPU compositing budget)
+- Add mute toggle and CTA overlay
+- Evaluate portrait vs landscape video for different viewport sizes
+
+---
+
+## Session — March 19, 2026 — Session 1
+
+### What We Did
+
+1. **HTML architecture fundamentals** — Discussed how HTML compares to compiled languages like C++, CSS variable systems, download button implementation, and 3D model viewer feasibility (Three.js/Babylon.js).
+2. **Code navigation mental model** — Established approach for navigating large HTML files to make targeted edits without breaking surrounding structure.
+
+### Key Decisions
+
+- **HTML5 is the correct standard** — XHTML is legacy and not applicable to this project. All documents use `<!DOCTYPE html>`.
+
+### Files Changed
+
+- None (educational session — no code output)
+
+### Next Steps
+
+- Apply HTML navigation patterns to upcoming document edits
+- Evaluate Three.js for potential 3D glove viewer on PDP
+
+---
+
+## Session — March 19, 2026 — Session 2
+
+### What We Did
+
+1. **Clinical Partner Program page** — Refined from v1.3 to v1.4. Added all real product photography replacing SVG placeholders.
+2. **SVG stroke icon system** — Ported from manifesto: 38×38 rounded square containers with consistent stroke weight.
+3. **Manifesto v2.0 final output** — Produced clean final version with all icon and photography updates.
+4. **Clinical tier badge fix** — Corrected badge color to pool (#006D77) for brand consistency.
+
+### Key Decisions
+
+- **Stroke-only icon system, no emoji** — All icons across all documents must use the SVG stroke system. Zero emoji anywhere.
+
+### Files Changed
+
+- `HTML/Drafts/SOKY_Clinical_v1.2.html`
+- `HTML/Drafts/SOKY_Manifesto_v2.0.html`
+
+### Next Steps
+
+- Cross-check icon consistency across all documents
+- Verify all product photos load from nmthera.com CDN
+
+---
+
+## Session — March 19, 2026 — Session 3
+
+### What We Did
+
+1. **Code architecture reference tables** — Generated detailed structural documentation for all three core HTML documents: Investor Overview v1.3, Manifesto v1.9.1, Clinical Partner Program.
+2. **Cross-document analysis** — Produced report identifying inconsistencies, errors, and consolidation opportunities across the three files.
+3. **Errors identified** — Duplicate product label, incorrect patent status in manifesto, spaced wordmark rendering error.
+
+### Key Decisions
+
+- None (audit session — findings fed into subsequent fix sessions)
+
+### Files Changed
+
+- None (analysis output only — no edits applied this session)
+
+### Next Steps
+
+- Fix duplicate product label across affected files
+- Correct patent status language in manifesto
+- Resolve spaced wordmark rendering issue
+
+---
+
+## Session — March 20, 2026 — Session 1
+
+### What We Did
+
+1. **Development tool comparison** — Evaluated GitHub, VS Code, Claude Code, and Claude Chat for task suitability. Mapped each tool to appropriate use cases.
+2. **Task-to-tool routing** — Established which tool handles which class of work.
+
+### Key Decisions
+
+- **Primary rhythm: Claude Chat for strategy/copy/artifacts, Claude Code for file-system work** — Claude Code becomes primary as codebase complexity grows. Chat remains the strategy and drafting environment.
+
+### Files Changed
+
+- None (planning session)
+
+### Next Steps
+
+- Set up Claude Code on desktop with Workshop G directory
+- Test file read/write workflow in Claude Code
+
+---
+
+## Session — March 20, 2026 — Session 2
+
+### What We Did
+
+1. **Asana Master Coordinator audit** — Full review of the NM Thera Asana board (project ID: `1208481693455010`).
+2. **Campaign roadmap mapped** — Six-campaign sequential drop schedule April–December 2026.
+3. **Task hygiene** — Identified 15 unassigned Campaign 1 subtasks. Found missing website, CRM, and email list tasks.
+4. **Date corrections** — Updated Campaign 1 due date to April 30. Completed February payroll tasks and rolled forward recurring dates.
+
+### Key Decisions
+
+- **Asana is the company operating system** — Claude must actively maintain it, not just read from it. Task creation, assignment, and date management are ongoing responsibilities.
+
+### Files Changed
+
+- None (Asana operations — no repo files changed)
+
+### Next Steps
+
+- Assign all 15 unassigned Campaign 1 subtasks
+- Create missing website/CRM/email list tasks
+- Build Asana section into skill file
+
+---
+
+## Session — March 20, 2026 — Session 3
+
+### What We Did
+
+1. **Skill file corrections** — Fixed five locations in v1.2 where the skill file overstated NM Thera's legal and governance structure.
+2. **Corporate structure clarified** — NM Thera is a private venture: Delaware C Corp parent, California LLC subsidiary. Commons/foundation structure is future aspiration only — not current reality.
+3. **Section 18 added** — Asana Operating System section with full campaign roadmap, team swim lanes, and COB personnel records.
+
+### Key Decisions
+
+- **Never describe NM Thera as steward-owned or foundation-governed** — These are aspirational structures. Current entity is a standard C Corp/LLC.
+
+### Files Changed
+
+- `.claude/skills/SOKY_NM_Thera_Foundational_Reference_System_v12_20Mar2026.skill`
+
+### Next Steps
+
+- Verify all downstream documents reflect corrected corporate structure
+- Cross-check manifesto and investor docs for governance language
+
+---
+
+## Session — March 20, 2026 — Session 4
+
+### What We Did
+
+1. **Investor business plan HTML** — Built comprehensive plan (v3 → v4) incorporating BSG v1.2 design tokens.
+2. **Six-mode enhancement system** — Documented the full SOKY product mode architecture.
+3. **Precision frontier section** — Added topical peptide soaks as the next-generation product thesis.
+4. **IP section corrected** — All four items: issued utility patent, pending platform patent, NM Thera trademark, SOKY logo trademark.
+5. **Markdown export** — Produced parallel markdown version for audio review workflow.
+
+### Key Decisions
+
+- **Premium editorial presentation over standard business doc formatting** — The business plan is a design artifact, not a Word doc. Full BSG visual system applies.
+
+### Files Changed
+
+- `HTML/Drafts/NMThera_BusinessPlan_2026_v4.html`
+
+### Next Steps
+
+- Audio review pass using markdown export
+- Iterate to v5/v6 with financial charts
+- Add media elements (product photography, video sections)
+
+---
+
+## Session — March 20, 2026 — Session 5
+
+### What We Did
+
+1. **Investor outreach asset stack designed** — Mapped the full investor journey from first touch to ask.
+2. **Single-page investor journey HTML** — Built 10-panel scrolling page: problem stats, ritual flow, SVG engineering diagram (inversion cuff), TAM/SAM/SOM charts, traction proof, IP timeline, platform roadmap, team/equity, revenue projections, ask with valuation milestone grid.
+
+### Key Decisions
+
+- **Sequence matters** — The investor journey follows a strict funnel: hero video → email gate → dashboard → full plan → ask. Each asset serves one stage.
+
+### Files Changed
+
+- `HTML/Drafts/SOKY_Investor_v1.3.html`
+
+### Next Steps
+
+- Build email gate component
+- Connect investor page to pitch deck flow
+- Test scroll performance on mobile
+
+---
+
+## Session — March 20, 2026 — Session 6
+
+### What We Did
+
+1. **Claude Code Windows setup resolved** — Fixed Git Bash path issue via user environment variable (`CLAUDE_CODE_GIT_BASH_PATH`).
+2. **Working pattern established** — Claude Chat for strategy and prompt drafting, Claude Code for file execution in the Workshop G directory.
+3. **Terminal clarification** — Documented difference between Command Prompt and MINGW64/Git Bash terminals on Windows.
+
+### Key Decisions
+
+- **Git Bash is the required terminal for Claude Code on Windows** — Command Prompt lacks the Unix utilities Claude Code depends on.
+
+### Files Changed
+
+- None (environment setup — no repo files changed)
+
+### Next Steps
+
+- Test Claude Code file read/write/commit workflow
+- Initialize repo from Claude Code terminal
+
+---
+
+## Session — March 20, 2026 — Session 7
+
+### What We Did
+
+1. **Investor valuation analysis HTML** — Produced comprehensive report with nine Chart.js interactive visualizations.
+2. **Blended valuation** — Base case $3.2M (asset reconstruction 35%, comparable transactions 35%, risk-adjusted DCF 30%). Bear $1.5M, Bull $6.5M.
+3. **Exit modeling** — Year 10 exit $240M–$361M (~113× return at base case).
+4. **Key value event identified** — Patent issuance March 2023 as the single largest value inflection in company history.
+
+### Key Decisions
+
+- **Three-method blended valuation** — No single method is reliable for pre-revenue hardware startups. Blended approach with explicit weighting provides the most defensible number.
+
+### Files Changed
+
+- `HTML/Drafts/NMThera_Valuation_Analysis_2026.html`
+
+### Next Steps
+
+- Sensitivity analysis on DCF discount rate assumptions
+- Add comparable transaction data sources as footnotes
+- Link valuation report from investor journey page
+
+---
+
+## Session — March 23, 2026
+
+### What We Did
+
+1. **Luminescent fluid formulation research** — Explored bioluminescence aesthetic for SOKY glove (dinoflagellate flash response to mechanical force).
+2. **Formulation document produced** — NMT-FL-001 v0.1 "Luminal Ritual Fluid." Peroxyoxalate chemiluminescent base with phosphorescent pigment system.
+3. **Procurement-ready spec** — Full ingredient list, concentrations, mixing protocol, and safety notes.
+
+### Key Decisions
+
+- **Long-term target is true mechanoluminescent microencapsulates** — Current formulation uses chemical chemiluminescence as a bridge. True mechanoluminescent capsules (force-activated light) are the goal once cosmetic-grade versions become commercially available.
+
+### Files Changed
+
+- None (formulation document produced in Claude Chat — not yet added to repo)
+
+### Next Steps
+
+- Source peroxyoxalate and phosphorescent pigment samples for bench testing
+- Evaluate shelf life and skin-contact safety profile
+- Draft formulation into HTML spec sheet for repo
+
+---
+
 ## Session — April 3, 2026
 
 ### What We Did
