@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NM Thera · CEO Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-deep: #0d1b2a;
+  --navy-mid: #152238;
+  --navy-surface: #1a2d45;
+  --navy-card: rgba(26, 45, 69, 0.65);
+  --navy: #31598A;
+  --seasalt: #F7F7F5;
+  --seasalt-dim: rgba(247,247,245,0.06);
+  --seasalt-muted: rgba(247,247,245,0.4);
+  --seasalt-soft: rgba(247,247,245,0.12);
+  --pool: #006D77;
+  --pool-bright: #4ecdc4;
+  --pool-dim: rgba(0,109,119,0.2);
+  --pool-glow: rgba(78,205,196,0.15);
+  --sunlight: #FFD166;
+  --sunlight-dim: rgba(255,209,102,0.12);
+  --reseda: #688B58;
+  --reseda-dim: rgba(104,139,88,0.15);
+  --red: #e74c3c;
+  --red-dim: rgba(231,76,60,0.12);
+  --green: #2ecc71;
+  --green-dim: rgba(46,204,113,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --blur: 20px;
+  --mono: 'JetBrains Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--navy-deep);color:var(--seasalt);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 20% 50%,rgba(0,109,119,0.07) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(49,89,138,0.05) 0%,transparent 50%);animation:bgDrift 30s ease-in-out infinite alternate;z-index:0;pointer-events:none}
+@keyframes bgDrift{0%{transform:translate(0,0)}100%{transform:translate(-2%,-1%)}}
+.app{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:16px;padding-bottom:80px}
+
+/* TOPBAR */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;margin-bottom:16px;background:var(--navy-card);backdrop-filter:blur(var(--blur));border:1px solid var(--seasalt-dim);border-radius:var(--radius)}
+.brand{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--seasalt-muted)}
+.brand span{color:var(--pool-bright)}
+.save-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-left:8px;transition:background .3s}
+.save-dot.saved{background:var(--pool-bright)}.save-dot.saving{background:var(--sunlight)}
+
+/* TAB BAR */
+.tab-bar{display:flex;gap:2px;background:var(--seasalt-dim);border-radius:8px;padding:3px;margin-bottom:16px}
+.tab-btn{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;background:transparent;color:var(--seasalt-muted);transition:all .2s;flex:1;text-align:center}
+.tab-btn.active{background:var(--pool-dim);color:var(--pool-bright)}
+.tab-btn:hover:not(.active){color:var(--seasalt)}
+
+/* DATE NAV */
+.date-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:20px}
+.nav-arrow{width:36px;height:36px;border-radius:var(--radius-sm);border:1px solid var(--seasalt-dim);background:transparent;color:var(--seasalt-muted);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:inherit}
+.nav-arrow:hover{border-color:var(--pool-bright);color:var(--pool-bright)}
+.date-label{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;text-align:center;min-width:200px}
+.date-sub{font-size:11px;color:var(--seasalt-muted);font-weight:400;margin-top:2px}
+.today-tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:2px 8px;border-radius:4px;background:var(--pool-dim);color:var(--pool-bright);margin-left:8px}
+.today-btn{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;padding:6px 14px;border:none;border-radius:6px;background:var(--pool-dim);color:var(--pool-bright);cursor:pointer;transition:all .2s}
+.today-btn:hover{background:var(--pool);color:white}
+
+/* GLASS CARD */
+.card{background:var(--navy-card);backdrop-filter:blur(var(--blur));border:1px solid var(--seasalt-dim);border-radius:var(--radius);padding:18px;margin-bottom:12px;transition:border-color .3s}
+.card:hover{border-color:var(--seasalt-soft)}
+.card-title{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--pool-bright);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-title .icon{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.card-title .hint{font-family:'Inter',sans-serif;font-size:10px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--seasalt-muted);margin-left:auto}
+
+/* FORMS */
+.input,.textarea,select{font-family:'Inter',sans-serif;font-size:13px;color:var(--seasalt);background:var(--seasalt-dim);border:1px solid rgba(247,247,245,0.08);border-radius:var(--radius-sm);padding:9px 12px;width:100%;outline:none;transition:border-color .2s}
+.input:focus,.textarea:focus{border-color:var(--pool)}.input::placeholder,.textarea::placeholder{color:rgba(247,247,245,0.25)}
+.textarea{resize:vertical;min-height:52px;line-height:1.5}
+select{cursor:pointer;-webkit-appearance:none;appearance:none}
+.check{width:20px;height:20px;border-radius:5px;border:2px solid rgba(247,247,245,0.15);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:11px;font-weight:700;color:transparent}
+.check.done{border-color:var(--pool-bright);background:var(--pool-glow);color:var(--pool-bright)}
+.check.violation{border-color:var(--red);background:var(--red-dim);color:var(--red)}
+.priority-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.priority-num{width:24px;height:24px;border-radius:50%;background:var(--navy-surface);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--seasalt-muted);flex-shrink:0;transition:all .3s}
+.priority-num.done{background:var(--pool-bright);color:var(--navy-deep)}
+.done-input{text-decoration:line-through;opacity:.4}
+.add-btn{font-family:'Inter',sans-serif;font-size:12px;color:var(--seasalt-muted);background:transparent;border:1px dashed rgba(247,247,245,0.1);border-radius:var(--radius-sm);padding:8px;width:100%;cursor:pointer;transition:all .2s}
+.add-btn:hover{border-color:var(--pool);color:var(--pool-bright)}
+.rm-btn{background:none;border:none;color:rgba(247,247,245,0.2);cursor:pointer;font-size:16px;padding:0 4px;transition:color .2s}
+.rm-btn:hover{color:var(--red)}
+.counter-btn{width:32px;height:32px;border-radius:var(--radius-sm);border:1px solid var(--seasalt-dim);background:transparent;color:var(--seasalt);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:all .2s}
+.counter-btn:hover{border-color:var(--pool-bright);color:var(--pool-bright)}
+.counter-val{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:800;color:var(--pool-bright);min-width:36px;text-align:center}
+.item-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.item-row .input{flex:1}.item-row .input.short{max-width:110px;flex:none}
+.tier-select{width:52px;flex:none;text-align:center;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px}
+
+/* ENERGY */
+.energy-dot{width:32px;height:32px;border-radius:50%;border:2px solid rgba(247,247,245,0.08);background:transparent;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--seasalt-muted);display:flex;align-items:center;justify-content:center;transition:all .25s}
+.energy-dot.e1{border-color:var(--red);background:var(--red-dim);color:var(--red)}
+.energy-dot.e2{border-color:#B31D1B;background:rgba(179,29,27,0.15);color:#B31D1B}
+.energy-dot.e3{border-color:var(--sunlight);background:var(--sunlight-dim);color:var(--sunlight)}
+.energy-dot.e4{border-color:var(--reseda);background:var(--reseda-dim);color:var(--reseda)}
+.energy-dot.e5{border-color:var(--pool-bright);background:var(--pool-glow);color:var(--pool-bright)}
+
+/* WEEK VIEW */
+.week-strip{display:flex;gap:4px;margin-bottom:16px}
+.week-day{flex:1;padding:8px 2px;border-radius:var(--radius-sm);border:1px solid transparent;text-align:center;cursor:pointer;transition:all .2s;min-width:0}
+.week-day:hover{background:var(--seasalt-dim)}
+.week-day.selected{border-color:var(--pool-bright);background:var(--pool-dim)}
+.wd-name{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:1px;color:var(--seasalt-muted)}
+.wd-num{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:var(--seasalt);margin-top:2px}
+.week-day.is-today .wd-num{color:var(--pool-bright)}
+.wd-dot{width:4px;height:4px;border-radius:50%;background:var(--pool-bright);margin:4px auto 0}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:12px}
+.stat-card{background:var(--navy-card);backdrop-filter:blur(var(--blur));border:1px solid var(--seasalt-dim);border-radius:var(--radius);padding:14px}
+.stat-num{font-family:'Montserrat',sans-serif;font-size:26px;font-weight:800;line-height:1}
+.stat-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--seasalt-muted);margin-top:6px}
+.stat-sub{font-size:11px;color:var(--seasalt-muted);margin-top:2px}
+.tag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;flex-shrink:0}
+.tag-pool{background:var(--pool-dim);color:var(--pool-bright)}
+.tag-green{background:var(--green-dim);color:var(--green)}
+.tag-sun{background:var(--sunlight-dim);color:var(--sunlight)}
+.tag-red{background:var(--red-dim);color:var(--red)}
+.tag-navy{background:var(--seasalt-dim);color:var(--seasalt-muted)}
+.breakdown-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--seasalt-dim);cursor:pointer;transition:opacity .2s}
+.breakdown-row:last-child{border-bottom:none}.breakdown-row.empty{opacity:.3}
+.breakdown-day{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;width:36px;color:var(--seasalt-muted);flex-shrink:0}
+.breakdown-day.is-today{color:var(--pool-bright)}
+.breakdown-priorities{font-size:12px;color:var(--seasalt);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ASANA HEALTH */
+.asana-btn{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px 24px;border:1px solid var(--pool);border-radius:var(--radius);background:transparent;color:var(--pool-bright);cursor:pointer;width:100%;transition:all .3s;margin-bottom:16px}
+.asana-btn:hover{background:var(--pool-dim)}
+.asana-btn:disabled{opacity:.5;cursor:wait}
+.asana-btn.loading{animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+.health-gauge{display:flex;gap:6px;margin-bottom:16px}
+.gauge-segment{height:8px;border-radius:4px;transition:width .5s ease}
+.asana-section{border-left:3px solid var(--seasalt-dim);padding-left:14px;margin-bottom:16px}
+.asana-section.red{border-color:var(--red)}.asana-section.yellow{border-color:var(--sunlight)}.asana-section.green{border-color:var(--green)}
+.asana-task{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--seasalt-dim)}
+.asana-task:last-child{border-bottom:none}
+.asana-task .name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.asana-task .meta{font-size:10px;color:var(--seasalt-muted);font-family:var(--mono)}
+.progress-bar{background:var(--seasalt-dim);border-radius:4px;height:6px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;border-radius:4px;transition:width .5s ease}
+.campaign-countdown{font-family:'Montserrat',sans-serif;font-size:48px;font-weight:800;text-align:center;background:linear-gradient(135deg,var(--pool-bright),var(--sunlight));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.countdown-label{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;text-align:center;color:var(--seasalt-muted);margin-top:4px}
+.report-text{font-size:13px;line-height:1.7;color:var(--seasalt);white-space:pre-wrap}
+.report-text strong{color:var(--pool-bright);font-weight:600}
+
+.footer{text-align:center;padding:24px 0;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(247,247,245,0.15)}
+@media(max-width:480px){.app{padding:10px}.stats-grid{grid-template-columns:repeat(2,1fr)}.item-row .input.short{max-width:80px}}
+</style>
+</head>
+<body>
+<div id="app" class="app"></div>
+<script>
+const SK='ceo-dash-v3',AK='asana-report-cache';
+const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],FDAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const NTD={cssDebug:'CSS / breakpoint debugging',firstDraftCopy:'First-draft copy writing',asanaGrooming:'Asana board grooming',deckFormatting:'Deck formatting tweaks',scheduling:'Meeting scheduling',pixelReview:'Pixel-level design review'};
+const ELBL=['','Running on fumes','Dragging','Steady','Strong','On fire'];
+const PREBAKED_REPORT={"summary":{"total":528,"completed":258,"open":270,"overdue":34,"unassigned":84,"stale":88,"completionPct":49},"campaign1":{"daysLeft":22,"status":"red","openTasks":16,"unassignedTasks":12,"blockers":["8 Campaign 1 Ops tasks unassigned (due Apr 30)","4 Campaign 1 Fulfillment tasks unassigned","No content calendar or social assets scheduled","3PL and shipping workflow not started","March payroll tasks still open"]},"sections":[{"name":"⚫ Roadmap","open":8,"done":0,"health":"yellow"},{"name":"⛵ All Hands & Leadership","open":5,"done":0,"health":"yellow"},{"name":"🟡 Company Operations","open":53,"done":8,"health":"red"},{"name":"🔴 Go-To-Market","open":80,"done":12,"health":"red"},{"name":"🔵 Product & Manufacturing","open":28,"done":0,"health":"red"},{"name":"🟢 Strategic Initiatives","open":0,"done":2,"health":"green"},{"name":"🧹 Housekeeping","open":22,"done":8,"health":"red"},{"name":"🥪 Sandbox","open":12,"done":18,"health":"green"}],"overdueCritical":[{"name":"KP Answer This: Why $350/$85?","due":"2026-01-09","assignee":"Kenny","daysOverdue":89},{"name":"KP create full physical SOKY+ mock up","due":"2026-01-09","assignee":"Kenny","daysOverdue":89},{"name":"LEGALZOOM: Licenses and Permits for LLC/INC","due":"2026-01-13","assignee":"Kenny","daysOverdue":85},{"name":"Seller's Permit (CA)","due":"2026-01-14","assignee":"Kenny","daysOverdue":84},{"name":"File Licenses, Certs, Permits for LLC","due":"2026-01-14","assignee":"Kenny","daysOverdue":84},{"name":"Pre-Launch (milestone)","due":"2026-02-11","assignee":"Company Timeline","daysOverdue":56},{"name":"Batch IP Application 2025","due":"2026-02-11","assignee":"Kenny","daysOverdue":56},{"name":"250 Units Sold & Fulfilled (Feb)","due":"2026-02-28","assignee":"Company Timeline","daysOverdue":39}],"unassignedUrgent":[{"name":"Final sign-off on Drop #1 offer","due":"2026-04-30","section":"🟡 Ops"},{"name":"Green-light landing-page copy, legal disclaimers","due":"2026-04-30","section":"🟡 Ops"},{"name":"Daily metric dashboard live before cart opens","due":"2026-04-30","section":"🟡 Ops"},{"name":"Investor update: announce presale date","due":"2026-04-30","section":"🟡 Ops"},{"name":"Bind product-liability & shipping insurance","due":"2026-04-30","section":"🟡 Ops"},{"name":"Finalise 3PL SLA; reserve inbound dock slot","due":"2026-04-30","section":"🔴 GTM"},{"name":"Map receiving > pick/pack > tracking workflow","due":"2026-04-30","section":"🔴 GTM"},{"name":"Draft RMA / returns SOP","due":"2026-04-30","section":"🔴 GTM"}],"staleTasks":[{"name":"Trademark: SOKY","lastModified":"2026-01-06","assignee":"Kenny"},{"name":"Trademark: NM Waterdrop","lastModified":"2026-01-06","assignee":"Kenny"},{"name":"Design Patent – SOKY Glove (Model E)","lastModified":"2026-01-06","assignee":"Kenny"},{"name":"Design Patent – SOKY Sock/Bootie","lastModified":"2026-01-06","assignee":"Kenny"},{"name":"500 QC Fittings","lastModified":"2026-01-06","assignee":"Unassigned"},{"name":"500 Silicone Hand SOKY V3","lastModified":"2026-01-06","assignee":"Unassigned"},{"name":"CRM Follow Ups","lastModified":"2026-01-09","assignee":"Unassigned"},{"name":"3PL Quote and Strategy","lastModified":"2026-01-06","assignee":"Unassigned"}],"teamLoad":[{"name":"Kenny","open":38,"overdue":14,"completed":12},{"name":"Kenichiro Nishii","open":5,"overdue":1,"completed":4},{"name":"Chi Le","open":0,"overdue":0,"completed":5},{"name":"Jennifer Dau","open":0,"overdue":0,"completed":3},{"name":"Hameed Kalvathi","open":0,"overdue":0,"completed":2},{"name":"Unassigned","open":84,"overdue":12,"completed":4},{"name":"Company Timeline","open":14,"overdue":4,"completed":0}],"recommendations":{"immediate":["Assign all 12 Campaign 1 subtasks — these are 22 days from launch with no owners","Close or reschedule 8 tasks from January (89+ days overdue) — decide: done, defer, or delete","Verify March payroll (HK, YTM, JD, CL) — close if paid, escalate if not","Kenny has 38 open tasks — delegate everything not in the 4% (investor calls, system design, key relationships, product vision)"],"thisWeek":["Deduplicate Product & Manufacturing section (3x BML_#005, 2x QC Fittings, 2x Cap Systems)","Assign GTM content tasks to Jenn Dau (6 content backlog items unowned)","Assign fulfillment tasks to Kenichiro (3PL, ShipStation, RMA)","Restart weekly team sync cadence — Housekeeping section frozen since January","Set due dates on 35+ open tasks with no dates"],"thisSprint":["Reclassify aspirational milestones (250 Units Sold & Fulfilled) as OKRs, not tasks","Populate Strategic Initiatives section with investor outreach + clinic partner tasks","Create Campaign 2 subtask structure (June target)","Archive or move completed Sandbox items (co-founder syncs, jam sessions from Dec 2025)"]},"healthScore":28};
+let S={all:{},sel:new Date(),view:'daily',saving:false,loaded:false,asana:{loading:false,report:PREBAKED_REPORT,lastFetch:'2026-04-08T19:00:00Z'}};
+
+function dk(d){d=d||new Date();return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function td(){return dk(new Date())}
+function isT(d){return dk(d)===td()}
+function wkDates(r){const d=new Date(r),day=d.getDay(),m=new Date(d);m.setDate(d.getDate()-((day+6)%7));const ds=[];for(let i=0;i<7;i++){const t=new Date(m);t.setDate(m.getDate()+i);ds.push(t)}return ds}
+function blank(){return{priorities:['','',''],prioritiesDone:[false,false,false],founderFlow:false,founderFlowNote:'',delegated:[],notToDo:{cssDebug:false,firstDraftCopy:false,asanaGrooming:false,deckFormatting:false,scheduling:false,pixelReview:false},decisions:[],blockers:'',winOfDay:'',energyLevel:3,investorTouchpoints:0}}
+function gd(k){const s=S.all[k],b=blank();if(!s)return b;return{...b,...s,notToDo:{...b.notToDo,...(s.notToDo||{})},priorities:s.priorities||b.priorities,prioritiesDone:s.prioritiesDone||b.prioritiesDone}}
+function sd(k,d){S.all[k]=d;persist();render()}
+function ud(p){const k=dk(S.sel);sd(k,{...gd(k),...p})}
+async function persist(){S.saving=true;render();try{await window.storage.set(SK,JSON.stringify(S.all))}catch(e){}setTimeout(()=>{S.saving=false;render()},350)}
+async function load(){try{const r=await window.storage.get(SK);if(r&&r.value)S.all=JSON.parse(r.value)}catch(e){}try{const r=await window.storage.get(AK);if(r&&r.value){const cached=JSON.parse(r.value);if(cached.report)S.asana=cached}}catch(e){}S.loaded=true;render()}
+function navD(o){const d=new Date(S.sel);d.setDate(d.getDate()+o);S.sel=d;render()}
+function navW(o){const d=new Date(S.sel);d.setDate(d.getDate()+o*7);S.sel=d;render()}
+function goTd(){S.sel=new Date();render()}
+function setV(v){S.view=v;render()}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+// Priority/delegation/decision helpers
+function setPri(i,v){const d=gd(dk(S.sel));const p=[...d.priorities];p[i]=v;ud({priorities:p})}
+function togPri(i){const d=gd(dk(S.sel));const p=[...d.prioritiesDone];p[i]=!p[i];ud({prioritiesDone:p})}
+function togNTD(k){const d=gd(dk(S.sel));ud({notToDo:{...d.notToDo,[k]:!d.notToDo[k]}})}
+function addDel(){const d=gd(dk(S.sel));ud({delegated:[...d.delegated,{task:'',to:'',done:false}]})}
+function updDel(i,f,v){const d=gd(dk(S.sel));const a=[...d.delegated];a[i]={...a[i],[f]:v};ud({delegated:a})}
+function togDel(i){const d=gd(dk(S.sel));const a=[...d.delegated];a[i]={...a[i],done:!a[i].done};ud({delegated:a})}
+function rmDel(i){const d=gd(dk(S.sel));ud({delegated:d.delegated.filter((_,j)=>j!==i)})}
+function addDec(){const d=gd(dk(S.sel));ud({decisions:[...d.decisions,{text:'',tier:'1'}]})}
+function updDec(i,f,v){const d=gd(dk(S.sel));const a=[...d.decisions];a[i]={...a[i],[f]:v};ud({decisions:a})}
+function rmDec(i){const d=gd(dk(S.sel));ud({decisions:d.decisions.filter((_,j)=>j!==i)})}
+
+// ——— ASANA HEALTH — reads from persistent storage, populated by Claude in chat ———
+async function requestRefresh(){
+  // Tell user to ask Claude
+  S.asana.showRefreshMsg=true;render();
+  window.sendPrompt&&window.sendPrompt('Refresh my Asana health dashboard — pull the latest board data and push it to my CEO Command Center.');
+}
+
+// ——— RENDER ———
+function render(){
+  const app=document.getElementById('app');
+  if(!S.loaded){app.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:16px"><div style="width:40px;height:40px;border:3px solid var(--seasalt-dim);border-top-color:var(--pool-bright);border-radius:50%;animation:spin .8s linear infinite"></div><span style="font-family:'Montserrat';font-size:11px;letter-spacing:3px;color:var(--seasalt-muted);text-transform:uppercase">Loading</span></div><style>@keyframes spin{to{transform:rotate(360deg)}}</style>`;return}
+  const sel=S.sel,key=dk(sel),d=gd(key),isTd=isT(sel);
+  let h='';
+
+  // TOPBAR
+  h+=`<div class="topbar"><div><div class="brand"><span>NM</span> THERA · COMMAND CENTER</div><div style="margin-top:4px"><span class="save-dot ${S.saving?'saving':'saved'}"></span><span style="font-size:9px;color:var(--seasalt-muted);margin-left:4px">${S.saving?'saving…':'synced'}</span></div></div></div>`;
+
+  // TAB BAR
+  h+=`<div class="tab-bar">
+    <button class="tab-btn ${S.view==='daily'?'active':''}" onclick="setV('daily')">Day</button>
+    <button class="tab-btn ${S.view==='weekly'?'active':''}" onclick="setV('weekly')">Week</button>
+    <button class="tab-btn ${S.view==='asana'?'active':''}" onclick="setV('asana')">Asana Health</button>
+  </div>`;
+
+  if(S.view==='asana') h+=renderAsana();
+  else if(S.view==='weekly') h+=renderWeekly();
+  else h+=renderDaily(sel,key,d,isTd);
+
+  h+=`<div class="footer">4% drives 64% · system designer not operator</div>`;
+  app.innerHTML=h;
+}
+
+function renderDaily(sel,key,d,isTd){
+  let h='';
+  // Campaign countdown
+  const c1=new Date('2026-04-30');const diff=Math.ceil((c1-new Date())/(1000*60*60*24));
+  h+=`<div class="card" style="text-align:center;padding:20px"><div class="campaign-countdown">${diff}</div><div class="countdown-label">Days to Campaign 1 Launch</div></div>`;
+
+  // Date nav
+  h+=`<div class="date-nav"><button class="nav-arrow" onclick="navD(-1)">‹</button><div><div class="date-label">${FDAYS[sel.getDay()]}, ${MONTHS[sel.getMonth()]} ${sel.getDate()}${isTd?'<span class="today-tag">today</span>':''}</div><div class="date-sub">${sel.getFullYear()} · Campaign 1</div></div><button class="nav-arrow" onclick="navD(1)">›</button>${!isTd?'<button class="today-btn" onclick="goTd()">Today</button>':''}</div>`;
+
+  // Priorities
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--pool-dim);color:var(--pool-bright)">◆</div>Top 3 Priorities<span class="hint">Set during Week Close</span></div>`;
+  ['Highest-leverage task','Second priority','Third priority'].forEach((ph,i)=>{
+    const dn=d.prioritiesDone[i];
+    h+=`<div class="priority-row"><div class="priority-num ${dn?'done':''}">${i+1}</div><div class="check ${dn?'done':''}" onclick="togPri(${i})">${dn?'✓':''}</div><input class="input ${dn?'done-input':''}" placeholder="${ph}" value="${esc(d.priorities[i])}" onchange="setPri(${i},this.value)"></div>`;
+  });
+  h+=`</div>`;
+
+  // Founder Flow
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--sunlight-dim);color:var(--sunlight)">◈</div>Founder Flow<span class="hint">4hr deep work</span></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div class="check ${d.founderFlow?'done':''}" onclick="ud({founderFlow:${!d.founderFlow}})">${d.founderFlow?'✓':''}</div><span style="font-size:13px;color:${d.founderFlow?'var(--pool-bright)':'var(--seasalt-muted)'}">${d.founderFlow?'Protected ✓':'Did you protect your 4-hour block?'}</span></div><input class="input" placeholder="What did you focus on?" value="${esc(d.founderFlowNote)}" onchange="ud({founderFlowNote:this.value})"></div>`;
+
+  // Not-To-Do
+  const vc=Object.values(d.notToDo).filter(Boolean).length;
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--red-dim);color:var(--red)">✕</div>Not-To-Do Violations<span class="hint">${vc>0?vc+' violation'+(vc>1?'s':''):'Clean'}</span></div>`;
+  for(const[k,l]of Object.entries(NTD)){const a=d.notToDo[k];h+=`<div style="display:flex;align-items:center;gap:10px;padding:5px 0"><div class="check ${a?'violation':''}" onclick="togNTD('${k}')">${a?'✕':''}</div><span style="font-size:12px;color:${a?'var(--red)':'var(--seasalt-muted)'}">${l}</span></div>`}
+  h+=`</div>`;
+
+  // Delegated
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--reseda-dim);color:var(--reseda)">→</div>Delegated Today</div>`;
+  d.delegated.forEach((it,i)=>{h+=`<div class="item-row"><div class="check ${it.done?'done':''}" onclick="togDel(${i})">${it.done?'✓':''}</div><input class="input" placeholder="Task" value="${esc(it.task)}" onchange="updDel(${i},'task',this.value)"><input class="input short" placeholder="To whom" value="${esc(it.to)}" onchange="updDel(${i},'to',this.value)"><button class="rm-btn" onclick="rmDel(${i})">×</button></div>`});
+  h+=`<button class="add-btn" onclick="addDel()">+ Add delegation</button></div>`;
+
+  // Decisions
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--pool-dim);color:var(--pool-bright)">⬡</div>Decisions Made<span class="hint">T1=Kenny · T2=Team · T3=Auto</span></div>`;
+  d.decisions.forEach((dc,i)=>{h+=`<div class="item-row"><select class="input tier-select" onchange="updDec(${i},'tier',this.value)"><option value="1"${dc.tier==='1'?' selected':''}>T1</option><option value="2"${dc.tier==='2'?' selected':''}>T2</option><option value="3"${dc.tier==='3'?' selected':''}>T3</option></select><input class="input" placeholder="What was decided" value="${esc(dc.text)}" onchange="updDec(${i},'text',this.value)"><button class="rm-btn" onclick="rmDec(${i})">×</button></div>`});
+  h+=`<button class="add-btn" onclick="addDec()">+ Add decision</button></div>`;
+
+  // Investor
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--sunlight-dim);color:var(--sunlight)">$</div>Investor Touchpoints</div><div style="display:flex;align-items:center;gap:14px"><button class="counter-btn" onclick="ud({investorTouchpoints:Math.max(0,${d.investorTouchpoints}-1)})">−</button><span class="counter-val">${d.investorTouchpoints}</span><button class="counter-btn" onclick="ud({investorTouchpoints:${d.investorTouchpoints}+1})">+</button><span style="font-size:11px;color:var(--seasalt-muted)">calls · emails · intros</span></div></div>`;
+
+  // Blockers + Win + Energy
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--red-dim);color:var(--red)">⚠</div>Blockers</div><textarea class="textarea" placeholder="What's stuck?" onchange="ud({blockers:this.value})">${esc(d.blockers)}</textarea></div>`;
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--sunlight-dim);color:var(--sunlight)">⚡</div>Win of the Day</div><input class="input" placeholder="One thing that moved the needle" value="${esc(d.winOfDay)}" onchange="ud({winOfDay:this.value})"></div>`;
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--pool-dim);color:var(--pool-bright)">●</div>Energy Level</div><div style="display:flex;align-items:center;gap:10px">`;
+  for(let i=1;i<=5;i++){const a=d.energyLevel>=i;h+=`<button class="energy-dot ${a?'e'+i:''}" onclick="ud({energyLevel:${i}})">${i}</button>`}
+  h+=`<span style="font-size:12px;color:var(--seasalt-muted);margin-left:8px">${ELBL[d.energyLevel]}</span></div></div>`;
+  return h;
+}
+
+function renderWeekly(){
+  const wd=wkDates(S.sel),sk=dk(S.sel),tk=td();
+  const wda=wd.map(d=>({date:d,key:dk(d),data:gd(dk(d))}));
+  const ps=wda.reduce((s,d)=>s+d.data.priorities.filter(p=>p.trim()).length,0);
+  const pd=wda.reduce((s,d)=>s+d.data.prioritiesDone.filter((v,i)=>v&&d.data.priorities[i]?.trim()).length,0);
+  const ff=wda.filter(d=>d.data.founderFlow).length;
+  const vio=wda.reduce((s,d)=>s+Object.values(d.data.notToDo).filter(Boolean).length,0);
+  const dec=wda.reduce((s,d)=>s+d.data.decisions.length,0);
+  const del=wda.reduce((s,d)=>s+d.data.delegated.length,0);
+  const deld=wda.reduce((s,d)=>s+d.data.delegated.filter(t=>t.done).length,0);
+  const ae=(wda.reduce((s,d)=>s+d.data.energyLevel,0)/7).toFixed(1);
+  const inv=wda.reduce((s,d)=>s+(d.data.investorTouchpoints||0),0);
+  const cr=ps?Math.round(pd/ps*100):0;
+  const wins=wda.map(d=>d.data.winOfDay).filter(w=>w.trim());
+  let h='';
+
+  h+=`<div class="date-nav"><button class="nav-arrow" onclick="navW(-1)">‹</button><div><div class="date-label">${MONTHS[wd[0].getMonth()]} ${wd[0].getDate()} — ${MONTHS[wd[6].getMonth()]} ${wd[6].getDate()}</div><div class="date-sub">${wd[0].getFullYear()} · Week Review</div></div><button class="nav-arrow" onclick="navW(1)">›</button></div>`;
+  h+=`<div class="week-strip">`;
+  wd.forEach(d=>{const k=dk(d),has=S.all[k]&&(S.all[k].priorities?.some(p=>p.trim())||S.all[k].founderFlow);h+=`<div class="week-day ${k===sk?'selected':''} ${k===tk?'is-today':''}" onclick="S.sel=new Date('${d.toISOString()}');setV('daily')"><div class="wd-name">${DAYS[d.getDay()]}</div><div class="wd-num">${d.getDate()}</div>${has?'<div class="wd-dot"></div>':''}</div>`});
+  h+=`</div>`;
+
+  h+=`<div class="stats-grid">
+    <div class="stat-card"><div class="stat-num" style="color:${cr>=80?'var(--pool-bright)':cr>=50?'var(--sunlight)':'var(--red)'}">${cr}%</div><div class="stat-label">Priorities hit</div><div class="stat-sub">${pd}/${ps}</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:${ff>=4?'var(--pool-bright)':'var(--sunlight)'}">${ff}/5</div><div class="stat-label">Founder Flow</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:${vio>3?'var(--red)':vio>0?'var(--sunlight)':'var(--pool-bright)'}">${vio}</div><div class="stat-label">Violations</div></div>
+    <div class="stat-card"><div class="stat-num">${dec}</div><div class="stat-label">Decisions</div></div>
+    <div class="stat-card"><div class="stat-num">${deld}/${del}</div><div class="stat-label">Delegated</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--sunlight)">${inv}</div><div class="stat-label">Investor</div></div>
+    <div class="stat-card"><div class="stat-num">${ae}</div><div class="stat-label">Avg Energy</div></div>
+  </div>`;
+
+  if(wins.length>0){h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--sunlight-dim);color:var(--sunlight)">⚡</div>Wins This Week</div>`;wins.forEach(w=>{h+=`<div style="padding:8px 0;border-bottom:1px solid var(--seasalt-dim);font-size:13px">${esc(w)}</div>`});h+=`</div>`}
+
+  h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--pool-dim);color:var(--pool-bright)">≡</div>Daily Breakdown</div>`;
+  wda.forEach(({date,key:k,data:dd})=>{const has=dd.priorities.some(p=>p.trim()),dn=dd.prioritiesDone.filter((v,i)=>v&&dd.priorities[i]?.trim()).length,st=dd.priorities.filter(p=>p.trim()).length,tags=[];
+    if(dd.founderFlow)tags.push('<span class="tag tag-pool">FF</span>');if(st>0)tags.push(`<span class="tag ${dn===st?'tag-green':'tag-sun'}">${dn}/${st}</span>`);if(Object.values(dd.notToDo).some(Boolean))tags.push('<span class="tag tag-red">!</span>');
+    h+=`<div class="breakdown-row ${has?'':'empty'}" onclick="S.sel=new Date('${date.toISOString()}');setV('daily')"><div class="breakdown-day ${k===tk?'is-today':''}">${DAYS[date.getDay()]}</div><div class="breakdown-priorities">${has?esc(dd.priorities.filter(p=>p.trim()).join(' · ')):'—'}</div><div style="display:flex;gap:4px">${tags.join('')}</div></div>`});
+  h+=`</div>`;
+  h+=`<div style="text-align:center;margin-top:16px"><button class="today-btn" style="padding:10px 24px;font-size:11px" onclick="goTd();setV('daily')">Go to Today</button></div>`;
+  return h;
+}
+
+function renderAsana(){
+  const rpt=S.asana.report;
+  let h='';
+
+  // Campaign 1 countdown
+  const c1=new Date('2026-04-30');const diff=Math.ceil((c1-new Date())/(1000*60*60*24));
+  h+=`<div class="card" style="text-align:center;padding:20px"><div class="campaign-countdown">${diff}</div><div class="countdown-label">Days to Campaign 1 · April 30, 2026</div></div>`;
+
+  // Fetch button
+  h+=`<button class="asana-btn" onclick="requestRefresh()">Refresh — Ask Claude to Pull Latest Data</button>`;
+  if(S.asana.showRefreshMsg){h+=`<div class="card" style="text-align:center;border-color:var(--sunlight)"><div style="font-size:13px;color:var(--sunlight);padding:8px">Message sent to Claude. The dashboard will update after Claude pushes fresh data.</div></div>`}
+  if(S.asana.lastFetch){h+=`<div style="text-align:center;font-size:10px;color:var(--seasalt-muted);margin:-4px 0 16px;font-family:var(--mono)">Last scan: ${new Date(S.asana.lastFetch).toLocaleString()}</div>`}
+
+  if(!rpt){h+=`<div class="card" style="text-align:center"><div style="font-size:13px;color:var(--seasalt-muted);padding:40px 0">No scan yet. Hit the button above to pull live data from your Asana board via Claude + MCP.</div></div>`;return h}
+  if(rpt.error){h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--red-dim);color:var(--red)">⚠</div>Error</div><div style="font-size:13px;color:var(--red)">${esc(rpt.error)}</div></div>`;return h}
+  if(rpt.rawText&&!rpt.summary?.total){h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--sunlight-dim);color:var(--sunlight)">📋</div>Raw Analysis</div><div class="report-text">${esc(rpt.rawText)}</div></div>`;return h}
+
+  const sm=rpt.summary||{};
+  const hs=rpt.healthScore||0;
+  const hsColor=hs>=70?'var(--pool-bright)':hs>=40?'var(--sunlight)':'var(--red)';
+
+  // Health Score
+  h+=`<div class="card" style="text-align:center"><div style="font-family:'Montserrat',sans-serif;font-size:64px;font-weight:800;color:${hsColor};line-height:1">${hs}</div><div class="countdown-label">Board Health Score</div><div class="health-gauge" style="margin-top:12px"><div class="gauge-segment" style="width:${hs}%;background:${hsColor}"></div><div class="gauge-segment" style="width:${100-hs}%;background:var(--seasalt-dim)"></div></div></div>`;
+
+  // Summary stats
+  h+=`<div class="stats-grid">
+    <div class="stat-card"><div class="stat-num">${sm.total||0}</div><div class="stat-label">Total Tasks</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--pool-bright)">${sm.completed||0}</div><div class="stat-label">Completed</div><div class="progress-bar"><div class="progress-fill" style="width:${sm.completionPct||0}%;background:var(--pool-bright)"></div></div></div>
+    <div class="stat-card"><div class="stat-num">${sm.open||0}</div><div class="stat-label">Open</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--red)">${sm.overdue||0}</div><div class="stat-label">Overdue</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--sunlight)">${sm.unassigned||0}</div><div class="stat-label">Unassigned</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--seasalt-muted)">${sm.stale||0}</div><div class="stat-label">Stale</div></div>
+  </div>`;
+
+  // Campaign 1 status
+  if(rpt.campaign1){const c=rpt.campaign1;
+    h+=`<div class="card"><div class="card-title"><div class="icon" style="background:${c.status==='red'?'var(--red-dim)':c.status==='yellow'?'var(--sunlight-dim)':'var(--green-dim)'};color:${c.status==='red'?'var(--red)':c.status==='yellow'?'var(--sunlight)':'var(--green)'}">●</div>Campaign 1 Readiness<span class="hint">${c.daysLeft} days left</span></div>`;
+    h+=`<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px"><div><span style="font-size:24px;font-weight:800;font-family:'Montserrat'">${c.openTasks||0}</span><span style="font-size:11px;color:var(--seasalt-muted);margin-left:4px">open</span></div><div><span style="font-size:24px;font-weight:800;font-family:'Montserrat';color:var(--sunlight)">${c.unassignedTasks||0}</span><span style="font-size:11px;color:var(--seasalt-muted);margin-left:4px">unassigned</span></div></div>`;
+    if(c.blockers?.length){h+=`<div style="margin-top:8px">`;c.blockers.forEach(b=>{h+=`<div style="display:flex;align-items:center;gap:6px;padding:4px 0;font-size:12px"><span class="tag tag-red">BLOCK</span>${esc(b)}</div>`});h+=`</div>`}
+    h+=`</div>`;
+  }
+
+  // Section health
+  if(rpt.sections?.length){h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--pool-dim);color:var(--pool-bright)">≡</div>Section Health</div>`;
+    rpt.sections.forEach(s=>{const pct=s.open+s.done>0?Math.round(s.done/(s.open+s.done)*100):0;
+      h+=`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--seasalt-dim)"><span class="tag tag-${s.health==='red'?'red':s.health==='yellow'?'sun':'green'}" style="width:40px;text-align:center">${s.health==='red'?'RED':s.health==='yellow'?'YEL':'OK'}</span><div style="flex:1;font-size:12px">${esc(s.name)}</div><div style="font-size:11px;color:var(--seasalt-muted);font-family:var(--mono)">${s.done}/${s.open+s.done}</div></div>`});
+    h+=`</div>`}
+
+  // Overdue critical
+  if(rpt.overdueCritical?.length){h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--red-dim);color:var(--red)">⚠</div>Overdue — Critical</div>`;
+    rpt.overdueCritical.forEach(t=>{h+=`<div class="asana-task"><span class="tag tag-red">${t.daysOverdue}d</span><div class="name">${esc(t.name)}</div><div class="meta">${esc(t.assignee||'Unassigned')}</div></div>`});
+    h+=`</div>`}
+
+  // Unassigned urgent
+  if(rpt.unassignedUrgent?.length){h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--sunlight-dim);color:var(--sunlight)">?</div>Unassigned — Urgent</div>`;
+    rpt.unassignedUrgent.forEach(t=>{h+=`<div class="asana-task"><span class="tag tag-sun">NONE</span><div class="name">${esc(t.name)}</div><div class="meta">${t.due||'no date'}</div></div>`});
+    h+=`</div>`}
+
+  // Team workload
+  if(rpt.teamLoad?.length){h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--reseda-dim);color:var(--reseda)">◉</div>Team Workload</div>`;
+    rpt.teamLoad.forEach(t=>{const total=t.open+t.completed;const pct=total?Math.round(t.completed/total*100):0;
+      h+=`<div style="padding:8px 0;border-bottom:1px solid var(--seasalt-dim)"><div style="display:flex;align-items:center;gap:10px;margin-bottom:4px"><span style="font-size:13px;font-weight:600;flex:1">${esc(t.name)}</span><span style="font-size:11px;color:var(--seasalt-muted);font-family:var(--mono)">${t.open} open${t.overdue>0?' · <span style="color:var(--red)">'+t.overdue+' overdue</span>':''}</span></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:var(--pool-bright)"></div></div></div>`});
+    h+=`</div>`}
+
+  // Recommendations
+  if(rpt.recommendations){const r=rpt.recommendations;
+    h+=`<div class="card"><div class="card-title"><div class="icon" style="background:var(--pool-dim);color:var(--pool-bright)">→</div>Recommendations</div>`;
+    if(r.immediate?.length){h+=`<div class="asana-section red" style="margin-bottom:12px"><div style="font-family:'Montserrat';font-size:10px;font-weight:700;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px">Immediate</div>`;r.immediate.forEach(i=>{h+=`<div style="font-size:12px;padding:4px 0;color:var(--seasalt)">${esc(i)}</div>`});h+=`</div>`}
+    if(r.thisWeek?.length){h+=`<div class="asana-section yellow" style="margin-bottom:12px"><div style="font-family:'Montserrat';font-size:10px;font-weight:700;letter-spacing:2px;color:var(--sunlight);text-transform:uppercase;margin-bottom:8px">This Week</div>`;r.thisWeek.forEach(i=>{h+=`<div style="font-size:12px;padding:4px 0;color:var(--seasalt)">${esc(i)}</div>`});h+=`</div>`}
+    if(r.thisSprint?.length){h+=`<div class="asana-section green"><div style="font-family:'Montserrat';font-size:10px;font-weight:700;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:8px">This Sprint</div>`;r.thisSprint.forEach(i=>{h+=`<div style="font-size:12px;padding:4px 0;color:var(--seasalt)">${esc(i)}</div>`});h+=`</div>`}
+    h+=`</div>`}
+
+  return h;
+}
+
+render();load();
+</script>
+</body>
+</html>

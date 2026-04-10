@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NM Thera — Financial Projection Spring 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Mulish:wght@400;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --navy:#31598A;--ink:#111827;--paper:#F7F7F5;--green:#688B58;--umber:#8A6A4D;
+  --sunlight:#FFD166;--pool:#006D77;--heat:#B31D1B;--muted:#667085;
+  --line:rgba(17,24,39,0.09);--surface:rgba(255,255,255,0.88);--surface-strong:rgba(255,255,255,0.94);
+  --r-xl:28px;--r-lg:20px;--r-md:14px;--r-sm:8px;
+  --shadow:0 20px 56px rgba(17,24,39,0.10);--shadow-sm:0 3px 14px rgba(17,24,39,0.06);
+  --head:'Montserrat',system-ui,sans-serif;--serif:'DM Serif Display',Georgia,serif;
+  --sub:'Mulish',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:linear-gradient(180deg,#fcfcfb 0%,var(--paper) 38%,#f3f3ef 100%);color:var(--ink);font-size:14px;line-height:1.72;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.3;background-image:linear-gradient(rgba(17,24,39,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(17,24,39,0.015) 1px,transparent 1px);background-size:26px 26px;-webkit-mask-image:radial-gradient(circle at center,rgba(0,0,0,0.7),transparent 85%)}
+
+/* ═══ HEADER ═══ */
+.header{background:linear-gradient(135deg,#0c1520 0%,#1a2f4a 50%,#0f1f33 100%);padding:3rem 1.5rem 1.5rem;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,109,119,0.15),transparent 60%);pointer-events:none}
+.header-inner{max-width:1160px;margin:0 auto;position:relative;z-index:1}
+.header-brand{font-family:var(--head);font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.5rem}
+.header-title{font-family:var(--serif);font-size:clamp(28px,4vw,42px);color:white;line-height:1.15;margin-bottom:0.5rem}
+.header-sub{font-family:var(--body);font-size:clamp(13px,1.5vw,15px);color:rgba(255,255,255,0.55);max-width:600px;line-height:1.6}
+.header-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem}
+.header-badge{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.04)}
+.header-badge.active{background:rgba(0,109,119,0.25);border-color:rgba(0,109,119,0.4);color:rgba(255,255,255,0.85)}
+
+/* ═══ TAB NAV ═══ */
+.tab-nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,0.82);border-bottom:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.tab-nav-inner{max-width:1160px;margin:0 auto;display:flex;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{font-family:var(--sub);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:14px 20px;white-space:nowrap;border:none;background:transparent;color:var(--muted);cursor:pointer;position:relative;transition:color 0.2s}
+.tab-btn:hover{color:var(--ink)}
+.tab-btn.active{color:var(--navy)}
+.tab-btn.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2.5px;background:var(--navy);border-radius:2px 2px 0 0}
+
+/* ═══ CONTENT ═══ */
+.tab-panel{display:none;max-width:1160px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.tab-panel.active{display:block}
+
+/* ═══ CARDS & METRICS ═══ */
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:2rem}
+.metric-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1.2rem;position:relative;overflow:hidden}
+.metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-md) var(--r-md) 0 0}
+.metric-card.navy::before{background:var(--navy)}.metric-card.pool::before{background:var(--pool)}
+.metric-card.green::before{background:var(--green)}.metric-card.sun::before{background:var(--sunlight)}
+.metric-card.heat::before{background:var(--heat)}
+.metric-label{font-family:var(--sub);font-size:9.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+.metric-val{font-family:var(--serif);font-size:clamp(24px,3vw,32px);color:var(--ink);line-height:1.1}
+.metric-note{font-family:var(--body);font-size:11px;color:var(--muted);margin-top:0.3rem}
+.metric-val.positive{color:var(--green)}.metric-val.negative{color:var(--heat)}.metric-val.accent{color:var(--pool)}
+
+/* ═══ CHART CONTAINERS ═══ */
+.chart-panel{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)}
+.chart-title{font-family:var(--head);font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--navy);margin-bottom:0.3rem}
+.chart-sub{font-family:var(--body);font-size:12px;color:var(--muted);margin-bottom:1rem}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.chart-wrap{position:relative;width:100%;aspect-ratio:16/9}
+
+/* ═══ TABLES ═══ */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r-md);border:1px solid var(--line);margin-bottom:1.5rem}
+.fin-tbl{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--sub)}
+.fin-tbl th{background:var(--navy);color:white;font-weight:700;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:10px 12px;text-align:right;white-space:nowrap;position:sticky;top:0}
+.fin-tbl th:first-child{text-align:left;min-width:180px}
+.fin-tbl td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.fin-tbl td:first-child{text-align:left;font-weight:600;color:var(--ink)}
+.fin-tbl tr.section-row td{background:rgba(49,89,138,0.06);font-weight:700;color:var(--navy);border-top:2px solid var(--navy);border-bottom:2px solid rgba(49,89,138,0.15)}
+.fin-tbl tr.total-row td{background:rgba(49,89,138,0.1);font-weight:800;color:var(--navy);border-top:2px solid var(--navy)}
+.fin-tbl tr.subtotal-row td{font-weight:700;border-top:1px solid var(--line)}
+.fin-tbl .negative{color:var(--heat)}.fin-tbl .positive{color:var(--green)}
+.fin-tbl .danger{background:rgba(179,29,27,0.06)}.fin-tbl .safe{background:rgba(104,139,88,0.06)}
+
+/* ═══ TIMELINE ═══ */
+.timeline{position:relative;padding-left:28px;margin:1.5rem 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(var(--navy),var(--pool),var(--green))}
+.tl-item{position:relative;margin-bottom:1.5rem;padding-left:20px}
+.tl-item::before{content:'';position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid var(--navy);background:white}
+.tl-item.active::before{background:var(--pool);border-color:var(--pool)}
+.tl-item.future::before{background:var(--paper);border-color:var(--muted);border-style:dashed}
+.tl-date{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--pool)}
+.tl-title{font-family:var(--head);font-size:15px;font-weight:700;color:var(--ink);margin:0.15rem 0}
+.tl-desc{font-family:var(--body);font-size:13px;color:var(--muted);line-height:1.6}
+.tl-val{font-family:var(--serif);font-size:20px;color:var(--navy);margin-top:0.2rem}
+
+/* ═══ CALLOUTS ═══ */
+.callout{border-radius:var(--r-md);padding:1rem 1.2rem;margin:1.5rem 0;font-size:13px;line-height:1.6}
+.callout.warn{background:rgba(255,209,102,0.12);border-left:3px solid var(--sunlight)}
+.callout.danger{background:rgba(179,29,27,0.06);border-left:3px solid var(--heat)}
+.callout.info{background:rgba(0,109,119,0.06);border-left:3px solid var(--pool)}
+.callout.success{background:rgba(104,139,88,0.08);border-left:3px solid var(--green)}
+.callout strong{color:var(--ink)}
+.callout-lbl{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+
+/* ═══ SECTION HEADERS ═══ */
+.sec-head{margin-bottom:1.5rem}
+.sec-id{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--pool)}
+.sec-title{font-family:var(--head);font-size:clamp(20px,2.5vw,28px);font-weight:800;color:var(--ink);line-height:1.2;margin-top:0.2rem}
+.sec-sub{font-family:var(--body);font-size:14px;color:var(--muted);margin-top:0.3rem}
+
+/* ═══ WATERFALL ═══ */
+.wf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px;margin:1.5rem 0}
+.wf-bar{text-align:center}
+.wf-bar-inner{margin:0 auto;width:60%;border-radius:4px 4px 0 0;min-height:4px;transition:height 0.6s ease}
+.wf-bar-label{font-family:var(--sub);font-size:9px;font-weight:700;color:var(--muted);margin-top:4px;letter-spacing:0.06em}
+.wf-bar-val{font-family:var(--sub);font-size:10px;font-weight:700;margin-bottom:4px}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  .metric-grid{grid-template-columns:repeat(2,1fr)}
+  .chart-row{grid-template-columns:1fr}
+  .header{padding:2rem 1rem 1.2rem}
+}
+@media(max-width:480px){
+  .metric-grid{grid-template-columns:1fr}
+  .tab-btn{padding:12px 14px;font-size:11px}
+  .fin-tbl th,.fin-tbl td{padding:6px 8px;font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-brand">NM Therapeutics, Inc.</div>
+    <h1 class="header-title">Financial Projection</h1>
+    <p class="header-sub">15-month operating model · April 2026 – June 2027 · Pre-seed through initial revenue generation</p>
+    <div class="header-badges">
+      <span class="header-badge active">$3.2M Post-Money SAFE</span>
+      <span class="header-badge">3 SKUs · 200 Units Batch 1</span>
+      <span class="header-badge">$562K Total Funding Plan</span>
+      <span class="header-badge">$419K Projected Revenue</span>
+    </div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="tab-btn" data-tab="cashflow">Cash Flow</button>
+    <button class="tab-btn" data-tab="revenue">Revenue</button>
+    <button class="tab-btn" data-tab="funding">Funding</button>
+    <button class="tab-btn" data-tab="milestones">Milestones</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 1: DASHBOARD -->
+<!-- ═══════════════════════════════════════ -->
+<div class="tab-panel active" id="dashboard">
+  <div class="sec-head"><span class="sec-id">01 — Overview</span><h2 class="sec-title">The 15-month picture.</h2><p class="sec-sub">From $3,633 in the bank to $418K in cumulative revenue.</p></div>
+
+  <div class="metric-grid">
+    <div class="metric-card pool"><div class="metric-label">15-Mo Revenue</div><div class="metric-val accent">$418,700</div><div class="metric-note">Batch 1 + 2 + 3</div></div>
+    <div class="metric-card navy"><div class="metric-label">Total Funding</div><div class="metric-val">$562,500</div><div class="metric-note">Bridge + Pre-seed</div></div>
+    <div class="metric-card green"><div class="metric-label">Ending Cash</div><div class="metric-val positive">$417,983</div><div class="metric-note">Jun 2027 closing</div></div>
+    <div class="metric-card sun"><div class="metric-label">Gross Margin</div><div class="metric-val">70.8%</div><div class="metric-note">Blended all batches</div></div>
+  </div>
+
+  <div class="metric-grid">
+    <div class="metric-card heat"><div class="metric-label">Cash Low Point</div><div class="metric-val negative">$483</div><div class="metric-note">April 2026 — razor thin</div></div>
+    <div class="metric-card navy"><div class="metric-label">Monthly Burn (Pre-Raise)</div><div class="metric-val">$11,100</div><div class="metric-note">Current team + SaaS</div></div>
+    <div class="metric-card navy"><div class="metric-label">Monthly Burn (Post-Raise)</div><div class="metric-val">$30,900</div><div class="metric-note">Full team + marketing</div></div>
+    <div class="metric-card green"><div class="metric-label">Post-Raise Runway</div><div class="metric-val positive">14+ mo</div><div class="metric-note">With revenue flowing</div></div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-panel"><div class="chart-title">Cash Position Over Time</div><div class="chart-sub">Monthly closing balance — green = funded, orange = danger zone</div><div class="chart-wrap"><canvas id="cashChart"></canvas></div></div>
+    <div class="chart-panel"><div class="chart-title">Revenue by Batch</div><div class="chart-sub">Stacked monthly revenue from three production batches</div><div class="chart-wrap"><canvas id="revenueChart"></canvas></div></div>
+  </div>
+
+  <div class="callout warn"><div class="callout-lbl">Critical Path</div><strong>April is survival month.</strong> $483 closing cash means every sale matters. Seymour's $37.5K bridge in May is the first gate. Without it, you cannot fund Batch 2 manufacturing. The entire 15-month trajectory hinges on the first 60 days.</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 2: CASH FLOW -->
+<!-- ═══════════════════════════════════════ -->
+<div class="tab-panel" id="cashflow">
+  <div class="sec-head"><span class="sec-id">02 — Cash Flow</span><h2 class="sec-title">Month-by-month operating model.</h2><p class="sec-sub">Every dollar in, every dollar out, every month for 15 months.</p></div>
+
+  <div class="tbl-wrap">
+    <table class="fin-tbl" id="cashflowTable"></table>
+  </div>
+
+  <div class="chart-panel"><div class="chart-title">Monthly Net Operating Income</div><div class="chart-sub">Positive months in green, negative in red — breakeven is the zero line</div><div class="chart-wrap"><canvas id="netChart"></canvas></div></div>
+
+  <div class="callout info"><div class="callout-lbl">Reading This Table</div>The model shows three distinct phases: <strong>Survival (Apr–Jun)</strong> where Batch 1 revenue + bridges keep the company alive, <strong>Scale (Jul–Dec)</strong> where the pre-seed funds operations and Batch 2 sells through, and <strong>Growth (Jan–Jun 2027)</strong> where Batch 3 revenue begins building toward seed-round traction.</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 3: REVENUE -->
+<!-- ═══════════════════════════════════════ -->
+<div class="tab-panel" id="revenue">
+  <div class="sec-head"><span class="sec-id">03 — Revenue</span><h2 class="sec-title">Three batches. Three price points. One platform.</h2><p class="sec-sub">$22,700 → $99,000 → $297,000 — each batch validates the next.</p></div>
+
+  <div class="metric-grid">
+    <div class="metric-card pool"><div class="metric-label">Batch 1</div><div class="metric-val accent">$22,700</div><div class="metric-note">200 units · 3 SKUs · Apr–Jun</div></div>
+    <div class="metric-card navy"><div class="metric-label">Batch 2</div><div class="metric-val">$99,000</div><div class="metric-note">1,000 units · Sep–Dec</div></div>
+    <div class="metric-card green"><div class="metric-label">Batch 3</div><div class="metric-val positive">$297,000</div><div class="metric-note">3,000 units · Mar–Jun '27</div></div>
+    <div class="metric-card sun"><div class="metric-label">Cumulative</div><div class="metric-val">$418,700</div><div class="metric-note">15-month total</div></div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-panel"><div class="chart-title">SKU Mix — Batch 1</div><div class="chart-sub">200 units across three tiers</div><div class="chart-wrap"><canvas id="skuChart"></canvas></div></div>
+    <div class="chart-panel"><div class="chart-title">Cumulative Revenue</div><div class="chart-sub">Running total — each batch is a step function</div><div class="chart-wrap"><canvas id="cumRevChart"></canvas></div></div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="fin-tbl">
+      <thead><tr><th>SKU</th><th>Units</th><th>Price</th><th>Revenue</th><th>COGS/Unit</th><th>Gross Margin</th><th>Target</th></tr></thead>
+      <tbody>
+        <tr><td>_000 Research Access</td><td>20</td><td>$45</td><td>$900</td><td>$22</td><td>51%</td><td>Community data</td></tr>
+        <tr><td>_001 Core</td><td>80</td><td>$85</td><td>$6,800</td><td>$22</td><td>74%</td><td>Volume driver</td></tr>
+        <tr><td>_002 Travel System</td><td>100</td><td>$150</td><td>$15,000</td><td>$35</td><td>77%</td><td>Margin driver</td></tr>
+        <tr class="total-row"><td>Batch 1 Total</td><td>200</td><td></td><td>$22,700</td><td>$30 avg</td><td>73.8%</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout success"><div class="callout-lbl">Valuation Triggers</div><strong>Batch 1 sellout → $3.2M valuation (current SAFE cap).</strong> Batch 2 sellout → $4.5M+ step-up. Batch 3 traction → $5-8M seed positioning. Each sellout is a valuation event that de-risks the next raise.</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 4: FUNDING -->
+<!-- ═══════════════════════════════════════ -->
+<div class="tab-panel" id="funding">
+  <div class="sec-head"><span class="sec-id">04 — Funding</span><h2 class="sec-title">The capital ladder.</h2><p class="sec-sub">Every raise is earned by the milestone before it.</p></div>
+
+  <div class="chart-panel"><div class="chart-title">Valuation Step-Up Timeline</div><div class="chart-sub">Each event unlocks the next tier — urgency is built into the structure</div><div class="chart-wrap"><canvas id="valChart"></canvas></div></div>
+
+  <div class="tbl-wrap">
+    <table class="fin-tbl">
+      <thead><tr><th>Event</th><th>Amount</th><th>Timing</th><th>Valuation</th><th>New Equity</th><th>Cumulative</th></tr></thead>
+      <tbody>
+        <tr><td>Sosimo Roman (F&F)</td><td>$150,000</td><td>2024</td><td>—</td><td>—</td><td>$150,000</td></tr>
+        <tr><td>Seymour Everett (F&F)</td><td>$30,000</td><td>2024</td><td>—</td><td>10%</td><td>$180,000</td></tr>
+        <tr class="subtotal-row"><td>Seymour Bridge</td><td>$37,500</td><td>May 2026</td><td>$1.5M bridge</td><td>+2.5% → 12.5%</td><td>$217,500</td></tr>
+        <tr><td>Sosimo / Contacts Bridge</td><td>$25,000</td><td>Jun 2026</td><td>$1.5M bridge</td><td>~1.7%</td><td>$242,500</td></tr>
+        <tr class="section-row"><td>⬆ Batch 1 Sellout — Valuation Step-Up</td><td>—</td><td>Jun 2026</td><td><strong>→ $3.2M</strong></td><td>—</td><td>—</td></tr>
+        <tr class="total-row"><td>Pre-Seed Round (SAFE)</td><td>$500,000</td><td>Jul–Aug 2026</td><td>$3.2M cap</td><td>15.6%</td><td>$742,500</td></tr>
+        <tr class="section-row"><td>⬆ Batch 2 Sellout — Valuation Step-Up</td><td>—</td><td>Dec 2026</td><td><strong>→ $4.5M+</strong></td><td>—</td><td>—</td></tr>
+        <tr class="section-row"><td>⬆ Batch 3 Traction — Seed Positioning</td><td>—</td><td>Q2 2027</td><td><strong>→ $5–8M</strong></td><td>—</td><td>—</td></tr>
+        <tr style="opacity:0.5"><td>Seed Round (future)</td><td>$1.5–3M</td><td>Q2–Q3 2027</td><td>$8–15M</td><td>TBD</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn"><div class="callout-lbl">Investor Urgency</div>The bridge at <strong>$1.5M</strong> is available now. After Batch 1 sells out, the SAFE cap rises to <strong>$3.2M</strong> — more than 2× the bridge valuation. Every week of delay costs the early investor upside. This is by design.</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TAB 5: MILESTONES -->
+<!-- ═══════════════════════════════════════ -->
+<div class="tab-panel" id="milestones">
+  <div class="sec-head"><span class="sec-id">05 — Milestones</span><h2 class="sec-title">The critical path.</h2><p class="sec-sub">Every step gates the next. No shortcuts.</p></div>
+
+  <div class="timeline">
+    <div class="tl-item active"><div class="tl-date">April 30, 2026</div><div class="tl-title">Batch 1 Launch — 200 Units</div><div class="tl-desc">Website live. Shopify active. Three SKUs available: _000 ($45), _001 ($85), _002 ($150). Community-first launch.</div><div class="tl-val">$22,700 potential</div></div>
+    <div class="tl-item active"><div class="tl-date">May 2026</div><div class="tl-title">Seymour Bridge Close</div><div class="tl-desc">$37,500 additional investment. Equity: 10% → 12.5%. Bridge valuation $1.5M. Formalized lead investor designation.</div><div class="tl-val">$37,500</div></div>
+    <div class="tl-item future"><div class="tl-date">May–June 2026</div><div class="tl-title">Batch 1 Sellout</div><div class="tl-desc">200 units sold through. Revenue proof achieved. Valuation justified at $3.2M. Waitlist opens for Batch 2.</div><div class="tl-val">→ $3.2M valuation</div></div>
+    <div class="tl-item future"><div class="tl-date">June 2026</div><div class="tl-title">Batch 2 Deposit to TopSheng</div><div class="tl-desc">$15,000 deposit for 1,000-unit production run. Tooling costs amortized into unit price. TopSheng financing arrangement.</div><div class="tl-val">$15,000 deposit</div></div>
+    <div class="tl-item future"><div class="tl-date">June 2026</div><div class="tl-title">Sosimo / Contacts Bridge</div><div class="tl-desc">$25,000 additional bridge investment from Sosimo or his network. Bridge valuation $1.5M.</div><div class="tl-val">$25,000</div></div>
+    <div class="tl-item future"><div class="tl-date">July–August 2026</div><div class="tl-title">Pre-Seed Round Opens</div><div class="tl-desc">$500,000 SAFE at $3.2M cap. Revenue proof in hand. Advisor deck active. Sean Tan facilitating introductions.</div><div class="tl-val">$500,000 target</div></div>
+    <div class="tl-item future"><div class="tl-date">August 2026</div><div class="tl-title">Batch 2 Delivery</div><div class="tl-desc">1,000 units arrive from TopSheng. Second payment ($15K) on delivery. Sales begin immediately.</div><div class="tl-val">$99,000 potential</div></div>
+    <div class="tl-item future"><div class="tl-date">November–December 2026</div><div class="tl-title">Batch 2 Sellout</div><div class="tl-desc">1,000 units sold. Cumulative revenue ~$122K. Valuation step-up to $4.5M+.</div><div class="tl-val">→ $4.5M+ valuation</div></div>
+    <div class="tl-item future"><div class="tl-date">Q1 2027</div><div class="tl-title">Batch 3 Production + Seed Prep</div><div class="tl-desc">3,000-5,000 unit order to TopSheng. Revenue traction data compiled. Seed deck prepared.</div><div class="tl-val">$297,000 potential</div></div>
+    <div class="tl-item future"><div class="tl-date">Q2–Q3 2027</div><div class="tl-title">Seed Round</div><div class="tl-desc">$1.5–3M raise at $8–15M valuation. Revenue trajectory, margin proof, and community traction in hand.</div><div class="tl-val">→ $8–15M valuation</div></div>
+  </div>
+</div>
+
+<script>
+// ═══ TAB SWITCHING ═══
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ═══ DATA ═══
+const months=['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'];
+const batch1Rev=[7950,8550,6200,0,0,0,0,0,0,0,0,0,0,0,0];
+const batch2Rev=[0,0,0,0,0,19800,29700,29700,19800,0,0,0,0,0,0];
+const batch3Rev=[0,0,0,0,0,0,0,0,0,0,0,49500,74250,74250,99000];
+const totalRev=months.map((_,i)=>batch1Rev[i]+batch2Rev[i]+batch3Rev[i]);
+const totalCogs=[0,0,-15000,-750,-15000,0,0,0,-46500,-45000,0,0,0,0,0];
+const gross=months.map((_,i)=>totalRev[i]+totalCogs[i]);
+const totalOpex=[-11100,-11100,-11100,-28900,-29900,-30900,-36400,-36400,-36400,-34400,-34400,-34400,-36400,-36400,-36400];
+const netOps=months.map((_,i)=>gross[i]+totalOpex[i]);
+const funding=[0,37500,25000,250000,250000,0,0,0,0,0,0,0,0,0,0];
+const closing=[483,35433,40533,260883,465983,454883,448183,441483,378383,298983,264583,279683,317533,355383,417983];
+
+// ═══ CHART 1: CASH POSITION ═══
+new Chart(document.getElementById('cashChart'),{
+  type:'bar',
+  data:{labels:months,datasets:[{
+    label:'Closing Cash',
+    data:closing,
+    backgroundColor:closing.map(v=>v<5000?'rgba(179,29,27,0.7)':v<50000?'rgba(255,209,102,0.7)':'rgba(104,139,88,0.5)'),
+    borderRadius:4,borderSkipped:false
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:{ticks:{callback:v=>'$'+v.toLocaleString()},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}
+});
+
+// ═══ CHART 2: REVENUE BY BATCH ═══
+new Chart(document.getElementById('revenueChart'),{
+  type:'bar',
+  data:{labels:months,datasets:[
+    {label:'Batch 1',data:batch1Rev,backgroundColor:'rgba(0,109,119,0.7)',borderRadius:3},
+    {label:'Batch 2',data:batch2Rev,backgroundColor:'rgba(49,89,138,0.7)',borderRadius:3},
+    {label:'Batch 3',data:batch3Rev,backgroundColor:'rgba(104,139,88,0.7)',borderRadius:3}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{family:'Mulish',size:11}}}},
+    scales:{y:{stacked:true,ticks:{callback:v=>'$'+v.toLocaleString()},grid:{color:'rgba(0,0,0,0.04)'}},x:{stacked:true,grid:{display:false}}}}
+});
+
+// ═══ CHART 3: NET OPERATING INCOME ═══
+new Chart(document.getElementById('netChart'),{
+  type:'bar',
+  data:{labels:months,datasets:[{
+    label:'Net Operating Income',
+    data:netOps,
+    backgroundColor:netOps.map(v=>v>=0?'rgba(104,139,88,0.6)':'rgba(179,29,27,0.5)'),
+    borderRadius:4,borderSkipped:false
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:{ticks:{callback:v=>'$'+v.toLocaleString()},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}
+});
+
+// ═══ CHART 4: SKU MIX ═══
+new Chart(document.getElementById('skuChart'),{
+  type:'doughnut',
+  data:{labels:['_000 Research ($45)','_001 Core ($85)','_002 Travel ($150)'],
+    datasets:[{data:[900,6800,15000],backgroundColor:['rgba(0,109,119,0.7)','rgba(49,89,138,0.7)','rgba(104,139,88,0.7)'],borderWidth:2,borderColor:'#fff'}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{family:'Mulish',size:11}}}}}
+});
+
+// ═══ CHART 5: CUMULATIVE REVENUE ═══
+const cumRev=[];let cum=0;totalRev.forEach(v=>{cum+=v;cumRev.push(cum)});
+new Chart(document.getElementById('cumRevChart'),{
+  type:'line',
+  data:{labels:months,datasets:[{
+    label:'Cumulative Revenue',data:cumRev,
+    borderColor:'#31598A',backgroundColor:'rgba(49,89,138,0.08)',fill:true,
+    tension:0.3,pointRadius:4,pointBackgroundColor:'#31598A',borderWidth:2
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:{ticks:{callback:v=>'$'+v.toLocaleString()},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}
+});
+
+// ═══ CHART 6: VALUATION TIMELINE ═══
+new Chart(document.getElementById('valChart'),{
+  type:'line',
+  data:{labels:['Now','Batch 1\nSellout','Pre-Seed\nClose','Batch 2\nSellout','Batch 3\nTraction','Seed\nRound'],
+    datasets:[{
+      label:'Valuation',data:[1500000,3200000,3200000,4500000,6000000,10000000],
+      borderColor:'#006D77',backgroundColor:'rgba(0,109,119,0.08)',fill:true,
+      tension:0.3,pointRadius:6,pointBackgroundColor:['#B31D1B','#006D77','#31598A','#688B58','#D4A843','#688B58'],
+      pointBorderColor:'#fff',pointBorderWidth:2,borderWidth:2.5
+    }]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:{ticks:{callback:v=>'$'+(v/1000000).toFixed(1)+'M'},grid:{color:'rgba(0,0,0,0.04)'}},x:{grid:{display:false}}}}
+});
+
+// ═══ CASH FLOW TABLE ═══
+(function(){
+  const t=document.getElementById('cashflowTable');
+  const opexItems=[
+    ['Kenny salary',[4000,4000,4000,8000,8000,8000,8000,8000,8000,8000,8000,8000,8000,8000,8000]],
+    ['KP SF (home)',[4000,4000,4000,4000,4000,4000,4000,4000,4000,4000,4000,4000,4000,4000,4000]],
+    ['Chi Le',[500,500,500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500]],
+    ['Tiffany M.',[500,500,500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500]],
+    ['Jenn Dau',[500,500,500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500]],
+    ['Hameed K',[500,500,500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500,3500]],
+    ['SaaS stack',[900,900,900,900,900,900,900,900,900,900,900,900,900,900,900]],
+    ['Marketing',[0,0,0,1000,2000,3000,5000,5000,5000,3000,3000,3000,5000,5000,5000]],
+    ['Ins + Legal',[0,0,0,800,800,800,800,800,800,800,800,800,800,800,800]],
+    ['Ops/Fees',[200,200,200,200,200,200,200,200,200,200,200,200,200,200,200]],
+  ];
+  const fmt=v=>{if(v===0)return'—';const s=v<0;const a=Math.abs(v);return(s?'-':'')+'$'+a.toLocaleString()};
+  const cls=v=>v>0?'positive':v<0?'negative':'';
+  let h='<thead><tr><th></th><th>Total</th>';
+  months.forEach(m=>h+='<th>'+m+'</th>');
+  h+='</tr></thead><tbody>';
+  // Revenue section
+  h+='<tr class="section-row"><td>REVENUE</td><td></td>'+months.map(()=>'<td></td>').join('')+'</tr>';
+  const revRows=[['Batch 1',batch1Rev],['Batch 2',batch2Rev],['Batch 3',batch3Rev]];
+  revRows.forEach(([n,d])=>{h+='<tr><td>'+n+'</td><td>'+fmt(d.reduce((a,b)=>a+b,0))+'</td>';d.forEach(v=>h+='<td class="'+cls(v)+'">'+fmt(v)+'</td>');h+='</tr>'});
+  h+='<tr class="subtotal-row"><td>Total Revenue</td><td class="positive"><strong>'+fmt(totalRev.reduce((a,b)=>a+b,0))+'</strong></td>';
+  totalRev.forEach(v=>h+='<td class="positive"><strong>'+fmt(v)+'</strong></td>');h+='</tr>';
+  // COGS
+  h+='<tr class="section-row"><td>COGS</td><td></td>'+months.map(()=>'<td></td>').join('')+'</tr>';
+  h+='<tr><td>Manufacturing + Shipping</td><td>'+fmt(totalCogs.reduce((a,b)=>a+b,0))+'</td>';
+  totalCogs.forEach(v=>h+='<td class="'+cls(v)+'">'+fmt(v)+'</td>');h+='</tr>';
+  // Gross
+  h+='<tr class="subtotal-row"><td>Gross Profit</td><td>'+fmt(gross.reduce((a,b)=>a+b,0))+'</td>';
+  gross.forEach(v=>h+='<td class="'+(v>=0?'positive':'negative')+'"><strong>'+fmt(v)+'</strong></td>');h+='</tr>';
+  // OpEx
+  h+='<tr class="section-row"><td>OPERATING EXPENSES</td><td></td>'+months.map(()=>'<td></td>').join('')+'</tr>';
+  opexItems.forEach(([n,d])=>{h+='<tr><td>'+n+'</td><td>'+fmt(-d.reduce((a,b)=>a+b,0))+'</td>';d.forEach(v=>h+='<td class="negative">'+fmt(-v)+'</td>');h+='</tr>'});
+  h+='<tr class="subtotal-row"><td>Total OpEx</td><td class="negative"><strong>'+fmt(totalOpex.reduce((a,b)=>a+b,0))+'</strong></td>';
+  totalOpex.forEach(v=>h+='<td class="negative"><strong>'+fmt(v)+'</strong></td>');h+='</tr>';
+  // Net
+  h+='<tr class="total-row"><td>Net Operating</td><td>'+fmt(netOps.reduce((a,b)=>a+b,0))+'</td>';
+  netOps.forEach(v=>h+='<td class="'+(v>=0?'positive safe':'negative danger')+'"><strong>'+fmt(v)+'</strong></td>');h+='</tr>';
+  // Funding
+  h+='<tr class="section-row"><td>FUNDING</td><td></td>'+months.map(()=>'<td></td>').join('')+'</tr>';
+  h+='<tr><td>Investment inflows</td><td class="positive">'+fmt(funding.reduce((a,b)=>a+b,0))+'</td>';
+  funding.forEach(v=>h+='<td class="'+(v>0?'positive':'')+'">'+fmt(v)+'</td>');h+='</tr>';
+  // Closing cash
+  h+='<tr class="total-row"><td>CLOSING CASH</td><td></td>';
+  closing.forEach(v=>h+='<td class="'+(v<5000?'danger':v>50000?'safe':'')+'"><strong>'+fmt(v)+'</strong></td>');
+  h+='</tr></tbody>';
+  t.innerHTML=h;
+})();
+</script>
+</body>
+</html>

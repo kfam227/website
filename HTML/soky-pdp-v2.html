@@ -66,7 +66,6 @@ img{max-width:100%;display:block}
 /* ═══ BUY BOX ═══ */
 .buy-box{padding-top:0.5rem}
 .bb-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--pool);margin-bottom:0.5rem;display:flex;align-items:center;gap:8px}
-.bb-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-dot 2s infinite}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
 .bb-title{font-family:var(--head);font-size:clamp(32px,5vw,48px);font-weight:900;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);line-height:1;margin-bottom:0.25rem}
 .bb-subtitle{font-family:var(--serif);font-size:clamp(14px,1.6vw,18px);color:var(--muted);font-style:italic;margin-bottom:1.25rem}
@@ -354,6 +353,457 @@ img{max-width:100%;display:block}
   transform:translateY(-1px) !important;
   box-shadow:0 8px 24px rgba(49,89,138,0.35) !important;
 }
+.buy-box .atc-btn.preorder-mode{
+  background:linear-gradient(135deg,#006D77,#688B58) !important;
+  border:1px dashed rgba(104,139,88,0.4) !important;
+}
+.buy-box .atc-btn.preorder-mode:hover{
+  box-shadow:0 8px 24px rgba(0,109,119,0.35) !important;
+}
+.buy-box .atc-btn.soldout-mode{
+  background:#667085 !important;
+  box-shadow:none !important;
+  cursor:default !important;
+}
+.buy-box .atc-btn.soldout-mode:hover{
+  transform:none !important;
+  box-shadow:none !important;
+}
+
+/* ═══ DROP SYSTEM ═══ */
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
+.eyebrow-dot.in-stock{background:var(--green);animation:pulse-dot 2s infinite}
+.eyebrow-dot.pre-order{background:var(--sunlight);animation:pulse-dot 2s infinite}
+.eyebrow-dot.sold-out{background:var(--muted)}
+
+.sku-stock.preorder{color:var(--navy);font-weight:700}
+.sku-stock.sold-out{color:var(--muted);text-decoration:line-through;opacity:0.6}
+.sku-option.sold-out-sku{opacity:0.55;pointer-events:none;cursor:default}
+.tag-preorder{background:rgba(255,209,102,0.15);color:#8A6A00;border:1px solid rgba(255,209,102,0.3);margin-left:4px}
+
+/* SKU card image wrapper + overlay */
+.sku-card-img-wrap{position:relative;overflow:hidden}
+.sku-card-overlay{
+  position:absolute;
+  top:0;left:0;right:0;
+  aspect-ratio:4/3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(17,24,39,0.55);
+  z-index:2;
+  pointer-events:none;
+}
+.sku-card-overlay-text{
+  font-family:var(--sub);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:#fff;
+  background:rgba(0,0,0,0.4);
+  padding:6px 16px;
+  border-radius:999px;
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  text-align:center;
+}
+
+/* Drop Timeline */
+.drop-timeline{
+  margin-top:1.5rem;
+  background:var(--surface-strong);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  padding:1.25rem;
+  box-shadow:var(--shadow-sm);
+}
+.dt-title{
+  font-family:var(--sub);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--navy);
+  margin-bottom:1rem;
+}
+.dt-track{
+  display:flex;
+  align-items:flex-start;
+  gap:0;
+}
+.dt-node{
+  flex:1;
+  text-align:center;
+  position:relative;
+}
+.dt-connector{
+  width:40px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  padding-top:6px;
+}
+.dt-connector::after{
+  content:'';
+  display:block;
+  width:100%;
+  height:2px;
+  background:var(--line-md);
+}
+.dt-dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  margin:0 auto 6px;
+  border:2px solid var(--line-md);
+  background:var(--paper);
+  transition:all .3s;
+}
+.dt-node.active .dt-dot{
+  background:var(--navy);
+  border-color:var(--navy);
+  box-shadow:0 0 0 4px rgba(49,89,138,0.15);
+}
+.dt-node.upcoming .dt-dot{
+  background:var(--pool);
+  border-color:var(--pool);
+  box-shadow:0 0 0 4px rgba(0,109,119,0.12);
+}
+.dt-node.sold-out .dt-dot{
+  background:var(--muted);
+  border-color:var(--muted);
+}
+.dt-node.future .dt-dot{
+  background:var(--paper);
+  border-color:var(--line-md);
+  border-style:dashed;
+}
+.dt-label{
+  font-family:var(--sub);
+  font-size:11px;
+  font-weight:700;
+  color:var(--ink);
+  letter-spacing:0.06em;
+}
+.dt-date{
+  font-family:var(--body);
+  font-size:10px;
+  color:var(--muted);
+  margin-top:1px;
+}
+.dt-status{
+  font-family:var(--sub);
+  font-size:8.5px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-top:4px;
+  padding:2px 8px;
+  border-radius:999px;
+  display:inline-block;
+}
+.dt-node.active .dt-status{
+  background:rgba(104,139,88,0.1);
+  color:var(--green);
+}
+.dt-node.upcoming .dt-status{
+  background:rgba(0,109,119,0.08);
+  color:var(--pool);
+}
+.dt-node.sold-out .dt-status{
+  background:rgba(179,29,27,0.08);
+  color:var(--heat);
+}
+.dt-node.future .dt-status{
+  background:rgba(17,24,39,0.04);
+  color:var(--muted);
+}
+.dt-inventory{
+  margin-top:6px;
+  padding:0 1rem;
+}
+.dt-inv-bar{
+  height:4px;
+  border-radius:999px;
+  background:var(--line);
+  overflow:hidden;
+  margin-bottom:3px;
+}
+.dt-inv-fill{
+  height:100%;
+  border-radius:999px;
+  transition:width 0.8s ease;
+}
+.dt-inv-label{
+  font-family:var(--sub);
+  font-size:8px;
+  font-weight:600;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* Drop Status Strip (in buy box) */
+.drop-status-strip{
+  background:var(--surface-strong);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  padding:14px 16px;
+  margin-bottom:1.25rem;
+  box-shadow:var(--shadow-sm);
+}
+.dss-counter{margin-bottom:10px}
+.dss-counter-num{
+  font-family:var(--serif);
+  font-size:clamp(28px,3.5vw,38px);
+  color:var(--navy);
+  line-height:1;
+  display:inline;
+}
+.dss-counter-label{
+  font-family:var(--sub);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:inline;
+  margin-left:8px;
+  vertical-align:baseline;
+  position:relative;
+  top:-2px;
+}
+.dss-counter-bar{
+  height:6px;
+  border-radius:999px;
+  background:var(--line);
+  overflow:hidden;
+  margin-top:8px;
+}
+.dss-counter-fill{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--navy),var(--pool));
+  transition:width 0.8s ease;
+}
+.dss-timeline{
+  display:flex;
+  align-items:center;
+  gap:0;
+  padding-top:10px;
+  border-top:1px solid var(--line);
+}
+.dss-tl-node{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-shrink:0;
+}
+.dss-tl-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  border:2px solid var(--line-md);
+  background:var(--paper);
+  flex-shrink:0;
+}
+.dss-tl-node.active .dss-tl-dot{
+  background:var(--navy);
+  border-color:var(--navy);
+  box-shadow:0 0 0 3px rgba(49,89,138,0.12);
+}
+.dss-tl-node.upcoming .dss-tl-dot{
+  background:var(--pool);
+  border-color:var(--pool);
+}
+.dss-tl-node.sold-out .dss-tl-dot{
+  background:var(--muted);
+  border-color:var(--muted);
+}
+.dss-tl-node.future .dss-tl-dot{border-style:dashed}
+.dss-tl-text{
+  font-family:var(--sub);
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.04em;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.dss-tl-node.active .dss-tl-text{color:var(--navy);font-weight:700}
+.dss-tl-node.upcoming .dss-tl-text{color:var(--pool)}
+.dss-tl-line{
+  flex:1;
+  height:1px;
+  background:var(--line-md);
+  margin:0 6px;
+  min-width:12px;
+}
+
+/* ═══ PRODUCT ROADMAP ═══ */
+.roadmap-section{padding:4rem 0}
+.roadmap-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.roadmap-card{
+  display:block;
+  background:var(--surface-strong);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+  text-decoration:none;
+  color:inherit;
+  position:relative;
+}
+.roadmap-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow);
+  border-color:rgba(49,89,138,0.2);
+}
+.roadmap-card-wide{grid-column:1 / -1}
+.roadmap-card-accent{height:4px;width:100%}
+.roadmap-card-body{padding:1.25rem}
+.roadmap-card-badge{
+  font-family:var(--sub);
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:0.6rem;
+  padding:2px 8px;
+  border-radius:999px;
+  background:rgba(17,24,39,0.04);
+  display:inline-block;
+}
+.roadmap-card-icon{
+  width:40px;
+  height:40px;
+  margin-bottom:0.6rem;
+  opacity:0.8;
+}
+.roadmap-card-icon svg{width:100%;height:100%}
+.roadmap-card-title{
+  font-family:var(--head);
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:var(--ink);
+  margin-bottom:0.4rem;
+  line-height:1.2;
+}
+.roadmap-card-desc{
+  font-family:var(--body);
+  font-size:11.5px;
+  color:var(--muted);
+  line-height:1.6;
+  margin-bottom:0.75rem;
+}
+.roadmap-card-specs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:0.75rem;
+}
+.roadmap-card-specs span{
+  font-family:var(--sub);
+  font-size:8px;
+  font-weight:600;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:999px;
+  background:rgba(49,89,138,0.06);
+  color:var(--navy);
+  white-space:nowrap;
+}
+.roadmap-card-cta{
+  padding-top:0.5rem;
+  border-top:1px solid var(--line);
+}
+.roadmap-cta-btn{
+  font-family:var(--sub);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--pool);
+  transition:color .2s;
+}
+.roadmap-card:hover .roadmap-cta-btn{color:var(--navy)}
+
+/* Debug panel */
+.debug-panel{
+  position:fixed;
+  bottom:16px;
+  right:16px;
+  width:220px;
+  background:rgba(17,24,39,0.92);
+  color:#fff;
+  border-radius:10px;
+  padding:12px 14px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  z-index:9999;
+  font-family:var(--sub);
+  font-size:11px;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.debug-panel h5{
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:#FFD166;
+  margin-bottom:8px;
+}
+.debug-panel label{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:5px;
+  font-size:10px;
+  color:rgba(255,255,255,0.85);
+}
+.debug-panel input,
+.debug-panel select{
+  width:60px;
+  background:rgba(255,255,255,0.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:4px;
+  padding:3px 6px;
+  font-family:var(--sub);
+  font-size:10px;
+  text-align:right;
+}
+.debug-panel select{
+  width:100%;
+  text-align:left;
+  margin-bottom:8px;
+}
+.debug-panel button{
+  width:100%;
+  margin-top:6px;
+  padding:6px 10px;
+  background:linear-gradient(135deg,#31598A,#006D77);
+  color:#fff;
+  border:none;
+  border-radius:4px;
+  font-family:var(--sub);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.debug-panel button:hover{filter:brightness(1.15)}
 
 /* ═══ REVEAL ANIMATION ═══ */
 /* Progressive enhancement: elements visible by default.
@@ -378,6 +828,8 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
   body::before{display:none}
   .topbar-inner{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(255,255,255,0.92)}
   .mode-card{width:calc(50% - 8px)}
+  .roadmap-grid{grid-template-columns:1fr}
+  .roadmap-card-wide{grid-column:auto}
 }
 @media(max-width:600px){
   .pdp-hero{gap:1.5rem}
@@ -394,6 +846,12 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
   .cta-band{padding:2rem 1.25rem;border-radius:var(--r-lg)}
   .sku-option{grid-template-columns:auto 1fr auto;gap:8px;padding:10px 12px}
   .sku-price-val{font-size:20px}
+  .dt-track{flex-direction:column;align-items:stretch}
+  .dt-node{text-align:left;display:flex;align-items:flex-start;gap:10px;padding:8px 0}
+  .dt-dot{margin:2px 0 0}
+  .dt-connector{width:auto;height:20px;padding-top:0;padding-left:6px}
+  .dt-connector::after{width:2px;height:100%}
+  .dt-inventory{padding:0;flex:1}
 }
 </style>
 </head>
@@ -412,6 +870,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
     <a href="#offers">Shop</a>
     <a href="#how-it-works">How It Works</a>
     <a href="#science">Science</a>
+    <a href="#roadmap">Roadmap</a>
     <a href="#faq">FAQ</a>
     <button class="nav-cart">Cart (0)</button>
   </div>
@@ -438,7 +897,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
 
   <!-- Buy Box -->
   <div class="buy-box">
-    <div class="bb-eyebrow">In Stock · First Drop · Batch 1 of 200</div>
+    <div class="bb-eyebrow" id="bbEyebrow"><span class="eyebrow-dot in-stock"></span><span class="eyebrow-text">In Stock · First Drop · Batch 1 of 200</span></div>
     <h1 class="bb-title">SOKY</h1>
     <p class="bb-subtitle">Wearable soak system for hands &amp; feet.</p>
     <p class="bb-value-prop">A patented silicone glove that <strong>seals water, warmth, and therapeutic agents around your hand</strong> while you move freely. No bowls. No basins. No sitting still. Just 15–20 minutes of portable, spa-grade immersion — wherever you are.</p>
@@ -497,7 +956,10 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
       <button class="atc-btn" id="atcBtn">Add to Cart — $85</button>
     </div>
 
-    <p style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-bottom:1.5rem"><strong style="color:var(--green)">PRE-ORDER</strong> · Batch 1 ships Spring 2026. Satisfaction guaranteed — if sizing or comfort isn't right, we'll make it right within 30 days.</p>
+    <p id="shippingNote" style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-bottom:1.5rem"><strong style="color:var(--green)">IN STOCK</strong> · Drop 1 ships Spring 2026. Satisfaction guaranteed — if sizing or comfort isn't right, we'll make it right within 30 days.</p>
+
+    <!-- Drop Status Strip -->
+    <div class="drop-status-strip" id="dropStatusStrip"></div>
 
     <!-- Collapsible Details -->
     <div class="details-section open" id="detailsIncludes">
@@ -860,8 +1322,10 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
 
   <div class="sku-cards">
     <!-- Research -->
-    <div class="sku-detail-card research">
-      <img class="sku-card-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Research Access" loading="lazy">
+    <div class="sku-detail-card research" data-sku="000">
+      <div class="sku-card-img-wrap">
+        <img class="sku-card-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Research Access" loading="lazy">
+      </div>
       <div class="sku-card-body">
         <div class="sku-card-id">HandSOKY_B_M_000</div>
         <div class="sku-card-price">$45</div>
@@ -876,8 +1340,10 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
       </div>
     </div>
     <!-- Core -->
-    <div class="sku-detail-card core">
-      <img class="sku-card-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Core" loading="lazy">
+    <div class="sku-detail-card core" data-sku="001">
+      <div class="sku-card-img-wrap">
+        <img class="sku-card-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Core" loading="lazy">
+      </div>
       <div class="sku-card-body">
         <div class="sku-card-id">HandSOKY_B_M_001</div>
         <div class="sku-card-price">$85</div>
@@ -892,8 +1358,10 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
       </div>
     </div>
     <!-- Kit -->
-    <div class="sku-detail-card kit">
-      <img class="sku-card-img" src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="Hand SOKY Travel System" loading="lazy">
+    <div class="sku-detail-card kit" data-sku="002">
+      <div class="sku-card-img-wrap">
+        <img class="sku-card-img" src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="Hand SOKY Travel System" loading="lazy">
+      </div>
       <div class="sku-card-body">
         <div class="sku-card-id">HandSOKY_B_M_002</div>
         <div class="sku-card-price">$150</div>
@@ -911,7 +1379,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
 
   <!-- Batch Allocation -->
   <div class="batch-bar-wrap">
-    <div class="batch-title">Batch 1 Allocation — 200 Units Total</div>
+    <div class="batch-title" id="batchTitle">Drop 1 Allocation — 200 Units Total · 0 Claimed</div>
     <div class="batch-bar">
       <div class="batch-seg" style="width:10%;background:var(--pool)"></div>
       <div class="batch-seg" style="width:40%;background:var(--navy)"></div>
@@ -922,6 +1390,142 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
       <span class="batch-lbl"><span class="batch-dot" style="background:var(--navy)"></span>_001 Core — 80 (40%)</span>
       <span class="batch-lbl"><span class="batch-dot" style="background:var(--green)"></span>_002 Travel System — 100 (50%)</span>
     </div>
+    <div class="batch-progress" id="batchProgress" style="margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--line)">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="batch-lbl">0 of 200 units claimed</span>
+        <span class="batch-lbl" style="color:var(--pool)">200 remaining</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══ PRODUCT ROADMAP ═══ -->
+<div class="container roadmap-section reveal" id="roadmap">
+  <div class="section-eyebrow">Coming Next</div>
+  <h2 class="section-heading">The platform is growing.</h2>
+  <p class="section-sub">Same patented seal. Same five-step ritual. New garments, new body zones, new formulations — all built on the same platform you're holding today.</p>
+
+  <div class="roadmap-grid">
+
+    <!-- FOOT SOKY -->
+    <a href="soky-pdp-foot.html" class="roadmap-card">
+      <div class="roadmap-card-accent" style="background:linear-gradient(135deg,var(--pool),var(--navy))"></div>
+      <div class="roadmap-card-body">
+        <div class="roadmap-card-badge">Garment · Coming Fall 2026</div>
+        <div class="roadmap-card-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 8C12 8 11 18 11 22C11 26 14 32 20 32C26 32 29 26 29 22C29 18 28 8 28 8" stroke="#006D77" stroke-width="2" stroke-linecap="round"/>
+            <path d="M14 32C14 32 13 36 20 36C27 36 26 32 26 32" stroke="#006D77" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M12 8C12 8 15 6 20 6C25 6 28 8 28 8" stroke="#006D77" stroke-width="2" stroke-linecap="round"/>
+            <path d="M15 14H25" stroke="#006D77" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+            <path d="M14 20H26" stroke="#006D77" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="roadmap-card-title">Foot SOKY</h3>
+        <p class="roadmap-card-desc">Full-foot immersion bootie with the same inversion cuff seal, sized for ankles. Targets plantar fasciitis, diabetic foot care, post-exercise recovery, and nail/skin conditions. Walk-compatible — the bootie grips the floor while sealed. Same five-step ritual: Don · Fill · Seal · Soak · Drain.</p>
+        <div class="roadmap-card-specs">
+          <span>Bootie form factor</span>
+          <span>Ankle-height cuff seal</span>
+          <span>Non-slip tread sole</span>
+          <span>Sizes S / M / L</span>
+        </div>
+        <div class="roadmap-card-cta">
+          <span class="roadmap-cta-btn">Join Waitlist →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- KNEE SOKY -->
+    <a href="soky-pdp-knee.html" class="roadmap-card">
+      <div class="roadmap-card-accent" style="background:linear-gradient(135deg,var(--navy),var(--green))"></div>
+      <div class="roadmap-card-body">
+        <div class="roadmap-card-badge">Garment · 2027 Roadmap</div>
+        <div class="roadmap-card-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 6V34" stroke="#31598A" stroke-width="2" stroke-linecap="round"/>
+            <path d="M26 6V34" stroke="#31598A" stroke-width="2" stroke-linecap="round"/>
+            <ellipse cx="20" cy="20" rx="8" ry="5" stroke="#31598A" stroke-width="2" fill="rgba(49,89,138,0.08)"/>
+            <circle cx="20" cy="20" r="2.5" fill="#31598A" opacity="0.3"/>
+            <path d="M14 10C14 10 17 12 20 12C23 12 26 10 26 10" stroke="#31598A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+            <path d="M14 30C14 30 17 28 20 28C23 28 26 30 26 30" stroke="#31598A" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="roadmap-card-title">Knee SOKY</h3>
+        <p class="roadmap-card-desc">Wrap-style sealed sleeve for the knee joint. Dual cuff seals above and below the kneecap create a 360° immersion chamber around the joint capsule. Designed for arthritis, post-surgical recovery, runner's knee, and general joint care. Seated or reclined use — full seal maintained at rest.</p>
+        <div class="roadmap-card-specs">
+          <span>Wrap sleeve form factor</span>
+          <span>Dual cuff seals</span>
+          <span>360° joint immersion</span>
+          <span>Adjustable fit</span>
+        </div>
+        <div class="roadmap-card-cta">
+          <span class="roadmap-cta-btn">Join Waitlist →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- ELBOW SOKY -->
+    <a href="soky-pdp-elbow.html" class="roadmap-card">
+      <div class="roadmap-card-accent" style="background:linear-gradient(135deg,var(--green),var(--pool))"></div>
+      <div class="roadmap-card-body">
+        <div class="roadmap-card-badge">Garment · 2027 Roadmap</div>
+        <div class="roadmap-card-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10L20 20L30 12" stroke="#688B58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 14L20 24L30 16" stroke="#688B58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+            <circle cx="20" cy="20" r="4" stroke="#688B58" stroke-width="1.5" fill="rgba(104,139,88,0.1)"/>
+            <path d="M13 28C15 26 18 24 20 24C22 24 25 26 27 28" stroke="#688B58" stroke-width="1" stroke-dasharray="2,2" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="roadmap-card-title">Elbow SOKY</h3>
+        <p class="roadmap-card-desc">Compact sealed sleeve for the elbow joint. Same dual cuff architecture as Knee SOKY, scaled for the smaller joint radius. Targets tennis elbow, golfer's elbow, repetitive strain, and post-surgical recovery. Lightweight enough for desk use — soak while you work.</p>
+        <div class="roadmap-card-specs">
+          <span>Compact sleeve</span>
+          <span>Dual cuff seals</span>
+          <span>Desk-compatible</span>
+          <span>Universal port</span>
+        </div>
+        <div class="roadmap-card-cta">
+          <span class="roadmap-cta-btn">Join Waitlist →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- SOKY PLUS — CONSUMABLES -->
+    <a href="soky-pdp-plus.html" class="roadmap-card roadmap-card-wide">
+      <div class="roadmap-card-accent" style="background:linear-gradient(135deg,var(--sunlight),var(--umber))"></div>
+      <div class="roadmap-card-body">
+        <div class="roadmap-card-badge">Consumables · Coming Late 2026</div>
+        <div class="roadmap-card-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="10" width="10" height="20" rx="3" stroke="#8A6A4D" stroke-width="1.5" fill="rgba(138,106,77,0.08)"/>
+            <rect x="22" y="6" width="12" height="28" rx="4" stroke="#8A6A4D" stroke-width="1.5" fill="rgba(138,106,77,0.06)"/>
+            <line x1="11" y1="16" x2="15" y2="16" stroke="#8A6A4D" stroke-width="1" opacity="0.5"/>
+            <line x1="11" y1="19" x2="15" y2="19" stroke="#8A6A4D" stroke-width="1" opacity="0.5"/>
+            <line x1="25" y1="13" x2="31" y2="13" stroke="#8A6A4D" stroke-width="1" opacity="0.5"/>
+            <line x1="25" y1="17" x2="31" y2="17" stroke="#8A6A4D" stroke-width="1" opacity="0.5"/>
+            <line x1="25" y1="21" x2="31" y2="21" stroke="#8A6A4D" stroke-width="1" opacity="0.5"/>
+            <circle cx="13" cy="25" r="1.5" fill="#FFD166" opacity="0.6"/>
+            <circle cx="28" cy="28" r="2" fill="#FFD166" opacity="0.6"/>
+          </svg>
+        </div>
+        <h3 class="roadmap-card-title">SOKY Plus — Soak Packs &amp; Formulations</h3>
+        <p class="roadmap-card-desc">Pre-measured additive enhancers designed for the SOKY liquid environment. Single-use stick packs for convenience or 30-day supply bags for daily routines. Formulation tiers: Mineral (Epsom/Dead Sea), Botanical (chamomile/lavender/oat), Active (salicylic/urea/menthol), and Peptide (collagen/barrier repair). Each pack is dosed for the reduced water volume of a SOKY garment — no measuring, no guessing. Razor-handle economics: the glove is the platform, the packs are the recurring revenue layer.</p>
+        <div class="roadmap-card-specs">
+          <span>Single-use stick packs</span>
+          <span>30-day supply bags</span>
+          <span>4 formulation tiers</span>
+          <span>Pre-dosed for SOKY volume</span>
+          <span>Subscription-ready</span>
+        </div>
+        <div class="roadmap-card-cta">
+          <span class="roadmap-cta-btn">Get Notified →</span>
+        </div>
+      </div>
+    </a>
+
   </div>
 </div>
 
@@ -938,6 +1542,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is SOKY latex-free?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">Yes. SOKY is made from medical-grade silicone. It is latex-free, BPA-free, and allergy-friendly.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I use hot or cold water?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">Yes — SOKY supports both warm and cool soaks. Use water at a temperature comfortable to touch. Avoid boiling water. Cool soaks are great for inflammation and post-exercise recovery.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is SOKY safe for sensitive skin?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">SOKY is made from skin-safe, medical-grade silicone designed for extended contact. If you have specific skin sensitivities, consult your dermatologist before use.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What happens when a drop sells out?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">SOKY ships in limited drops of 200 units every three months. When a drop sells out, you can pre-order for the next batch at the same price — your order locks in your spot and ships when that batch is ready. Drop 1 ships April 2026, Drop 2 ships July 2026, Drop 3 ships October 2026.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Will SOKY leak?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">When donned correctly — cuff folded inward, fingers fully seated — the patented inversion seal holds firmly. The seal actually tightens with movement. Correct donning is the key step.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I use salts or additives?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">Absolutely. Epsom salts, essential oils, botanical extracts, and other soak additives work beautifully. SOKY's lower water volume actually concentrates the active ingredients for more effective delivery.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How long should I soak?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">15–20 minutes is the recommended session length. You can adjust based on your comfort and routine.</div></div></div>
@@ -953,9 +1558,9 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
 <div class="container">
   <div class="cta-band reveal">
     <h2 class="cta-heading">"Because your hands deserve meaningful care and everyday confidence."</h2>
-    <p class="cta-sub">Three offers. 200 units. The first drop of a patented platform — your hands have been waiting long enough.</p>
+    <p class="cta-sub" id="ctaSub">Three offers. 200 units. The first drop of a patented platform — your hands have been waiting long enough.</p>
     <div class="cta-buttons">
-      <a href="#top" class="cta-btn primary">Shop Now</a>
+      <a href="#top" class="cta-btn primary" id="ctaPrimaryBtn">Shop Now</a>
       <a href="mailto:kenny@nmthera.com" class="cta-btn secondary">Contact Us</a>
     </div>
   </div>
@@ -1003,6 +1608,379 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
 </div><!-- /shell -->
 
 <script>
+/* ═══ DROP STATE ═══ */
+var DROPS = [
+  {
+    id: 1,
+    label: 'Drop 1',
+    date: 'April 2026',
+    shipDate: 'Spring 2026',
+    status: 'shipping',
+    total: 200,
+    skus: {
+      '000': { cap: 20, sold: 0, price: 45 },
+      '001': { cap: 80, sold: 0, price: 85 },
+      '002': { cap: 100, sold: 0, price: 150 }
+    }
+  },
+  {
+    id: 2,
+    label: 'Drop 2',
+    date: 'July 2026',
+    shipDate: 'July 2026',
+    status: 'upcoming',
+    total: 200,
+    skus: {
+      '000': { cap: 20, sold: 0, price: 45 },
+      '001': { cap: 80, sold: 0, price: 85 },
+      '002': { cap: 100, sold: 0, price: 150 }
+    }
+  },
+  {
+    id: 3,
+    label: 'Drop 3',
+    date: 'October 2026',
+    shipDate: 'October 2026',
+    status: 'upcoming',
+    total: 200,
+    skus: {
+      '000': { cap: 20, sold: 0, price: 45 },
+      '001': { cap: 80, sold: 0, price: 85 },
+      '002': { cap: 100, sold: 0, price: 150 }
+    }
+  }
+];
+
+/* ═══ HELPERS ═══ */
+function getSkuRemaining(drop, skuId){
+  return drop.skus[skuId].cap - drop.skus[skuId].sold;
+}
+function isDropSoldOut(drop){
+  var ids = Object.keys(drop.skus);
+  for(var i=0;i<ids.length;i++){
+    if(getSkuRemaining(drop, ids[i]) > 0) return false;
+  }
+  return true;
+}
+function getTotalSoldInDrop(drop){
+  var total = 0;
+  var ids = Object.keys(drop.skus);
+  for(var i=0;i<ids.length;i++){ total += drop.skus[ids[i]].sold; }
+  return total;
+}
+function getActiveDrop(){
+  for(var i=0;i<DROPS.length;i++){
+    if(!isDropSoldOut(DROPS[i])) return DROPS[i];
+  }
+  return DROPS[DROPS.length - 1];
+}
+function getActiveDropForSku(skuId){
+  for(var i=0;i<DROPS.length;i++){
+    if(getSkuRemaining(DROPS[i], skuId) > 0) return DROPS[i];
+  }
+  return null; // sold out across all drops
+}
+function isSkuSoldOutEverywhere(skuId){
+  return getActiveDropForSku(skuId) === null;
+}
+function getSelectedSkuId(){
+  var sel = document.querySelector('.sku-option.selected');
+  return sel ? sel.getAttribute('data-sku') : '001';
+}
+
+/* ═══ RENDER: BUY BOX EYEBROW ═══ */
+function renderBuyBoxEyebrow(){
+  var eyebrow = document.getElementById('bbEyebrow');
+  if(!eyebrow) return;
+  var skuId = getSelectedSkuId();
+  var dot = eyebrow.querySelector('.eyebrow-dot');
+  var textEl = eyebrow.querySelector('.eyebrow-text');
+
+  if(isSkuSoldOutEverywhere(skuId)){
+    dot.className = 'eyebrow-dot sold-out';
+    eyebrow.style.color = 'var(--heat)';
+    textEl.textContent = 'Sold Out · Join Waitlist';
+    return;
+  }
+  var activeDrop = getActiveDropForSku(skuId);
+  var drop1 = DROPS[0];
+  if(activeDrop.id === drop1.id && getSkuRemaining(drop1, skuId) > 0){
+    dot.className = 'eyebrow-dot in-stock';
+    eyebrow.style.color = 'var(--pool)';
+    textEl.textContent = 'In Stock · ' + activeDrop.label + ' · ' + activeDrop.date;
+  } else {
+    dot.className = 'eyebrow-dot pre-order';
+    eyebrow.style.color = 'var(--navy)';
+    textEl.textContent = 'Pre-Order · ' + activeDrop.label + ' · Ships ' + activeDrop.date;
+  }
+}
+
+/* ═══ RENDER: SKU SELECTOR ═══ */
+function renderSkuSelector(){
+  var options = document.querySelectorAll('.sku-option');
+  options.forEach(function(opt){
+    var skuId = opt.getAttribute('data-sku');
+    var stockEl = opt.querySelector('.sku-stock');
+    var infoEl = opt.querySelector('.sku-info');
+
+    // Clean up any previously-injected preorder tag
+    var oldTag = infoEl.querySelector('.tag-preorder');
+    if(oldTag) oldTag.remove();
+
+    opt.classList.remove('sold-out-sku');
+    stockEl.classList.remove('low','preorder','sold-out');
+
+    if(isSkuSoldOutEverywhere(skuId)){
+      stockEl.textContent = 'Sold out';
+      stockEl.classList.add('sold-out');
+      opt.classList.add('sold-out-sku');
+      opt.setAttribute('data-drop','none');
+      return;
+    }
+
+    var activeDrop = getActiveDropForSku(skuId);
+    var drop1 = DROPS[0];
+    opt.setAttribute('data-drop', activeDrop.id);
+
+    // Sold out in Drop 1 but available in a future drop → preorder
+    if(activeDrop.id !== drop1.id){
+      stockEl.textContent = 'Sold out · Pre-order for ' + activeDrop.date;
+      stockEl.classList.add('preorder');
+      var tag = document.createElement('span');
+      tag.className = 'sku-info-tag tag-preorder';
+      tag.textContent = 'Pre-Order · Ships ' + activeDrop.date;
+      infoEl.appendChild(tag);
+      return;
+    }
+
+    // In stock in current drop
+    var remaining = getSkuRemaining(activeDrop, skuId);
+    var cap = activeDrop.skus[skuId].cap;
+    if(remaining <= 10){
+      stockEl.textContent = 'Only ' + remaining + ' left';
+      stockEl.classList.add('low');
+    } else if(remaining <= cap/2){
+      stockEl.textContent = remaining + ' of ' + cap + ' left — going fast';
+      stockEl.classList.add('low');
+    } else {
+      stockEl.textContent = remaining + ' of ' + cap + ' left';
+    }
+  });
+}
+
+/* ═══ RENDER: ATC BUTTON ═══ */
+function renderAtcButton(){
+  var btn = document.getElementById('atcBtn');
+  if(!btn) return;
+  var sel = document.querySelector('.sku-option.selected');
+  if(!sel) return;
+
+  // Do not let a sold-out SKU remain selected if possible
+  var skuId = sel.getAttribute('data-sku');
+  var qty = parseInt(document.getElementById('qtyVal').value) || 1;
+
+  btn.classList.remove('preorder-mode','soldout-mode');
+
+  if(isSkuSoldOutEverywhere(skuId)){
+    btn.textContent = 'Sold Out — Join Waitlist';
+    btn.classList.add('soldout-mode');
+    return;
+  }
+
+  var activeDrop = getActiveDropForSku(skuId);
+  var drop1 = DROPS[0];
+  var price = activeDrop.skus[skuId].price;
+
+  if(activeDrop.id === drop1.id){
+    btn.textContent = 'Add to Cart — $' + (price * qty);
+  } else {
+    btn.textContent = 'Pre-Order — $' + (price * qty) + ' · Ships ' + activeDrop.date;
+    btn.classList.add('preorder-mode');
+  }
+}
+
+/* ═══ RENDER: SHIPPING NOTE ═══ */
+function renderShippingNote(){
+  var note = document.getElementById('shippingNote');
+  if(!note) return;
+  var skuId = getSelectedSkuId();
+
+  if(isSkuSoldOutEverywhere(skuId)){
+    note.innerHTML = '<strong style="color:var(--heat)">SOLD OUT</strong> · All current drops are claimed. Sign up below to be notified when the next drop opens.';
+    return;
+  }
+  var activeDrop = getActiveDropForSku(skuId);
+  var drop1 = DROPS[0];
+  if(activeDrop.id === drop1.id){
+    note.innerHTML = '<strong style="color:var(--green)">IN STOCK</strong> · Drop 1 ships ' + drop1.shipDate + '. Satisfaction guaranteed — if sizing or comfort isn\'t right, we\'ll make it right within 30 days.';
+  } else {
+    note.innerHTML = '<strong style="color:var(--navy)">PRE-ORDER</strong> · Your order ships with ' + activeDrop.label + ' — ' + activeDrop.date + '. Same product, same guarantee. Satisfaction guaranteed within 30 days of delivery.';
+  }
+}
+
+/* ═══ RENDER: DROP STATUS STRIP ═══ */
+function shortMonth(dateStr){
+  return dateStr.split(' ')[0].substring(0, 3);
+}
+function renderDropStatusStrip(){
+  var container = document.getElementById('dropStatusStrip');
+  if(!container) return;
+
+  var active = getActiveDrop();
+  var activeIdx = DROPS.indexOf(active);
+  var sold = getTotalSoldInDrop(active);
+  var remaining = active.total - sold;
+  var soldPct = Math.round((sold / active.total) * 100);
+  var allSoldOut = isDropSoldOut(DROPS[DROPS.length - 1]) && activeIdx === DROPS.length - 1;
+
+  // Counter gradient: navy→pool for shipping (Drop 1 active), pool→green for pre-order
+  var fillGradient = activeIdx === 0
+    ? 'linear-gradient(90deg,var(--navy),var(--pool))'
+    : 'linear-gradient(90deg,var(--pool),var(--green))';
+
+  var counterNum = allSoldOut ? '0' : remaining;
+  var counterLabel = allSoldOut
+    ? 'All drops claimed · waitlist only'
+    : 'of ' + active.total + ' units remaining · ' + active.label;
+
+  var html = '';
+  html += '<div class="dss-counter">';
+  html += '<span class="dss-counter-num">' + counterNum + '</span>';
+  html += '<span class="dss-counter-label">' + counterLabel + '</span>';
+  html += '<div class="dss-counter-bar"><div class="dss-counter-fill" style="width:' + soldPct + '%;background:' + fillGradient + '"></div></div>';
+  html += '</div>';
+
+  html += '<div class="dss-timeline">';
+  DROPS.forEach(function(drop, idx){
+    var cls = 'dss-tl-node ';
+    var soldOut = isDropSoldOut(drop);
+    if(soldOut){
+      cls += 'sold-out';
+    } else if(idx === activeIdx){
+      cls += 'active';
+    } else if(idx === activeIdx + 1){
+      cls += 'upcoming';
+    } else {
+      cls += 'future';
+    }
+    html += '<div class="' + cls + '">';
+    html += '<span class="dss-tl-dot"></span>';
+    html += '<span class="dss-tl-text">' + drop.label + ' · ' + shortMonth(drop.date) + '</span>';
+    html += '</div>';
+    if(idx < DROPS.length - 1){
+      html += '<span class="dss-tl-line"></span>';
+    }
+  });
+  html += '</div>';
+
+  container.innerHTML = html;
+}
+
+/* ═══ RENDER: SKU DETAIL CARDS ═══ */
+function renderSkuDetailCards(){
+  var cards = document.querySelectorAll('.sku-detail-card');
+  cards.forEach(function(card){
+    var skuId = card.getAttribute('data-sku');
+    if(!skuId) return;
+    var fill = card.querySelector('.stock-fill');
+    var label = card.querySelector('.stock-label');
+    var wrap = card.querySelector('.sku-card-img-wrap');
+    var oldOverlay = wrap ? wrap.querySelector('.sku-card-overlay') : null;
+    if(oldOverlay) oldOverlay.remove();
+
+    if(isSkuSoldOutEverywhere(skuId)){
+      if(fill) fill.style.width = '0%';
+      if(label) label.textContent = 'Sold out across all drops';
+      if(wrap){
+        var ov = document.createElement('div');
+        ov.className = 'sku-card-overlay';
+        ov.innerHTML = '<span class="sku-card-overlay-text">Sold Out</span>';
+        wrap.appendChild(ov);
+      }
+      return;
+    }
+
+    var activeDrop = getActiveDropForSku(skuId);
+    var drop1 = DROPS[0];
+    var skuData = activeDrop.skus[skuId];
+    var remaining = getSkuRemaining(activeDrop, skuId);
+    var pct = (remaining / skuData.cap) * 100;
+
+    if(activeDrop.id === drop1.id){
+      if(fill) fill.style.width = pct + '%';
+      if(label) label.textContent = remaining + ' / ' + skuData.cap + ' available';
+    } else {
+      // Sold out in Drop 1, preorder for future drop
+      if(fill) fill.style.width = (skuData.sold / skuData.cap * 100) + '%';
+      if(label) label.textContent = 'Pre-order: ' + skuData.sold + ' of ' + skuData.cap + ' claimed for ' + activeDrop.label;
+      if(wrap){
+        var ov2 = document.createElement('div');
+        ov2.className = 'sku-card-overlay';
+        ov2.innerHTML = '<span class="sku-card-overlay-text">Drop 1 Sold Out · Pre-Order ' + activeDrop.label + '</span>';
+        wrap.appendChild(ov2);
+      }
+    }
+  });
+}
+
+/* ═══ RENDER: BATCH ALLOCATION ═══ */
+function renderBatchAllocation(){
+  var title = document.getElementById('batchTitle');
+  var progress = document.getElementById('batchProgress');
+  if(!title || !progress) return;
+
+  var active = getActiveDrop();
+  var sold = getTotalSoldInDrop(active);
+  var remaining = active.total - sold;
+
+  title.textContent = active.label + ' Allocation — ' + active.total + ' Units Total · ' + sold + ' Claimed';
+  progress.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center">' +
+    '<span class="batch-lbl">' + sold + ' of ' + active.total + ' units claimed</span>' +
+    '<span class="batch-lbl" style="color:var(--pool)">' + remaining + ' remaining</span>' +
+    '</div>';
+}
+
+/* ═══ RENDER: CTA BAND ═══ */
+function renderCtaBand(){
+  var sub = document.getElementById('ctaSub');
+  var btn = document.getElementById('ctaPrimaryBtn');
+  if(!sub || !btn) return;
+
+  var drop1 = DROPS[0];
+  var drop2 = DROPS[1];
+  var drop3 = DROPS[2];
+  var d1Out = isDropSoldOut(drop1);
+  var d2Out = isDropSoldOut(drop2);
+  var d3Out = isDropSoldOut(drop3);
+
+  if(!d1Out){
+    sub.textContent = 'Three offers. 200 units. The first drop of a patented platform — your hands have been waiting long enough.';
+    btn.textContent = 'Shop Now';
+  } else if(!d2Out){
+    sub.textContent = 'Drop 1 sold out. Secure your pair in the next batch — shipping ' + drop2.date + '. Same patented glove, same ritual.';
+    btn.textContent = 'Pre-Order Now';
+  } else if(!d3Out){
+    var d3Remaining = drop3.total - getTotalSoldInDrop(drop3);
+    sub.textContent = 'Two drops claimed. ' + d3Remaining + ' units remain in Drop 3 — shipping ' + drop3.date + '.';
+    btn.textContent = 'Pre-Order Now';
+  } else {
+    sub.textContent = 'All drops claimed. Join the waitlist below to be first in line when the next batch opens.';
+    btn.textContent = 'Join Waitlist';
+  }
+}
+
+/* ═══ MASTER RENDER ═══ */
+function renderAll(){
+  renderBuyBoxEyebrow();
+  renderSkuSelector();
+  renderAtcButton();
+  renderShippingNote();
+  renderDropStatusStrip();
+  renderSkuDetailCards();
+  renderBatchAllocation();
+  renderCtaBand();
+}
+
 /* ═══ IMAGE GALLERY ═══ */
 function swapImg(thumb,src){
   document.getElementById('mainImgEl').src=src;
@@ -1012,16 +1990,15 @@ function swapImg(thumb,src){
 
 /* ═══ SKU SELECTOR ═══ */
 function selectSku(el){
+  if(el.classList.contains('sold-out-sku')) return;
   document.querySelectorAll('.sku-option').forEach(function(o){o.classList.remove('selected')});
   el.classList.add('selected');
   updateAtc();
+  renderBuyBoxEyebrow();
+  renderShippingNote();
 }
 function updateAtc(){
-  var sel=document.querySelector('.sku-option.selected');
-  if(!sel)return;
-  var price=parseInt(sel.getAttribute('data-price'));
-  var qty=parseInt(document.getElementById('qtyVal').value)||1;
-  document.getElementById('atcBtn').textContent='Add to Cart — $'+(price*qty);
+  renderAtcButton();
 }
 function changeQty(d){
   var el=document.getElementById('qtyVal');
@@ -1045,6 +2022,63 @@ function toggleMode(el){
 /* ═══ FAQ ═══ */
 function toggleFaq(el){
   el.classList.toggle('open');
+}
+
+/* ═══ ATC CLICK — waitlist scroll ═══ */
+document.addEventListener('click', function(e){
+  var btn = e.target.closest('#atcBtn');
+  if(!btn) return;
+  if(btn.classList.contains('soldout-mode')){
+    e.preventDefault();
+    var footer = document.querySelector('.site-footer');
+    if(footer) footer.scrollIntoView({behavior:'smooth'});
+  }
+});
+
+/* ═══ DEBUG PANEL ═══ */
+function initDebugPanel(){
+  if(window.location.search.indexOf('debug=1') === -1) return;
+  var panel = document.createElement('div');
+  panel.className = 'debug-panel';
+  var html = '<h5>Drop Debug</h5>';
+  html += '<select id="dbgDropSel">';
+  DROPS.forEach(function(d){ html += '<option value="' + d.id + '">' + d.label + '</option>'; });
+  html += '</select>';
+  html += '<label>_000 sold <input type="number" id="dbg000" min="0" max="20" value="0"></label>';
+  html += '<label>_001 sold <input type="number" id="dbg001" min="0" max="80" value="0"></label>';
+  html += '<label>_002 sold <input type="number" id="dbg002" min="0" max="100" value="0"></label>';
+  html += '<button id="dbgApply">Simulate</button>';
+  panel.innerHTML = html;
+  document.body.appendChild(panel);
+
+  function loadDrop(){
+    var id = parseInt(document.getElementById('dbgDropSel').value);
+    var d = DROPS.find(function(x){ return x.id === id; });
+    document.getElementById('dbg000').value = d.skus['000'].sold;
+    document.getElementById('dbg001').value = d.skus['001'].sold;
+    document.getElementById('dbg002').value = d.skus['002'].sold;
+  }
+  loadDrop();
+  document.getElementById('dbgDropSel').addEventListener('change', loadDrop);
+  document.getElementById('dbgApply').addEventListener('click', function(){
+    var id = parseInt(document.getElementById('dbgDropSel').value);
+    var d = DROPS.find(function(x){ return x.id === id; });
+    d.skus['000'].sold = Math.min(d.skus['000'].cap, Math.max(0, parseInt(document.getElementById('dbg000').value) || 0));
+    d.skus['001'].sold = Math.min(d.skus['001'].cap, Math.max(0, parseInt(document.getElementById('dbg001').value) || 0));
+    d.skus['002'].sold = Math.min(d.skus['002'].cap, Math.max(0, parseInt(document.getElementById('dbg002').value) || 0));
+    renderAll();
+  });
+}
+
+/* ═══ INIT ═══ */
+function initDropSystem(){
+  renderAll();
+  initDebugPanel();
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', initDropSystem);
+} else {
+  initDropSystem();
 }
 
 /* ═══ REVEAL ON SCROLL ═══ */
