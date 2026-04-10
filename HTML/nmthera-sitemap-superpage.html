@@ -260,7 +260,7 @@ img{max-width:100%;display:block}
 /* Hero panels: no top padding — hero bleeds to viewport top */
 #page-home,#page-shop,#page-ritual{padding-top:0 !important}
 /* Non-hero panels: extra top clearance for WP offset compensation */
-#page-science,#page-about,#page-research,#page-clinical,#page-codev,#page-faq,#page-contact,#page-policies,#page-blog,#page-commons,#page-thankyou{padding-top:100px}
+#page-science,#page-about,#page-research,#page-clinical,#page-practitioners,#page-performance,#page-codev,#page-faq,#page-contact,#page-policies,#page-blog,#page-commons,#page-thankyou{padding-top:100px}
 .hero{position:relative;width:100%;min-height:100vh;min-height:100dvh;overflow:hidden;margin-left:0;margin-top:-80px;padding-bottom:0;background:#0c1520}
 #heroBg,#shopHeroBg,#ritualHeroBg{position:absolute;inset:0;width:100%;height:100%;filter:blur(56px) saturate(1.5) brightness(0.75) opacity(0.9);z-index:1;pointer-events:none;will-change:filter}
 .hero-veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(135deg,rgba(12,21,32,0.88) 0%,rgba(12,21,32,0.55) 50%,rgba(12,21,32,0.78) 100%)}
@@ -488,11 +488,12 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 /* ═══ REFUSE / PURSUE ═══ */
 .refuse-pursue{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:680px;margin:0 auto;padding:clamp(1.5rem,3vw,2.5rem) 0}
 .rp-col{padding-left:14px}
-.rp-col.refuse{border-left:2px solid var(--heat)}
-.rp-col.pursue{border-left:2px solid var(--green)}
+.rp-col.refuse{border-left:none}
+.rp-col.pursue{border-left:none}
 .rp-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.6rem}
 .rp-col.refuse .rp-eyebrow{color:var(--heat)}.rp-col.pursue .rp-eyebrow{color:var(--green)}
-.rp-col li{font-family:var(--body);font-size:11px;color:rgba(17,24,39,0.58);line-height:1.7;list-style:none;padding:2px 0}
+.rp-col li{font-family:var(--body);font-size:14px;color:rgba(17,24,39,0.58);line-height:1.7;list-style:none;padding:2px 0}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 
 /* ═══ LIQUID ACCENT ═══ */
 .liquid-accent{height:4px;border:none;margin:0;background:linear-gradient(90deg,transparent 0%,rgba(0,109,119,0.15) 15%,rgba(49,89,138,0.25) 35%,rgba(0,109,119,0.3) 50%,rgba(104,139,88,0.2) 70%,rgba(49,89,138,0.15) 85%,transparent 100%);filter:blur(1px)}
@@ -687,6 +688,8 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
     <div class="nav-tab" data-tab="about">About</div>
     <div class="nav-tab" data-tab="research">Research Access</div>
     <div class="nav-tab" data-tab="clinical">For Clinicians</div>
+    <div class="nav-tab" data-tab="practitioners">For Practitioners</div>
+    <div class="nav-tab" data-tab="performance">Performance</div>
     <div class="nav-tab" data-tab="codev">Co-Development</div>
     <div class="nav-tab" data-tab="faq">FAQ</div>
     <div class="nav-tab" data-tab="contact">Contact</div>
@@ -739,11 +742,12 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
         <div class="hero-tagline"><strong>Hand &amp; Footcare</strong> Reimagined.</div>
         <p class="hero-desc"><em>What if one of the oldest acts of personal care — immersing the body in water — could move with the person?</em> A patented silicone glove that seals water, warmth, and therapeutic agents around your hand while you move freely. No bowls. No basins. No sitting still.</p>
         <div class="hero-badges">
-          <span class="hero-badge hl">US Patent · Valid to 2043</span>
+          <span class="hero-badge">First Batch Launching May 1</span>
+          <span class="hero-badge">US Patent · Valid to 2043</span>
           <span class="hero-badge">3 Offers Available Now</span>
           <span class="hero-badge">Medical-Grade Silicone</span>
         </div>
-        <div style="font-family:var(--sub);font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:1rem">~8 Min Read · Scroll to explore</div>
+        <button class="nav-cta" onclick="switchTab('shop')" style="margin-top:1.25rem" data-backend="woocommerce" data-action="navigate-to-cart">Explore SOKY</button>
       </div>
     </div>
     <div class="scroll-cue"><span>Scroll</span><div class="scroll-cue-bar"></div></div>
@@ -786,33 +790,22 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
     <h2 class="conn-heading">The hand is where connection begins.</h2>
     <p class="conn-body">A handshake. A child's grip. A steadying touch on someone's shoulder. The moments that matter most in a complex world happen through our hands — and millions of people avoid them. Sweating, cracking, aching, or simply neglected, the hands become a barrier instead of a bridge. SOKY exists to remove that barrier. Not with complexity, but with water, warmth, and a ritual simple enough to keep.</p>
     <p class="conn-coda">When we restore care to the hands, we restore the capacity to reach out.</p>
+    <button class="nav-cta" onclick="switchTab('shop')" style="margin-top:1.5rem" data-backend="woocommerce" data-action="navigate-to-cart">Shop SOKY</button>
   </div></div>
 
-  <!-- Who It's For -->
-  <div class="sec"><div class="container">
-    <div class="sec-eyebrow">Who It's For</div>
-    <h2 class="sec-heading">Built for people, not personas alone.</h2>
-    <div class="persona-grid reveal">
-      <div class="persona-card">
-        <div class="persona-icon" style="color:var(--pool)"><svg viewBox="0 0 32 32" fill="none" width="36" height="36"><circle cx="16" cy="10" r="5" stroke="currentColor" stroke-width="2"/><path d="M6 28c0-5.5 4.5-10 10-10s10 4.5 10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <div class="persona-label">Self / Personal Care</div>
-        <h3 class="persona-title">The calm-seeker</h3>
-        <p class="persona-desc">You're looking for rituals of restoration — hydration, relief, cleanliness, discretion, and everyday confidence. Care that fits into the rhythm of a real life rather than interrupting it. You've never had a hand care routine that actually stuck. SOKY is how you begin.</p>
-        <div class="persona-conditions"><span>Dry, cracked skin</span><span>Hand fatigue</span><span>Daily wellness</span><span>Relaxation</span></div>
-      </div>
-      <div class="persona-card">
-        <div class="persona-icon" style="color:var(--navy)"><svg viewBox="0 0 32 32" fill="none" width="36" height="36"><rect x="7" y="4" width="18" height="24" rx="3" stroke="currentColor" stroke-width="2"/><line x1="12" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="14" x2="18" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="16" cy="22" r="2" stroke="currentColor" stroke-width="1.5"/></svg></div>
-        <div class="persona-label">Clinician-Adjacent</div>
-        <h3 class="persona-title">The practitioner &amp; guidance-seeker</h3>
-        <p class="persona-desc">You value safe, supportive tools that complement clinical practice. Your recommendation is only as durable as the patient's ability to keep the routine — SOKY removes every friction point in the home soak protocol.</p>
-        <div class="persona-conditions"><span>Hyperhidrosis</span><span>Eczema</span><span>Arthritis</span><span>Post-surgical</span></div>
-      </div>
-      <div class="persona-card">
-        <div class="persona-icon" style="color:var(--green)"><svg viewBox="0 0 32 32" fill="none" width="36" height="36"><path d="M16 4l3 6h7l-5.5 4.5 2 7L16 17l-6.5 4.5 2-7L6 10h7l3-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
-        <div class="persona-label">Performance / Recovery</div>
-        <h3 class="persona-title">The efficiency-minded</h3>
-        <p class="persona-desc">Athletes and active people who want a portable reset, short workflows, easy cleanup, and body-part specific recovery that fits into training life — not around it. 15 minutes, targeted, done.</p>
-        <div class="persona-conditions"><span>Exercise recovery</span><span>Inflammation</span><span>Muscle relief</span><span>Plantar fasciitis</span></div>
+  <!-- Persona Funnel — SEO symptom routing -->
+  <div class="sec" style="padding-top:0"><div class="container">
+    <div style="text-align:center;max-width:680px;margin:0 auto">
+      <p style="font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">SOKY helps with</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center">
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Dry Cracked Hands</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Sweaty Hands</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Post-Workout Recovery</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Eczema</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Arthritis Relief</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Plantar Fasciitis</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Hand Fatigue</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Daily Wellness</a>
       </div>
     </div>
   </div></div>
@@ -953,11 +946,19 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
         <div class="sku-c-body">
           <div class="sku-c-id">HandSOKY_B_M_000</div>
           <div class="sku-c-price">$45</div>
-          <span class="sku-c-tag tag-r">Research Access · 20 Units</span>
-          <div class="sku-c-name">Hand SOKY — Research Access</div>
-          <div class="sku-c-desc">Identical glove. 90-day feedback commitment. Application-based — 20 per drop.</div>
+          <span class="sku-c-tag tag-r">Single Glove · 40 Units</span>
+          <div class="sku-c-name">Hand SOKY — Single</div>
+          <div class="sku-c-desc">One glove, Size Medium. Same patented seal, same ritual. Try SOKY at the entry price.</div>
           <!-- BACKEND: Dynamic inventory count for _000 -->
-          <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_000"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--pool),var(--green))"></div></div><span class="stk-lbl">20 / 20</span></div>
+          <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_000"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--pool),var(--green))"></div></div><span class="stk-lbl">40 / 40</span></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:1rem">
+            <div style="display:flex;align-items:center;border:1px solid var(--line-md);border-radius:var(--r-sm);overflow:hidden">
+              <button onclick="var i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">−</button>
+              <input type="number" value="1" min="1" max="10" style="width:32px;height:28px;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-family:var(--body);font-size:12px;color:var(--ink);-moz-appearance:textfield" oninput="this.value=Math.max(1,Math.min(10,+this.value||1))">
+              <button onclick="var i=this.previousElementSibling;i.value=Math.min(10,+i.value+1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">+</button>
+            </div>
+            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000">Add to Cart</button>
+          </div>
         </div>
       </div>
       <!-- BACKEND: Add to cart — HandSOKY_B_M_001 via WooCommerce -->
@@ -971,6 +972,14 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
           <div class="sku-c-desc">One pair, Size Medium. The essential starting point — everything you need for the full ritual.</div>
           <!-- BACKEND: Dynamic inventory count for _001 -->
           <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_001"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--navy),var(--pool))"></div></div><span class="stk-lbl">80 / 80</span></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:1rem">
+            <div style="display:flex;align-items:center;border:1px solid var(--line-md);border-radius:var(--r-sm);overflow:hidden">
+              <button onclick="var i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">−</button>
+              <input type="number" value="1" min="1" max="10" style="width:32px;height:28px;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-family:var(--body);font-size:12px;color:var(--ink);-moz-appearance:textfield" oninput="this.value=Math.max(1,Math.min(10,+this.value||1))">
+              <button onclick="var i=this.previousElementSibling;i.value=Math.min(10,+i.value+1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">+</button>
+            </div>
+            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_001">Add to Cart</button>
+          </div>
         </div>
       </div>
       <!-- BACKEND: Add to cart — HandSOKY_B_M_002 via WooCommerce -->
@@ -978,20 +987,22 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
         <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="Hand SOKY Travel System" loading="lazy">
         <div class="sku-c-body">
           <div class="sku-c-id">HandSOKY_B_M_002</div>
-          <div class="sku-c-price">$150</div>
+          <div class="sku-c-price">$120</div>
           <span class="sku-c-tag tag-k">Travel System · Best Value</span>
           <div class="sku-c-name">Hand SOKY Travel System</div>
           <div class="sku-c-desc">Gloves + towel + clip hook + bag + instructions. Gift-ready. The complete experience.</div>
           <!-- BACKEND: Dynamic inventory count for _002 -->
           <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_002"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--green),var(--navy))"></div></div><span class="stk-lbl">100 / 100</span></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:1rem">
+            <div style="display:flex;align-items:center;border:1px solid var(--line-md);border-radius:var(--r-sm);overflow:hidden">
+              <button onclick="var i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">−</button>
+              <input type="number" value="1" min="1" max="10" style="width:32px;height:28px;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-family:var(--body);font-size:12px;color:var(--ink);-moz-appearance:textfield" oninput="this.value=Math.max(1,Math.min(10,+this.value||1))">
+              <button onclick="var i=this.previousElementSibling;i.value=Math.min(10,+i.value+1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">+</button>
+            </div>
+            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_002">Add to Cart</button>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="batch-wrap">
-      <div class="batch-hd">Batch 1 Allocation — 200 Units Total</div>
-      <div class="batch-bar"><div class="batch-seg" style="width:10%;background:var(--pool)"></div><div class="batch-seg" style="width:40%;background:var(--navy)"></div><div class="batch-seg" style="width:50%;background:var(--green)"></div></div>
-      <div class="batch-labels"><span class="batch-lbl"><span class="batch-dot" style="background:var(--pool)"></span>Research — 20</span><span class="batch-lbl"><span class="batch-dot" style="background:var(--navy)"></span>Core — 80</span><span class="batch-lbl"><span class="batch-dot" style="background:var(--green)"></span>Travel — 100</span></div>
     </div>
 
     <p style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-top:1.5rem;margin-bottom:2rem"><strong style="color:var(--green)">PRE-ORDER</strong> · Batch 1 ships Spring 2026. 30-day satisfaction guarantee.</p>
@@ -1000,7 +1011,7 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 
     <h3 style="font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem">What's Included</h3>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:2rem">
-      <div class="callout pool"><div class="callout-lbl">_000 Research Access</div><p>(2) SOKY silicone gloves · (1) How-To-Use card · Research enrollment form</p></div>
+      <div class="callout pool"><div class="callout-lbl">_000 Single</div><p>(1) SOKY silicone glove · (1) How-To-Use card</p></div>
       <div class="callout"><div class="callout-lbl">_001 Core</div><p>(2) SOKY silicone gloves · (1) How-To-Use card</p></div>
       <div class="callout green"><div class="callout-lbl">_002 Travel System</div><p>(2) SOKY silicone gloves · (1) Hand towel · (1) Clip hook · (1) Travel bag · (1) How-To-Use card · (1) Product info card</p></div>
     </div>
@@ -1144,7 +1155,7 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
     <div class="sci-grid reveal">
       <div class="sci-card"><div class="sci-lbl">Occlusive Hydration</div><div class="sci-val">300–400%</div><div class="sci-desc">Stratum corneum hydration increase under sealed occlusive conditions.</div></div>
       <div class="sci-card"><div class="sci-lbl">Iontophoresis Efficacy</div><div class="sci-val">80%+</div><div class="sci-desc">Sweat reduction via iontophoresis — gold standard for hyperhidrosis.</div></div>
-      <div class="sci-card"><div class="sci-lbl">Adherence Improvement</div><div class="sci-val">+36 pts</div><div class="sci-desc">Adherence improvement when format friction is removed.</div></div>
+      <div class="sci-card"><div class="sci-lbl">Adherence Improvement</div><div class="sci-val">+36%</div><div class="sci-desc">Adherence improvement when format friction is removed from home routines.</div></div>
       <div class="sci-card"><div class="sci-lbl">Conditions Supported</div><div class="sci-val">9+</div><div class="sci-desc">Across consumer and clinical pathways.</div></div>
     </div>
 
@@ -1346,7 +1357,7 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
       <div class="sci-grid" style="grid-template-columns:1fr 1fr;margin-bottom:2rem">
         <div class="sci-card"><div class="sci-lbl">Iontophoresis</div><div class="sci-val">80%+</div><div class="sci-desc">Sweat reduction — gold standard for hyperhidrosis management.</div></div>
         <div class="sci-card"><div class="sci-lbl">Occlusion</div><div class="sci-val">300–400%</div><div class="sci-desc">Stratum corneum hydration increase under sealed conditions.</div></div>
-        <div class="sci-card"><div class="sci-lbl">Adherence</div><div class="sci-val">+36 pts</div><div class="sci-desc">Improvement when format friction is removed from home soak routines.</div></div>
+        <div class="sci-card"><div class="sci-lbl">Adherence</div><div class="sci-val">+36%</div><div class="sci-desc">Adherence improvement when format friction is removed from home routines.</div></div>
         <div class="sci-card"><div class="sci-lbl">Drop-off Rate</div><div class="sci-val">~70%</div><div class="sci-desc">Users abandon at-home immersion within 90 days. SOKY addresses the format barrier.</div></div>
       </div>
 
@@ -1381,6 +1392,40 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
       <div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" placeholder="Tell us about your practice and how you see SOKY fitting in."></textarea></div>
       <!-- BACKEND: Clinical partner interest form -->
       <button class="form-btn" data-backend="form" data-form-type="clinical-partner-interest">Submit Interest</button>
+    </div>
+  </div></div>
+</div>
+
+<!-- PAGE: FOR PRACTITIONERS -->
+<div class="page-panel" id="page-practitioners">
+  <div class="container page-hero">
+    <div class="page-hero-eyebrow">For Practitioners &amp; Therapists</div>
+    <h1 class="page-hero-title">A tool your patients will actually use.</h1>
+    <p class="page-hero-sub">SOKY removes the format barrier that causes 70% of patients to abandon at-home immersion routines. Recommend a portable, patent-protected soak system that bridges the gap between clinic visits.</p>
+  </div>
+  <div class="sec"><div class="container">
+    <div class="coming-soon">
+      <div class="coming-soon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div class="coming-soon-title">Full page coming soon.</div>
+      <p class="coming-soon-desc">This page will feature condition-specific protocols, clinical evidence, dispensing program details, and practitioner testimonials. In the meantime, visit the Clinical Partner page for more.</p>
+      <button class="form-btn" onclick="switchTab('clinical')">Clinical Partner Program →</button>
+    </div>
+  </div></div>
+</div>
+
+<!-- PAGE: PERFORMANCE -->
+<div class="page-panel" id="page-performance">
+  <div class="container page-hero">
+    <div class="page-hero-eyebrow">Performance &amp; Recovery</div>
+    <h1 class="page-hero-title">15 minutes. Targeted. Done.</h1>
+    <p class="page-hero-sub">Athletes and active people who want a portable reset — body-part specific recovery that fits into training life, not around it. Short workflows, easy cleanup, real results.</p>
+  </div>
+  <div class="sec"><div class="container">
+    <div class="coming-soon">
+      <div class="coming-soon-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div class="coming-soon-title">Full page coming soon.</div>
+      <p class="coming-soon-desc">This page will feature recovery protocols, athlete use cases, hot/cold mode guides, and performance-specific soak routines.</p>
+      <button class="form-btn" onclick="switchTab('shop')">Shop SOKY →</button>
     </div>
   </div></div>
 </div>
