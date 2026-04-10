@@ -2,6 +2,89 @@
 
 ---
 
+## April 10, 2026 — 24-Hour Recap: Six Threads, Campaign 1 Pressure
+
+### 1. Data Privacy & Training Opt-Out
+Realized sensitive info (tax/financial data) had been shared while Anthropic training toggle was ON. Remediated: purged all 3 memory edits, toggled off "Help improve Claude," discussed deleting past conversations. Key takeaway: deleted chats are excluded from future training, but data already in the pipeline can't be unlearned. Practical risk of data surfacing to other users is very low but theoretically nonzero. Decided exposure was manageable and moved on.
+
+### 2. Full Skills Ecosystem Audit
+Cataloged all 11 installed skills (8 public, 2 custom, 1 example) into a reference table with paths, editability, descriptions, and revision cadence. Identified four new skills to build: bsg-design-system, investor-materials, campaign-1-launch (most time-sensitive — weekly updates through April 30), and claude-code-prompts (meta-skill about working patterns with Claude). Documented the skill update workflow: tell Claude what to change → download repackaged .skill → re-upload in Settings.
+
+### 3. Asana Backlog Sprint (50 Tasks)
+Sorted all 50 tasks on the Master Coordinator board by due date and worked through them sequentially. Accomplished: pricing rationale drafted ("Why $350/$85?"), TopSheng video brief completed, LegalZoom/corporate compliance documented (C Corp reinstatement filed, licensing checklist mapped — Seller's Permit, Home Occupation Verification, Business Tax Certificate), team comms sent to Chi Le and Tiffany Morimoto, Weekly Updater and COB task structures reviewed. Generated a full status report deliverable.
+
+**Honest assessment for Campaign 1:** Pre-Launch and Launch task lists mostly unassigned and unstarted. Five critical blockers: (1) no Shopify checkout, (2) no landing page, (3) no product liability insurance, (4) no Seller's Permit filed, (5) manufacturing status with TopSheng unconfirmed.
+
+### 4. Journal Workflow
+Consolidated April 9 work into a recap and generated a Claude Code prompt to append to JOURNAL.md. Confirmed workflow: Chat → Claude Code prompt → execute in terminal → push. Entries most-recent-first.
+
+### 5. 3D Design / OpenSCAD Exploration
+Explored whether Claude can create STP/CAD files. Established boundary: Claude can write parametric OpenSCAD .scad scripts but can't produce native CAD. Good for hard-surface/mechanical geometry, weak for organic surfaces. Downloaded OpenSCAD installer. New workflow unlocked: describe geometry → Claude writes script → render locally → export STL/STEP.
+
+### 6. PDP Pre-Order System + Product Roadmap
+Designed a pre-order cascade for the PDP: when a batch of 200 units sells out, the buy box transitions from "Add to Cart" to "Pre-Order · Ships [next drop date]," cascading through subsequent batches (April → July → October). Two features built via Claude Code prompt:
+- **Drop Status Strip** — relocated into the buy box. Shows remaining units counter, sold-percentage bar, 3-dot mini timeline.
+- **Product Roadmap section** — four cards (Foot SOKY, Knee SOKY, Elbow SOKY, SOKY Plus consumables) between Three Offers and FAQ, with pre-wired links to future PDP pages.
+
+### Overarching Theme
+20 days to Campaign 1 launch. Juggling legal compliance, frontend buildout, team coordination, manufacturing confirmation, and investor-facing polish simultaneously. Skills ecosystem and journal workflow are scaffolding for cross-session context. Biggest unlocks today: Tiffany meeting (frontend handoff) and Seller's Permit application.
+
+---
+
+## Session — April 7, 2026
+
+### What We Did
+
+1. **Full 2025 tax prep buildout** — Parsed 601 transactions from Wells Fargo year-end spending report (CSV). Classified every transaction as business, medical, or personal using regex-based rules against Kenny's tax category list.
+2. **Chase Business Ink analysis** — Ingested Chase Ink ...9908 CSV (closed card). Found $2,385 in business purchases (Jan–Apr) and $5,046 in business credit card interest potentially deductible. Card was closed involuntarily by Chase mid-April — root cause of all commingling on personal accounts.
+3. **Business account analysis** — Parsed INC (...3560) and LLC (...1356) Chase Business checking CSVs. Mapped all outflows: $8,165 to TopSheng, $8,500 to contractors, $86,399 to Kenny (salary/draw + mortgage allocation), $130,120 in investor deposits.
+4. **IVF deduction identified** — $26,000 IVF procedure charged to wife's CC in 2025, refinanced via medical loan. Fully deductible on Schedule A in the year charged. Combined with Kaiser ($5,145), pharmacy ($604), and Blue Shield ($230), total medical is $31,749.
+5. **Itemizing vs standard deduction analysis** — Medical alone (~$26.5K after 7.5% AGI floor) nearly matches the $29,200 standard deduction. Adding SALT and mortgage interest likely makes itemizing the better path.
+6. **Contractor 1099 audit** — Identified four contractors needing late 1099-NECs: Hameed ($4,000), Tiffany ($1,500), Jenn ($1,500), Chi ($1,000). Charlie Kim under $600 threshold. Deadline was Jan 31 — penalty est. $240–600.
+7. **Hameed payment channels mapped** — ITSMADEEZY Innovative Solutions (India entity) received payments via PayPal/ACH (Feb $1,500) and ICICI Bank wires (Jun $1,500, Nov $500, Dec $500). All four transactions reference same entity. Needs W-8BEN or W-8BEN-E.
+8. **Kenichiro R&D reimbursement** — $2,000 via Zelle (2 x $1,000) for iontophoresis machines. Confirmed as 2026 payment — removed from 2025 totals. Equipment supports Model E1 development and R&D credit case.
+9. **LLC partnership return flagged** — LLC is multi-member (Kenny + Kenichiro), requiring Form 1065 + K-1s. Ownership percentages are informal and need formalization before filing. Unclear whether 1065 was filed in prior years.
+10. **Corp-E-Corp identified** — $430.63 payment (Apr 7, LLC) identified as likely Delaware C Corp annual franchise tax / registered agent fee.
+11. **24 Hour Fitness flagged as personal** — $335.87 (Jan + Feb, LLC) was personal spending commingled accidentally. Excluded from business totals.
+12. **Tax prep spreadsheet built** — Eight-tab Excel workbook: Cover Memo, WF Business Expenses, Chase Ink (closed), Business Accounts, Medical (Schedule A), 1099 Filing Summary, Grand Summary, Personal Summary. Iterated through six major versions as new data sources were added.
+13. **Cover memo for Stewart (Robinson CPA)** — Clean single-pass briefing: entity structure, financial summary, contractor/1099 status, eight questions for Stewart, folder checklist with IRS form links.
+14. **Spending pattern analysis** — Burn rate doubled Jun–Dec vs Jan–May. WF CC payments escalated from $579/mo to $5,325/mo. Two overdraft fees in one week (Jul). SaaS creep to ~$800–900/mo by Q4. Amazon black box ($4,823, spike Oct–Nov).
+15. **Red flag / green flag audit** — Green: capital-efficient build ($32K ops on $130K capital), documented contractor SOWs, traceable expenses, legitimate IP and manufacturing spend. Red: commingling across five accounts, no 1099s filed, no W-2 payroll, informal LLC ownership, $40K personal CC debt.
+16. **Fundraising strategy discussion** — Recommended $500K target on $3.2M SAFE. Three tiers analyzed (survival $150–250K, working $400–600K, growth $800K–1M). Lead with product/IP/margins in pitch, not macro thesis. Raise now — angels less sensitive to market volatility.
+17. **W-9 and W-8BEN messages drafted** — Template for Tiffany/Jenn/Chi (W-9) and custom message for Hameed (W-8BEN individual with entity question flagged for Stewart).
+
+### Key Decisions
+
+- **File extensions before April 15** — Form 4868 (personal) + Form 7004 (C Corp + partnership). Return cannot be properly filed in 8 days given C Corp, LLC 1065, compensation characterization, and late 1099s.
+- **All contractors treated as independent contractors** — Correct for current phase. SOW documentation exists for all team members.
+- **Hameed files as individual (W-8BEN)** — His preference. Stewart may also need W-8BEN-E for ITSMADEEZY entity given Feb payment went through the company.
+- **Kenichiro iontophoresis payment is 2026** — Removed from 2025 business totals. Will be 2026 R&D expense.
+- **24 Hour Fitness excluded** — Personal expense commingled on LLC. Treated as personal draw.
+- **Corp-E-Corp is DE corp maintenance** — Not flagged as unknown. Likely franchise tax or registered agent.
+- **KP SF = Kenny's mortgage/home account** — ~$4K/mo housing allocation. Stewart to characterize along with direct salary payments.
+- **Credit card statements (Discover, Amazon Store Card) not included** — Confirmed no business charges on those cards. Rolling personal balances only.
+- **Chase Ink closure caused the commingling** — Not carelessness. Card was the primary business card; after involuntary closure, all subscriptions migrated to personal WF accounts.
+- **Post-raise clean break** — Day one of pre-seed funding: new business CC, Gusto payroll, zero personal card usage for business.
+
+### Files Changed
+
+- None (tax prep session — spreadsheet output only, not added to repo)
+- Output: `NMThera_2025_Tax_FINAL_v4.xlsx` (8-tab workbook for Stewart)
+
+### Next Steps
+
+- File Form 4868 + Form 7004 before April 15
+- Send W-9 requests to Tiffany, Jenn, Chi
+- Send W-8BEN request to Hameed
+- Collect wife's W-2 + IVF invoice + CC line items + loan agreement
+- Get iontophoresis machine receipts from Ken (for 2026 filing)
+- Hand Stewart the folder: spreadsheet + 5 CSVs + 2 screenshots
+- Stewart to advise on: LLC 1065 history, Kenny comp characterization, R&D credit eligibility, biz CC interest deductibility, Blue Shield placement
+- Formalize LLC ownership percentages (Kenny + Kenichiro) before K-1s
+- April 30 — Campaign 1 launch (unchanged)
+
+---
+
 ## Session — April 3, 2026
 
 ### What We Did
