@@ -381,7 +381,7 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 .sci-desc{font-family:var(--body);font-size:11.5px;color:var(--muted);line-height:1.5}
 
 /* ═══ SKU CARDS ═══ */
-.sku-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:2rem}
+.sku-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:2rem}
 .sku-c{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);position:relative;transition:transform .2s,box-shadow .2s}
 .sku-c:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .sku-c::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
@@ -923,7 +923,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <div class="hero-text">
         <div class="hero-eyebrow">Shop SOKY</div>
         <h1 class="hero-title" style="font-size:clamp(42px,7vw,88px)">Choose Your Entry</h1>
-        <div class="hero-tagline">Two Offers · 200 Units · <strong>First Drop</strong></div>
+        <div class="hero-tagline">Three Offers · 200 Units · <strong>First Drop</strong></div>
         <p class="hero-desc">Every offer ships the same patented glove — identical silicone, identical seal, identical ritual. Pick the one that fits your path.</p>
         <div class="hero-badges">
           <span class="hero-badge hl">Batch 1 · Spring 2026</span>
@@ -941,10 +941,31 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
   <div class="sec"><div class="container">
     <div class="sec-eyebrow">First Drop · Batch 1 of 200</div>
-    <h2 class="sec-heading">Two offers. 200 units. First drop.</h2>
+    <h2 class="sec-heading">Three offers. 200 units. First drop.</h2>
     <p class="sec-sub">Every offer ships the same patented glove — identical silicone, identical seal, identical ritual. Pick the one that fits your path.</p>
 
     <div class="sku-cards reveal">
+      <!-- BACKEND: Add to cart — HandSOKY_B_M_000 via WooCommerce -->
+      <div class="sku-c research" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000">
+        <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Single" loading="lazy" style="object-position:center 60%">
+        <div class="sku-c-body">
+          <div class="sku-c-id">HandSOKY_B_M_000</div>
+          <div class="sku-c-price">$45</div>
+          <span class="sku-c-tag tag-r">Single Glove · 40 Units</span>
+          <div class="sku-c-name">Hand SOKY — Single</div>
+          <div class="sku-c-desc">One glove, Size Medium. Same patented seal, same ritual. Try SOKY at the entry price.</div>
+          <!-- BACKEND: Dynamic inventory count for _000 -->
+          <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_000"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--pool),var(--green))"></div></div><span class="stk-lbl">40 / 40</span></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:1rem">
+            <div style="display:flex;align-items:center;border:1px solid var(--line-md);border-radius:var(--r-sm);overflow:hidden">
+              <button onclick="var i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">−</button>
+              <input type="number" value="1" min="1" max="10" style="width:32px;height:28px;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-family:var(--body);font-size:12px;color:var(--ink);-moz-appearance:textfield" oninput="this.value=Math.max(1,Math.min(10,+this.value||1))">
+              <button onclick="var i=this.previousElementSibling;i.value=Math.min(10,+i.value+1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">+</button>
+            </div>
+            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000">Add to Cart</button>
+          </div>
+        </div>
+      </div>
       <!-- BACKEND: Add to cart — HandSOKY_B_M_001 via WooCommerce -->
       <div class="sku-c core" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_001">
         <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Core" loading="lazy" style="object-position:center 45%">
@@ -997,8 +1018,8 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <svg viewBox="0 0 24 24" fill="none" stroke="var(--pool)" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
       </div>
       <div style="flex:1;min-width:0">
-        <p style="font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pool);margin-bottom:.25rem">Research Access Program</p>
-        <p style="font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.72);line-height:1.55">Not ready to buy? Join our Research Access program — same glove at $45, in exchange for 90 days of structured feedback. 20 slots per drop.</p>
+        <p style="font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pool);margin-bottom:.25rem">Our Commitment to Accessibility</p>
+        <p style="font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.72);line-height:1.55">We believe meaningful care shouldn't be gated by price. Our Research Access program offers the same patented glove pair at $45 — in exchange for 90 days of structured feedback that shapes every future product. 20 spots per drop, application-based.</p>
       </div>
       <span style="font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pool);white-space:nowrap;flex-shrink:0">Learn More →</span>
     </div>
@@ -1006,7 +1027,8 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <hr class="divider" style="margin:2rem 0">
 
     <h3 style="font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem">What's Included</h3>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:2rem">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:2rem">
+      <div class="callout pool"><div class="callout-lbl">_000 Single</div><p>(1) SOKY silicone glove · (1) How-To-Use card</p></div>
       <div class="callout"><div class="callout-lbl">_001 Core</div><p>(2) SOKY silicone gloves · (1) How-To-Use card</p></div>
       <div class="callout green"><div class="callout-lbl">_002 Travel System</div><p>(2) SOKY silicone gloves · (1) Hand towel · (1) Clip hook · (1) Travel bag · (1) How-To-Use card · (1) Product info card</p></div>
     </div>
@@ -1028,7 +1050,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
     <div class="cta-band reveal">
       <h2 class="cta-heading">"Your hands have been waiting long enough."</h2>
-      <p class="cta-sub">Two offers. 200 units. The first drop of a patented platform.</p>
+      <p class="cta-sub">Three offers. 200 units. The first drop of a patented platform.</p>
       <div class="cta-buttons">
         <!-- BACKEND: Contact to order via WooCommerce -->
         <a href="mailto:kenny@nmthera.com" class="cta-btn primary" data-backend="woocommerce" data-action="add-to-cart-or-contact">Contact to Order</a>
@@ -1291,7 +1313,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       </div>
       <div class="callout green" style="margin-bottom:2rem">
         <div class="callout-lbl">What You Receive</div>
-        <p>The identical HandSOKY glove pair (same silicone, same seal, same ritual) at $45 instead of $85. Permanent founding researcher credit. Priority access to future drops and SOKY Plus formulations. Direct line to the product team.</p>
+        <p>The identical HandSOKY glove pair (SKU 003 · same silicone, same seal, same ritual) at $45 instead of $85. Permanent founding researcher credit. Priority access to future drops and SOKY Plus formulations. Direct line to the product team.</p>
       </div>
       <div class="callout sun" style="margin-bottom:2rem">
         <div class="callout-lbl">Who This Is For</div>
