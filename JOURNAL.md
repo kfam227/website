@@ -549,3 +549,50 @@ ec1d9f5  rebuild team update — multi-tab with roadmap, build log, and links
 - Investigate Dow/Momentive take-back programs for post-consumer LSR
 - Model cost impact of TPU skeleton on BOM
 - Draft circular economy section for business plan
+
+---
+
+## April 10, 2026 — Website Development Pipeline & PDP/Homepage Redesign
+
+### What happened today
+- Synced with Hameed on website architecture, SEO strategy, and global tax compliance
+- Synced with Tiffany on UX review workflow, product offer structure, and launch scope
+- Established a repeatable website development pipeline with defined roles:
+  - **Kenny / Jen** → design generation (Claude AI, iterated to ~90% complete)
+  - **Chi** → content & branding approval
+  - **Tiffany** → UX, formatting, layout review
+  - **Hameed** → Elementor build + backend connections
+  - **Full team** → QA before launch
+- Killed the Research Access offer ($45 + 8-week program). Replaced with single glove at $45 (SKU 000)
+- Confirmed three-offer PDP structure: SKU 000 ($45 single glove), SKU 001 ($85 pair), SKU 002 ($120 Travel System)
+- Scoped launch to US market only — international handled via "contact us" form
+- Created Asana tasks (Home V2, PDP V2) with full handoff prompts, reference links, and implementation instructions
+- Built pipeline diagram in FigJam for team reference
+
+### Three implementation methods (Hameed)
+1. **Method 1:** HTML native connectors — front-end to back-end directly in code
+2. **Method 2:** Elementor overlay — Elementor mediates between front-end and back-end
+3. **Method 3:** Full Elementor rebuild (~1.5 days) — best for SEO, editing, long-term maintenance
+
+### Key decisions
+- Method 3 is the default for all customer-facing pages (unique URLs for SEO indexing)
+- Pipeline sequencing: Chi approves content BEFORE Tiffany reviews formatting (content must be locked first)
+- WP Mail Logging plugin may be sufficient short-term — delays HubSpot integration
+- Stripe setup deferred until after US launch
+
+### Learnings & improvements for next time
+1. **Lock content with Chi before generating the design** — saves a full iteration cycle
+2. **Include Tiffany earlier in SKU/offer strategy** — UX concerns should surface before design is built, not after
+3. **Don't make customers work** — the Research Access model added friction. Sell the product simply. Use a money-back guarantee to reduce risk instead of gating behind a program
+4. **SEO requires unique URLs** — tabbed single-page HTML is invisible to Google. Every public page needs its own slug
+5. **AI-generated designs need a human pass** — Method 3 exists partly to humanize the output
+6. **Ship for one market first** — US-only launch keeps timeline tight. Handle international interest with a form
+7. **Standardize the handoff artifact** — every page ships with: live draft link, GitHub source link, attached HTML file
+8. **Document implementation methods permanently** — avoid re-explaining tradeoffs every time a new page comes up
+
+### References
+- Homepage draft: nmthera.com/home2
+- PDP draft: nmthera.com/hand-soky
+- GitHub (homepage): https://github.com/kfam227/website/blob/main/HTML/nmthera-sitemap-superpage.html
+- GitHub (PDP): https://github.com/kfam227/website/blob/main/HTML/soky-pdp-v2.html
+- Asana tasks: Home V2, PDP V2
