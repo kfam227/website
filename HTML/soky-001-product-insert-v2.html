@@ -180,6 +180,16 @@ img{max-width:100%;display:block}
 .cs-sub{font-family:var(--body);font-size:7px;color:var(--muted);line-height:1.35}
 .cs-badge{display:inline-block;padding:1.5px 8px;border-radius:999px;font-family:var(--sub);font-size:5.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:rgba(0,109,119,0.1);color:var(--pool);margin-top:3px}
 
+/* Safety & Warnings */
+.safety-block{background:rgba(179,29,27,0.03);border:1px solid rgba(179,29,27,0.12);border-radius:5px;padding:8px 12px;margin-bottom:10px}
+.safety-title{font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--heat);margin-bottom:4px;display:flex;align-items:center;gap:5px}
+.safety-title::before{content:'⚠';font-size:9px}
+.safety-list{font-family:var(--body);font-size:7.5px;color:rgba(17,24,39,0.65);line-height:1.5;list-style:none;column-count:2;column-gap:18px}
+.safety-list li{padding-left:8px;position:relative;margin-bottom:2px;break-inside:avoid}
+.safety-list li::before{content:'·';position:absolute;left:0;color:var(--heat);font-weight:700}
+.safety-list li strong{color:var(--ink)}
+.safety-note{font-family:var(--body);font-size:6.5px;color:rgba(17,24,39,0.5);line-height:1.4;margin-top:4px;border-top:1px solid rgba(179,29,27,0.08);padding-top:4px}
+
 /* Page 2 footer */
 .p2-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--line);padding-top:8px;margin-top:10px}
 .p2-footer-left{font-family:var(--body);font-size:6.5px;color:rgba(17,24,39,0.35);max-width:62%;line-height:1.4}
@@ -444,6 +454,27 @@ img{max-width:100%;display:block}
         <div style="font-family:var(--body);font-size:7.5px;color:var(--muted)">Hyperhidrosis, eczema, arthritis, psoriasis, PVD, and more</div>
       </div>
     </div>
+  </div>
+
+  <!-- Safety & Warnings -->
+  <div class="safety-block">
+    <div class="safety-title">Safety &amp; Warnings</div>
+    <ul class="safety-list">
+      <li><strong>Use common sense.</strong> SOKY is a water-filled garment worn on the hand. Exercise the same caution you would around any open container of water.</li>
+      <li><strong>Do not walk or run on wet surfaces.</strong> Water may drip or leak during use. Use caution on tile, hardwood, and other smooth flooring. Wipe up spills immediately to prevent slipping.</li>
+      <li><strong>Leaks are possible.</strong> The seal is pressure-responsive but not guaranteed leak-proof in every use case. Users with highly defined hand musculature may experience gaps between tendons or knuckles where the seal cannot fully conform. Monitor for drips, especially during initial sessions.</li>
+      <li><strong>Avoid sharp objects.</strong> Do not handle knives, tools, pins, or abrasive surfaces while wearing the glove. The garment is durable but not puncture-proof — a tear will end the session and may cause a sudden release of water.</li>
+      <li><strong>Test water temperature before filling.</strong> Do not exceed 110°F (43°C). Water that is too hot can cause burns, especially under sealed occlusion where heat is retained and skin sensitivity is reduced. Always test with a free hand or thermometer before filling.</li>
+      <li><strong>Limit session length.</strong> Prolonged soaking beyond 30 minutes may cause skin maceration — softening and breakdown of the skin barrier. Follow the recommended 15–20 minute session time. If skin appears white, wrinkled, or feels unusually soft, end the session and allow the skin to dry fully before re-use.</li>
+      <li><strong>Keep away from electronics.</strong> Do not handle phones, chargers, laptops, or any plugged-in electrical device while wearing a water-filled glove. Contact between water and live electrical current creates a risk of electric shock. If you need to use the SOKY Electro module, follow the dedicated Electro protocol only.</li>
+      <li><strong>Do not drive or operate machinery.</strong> The glove reduces grip strength and manual dexterity. Do not drive a vehicle, operate power tools, or perform any activity requiring full hand control while wearing SOKY.</li>
+      <li><strong>Remove immediately if you experience numbness, tingling, or discoloration.</strong> These may indicate restricted circulation at the cuff. Loosen or remove the glove and allow normal blood flow to return before resuming.</li>
+      <li><strong>Reduced thermal sensitivity.</strong> Individuals with peripheral neuropathy, diabetes, or any condition that impairs sensation in the hands may not accurately perceive water temperature. Use a thermometer and do not rely on feel alone.</li>
+      <li><strong>Patch-test additives.</strong> Salts, botanicals, and other enhancers may cause skin irritation or allergic reactions in some individuals. Test any new additive on a small area of skin before a full soak session.</li>
+      <li><strong>Not a toy.</strong> Keep out of reach of children. Use by minors requires adult supervision. The glove and its contents present a potential choking, spill, and burn hazard for young children.</li>
+      <li><strong>Consult your healthcare provider</strong> before use if you have open wounds, active skin infections, vascular conditions, or any medical condition affecting the hands. Do not use as a substitute for medical treatment.</li>
+    </ul>
+    <div class="safety-note">SOKY is a personal wellness product designed to support care routines. It is not a medical device and is not intended to diagnose, treat, cure, or prevent any disease or condition. Use at your own risk. NM Therapeutics, Inc. assumes no liability for injury resulting from misuse, improper water temperature, use on wet or slippery surfaces, use with incompatible additives, or failure to follow the instructions in this guide.</div>
   </div>
 
   <!-- Coming Soon strip -->
