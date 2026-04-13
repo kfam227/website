@@ -104,11 +104,6 @@ img{max-width:100%;display:block}
 .ip-badge.pending{background:rgba(104,139,88,0.1);color:var(--green)}
 .ip-text{font-family:var(--body);font-size:7.5px;color:var(--muted)}
 
-/* Barcode */
-.barcode-area{margin-top:auto;padding-top:6px}
-.barcode-label{font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:0.12em;color:var(--ink);margin-bottom:2px}
-.barcode-svg{height:28px;width:100%;max-width:180px}
-
 /* Image */
 .patent-img{width:100%;border:1px solid var(--line);border-radius:5px;object-fit:contain;background:#fff}
 .img-cap{font-family:var(--body);font-size:6.5px;color:rgba(17,24,39,0.38);font-style:italic;margin-top:1px}
@@ -178,13 +173,12 @@ img{max-width:100%;display:block}
 .care-list li{padding-left:8px;position:relative;margin-bottom:1px}
 .care-list li::before{content:'·';position:absolute;left:0;color:var(--navy);font-weight:700}
 
-/* QR section */
-.qr-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:auto;padding-top:12px;border-top:1.5px solid var(--navy)}
-.qr-item{text-align:center}
-.qr-box{width:56px;height:56px;border:1.5px solid var(--line);border-radius:4px;margin:0 auto 3px;display:flex;align-items:center;justify-content:center;background:rgba(49,89,138,0.03)}
-.qr-box svg{width:40px;height:40px}
-.qr-label{font-family:var(--sub);font-size:7.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink)}
-.qr-sub{font-family:var(--body);font-size:7px;color:var(--muted);line-height:1.3;margin-top:1px}
+/* Coming Soon callouts */
+.coming-soon{display:flex;gap:12px;margin-top:auto;padding-top:12px;border-top:1.5px solid var(--navy)}
+.cs-item{flex:1;text-align:center;padding:8px 6px;border:1px dashed var(--line);border-radius:4px;background:rgba(49,89,138,0.02)}
+.cs-label{font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--navy);margin-bottom:2px}
+.cs-sub{font-family:var(--body);font-size:7px;color:var(--muted);line-height:1.35}
+.cs-badge{display:inline-block;padding:1.5px 8px;border-radius:999px;font-family:var(--sub);font-size:5.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:rgba(0,109,119,0.1);color:var(--pool);margin-top:3px}
 
 /* Page 2 footer */
 .p2-footer{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--line);padding-top:8px;margin-top:10px}
@@ -266,7 +260,7 @@ img{max-width:100%;display:block}
         <tr><td>Port interface</td><td>Universal quick-connect</td></tr>
         <tr><td>Session length</td><td>15–20 min</td></tr>
         <tr><td>Designed lifespan</td><td>90+ sessions</td></tr>
-        <tr><td>Temp range</td><td>Cold → 45°C / 113°F</td></tr>
+        <tr><td>Temp range</td><td>35°F–110°F (2°C–43°C)</td></tr>
         <tr><td>Latex-free</td><td>No adhesives · No clamps</td></tr>
       </table>
 
@@ -279,16 +273,6 @@ img{max-width:100%;display:block}
         <div class="img-cap">Inactive (extended) vs Active (sealed) — cuff inverted configuration</div>
       </div>
 
-      <div style="font-family:var(--serif);font-size:9px;font-style:italic;color:rgba(17,24,39,0.5);margin-top:8px;line-height:1.3">Spa-grade immersion. Anywhere.</div>
-      <div style="font-family:var(--body);font-size:6.5px;color:var(--muted);margin-top:1px">Scan for the SOKY Ritual Guide<br>Patent Pending · NM Thera Technologies<br>Designed for immersive handcare therapies</div>
-
-      <!-- Barcode -->
-      <div class="barcode-area">
-        <div class="barcode-label">NMT_SOKY_001</div>
-        <svg class="barcode-svg" viewBox="0 0 200 32" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="0" width="2" height="28" fill="#111827"/><rect x="4" y="0" width="1" height="28" fill="#111827"/><rect x="7" y="0" width="3" height="28" fill="#111827"/><rect x="12" y="0" width="1" height="28" fill="#111827"/><rect x="15" y="0" width="2" height="28" fill="#111827"/><rect x="19" y="0" width="1" height="28" fill="#111827"/><rect x="22" y="0" width="3" height="28" fill="#111827"/><rect x="27" y="0" width="1" height="28" fill="#111827"/><rect x="30" y="0" width="2" height="28" fill="#111827"/><rect x="34" y="0" width="1" height="28" fill="#111827"/><rect x="37" y="0" width="3" height="28" fill="#111827"/><rect x="42" y="0" width="2" height="28" fill="#111827"/><rect x="46" y="0" width="1" height="28" fill="#111827"/><rect x="49" y="0" width="2" height="28" fill="#111827"/><rect x="53" y="0" width="3" height="28" fill="#111827"/><rect x="58" y="0" width="1" height="28" fill="#111827"/><rect x="61" y="0" width="2" height="28" fill="#111827"/><rect x="65" y="0" width="1" height="28" fill="#111827"/><rect x="68" y="0" width="3" height="28" fill="#111827"/><rect x="73" y="0" width="1" height="28" fill="#111827"/><rect x="76" y="0" width="2" height="28" fill="#111827"/><rect x="80" y="0" width="1" height="28" fill="#111827"/><rect x="83" y="0" width="2" height="28" fill="#111827"/><rect x="87" y="0" width="3" height="28" fill="#111827"/><rect x="92" y="0" width="1" height="28" fill="#111827"/><rect x="95" y="0" width="2" height="28" fill="#111827"/><rect x="99" y="0" width="1" height="28" fill="#111827"/><rect x="102" y="0" width="3" height="28" fill="#111827"/><rect x="107" y="0" width="1" height="28" fill="#111827"/><rect x="110" y="0" width="2" height="28" fill="#111827"/><rect x="114" y="0" width="1" height="28" fill="#111827"/><rect x="117" y="0" width="3" height="28" fill="#111827"/><rect x="122" y="0" width="2" height="28" fill="#111827"/><rect x="126" y="0" width="1" height="28" fill="#111827"/><rect x="129" y="0" width="2" height="28" fill="#111827"/><rect x="133" y="0" width="1" height="28" fill="#111827"/><rect x="136" y="0" width="3" height="28" fill="#111827"/><rect x="141" y="0" width="1" height="28" fill="#111827"/><rect x="144" y="0" width="2" height="28" fill="#111827"/>
-        </svg>
-      </div>
     </div>
   </div>
 
@@ -462,69 +446,21 @@ img{max-width:100%;display:block}
     </div>
   </div>
 
-  <!-- QR Codes -->
-  <div class="qr-strip">
-    <div class="qr-item">
-      <div class="qr-box">
-        <!-- Mock QR pattern -->
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="10" height="10" rx="1" fill="#31598A"/><rect x="14" y="2" width="4" height="4" fill="#31598A"/><rect x="28" y="2" width="10" height="10" rx="1" fill="#31598A"/>
-          <rect x="4" y="4" width="6" height="6" rx="0.5" fill="#fff"/><rect x="30" y="4" width="6" height="6" rx="0.5" fill="#fff"/>
-          <rect x="5.5" y="5.5" width="3" height="3" fill="#31598A"/><rect x="31.5" y="5.5" width="3" height="3" fill="#31598A"/>
-          <rect x="2" y="15" width="3" height="3" fill="#31598A"/><rect x="7" y="15" width="3" height="3" fill="#31598A"/><rect x="15" y="15" width="10" height="10" rx="1" fill="#006D77" opacity="0.2"/>
-          <rect x="17" y="17" width="6" height="6" rx="0.5" fill="#006D77"/><rect x="18.5" y="18.5" width="3" height="3" fill="#fff"/>
-          <rect x="2" y="28" width="10" height="10" rx="1" fill="#31598A"/><rect x="4" y="30" width="6" height="6" rx="0.5" fill="#fff"/><rect x="5.5" y="31.5" width="3" height="3" fill="#31598A"/>
-          <rect x="14" y="28" width="3" height="3" fill="#31598A"/><rect x="20" y="28" width="3" height="3" fill="#31598A"/><rect x="28" y="28" width="4" height="4" fill="#31598A"/><rect x="35" y="28" width="3" height="3" fill="#31598A"/>
-          <rect x="28" y="15" width="3" height="3" fill="#31598A"/><rect x="35" y="18" width="3" height="3" fill="#31598A"/>
-        </svg>
-      </div>
-      <div class="qr-label">Ritual Guide</div>
-      <div class="qr-sub">Setup · protocols<br>Video walkthrough</div>
+  <!-- Coming Soon strip -->
+  <div class="coming-soon">
+    <div class="cs-item">
+      <div class="cs-label">Co-Development Sign-Up</div>
+      <div class="cs-sub">Try experimental models · Shape what ships next · Give feedback that builds the product</div>
+      <div class="cs-badge">Coming Soon</div>
     </div>
-    <div class="qr-item">
-      <div class="qr-box">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="10" height="10" rx="1" fill="#688B58"/><rect x="14" y="2" width="4" height="4" fill="#688B58"/><rect x="28" y="2" width="10" height="10" rx="1" fill="#688B58"/>
-          <rect x="4" y="4" width="6" height="6" rx="0.5" fill="#fff"/><rect x="30" y="4" width="6" height="6" rx="0.5" fill="#fff"/>
-          <rect x="5.5" y="5.5" width="3" height="3" fill="#688B58"/><rect x="31.5" y="5.5" width="3" height="3" fill="#688B58"/>
-          <rect x="2" y="15" width="3" height="3" fill="#688B58"/><rect x="7" y="15" width="3" height="3" fill="#688B58"/>
-          <rect x="15" y="15" width="10" height="10" rx="1" fill="#688B58" opacity="0.2"/><rect x="17" y="17" width="6" height="6" rx="0.5" fill="#688B58"/><rect x="18.5" y="18.5" width="3" height="3" fill="#fff"/>
-          <rect x="2" y="28" width="10" height="10" rx="1" fill="#688B58"/><rect x="4" y="30" width="6" height="6" rx="0.5" fill="#fff"/><rect x="5.5" y="31.5" width="3" height="3" fill="#688B58"/>
-          <rect x="28" y="28" width="4" height="4" fill="#688B58"/><rect x="35" y="33" width="3" height="3" fill="#688B58"/>
-        </svg>
-      </div>
-      <div class="qr-label">Register</div>
-      <div class="qr-sub">Warranty activation<br>90-day coverage</div>
+    <div class="cs-item">
+      <div class="cs-label">SOKY Commons</div>
+      <div class="cs-sub">Open-source hardware · Community protocols · Shared knowledge base</div>
+      <div class="cs-badge">Coming Soon</div>
     </div>
-    <div class="qr-item">
-      <div class="qr-box">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="10" height="10" rx="1" fill="#006D77"/><rect x="14" y="2" width="4" height="4" fill="#006D77"/><rect x="28" y="2" width="10" height="10" rx="1" fill="#006D77"/>
-          <rect x="4" y="4" width="6" height="6" rx="0.5" fill="#fff"/><rect x="30" y="4" width="6" height="6" rx="0.5" fill="#fff"/>
-          <rect x="5.5" y="5.5" width="3" height="3" fill="#006D77"/><rect x="31.5" y="5.5" width="3" height="3" fill="#006D77"/>
-          <rect x="2" y="15" width="3" height="3" fill="#006D77"/><rect x="7" y="18" width="3" height="3" fill="#006D77"/>
-          <rect x="15" y="15" width="10" height="10" rx="1" fill="#006D77" opacity="0.2"/><rect x="17" y="17" width="6" height="6" rx="0.5" fill="#006D77"/><rect x="18.5" y="18.5" width="3" height="3" fill="#fff"/>
-          <rect x="2" y="28" width="10" height="10" rx="1" fill="#006D77"/><rect x="4" y="30" width="6" height="6" rx="0.5" fill="#fff"/><rect x="5.5" y="31.5" width="3" height="3" fill="#006D77"/>
-          <rect x="28" y="30" width="3" height="3" fill="#006D77"/><rect x="33" y="28" width="5" height="5" fill="#006D77"/>
-        </svg>
-      </div>
-      <div class="qr-label">Co-Dev Sign-Up</div>
-      <div class="qr-sub">Try experimental models<br>Shape what ships next</div>
-    </div>
-    <div class="qr-item">
-      <div class="qr-box">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="10" height="10" rx="1" fill="#8A6A4D"/><rect x="14" y="5" width="4" height="4" fill="#8A6A4D"/><rect x="28" y="2" width="10" height="10" rx="1" fill="#8A6A4D"/>
-          <rect x="4" y="4" width="6" height="6" rx="0.5" fill="#fff"/><rect x="30" y="4" width="6" height="6" rx="0.5" fill="#fff"/>
-          <rect x="5.5" y="5.5" width="3" height="3" fill="#8A6A4D"/><rect x="31.5" y="5.5" width="3" height="3" fill="#8A6A4D"/>
-          <rect x="5" y="15" width="3" height="3" fill="#8A6A4D"/><rect x="10" y="18" width="3" height="3" fill="#8A6A4D"/>
-          <rect x="15" y="15" width="10" height="10" rx="1" fill="#8A6A4D" opacity="0.2"/><rect x="17" y="17" width="6" height="6" rx="0.5" fill="#8A6A4D"/><rect x="18.5" y="18.5" width="3" height="3" fill="#fff"/>
-          <rect x="2" y="28" width="10" height="10" rx="1" fill="#8A6A4D"/><rect x="4" y="30" width="6" height="6" rx="0.5" fill="#fff"/><rect x="5.5" y="31.5" width="3" height="3" fill="#8A6A4D"/>
-          <rect x="28" y="28" width="5" height="5" fill="#8A6A4D"/><rect x="35" y="35" width="3" height="3" fill="#8A6A4D"/>
-        </svg>
-      </div>
-      <div class="qr-label">SOKY Commons</div>
-      <div class="qr-sub">Open-source hardware<br>Community protocols</div>
+    <div style="flex:0.5;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+      <div style="font-family:var(--serif);font-size:9px;font-style:italic;color:rgba(17,24,39,0.45);line-height:1.25">The oldest forms<br>of care deserve<br>better delivery.</div>
+      <div style="font-family:var(--sub);font-size:5.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:2px">nmthera.com</div>
     </div>
   </div>
 
