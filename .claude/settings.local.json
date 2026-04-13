@@ -50,7 +50,9 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(start \"\" \"C:\\\\Users\\\\Administrator\\\\Desktop\\\\NMT_Claude_WorkshopG\\\\HTML\\\\soky-001-product-insert-v2.html\")",
+      "Bash(npx -y http-server -p 8321 --cors -c-1)"
     ]
   }
 }
