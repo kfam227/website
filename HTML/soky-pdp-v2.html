@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop SOKY — Wearable Soak System | NM Thera</title>
-<meta name="description" content="SOKY is a patented wearable soak system for hands and feet. Portable immersion — spa-grade care that moves with you. Three offers available now.">
+<meta name="description" content="SOKY is a patented wearable soak system for hands and feet. Portable immersion — spa-grade care that moves with you. Available now.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://nmthera.com/wp-content/uploads/2026/03/NM-THERA-LOGO-SITE-IMAGE.png">
 <meta property="og:url" content="https://kfam227.github.io/website/HTML/soky-pdp-v2.html">
 <meta property="og:title" content="Shop SOKY — Wearable Soak System | NM Thera">
-<meta property="og:description" content="SOKY is a patented wearable soak system for hands and feet. Portable immersion — spa-grade care that moves with you. Three offers available now.">
+<meta property="og:description" content="SOKY is a patented wearable soak system for hands and feet. Portable immersion — spa-grade care that moves with you. Available now.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://nmthera.com/wp-content/uploads/2026/03/NM-THERA-LOGO-SITE-IMAGE.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +45,7 @@ img{max-width:100%;display:block}
 .brand-logo{width:22px;height:22px;object-fit:contain;border-radius:4px}
 .brand-name{font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink)}
 .nav-links{display:flex;gap:24px;align-items:center}
-.nav-links a{font-family:var(--sub);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.nav-links a{font-family:var(--sub);font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);transition:color .2s}
 .nav-links a:hover{color:var(--navy)}
 .nav-cart{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,var(--navy),var(--pool));color:#fff;font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border:none}
 
@@ -91,8 +91,6 @@ img{max-width:100%;display:block}
 .sku-info-desc{font-family:var(--body);font-size:11px;color:var(--muted);line-height:1.4}
 .sku-price-col{text-align:right;flex-shrink:0}
 .sku-price-val{font-family:var(--serif);font-size:24px;color:var(--ink);line-height:1}
-.sku-stock{font-family:var(--sub);font-size:9px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-top:2px}
-.sku-stock.low{color:var(--heat)}
 
 /* ═══ ADD TO CART ═══ */
 .atc-wrap{display:flex;gap:10px;margin-bottom:1.5rem;align-items:stretch}
@@ -174,35 +172,6 @@ img{max-width:100%;display:block}
 .eng-visual{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:2rem;box-shadow:var(--shadow-sm);margin-bottom:2rem}
 .eng-visual svg{width:100%;height:auto;display:block}
 
-/* ═══ SKU DETAIL CARDS ═══ */
-.offers-section{padding:4rem 0}
-.sku-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:2rem}
-.sku-detail-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);position:relative;transition:transform .2s,box-shadow .2s}
-.sku-detail-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.sku-detail-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.sku-detail-card.research::before{background:linear-gradient(90deg,var(--pool),var(--green))}
-.sku-detail-card.core::before{background:linear-gradient(90deg,var(--navy),var(--pool))}
-.sku-detail-card.kit::before{background:linear-gradient(90deg,var(--green),var(--navy))}
-.sku-card-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#f0eeeb}
-.sku-card-body{padding:1.25rem}
-.sku-card-id{font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
-.sku-card-price{font-family:var(--serif);font-size:32px;color:var(--ink);line-height:1;margin-bottom:0.25rem}
-.sku-card-name{font-family:var(--sub);font-size:13px;font-weight:700;color:var(--ink);margin-bottom:0.5rem}
-.sku-card-desc{font-family:var(--body);font-size:11.5px;color:var(--muted);line-height:1.55;margin-bottom:0.75rem}
-.sku-card-persona{font-family:var(--body);font-size:10.5px;color:rgba(17,24,39,0.5);font-style:italic;line-height:1.5;border-top:1px solid var(--line);padding-top:0.6rem}
-.sku-card-stock{display:flex;align-items:center;gap:6px;margin-top:0.6rem}
-.stock-bar{flex:1;height:6px;border-radius:999px;background:var(--line);overflow:hidden}
-.stock-fill{height:100%;border-radius:999px;transition:width 1s ease}
-.stock-label{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-
-/* ═══ BATCH ALLOC ═══ */
-.batch-bar-wrap{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1.25rem;box-shadow:var(--shadow-sm)}
-.batch-title{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--navy);margin-bottom:0.6rem}
-.batch-bar{display:flex;height:10px;border-radius:999px;overflow:hidden;gap:2px;margin-bottom:0.5rem}
-.batch-seg{border-radius:999px}
-.batch-labels{display:flex;gap:1.5rem;flex-wrap:wrap}
-.batch-lbl{font-family:var(--sub);font-size:10px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:5px}
-.batch-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 
 /* ═══ FAQ ═══ */
 .faq-section{padding:4rem 0}
@@ -376,38 +345,8 @@ img{max-width:100%;display:block}
 .eyebrow-dot.pre-order{background:var(--sunlight);animation:pulse-dot 2s infinite}
 .eyebrow-dot.sold-out{background:var(--muted)}
 
-.sku-stock.preorder{color:var(--navy);font-weight:700}
-.sku-stock.sold-out{color:var(--muted);text-decoration:line-through;opacity:0.6}
 .sku-option.sold-out-sku{opacity:0.55;pointer-events:none;cursor:default}
 .tag-preorder{background:rgba(255,209,102,0.15);color:#8A6A00;border:1px solid rgba(255,209,102,0.3);margin-left:4px}
-
-/* SKU card image wrapper + overlay */
-.sku-card-img-wrap{position:relative;overflow:hidden}
-.sku-card-overlay{
-  position:absolute;
-  top:0;left:0;right:0;
-  aspect-ratio:4/3;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(17,24,39,0.55);
-  z-index:2;
-  pointer-events:none;
-}
-.sku-card-overlay-text{
-  font-family:var(--sub);
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:#fff;
-  background:rgba(0,0,0,0.4);
-  padding:6px 16px;
-  border-radius:999px;
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
-  text-align:center;
-}
 
 /* Drop Timeline */
 .drop-timeline{
@@ -820,7 +759,6 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
   .ritual-steps{grid-template-columns:repeat(3,1fr)}
   .rstep:nth-child(4){border-top:1px solid var(--line)}
   .rstep:nth-child(3){border-right:none}
-  .sku-cards{grid-template-columns:1fr}
   .science-grid{grid-template-columns:1fr 1fr}
   .faq-grid{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
@@ -867,11 +805,8 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
     <span class="brand-name">NM Thera</span>
   </a>
   <div class="nav-links">
-    <a href="#offers">Shop</a>
-    <a href="#how-it-works">How It Works</a>
-    <a href="#science">Science</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#faq">FAQ</a>
+    <a href="https://nmthera.com/home2">Home</a>
+    <a href="#top">Shop</a>
     <button class="nav-cart">Cart (0)</button>
   </div>
 </div>
@@ -897,7 +832,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
 
   <!-- Buy Box -->
   <div class="buy-box">
-    <div class="bb-eyebrow" id="bbEyebrow"><span class="eyebrow-dot in-stock"></span><span class="eyebrow-text">In Stock · First Drop · Batch 1 of 200</span></div>
+    <div class="bb-eyebrow" id="bbEyebrow"><span class="eyebrow-dot in-stock"></span><span class="eyebrow-text">In Stock · Available Now</span></div>
     <h1 class="bb-title">SOKY</h1>
     <p class="bb-subtitle">Wearable soak system for hands &amp; feet.</p>
     <p class="bb-value-prop">A patented silicone glove that <strong>seals water, warmth, and therapeutic agents around your hand</strong> while you move freely. No bowls. No basins. No sitting still. Just 15–20 minutes of portable, spa-grade immersion — wherever you are.</p>
@@ -907,9 +842,16 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
       <span class="bb-patent" style="background:rgba(49,89,138,0.08);border-color:rgba(49,89,138,0.18);color:var(--navy);margin-left:8px">30-Day Money-Back Guarantee</span>
     </div>
 
+    <!-- ⚠️ UX DECISION PENDING: Tiffany to decide whether to split the three SKUs
+         into separate PDP pages (one per product) or keep them on this single page.
+         If splitting: each SKU becomes its own page with its own URL, hero images,
+         and buy box. The Shop tab on the Home page would then link to a shop index
+         or directly to the most popular SKU (001).
+         If keeping: the current layout stays but may need visual hierarchy work
+         to reduce confusion between the three options. -->
     <!-- SKU Selector -->
     <div class="sku-selector" id="skuSelector">
-      <div class="sku-option" data-sku="000" data-price="45" onclick="selectSku(this)">
+      <div class="sku-option" data-sku="000" data-price="45" data-img="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" onclick="selectSku(this)">
         <div class="sku-radio"></div>
         <div class="sku-info">
           <span class="sku-info-tag tag-research">Single · Entry Price</span>
@@ -918,10 +860,9 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
         </div>
         <div class="sku-price-col">
           <div class="sku-price-val">$45</div>
-          <div class="sku-stock">40 of 40 left</div>
         </div>
       </div>
-      <div class="sku-option selected" data-sku="001" data-price="85" onclick="selectSku(this)">
+      <div class="sku-option selected" data-sku="001" data-price="85" data-img="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" onclick="selectSku(this)">
         <div class="sku-radio"></div>
         <div class="sku-info">
           <span class="sku-info-tag tag-core">Core · Most Popular</span>
@@ -930,10 +871,9 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
         </div>
         <div class="sku-price-col">
           <div class="sku-price-val">$85</div>
-          <div class="sku-stock">80 of 80 left</div>
         </div>
       </div>
-      <div class="sku-option" data-sku="002" data-price="120" onclick="selectSku(this)">
+      <div class="sku-option" data-sku="002" data-price="120" data-img="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" onclick="selectSku(this)">
         <div class="sku-radio"></div>
         <div class="sku-info">
           <span class="sku-info-tag tag-kit">Travel System · Best Value</span>
@@ -942,7 +882,6 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
         </div>
         <div class="sku-price-col">
           <div class="sku-price-val">$120</div>
-          <div class="sku-stock">100 of 100 left</div>
         </div>
       </div>
     </div>
@@ -957,7 +896,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
       <button class="atc-btn" id="atcBtn">Add to Cart — $85</button>
     </div>
 
-    <p id="shippingNote" style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-bottom:1.5rem"><strong style="color:var(--green)">IN STOCK</strong> · Drop 1 ships Spring 2026. Satisfaction guaranteed — if sizing or comfort isn't right, we'll make it right within 30 days.</p>
+    <p id="shippingNote" style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-bottom:1.5rem"><strong style="color:var(--green)">IN STOCK</strong> · 30-day satisfaction guarantee. If it's not right, ship it back and we'll refund you in full once received.</p>
 
     <!-- Research Access Callout — accessibility framing, routes to Research Access page -->
     <a href="https://kfam227.github.io/website/HTML/nmthera-sitemap-superpage.html#research" style="display:flex;align-items:center;gap:1rem;padding:14px 16px;background:linear-gradient(135deg,rgba(0,109,119,0.06),rgba(104,139,88,0.06));border:1px solid rgba(0,109,119,0.18);border-radius:var(--r-md);margin-bottom:1.25rem;text-decoration:none;color:inherit;transition:all .2s" onmouseover="this.style.borderColor='rgba(0,109,119,0.35)';this.style.transform='translateY(-1px)'" onmouseout="this.style.borderColor='rgba(0,109,119,0.18)';this.style.transform='none'">
@@ -1027,7 +966,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
       <div class="details-body"><div class="details-body-inner">
         <p><strong>Pre-order:</strong> Batch 1 ships Spring 2026. You'll receive a tracking number when your order ships.</p>
         <p style="margin-top:8px"><strong>Domestic US shipping:</strong> Free standard shipping on all orders. Expedited options available at checkout.</p>
-        <p style="margin-top:8px"><strong>30-day satisfaction guarantee:</strong> If sizing or comfort isn't perfect, contact us within 30 days of delivery for a full exchange or refund. No questions asked.</p>
+        <p style="margin-top:8px"><strong>30-day satisfaction guarantee:</strong> Contact us within 30 days of delivery to initiate a return. Ship the product back to us and we'll issue a full refund once received. Return shipping is on the buyer.</p>
       </div></div>
     </div>
   </div>
@@ -1327,105 +1266,6 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
 
 <hr class="section-divider">
 
-<!-- ═══ THREE OFFERS ═══ -->
-<div class="container offers-section reveal" id="offers">
-  <div class="section-eyebrow">Choose Your Entry</div>
-  <h2 class="section-heading">Three offers. 200 units. First drop.</h2>
-  <p class="section-sub">Every offer ships the same patented glove — identical silicone, identical seal, identical ritual. Pick the one that fits your path.</p>
-
-  <div class="sku-cards">
-    <!-- Research -->
-    <div class="sku-detail-card research" data-sku="000">
-      <div class="sku-card-img-wrap">
-        <img class="sku-card-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Research Access" loading="lazy">
-      </div>
-      <div class="sku-card-body">
-        <div class="sku-card-id">HandSOKY_B_M_000</div>
-        <div class="sku-card-price">$45</div>
-        <span class="sku-info-tag tag-research" style="margin-bottom:0.4rem;display:inline-flex">Single Glove · 40 Units</span>
-        <div class="sku-card-name">Hand SOKY — Single</div>
-        <div class="sku-card-desc">One glove, Size Medium. Same patented silicone, same inversion cuff seal, same five-step ritual. The simplest way to try SOKY — no commitment, no program, just the product. 30-day money-back guarantee.</div>
-        <div class="sku-card-persona">For the curious buyer who wants to try before committing to a pair. Low risk, full experience.</div>
-        <div class="sku-card-stock">
-          <div class="stock-bar"><div class="stock-fill" style="width:100%;background:linear-gradient(90deg,var(--pool),var(--green))"></div></div>
-          <span class="stock-label">40 / 40 available</span>
-        </div>
-      </div>
-    </div>
-    <!-- Core -->
-    <div class="sku-detail-card core" data-sku="001">
-      <div class="sku-card-img-wrap">
-        <img class="sku-card-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Core" loading="lazy">
-      </div>
-      <div class="sku-card-body">
-        <div class="sku-card-id">HandSOKY_B_M_001</div>
-        <div class="sku-card-price">$85</div>
-        <span class="sku-info-tag tag-core" style="margin-bottom:0.4rem;display:inline-flex">Core · 80 Units</span>
-        <div class="sku-card-name">Hand SOKY</div>
-        <div class="sku-card-desc">One pair, Size Medium. Silicone compression-molded gloves. The essential starting point. No accessories or enhancers required — the glove alone is everything you need to complete the full ritual. Built for durability and repeated use over an extended product life.</div>
-        <div class="sku-card-persona">For the personal- and self-care seeker who has never had a hand care routine that actually stuck. They just need to begin.</div>
-        <div class="sku-card-stock">
-          <div class="stock-bar"><div class="stock-fill" style="width:100%;background:linear-gradient(90deg,var(--navy),var(--pool))"></div></div>
-          <span class="stock-label">80 / 80 available</span>
-        </div>
-      </div>
-    </div>
-    <!-- Kit -->
-    <div class="sku-detail-card kit" data-sku="002">
-      <div class="sku-card-img-wrap">
-        <img class="sku-card-img" src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="Hand SOKY Travel System" loading="lazy">
-      </div>
-      <div class="sku-card-body">
-        <div class="sku-card-id">HandSOKY_B_M_002</div>
-        <div class="sku-card-price">$120</div>
-        <span class="sku-info-tag tag-kit" style="margin-bottom:0.4rem;display:inline-flex">Travel System · 100 Units</span>
-        <div class="sku-card-name">Hand SOKY Travel System</div>
-        <div class="sku-card-desc">One pair, Size Medium. Silicone compression-molded gloves. Hand towel, clip hook, how-to-use instructions, and product info card — packaged in a branded travel bag. Everything you need in one box. Perfect for gifting, for practitioners, or for anyone who wants the complete experience from day one.</div>
-        <div class="sku-card-persona">For the gift buyer, the practitioner, the convert. The SKU most likely to generate the referral that brings the next buyer in.</div>
-        <div class="sku-card-stock">
-          <div class="stock-bar"><div class="stock-fill" style="width:100%;background:linear-gradient(90deg,var(--green),var(--navy))"></div></div>
-          <span class="stock-label">100 / 100 available</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Research Access Callout — full-width card for offers section -->
-  <a href="https://kfam227.github.io/website/HTML/nmthera-sitemap-superpage.html#research" style="display:flex;align-items:center;gap:1.25rem;padding:1.25rem 1.5rem;background:linear-gradient(135deg,rgba(0,109,119,0.05),rgba(104,139,88,0.05));border:1px solid rgba(0,109,119,0.15);border-radius:var(--r-lg);text-decoration:none;color:inherit;transition:all .2s;margin-bottom:2rem" onmouseover="this.style.borderColor='rgba(0,109,119,0.3)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(0,109,119,0.15)';this.style.transform='none'">
-    <div style="width:48px;height:48px;border-radius:50%;background:rgba(0,109,119,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--pool)" stroke-width="2" width="22" height="22"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-    </div>
-    <div style="flex:1;min-width:0">
-      <p style="font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pool);margin-bottom:.3rem">Our Commitment to Accessibility</p>
-      <p style="font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.72);line-height:1.55">We believe meaningful care shouldn't be gated by price. Our Research Access program offers the same patented glove pair at $45 — in exchange for 90 days of structured feedback that shapes every future product. 20 spots per drop, application-based.</p>
-    </div>
-    <span style="font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pool);white-space:nowrap;flex-shrink:0">Apply Now →</span>
-  </a>
-
-  <!-- Batch Allocation -->
-  <div class="batch-bar-wrap">
-    <div class="batch-title" id="batchTitle">Drop 1 Allocation — 200 Units Total · 0 Claimed</div>
-    <div class="batch-bar">
-      <div class="batch-seg" style="width:18%;background:var(--pool)"></div>
-      <div class="batch-seg" style="width:36%;background:var(--navy)"></div>
-      <div class="batch-seg" style="width:46%;background:var(--green)"></div>
-    </div>
-    <div class="batch-labels">
-      <span class="batch-lbl"><span class="batch-dot" style="background:var(--pool)"></span>_000 Single — 40</span>
-      <span class="batch-lbl"><span class="batch-dot" style="background:var(--navy)"></span>_001 Core — 80 (40%)</span>
-      <span class="batch-lbl"><span class="batch-dot" style="background:var(--green)"></span>_002 Travel System — 100 (50%)</span>
-    </div>
-    <div class="batch-progress" id="batchProgress" style="margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--line)">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <span class="batch-lbl">0 of 200 units claimed</span>
-        <span class="batch-lbl" style="color:var(--pool)">200 remaining</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<hr class="section-divider">
-
 <!-- ═══ PRODUCT ROADMAP ═══ -->
 <div class="container roadmap-section reveal" id="roadmap">
   <div class="section-eyebrow">Coming Next</div>
@@ -1567,7 +1407,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is SOKY latex-free?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">Yes. SOKY is made from medical-grade silicone. It is latex-free, BPA-free, and allergy-friendly.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I use hot or cold water?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">Yes — SOKY supports both warm and cool soaks. Use water at a temperature comfortable to touch. Avoid boiling water. Cool soaks are great for inflammation and post-exercise recovery.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is SOKY safe for sensitive skin?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">SOKY is made from skin-safe, medical-grade silicone designed for extended contact. If you have specific skin sensitivities, consult your dermatologist before use.</div></div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What happens when a drop sells out?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">SOKY ships in limited drops of 200 units every three months. When a drop sells out, you can pre-order for the next batch at the same price — your order locks in your spot and ships when that batch is ready. Drop 1 ships April 2026, Drop 2 ships July 2026, Drop 3 ships October 2026.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What happens when a drop sells out?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">SOKY ships in limited drops of 200 units every three months. When a drop sells out, you can pre-order for the next batch at the same price — your order locks in your spot and ships when that batch is ready. Drop 1 available now, Drop 2 ships July 2026, Drop 3 ships October 2026.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Will SOKY leak?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">When donned correctly — cuff folded inward, fingers fully seated — the patented inversion seal holds firmly. The seal actually tightens with movement. Correct donning is the key step.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I use salts or additives?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">Absolutely. Epsom salts, essential oils, botanical extracts, and other soak additives work beautifully. SOKY's lower water volume actually concentrates the active ingredients for more effective delivery.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How long should I soak?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">15–20 minutes is the recommended session length. You can adjust based on your comfort and routine.</div></div></div>
@@ -1575,7 +1415,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I use SOKY on my feet?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">Foot SOKY is next in the roadmap — expected within 90 days of the first drop. The same patented seal technology, adapted for feet. Join the waitlist for updates.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How long does SOKY last?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">With proper care (rinse after use, air dry, store flat), SOKY is built for 100+ sessions. Medical-grade silicone is inherently durable and resistant to degradation.</div></div></div>
     <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is SOKY a medical device?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">The current consumer offering (Model B/F) is an OTC personal care product — Class I, 510(k) exempt. It supports personal care routines. It is not intended to diagnose, treat, cure, or prevent any disease.</div></div></div>
-    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What is your return policy?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">30-day satisfaction guarantee. If sizing or comfort isn't right, contact us for a full exchange or refund. No questions asked.</div></div></div>
+    <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What is your return policy?<span class="faq-arrow">›</span></div><div class="faq-a"><div class="faq-a-inner">30-day satisfaction guarantee. Contact us to initiate a return, ship the product back, and we'll issue a full refund once received. Return shipping is on the buyer.</div></div></div>
   </div>
 </div>
 
@@ -1599,7 +1439,7 @@ html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
 <div class="container">
   <div class="cta-band reveal">
     <h2 class="cta-heading">"Because your hands deserve meaningful care and everyday confidence."</h2>
-    <p class="cta-sub" id="ctaSub">Three offers. 200 units. The first drop of a patented platform — your hands have been waiting long enough.</p>
+    <p class="cta-sub" id="ctaSub">The first drop of a patented platform. Your hands have been waiting long enough.</p>
     <div class="cta-buttons">
       <a href="#top" class="cta-btn primary" id="ctaPrimaryBtn">Shop Now</a>
       <a href="mailto:kenny@nmthera.com" class="cta-btn secondary">Contact Us</a>
@@ -1769,11 +1609,10 @@ function renderSkuSelector(){
     if(oldTag) oldTag.remove();
 
     opt.classList.remove('sold-out-sku');
-    stockEl.classList.remove('low','preorder','sold-out');
+    if(stockEl) stockEl.classList.remove('low','preorder','sold-out');
 
     if(isSkuSoldOutEverywhere(skuId)){
-      stockEl.textContent = 'Sold out';
-      stockEl.classList.add('sold-out');
+      if(stockEl){ stockEl.textContent = 'Sold out'; stockEl.classList.add('sold-out'); }
       opt.classList.add('sold-out-sku');
       opt.setAttribute('data-drop','none');
       return;
@@ -1785,26 +1624,12 @@ function renderSkuSelector(){
 
     // Sold out in Drop 1 but available in a future drop → preorder
     if(activeDrop.id !== drop1.id){
-      stockEl.textContent = 'Sold out · Pre-order for ' + activeDrop.date;
-      stockEl.classList.add('preorder');
+      if(stockEl){ stockEl.textContent = 'Sold out · Pre-order for ' + activeDrop.date; stockEl.classList.add('preorder'); }
       var tag = document.createElement('span');
       tag.className = 'sku-info-tag tag-preorder';
       tag.textContent = 'Pre-Order · Ships ' + activeDrop.date;
       infoEl.appendChild(tag);
       return;
-    }
-
-    // In stock in current drop
-    var remaining = getSkuRemaining(activeDrop, skuId);
-    var cap = activeDrop.skus[skuId].cap;
-    if(remaining <= 10){
-      stockEl.textContent = 'Only ' + remaining + ' left';
-      stockEl.classList.add('low');
-    } else if(remaining <= cap/2){
-      stockEl.textContent = remaining + ' of ' + cap + ' left — going fast';
-      stockEl.classList.add('low');
-    } else {
-      stockEl.textContent = remaining + ' of ' + cap + ' left';
     }
   });
 }
@@ -1853,7 +1678,7 @@ function renderShippingNote(){
   var activeDrop = getActiveDropForSku(skuId);
   var drop1 = DROPS[0];
   if(activeDrop.id === drop1.id){
-    note.innerHTML = '<strong style="color:var(--green)">IN STOCK</strong> · Drop 1 ships ' + drop1.shipDate + '. Satisfaction guaranteed — if sizing or comfort isn\'t right, we\'ll make it right within 30 days.';
+    note.innerHTML = '<strong style="color:var(--green)">IN STOCK</strong> · 30-day satisfaction guarantee. If it\'s not right, ship it back and we\'ll refund you in full once received.';
   } else {
     note.innerHTML = '<strong style="color:var(--navy)">PRE-ORDER</strong> · Your order ships with ' + activeDrop.label + ' — ' + activeDrop.date + '. Same product, same guarantee. Satisfaction guaranteed within 30 days of delivery.';
   }
@@ -1995,7 +1820,7 @@ function renderCtaBand(){
   var d3Out = isDropSoldOut(drop3);
 
   if(!d1Out){
-    sub.textContent = 'Three offers. 200 units. The first drop of a patented platform — your hands have been waiting long enough.';
+    sub.textContent = 'The first drop of a patented platform. Your hands have been waiting long enough.';
     btn.textContent = 'Shop Now';
   } else if(!d2Out){
     sub.textContent = 'Drop 1 sold out. Secure your pair in the next batch — shipping ' + drop2.date + '. Same patented glove, same ritual.';
@@ -2017,8 +1842,6 @@ function renderAll(){
   renderAtcButton();
   renderShippingNote();
   renderDropStatusStrip();
-  renderSkuDetailCards();
-  renderBatchAllocation();
   renderCtaBand();
 }
 
@@ -2034,6 +1857,12 @@ function selectSku(el){
   if(el.classList.contains('sold-out-sku')) return;
   document.querySelectorAll('.sku-option').forEach(function(o){o.classList.remove('selected')});
   el.classList.add('selected');
+  // Swap hero image to match selected SKU
+  var newImg = el.getAttribute('data-img');
+  if(newImg){
+    var mainImg = document.getElementById('mainImgEl');
+    if(mainImg) mainImg.src = newImg;
+  }
   updateAtc();
   renderBuyBoxEyebrow();
   renderShippingNote();
