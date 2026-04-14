@@ -2,6 +2,130 @@
 
 ---
 
+## Session — Tuesday, April 14, 2026
+### What We Did
+
+**1. Combined HTML File — Merged Home + PDP into Single Deliverable**
+- Created `nmthera-combined.html` — a new file merging the sitemap superpage (Home) and PDP designs into one unified deliverable
+- Architecture: Home page + Shop page, with a hover dropdown nav revealing three sub-pages (Hand SOKY Single / Hand SOKY Pair / Hand SOKY Travel System)
+- Each SKU now lives on its own independent PDP, per Tiffany's recommendation that three SKUs on one page was confusing
+- Shop hover dropdown uses a `::after` bridge pseudo-element so cursor can travel from tab to dropdown without it closing
+- Mobile: tap opens dropdown, tap item navigates, tap elsewhere closes
+- Fixed iframe embed URL typo on WordPress — `nmthera.combined.html` corrected to `nmthera-combined.html`
+- Verification checklist produced: 12-point QA covering dropdown behavior, stat corrections, safety sections, temperature formatting, care instructions, and script integrity
+
+**2. Addressed Tiffany's Homepage Feedback (6 items)**
+- Generated Claude Code prompt with 24 targeted CSS find/replace changes across 5 tasks:
+  - Task 1: Nav text size bump (12px → 14px nav tabs, 14px → 16px brand name)
+  - Task 2: Hero section contrast fixes (subheading, CTA button, badge text)
+  - Task 3: Dark-mode nav contrast sweep
+  - Task 4: Body section contrast sweep — raised all `rgba(17,24,39,0.xx)` below 0.72 up to 0.78
+  - Task 5: Image caption overlay contrast (0.5 → 0.75)
+- Progress bar: removed
+- Nav items: trimmed to Home + Shop only (other tabs are roadmap, not this deliverable)
+- "First Batch Launching May 1": replaced with "Available Now — Limited First Drop"
+- SEO concern: clarified that the superpage is a prototype; production build will be individual Elementor pages with proper URLs and meta tags
+
+**3. Addressed Tiffany's PDP Feedback (7 items)**
+- Generated Claude Code prompt covering three concrete fixes:
+  - Inventory count removal (visible counters stripped; drop state machine preserved for backend)
+  - Text size minimum enforced: no rendered text below 10px, body/description minimum 12–13px
+  - "Three offers. 200 units. First drop." remnants cleaned up, CTA rewritten
+- Items deferred to Tiffany's decision: nav bar alignment (match Home or PDP-specific), single-vs-split PDP layout
+- Tiffany's split-PDP recommendation was ultimately adopted in the combined file (see item 1)
+- Refund policy clarified: customer ships back at own cost, full refund on receipt
+
+**4. Asana Task Consolidation — Home V2 + PDP V2 Merged**
+- Wrote a merged task description covering the full arc: old two-task/two-file setup → new single-reference combined file
+- Produced a concise Asana comment for handoff:
+  - Live draft: nmthera.com/home2
+  - GitHub source: github.com/kfam227/website/blob/main/HTML/nmthera-combined.html
+  - Itemized what changed since last round
+  - Tagged Tiffany for UX review, Hameed for Elementor rebuild after sign-off
+  - Each visible page maps to its own WordPress URL (/home, /shop, /hand-soky-single, /hand-soky, /hand-soky-travel-system)
+
+**5. Product Insert — SKU 002 Science at a Glance Rework**
+- Replaced obscure and visually repetitive stats (iontophoresis 80%+, adherence +36 pts, 9+ conditions) with Model B-relevant values:
+  - 3–5× stratum corneum hydration increase
+  - ~10× active concentration vs. basin soak
+  - 2×+ thermal retention duration
+  - 15–20 min recommended session length
+- Backed each stat with adjacent scientific literature (occlusive hydration studies, concentration-by-volume mechanics, thermal envelope behavior)
+- Added waterdrop logo to both front halves of the SKU 002 insert (matching SKU 001 insert treatment)
+- Removed unintentional footer top border
+
+**6. SBIR Grant Landscape — S. 3971 Signed Into Law**
+- Analyzed the Small Business Innovation and Economic Security Act (S. 3971), signed April 14, 2026
+- SBIR/STTR programs reauthorized through September 30, 2031 after a ~7-month lapse
+- Key provisions: Strategic Breakthrough Allocation (up to $30M per project for Phase II awardees), annual submission caps to reduce SBIR mill crowding, improved Phase III transition support
+- Grant sizing for NM Thera: ~$250K–$275K Phase I (NIH/NSF), non-dilutive
+- Timeline: 9–15 months from prep to funds received; realistic target is September 2026 submission → mid-2027 award
+- Strategic position: SBIR is a parallel track for R&D (electrotherapy, sensors, clinical validation), not a replacement for pre-seed capital or Campaign 1 revenue
+
+### Key Decisions
+- Three SKUs split into separate PDPs — Tiffany's recommendation adopted as the canonical architecture
+- Home V2 and PDP V2 tasks merged into one Asana task with one combined HTML file as the single source of truth
+- Nav trimmed to Home + Shop only for the consumer-facing launch deliverable
+- "Available Now — Limited First Drop" is the new scarcity language (replaces "First Batch Launching May 1")
+- SBIR application deferred until after Campaign 1 ships — target September 2026 submission window
+- Product insert stats rewritten to be Model B-specific and scientifically grounded without making unvalidated empirical claims
+
+### Learnings
+- **Splitting SKUs into separate PDPs reduces cognitive load.** Tiffany was right — three offers on one page creates decision paralysis. Independent pages let each SKU tell its own story and simplify the buy box.
+- **Accessibility isn't optional, it's a blocker.** Chrome extensions couldn't parse the superpage, contrast ratios failed AA in multiple places, and text sizes were below readable thresholds. These aren't polish items — they're barriers to conversion and trust.
+- **The drop state machine is invisible infrastructure.** Stripping visible inventory counts doesn't mean removing the drop logic. The DROPS array, sold-out transitions, and preorder cascade still run under the hood for when Hameed connects the backend. Visible ≠ functional.
+- **SBIR is a 12-month play, not a 12-week play.** Prep-to-award is 9–15 months. It funds the R&D layer that makes Series A compelling, but it can't rescue current operations. Pre-seed raise and Campaign 1 revenue are the near-term lifeline.
+- **Hover dropdowns need bridge elements.** Without a `::after` pseudo-element filling the gap between the nav tab and the dropdown, the menu closes as the cursor crosses the empty space. Small CSS detail, big UX impact.
+- **Task consolidation reduces coordination overhead.** Two Asana tasks pointing at two files meant two threads to track, two handoff moments, two QA passes. One task, one file, one handoff — cleaner for everyone.
+
+### Files Changed
+- `HTML/nmthera-combined.html` — NEW: merged Home + Shop + 3 separate PDPs
+- `HTML/soky-002-kit-insert.html` — Science at a Glance rework, waterdrop logo added, footer border removed
+- Claude Code prompts generated: accessibility contrast fix (24 changes), PDP feedback fixes (3 tasks), combined file verification checklist
+
+### Next Steps
+- Tiffany: review live draft at nmthera.com/home2 — flag anything that still needs work
+- Hameed: after Tiffany sign-off, begin Elementor rebuild using combined HTML + GitHub source
+- Each visible page gets its own WordPress URL: /home, /shop, /hand-soky-single, /hand-soky, /hand-soky-travel-system
+- Connect all Add to Cart buttons to WooCommerce (backend annotations already in code)
+- SBIR: park until post-Campaign 1; begin grant writer search in June/July for September submission
+- Product insert: finalize SKU 002 insert with updated stats, prep for print run
+- Continue Campaign 1 critical path: Shopify checkout, product liability insurance, Seller's Permit, TopSheng manufacturing confirmation
+
+---
+
+## April 13, 2026 — PDP Tiffany Feedback Fixes (soky-pdp-v2.html)
+
+Three concrete fixes from Tiffany Morimoto's UX review, shipped today. Two items still pending her design decision (#1 nav alignment, #6 single vs. split PDP).
+
+### Fix 1: Removed All Inventory Count UI
+Tiffany flagged inventory counters as distracting / premature for launch.
+- **CSS removed:** ~230 lines — `.drop-timeline`, `.dt-*`, `.drop-status-strip`, `.dss-*` selectors, plus responsive overrides at 600px breakpoint.
+- **HTML removed:** `#dropStatusStrip` container div from the buy box.
+- **JS removed:** `renderDropStatusStrip()`, `shortMonth()`, `renderSkuDetailCards()`, `renderBatchAllocation()`. Removed `renderDropStatusStrip` call from `renderAll()`.
+- **Kept:** DROPS array, core helpers (`getActiveDrop`, `getActiveDropForSku`, `isSkuSoldOutEverywhere`, `getSkuRemaining`), buy box eyebrow, ATC button state, shipping note, debug panel — all still needed for drop cascade logic.
+- **FAQ updated:** "What happens when a drop sells out?" — removed specific unit count (200) and drop schedule dates. Now reads: "SOKY ships in limited seasonal drops..."
+
+### Fix 2: Bumped Minimum Text Sizes
+Tiffany flagged text readability issues. Applied a 10px floor across the page:
+- Eyebrows/labels: 9px → 11px (`.bb-eyebrow`, `.section-eyebrow`, `.science-card-lbl`, `.don-callout-lbl`, Research Access callout)
+- Tags/badges: 8px → 10px (`.sku-info-tag`, `.roadmap-card-badge`, `.roadmap-card-specs span`)
+- Body/desc: 11px → 12px (`.sku-info-desc`, `.rstep-desc`, `.mode-card-tagline`, `.footer-brand-sub`, `.details-header h3`)
+- Footer text: 10px → 11px (`.footer-bottom`, `.footer-compliance`, `.footer-newsletter button`, `.nav-cart`, `.roadmap-cta-btn`, `.bb-compare`)
+- Content text: 12px → 13px (`.faq-a-inner`, `.footer-col a/p`, `.footer-newsletter input`, Research Access callout body)
+- Patent badge: 9px → 10px (`.bb-patent`)
+
+### Fix 3: Removed "Three offers. 200 units. First drop." Remnants
+- CTA band static text: removed "The first drop of a patented platform." — now just "Your hands have been waiting long enough."
+- `renderCtaBand()` JS: rewrote all sold-out state messages to remove specific drop numbers and unit counts.
+
+### Not Changed (Pending Tiffany)
+- Three-SKU selector layout (pending split PDP decision)
+- Nav bar alignment
+- Product images, URLs, debug panel, pricing, core drop logic
+
+---
+
 ## April 10, 2026 — 24-Hour Recap: Six Threads, Campaign 1 Pressure
 
 ### 1. Data Privacy & Training Opt-Out
