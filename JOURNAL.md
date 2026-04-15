@@ -6,152 +6,119 @@
 ### What We Did
 
 **1. Combined HTML File — Merged Home + PDP into Single Deliverable**
-- Created `nmthera-combined.html` — a new file merging the sitemap superpage (Home) and PDP designs into one unified deliverable
-- Architecture: Home page + Shop page, with a hover dropdown nav revealing three sub-pages (Hand SOKY Single / Hand SOKY Pair / Hand SOKY Travel System)
-- Each SKU now lives on its own independent PDP, per Tiffany's recommendation that three SKUs on one page was confusing
-- Shop hover dropdown uses a `::after` bridge pseudo-element so cursor can travel from tab to dropdown without it closing
-- Mobile: tap opens dropdown, tap item navigates, tap elsewhere closes
-- Fixed iframe embed URL typo on WordPress — `nmthera.combined.html` corrected to `nmthera-combined.html`
-- Verification checklist produced: 12-point QA covering dropdown behavior, stat corrections, safety sections, temperature formatting, care instructions, and script integrity
+- Created `nmthera-combined.html` — merged sitemap superpage (Home) and PDP into one unified file
+- Architecture: Home + Shop, with hover dropdown nav revealing three sub-pages (Hand SOKY Single / Pair / Travel System)
+- Each SKU now lives on its own independent PDP, per Tiffany's recommendation
+- Shop hover dropdown uses `::after` bridge pseudo-element for smooth cursor travel
+- Fixed iframe embed URL typo (dot vs hyphen) for WordPress/Elementor deployment
 
-**2. Addressed Tiffany's Homepage Feedback (6 items)**
-- Generated Claude Code prompt with 24 targeted CSS find/replace changes across 5 tasks:
-  - Task 1: Nav text size bump (12px → 14px nav tabs, 14px → 16px brand name)
-  - Task 2: Hero section contrast fixes (subheading, CTA button, badge text)
-  - Task 3: Dark-mode nav contrast sweep
-  - Task 4: Body section contrast sweep — raised all `rgba(17,24,39,0.xx)` below 0.72 up to 0.78
-  - Task 5: Image caption overlay contrast (0.5 → 0.75)
-- Progress bar: removed
-- Nav items: trimmed to Home + Shop only (other tabs are roadmap, not this deliverable)
-- "First Batch Launching May 1": replaced with "Available Now — Limited First Drop"
-- SEO concern: clarified that the superpage is a prototype; production build will be individual Elementor pages with proper URLs and meta tags
+**2. Tiffany Feedback — Accessibility & Design Pass**
+- Removed progress bar from nav
+- Trimmed nav to Home + Shop only
+- Ran full accessibility contrast sweep — 24 CSS changes across 5 tasks (nav text, hero overlay, dark-mode nav, body sections, image captions)
+- Updated "First Batch Launching May 1" → "Available Now — Limited First Drop"
+- Added safety disclaimers, return policy, and full Policies page
+- Generated Claude Code prompts for all changes + verification checklist
+- Drafted Asana task description and comment for merged Home V2 + PDP V2 task with handoff instructions
 
-**3. Addressed Tiffany's PDP Feedback (7 items)**
-- Generated Claude Code prompt covering three concrete fixes:
-  - Inventory count removal (visible counters stripped; drop state machine preserved for backend)
-  - Text size minimum enforced: no rendered text below 10px, body/description minimum 12–13px
-  - "Three offers. 200 units. First drop." remnants cleaned up, CTA rewritten
-- Items deferred to Tiffany's decision: nav bar alignment (match Home or PDP-specific), single-vs-split PDP layout
-- Tiffany's split-PDP recommendation was ultimately adopted in the combined file (see item 1)
-- Refund policy clarified: customer ships back at own cost, full refund on receipt
+**3. Product Insert — SKU 002 Science at a Glance Rework**
+- Replaced old stats (iontophoresis %, adherence %, condition count) — too similar-looking and unsubstantiated
+- New stats grounded in published science: skin permeability (3–5×), transdermal absorption (~10×), water conservation (2×+), soak time (15–20 min)
+- Added waterdrop logo to match SKU 001 insert
+- Removed footer top border
 
-**4. Asana Task Consolidation — Home V2 + PDP V2 Merged**
-- Wrote a merged task description covering the full arc: old two-task/two-file setup → new single-reference combined file
-- Produced a concise Asana comment for handoff:
-  - Live draft: nmthera.com/home2
-  - GitHub source: github.com/kfam227/website/blob/main/HTML/nmthera-combined.html
-  - Itemized what changed since last round
-  - Tagged Tiffany for UX review, Hameed for Elementor rebuild after sign-off
-  - Each visible page maps to its own WordPress URL (/home, /shop, /hand-soky-single, /hand-soky, /hand-soky-travel-system)
+**4. Seymour Everett — Investor Call Briefing**
+- Built comprehensive briefing for phone call with Seymour covering product status, web/GTM progress, team, Campaign 1 readiness, financial position, and runway concern
+- Framed the equity ask: inviting Seymour to exercise his contractual right to invest additional capital at original terms before the pre-seed round opens at $3.2M cap
+- Call completed
 
-**5. Product Insert — SKU 002 Science at a Glance Rework**
-- Replaced obscure and visually repetitive stats (iontophoresis 80%+, adherence +36 pts, 9+ conditions) with Model B-relevant values:
-  - 3–5× stratum corneum hydration increase
-  - ~10× active concentration vs. basin soak
-  - 2×+ thermal retention duration
-  - 15–20 min recommended session length
-- Backed each stat with adjacent scientific literature (occlusive hydration studies, concentration-by-volume mechanics, thermal envelope behavior)
-- Added waterdrop logo to both front halves of the SKU 002 insert (matching SKU 001 insert treatment)
-- Removed unintentional footer top border
+**5. Fernando — B2B Sales Role**
+- Drafted and iterated text message bringing Fernando back in a sales capacity
+- Role structure: commission-based B2B sales targeting podiatrists/clinicians via HubSpot CRM
+- Benchmarks: 50–100 calls + 50–100 emails per day, WFH/browser-based, no travel required
+- Key selling point: 15,000 contacts in CRM with zero competition — wide open opportunity
+- Connected role to Foot SOKY pipeline specifically (podiatry accounts)
+- Long-term path: Sales Director → potentially CSO, but leading with opportunity, not title
+- Kenny backs him on closes; no equity lead, commission TBD
 
-**6. SBIR Grant Landscape — S. 3971 Signed Into Law**
-- Analyzed the Small Business Innovation and Economic Security Act (S. 3971), signed April 14, 2026
-- SBIR/STTR programs reauthorized through September 30, 2031 after a ~7-month lapse
-- Key provisions: Strategic Breakthrough Allocation (up to $30M per project for Phase II awardees), annual submission caps to reduce SBIR mill crowding, improved Phase III transition support
-- Grant sizing for NM Thera: ~$250K–$275K Phase I (NIH/NSF), non-dilutive
-- Timeline: 9–15 months from prep to funds received; realistic target is September 2026 submission → mid-2027 award
-- Strategic position: SBIR is a parallel track for R&D (electrotherapy, sensors, clinical validation), not a replacement for pre-seed capital or Campaign 1 revenue
+**6. TopSheng / Jack — Manufacturing Terms Secured**
+- Reconnected with Jack about next Hand SOKY batch: 500 pieces (250 pairs), split across SKU 001 and SKU 002
+- Was upfront about funding timeline; asked for flexible payment terms
+- Jack initially offered 3-month terms
+- Sean Tan advised pushing to 4–5 months for breathing room as the raise comes together
+- Went back to Jack — he agreed to 5-month payment terms
+- Next steps: send specs and packaging designs for both SKUs, schedule a call with Jack to finalize details
+- Planted seed on Foot SOKY as next product development opportunity — Jack is interested
+- Open question: clarify whether 5 months runs from order placement, delivery, or invoice date
+- Sean's manufacturing experience was directly valuable in this negotiation
+
+**7. Sean Tan — Advisor Momentum**
+- Spoke with Sean; he's excited about the company's progress
+- Pitch deck and business plan (built in earlier sessions) are landing well with him
+- Sean provided direct tactical guidance on the TopSheng negotiation (push to 4–5 months, consider installment structure)
+- Also suggested potentially offering TopSheng equity — parked for now but on Kenny's mind given commitment to sole-manufacturer relationship
+
+**8. USPTO Trademark Update**
+- Received official notice: design search codes assigned to stylized trademark application (SN: 99562473)
+- Codes: raindrop/teardrop shapes + curved lines/bands — consistent with SOKY visual identity
+- Routine and good news — application progressing normally
+- No action required; codes have no legal significance
+- Flagged: need trademark counsel lined up (James Yang no longer available) in case Office Action comes back
+
+**9. Jenn Nguyen — Samsara Background Analysis**
+- Analyzed what Jenn's Samsara experience brings to NM Thera
+- IoT product design → SOKY sensor/data platform architecture
+- Complex-to-simple workflow design → ritual UX and onboarding
+- Design systems discipline → scaling BSG v3.0 to production
+- Pre-to-post-IPO range (Samsara: startup → $25B+ market cap)
+- Full-stack design execution: research → wireframe → prototype → production spec
+
+**10. SBIR Grant Strategy**
+- S. 3971 signed into law — SBIR/STTR reauthorized through 2031 after September 2025 lapse
+- Phase I awards ~$250K–$275K non-dilutive (NIH NIBIB or NSF best fit)
+- Timeline: 9–15 months prep-to-award; targeting September 2026 submission, funds ~mid-2027
+- Decision: park until post-Campaign 1; begin grant writer search June/July
+- This funds R&D layer (electrotherapy, sensors, clinical validation) for Series A — parallel track, not current lifeline
+
+**11. Flagship Store Brainstorm**
+- Deep conceptual design session for brick-and-mortar NM Thera flagship
+- Concept: "wellness mod shop" — cross between apothecary and nail salon
+- Five zones: Apothecary Bar (walk-in soak bar + blend wall), Mod Bench (device customization workshop), Wellness Studio (group sessions + practitioner consults), Heritage Wall, storefront experience
+- Customer journey mapped from walk-in → modification → community practice
+- Generated five-panel concept art prompt for Nano Banana to illustrate
+- Modalities: heat therapy, electrotherapy, hyperbaric gas therapy
 
 ### Key Decisions
-- Three SKUs split into separate PDPs — Tiffany's recommendation adopted as the canonical architecture
-- Home V2 and PDP V2 tasks merged into one Asana task with one combined HTML file as the single source of truth
-- Nav trimmed to Home + Shop only for the consumer-facing launch deliverable
-- "Available Now — Limited First Drop" is the new scarcity language (replaces "First Batch Launching May 1")
-- SBIR application deferred until after Campaign 1 ships — target September 2026 submission window
-- Product insert stats rewritten to be Model B-specific and scientifically grounded without making unvalidated empirical claims
+- **5-month payment terms secured with TopSheng** — production can begin before funding closes (June–August). Sean Tan's guidance was instrumental.
+- **Fernando enters as commission-based B2B sales rep** — no hourly, no equity lead. 15K-contact CRM is the pitch.
+- **Three SKUs split into separate PDPs** — confirmed and built per Tiffany's recommendation.
+- **SBIR parked until post-Campaign 1** — September 2026 submission target, grant writer search starts June/July.
+- **TopSheng equity idea parked** — on Kenny's mind but not ready to play forward yet.
 
 ### Learnings
-- **Splitting SKUs into separate PDPs reduces cognitive load.** Tiffany was right — three offers on one page creates decision paralysis. Independent pages let each SKU tell its own story and simplify the buy box.
-- **Accessibility isn't optional, it's a blocker.** Chrome extensions couldn't parse the superpage, contrast ratios failed AA in multiple places, and text sizes were below readable thresholds. These aren't polish items — they're barriers to conversion and trust.
-- **The drop state machine is invisible infrastructure.** Stripping visible inventory counts doesn't mean removing the drop logic. The DROPS array, sold-out transitions, and preorder cascade still run under the hood for when Hameed connects the backend. Visible ≠ functional.
-- **SBIR is a 12-month play, not a 12-week play.** Prep-to-award is 9–15 months. It funds the R&D layer that makes Series A compelling, but it can't rescue current operations. Pre-seed raise and Campaign 1 revenue are the near-term lifeline.
-- **Hover dropdowns need bridge elements.** Without a `::after` pseudo-element filling the gap between the nav tab and the dropdown, the menu closes as the cursor crosses the empty space. Small CSS detail, big UX impact.
-- **Task consolidation reduces coordination overhead.** Two Asana tasks pointing at two files meant two threads to track, two handoff moments, two QA passes. One task, one file, one handoff — cleaner for everyone.
+- **Sean Tan is delivering tangible value.** Direct tactical guidance on manufacturing negotiation resulted in better terms. The pitch deck and business plan are serving their intended purpose as shareable investor-facing assets.
+- **Jack/TopSheng trust is real and mutual.** "I trust you and would love to support you" — this relationship is a strategic asset worth protecting. Sole-manufacturer commitment is the right posture.
+- **Payment term specifics matter.** 5 months agreed in principle, but start date (order vs delivery vs invoice) and payment structure (lump sum vs installments) still need to be nailed down on the follow-up call.
+- **SBIR is a 9–15 month play.** It funds the R&D layer that makes Series A compelling, but it can't rescue current operations.
+- **Hover dropdowns need bridge elements.** Without a `::after` pseudo-element, the menu closes as cursor crosses empty space.
+- **Merging tasks reduces coordination overhead.** Two Asana tasks → one task, one file, one handoff.
 
 ### Files Changed
 - `HTML/nmthera-combined.html` — NEW: merged Home + Shop + 3 separate PDPs
-- `HTML/soky-002-kit-insert.html` — Science at a Glance rework, waterdrop logo added, footer border removed
-- Claude Code prompts generated: accessibility contrast fix (24 changes), PDP feedback fixes (3 tasks), combined file verification checklist
+- `HTML/soky-002-kit-insert.html` — Science at a Glance rework, waterdrop logo, footer border removed
+- Claude Code prompts generated: accessibility contrast fix (24 changes), PDP feedback fixes, combined file verification checklist
 
 ### Next Steps
-- Tiffany: review live draft at nmthera.com/home2 — flag anything that still needs work
-- Hameed: after Tiffany sign-off, begin Elementor rebuild using combined HTML + GitHub source
-- Each visible page gets its own WordPress URL: /home, /shop, /hand-soky-single, /hand-soky, /hand-soky-travel-system
-- Connect all Add to Cart buttons to WooCommerce (backend annotations already in code)
-- SBIR: park until post-Campaign 1; begin grant writer search in June/July for September submission
-- Product insert: finalize SKU 002 insert with updated stats, prep for print run
-- Continue Campaign 1 critical path: Shopify checkout, product liability insurance, Seller's Permit, TopSheng manufacturing confirmation
-
----
-
-## April 13, 2026 — PDP Tiffany Feedback Fixes (soky-pdp-v2.html)
-
-Three concrete fixes from Tiffany Morimoto's UX review, shipped today. Two items still pending her design decision (#1 nav alignment, #6 single vs. split PDP).
-
-### Fix 1: Removed All Inventory Count UI
-Tiffany flagged inventory counters as distracting / premature for launch.
-- **CSS removed:** ~230 lines — `.drop-timeline`, `.dt-*`, `.drop-status-strip`, `.dss-*` selectors, plus responsive overrides at 600px breakpoint.
-- **HTML removed:** `#dropStatusStrip` container div from the buy box.
-- **JS removed:** `renderDropStatusStrip()`, `shortMonth()`, `renderSkuDetailCards()`, `renderBatchAllocation()`. Removed `renderDropStatusStrip` call from `renderAll()`.
-- **Kept:** DROPS array, core helpers (`getActiveDrop`, `getActiveDropForSku`, `isSkuSoldOutEverywhere`, `getSkuRemaining`), buy box eyebrow, ATC button state, shipping note, debug panel — all still needed for drop cascade logic.
-- **FAQ updated:** "What happens when a drop sells out?" — removed specific unit count (200) and drop schedule dates. Now reads: "SOKY ships in limited seasonal drops..."
-
-### Fix 2: Bumped Minimum Text Sizes
-Tiffany flagged text readability issues. Applied a 10px floor across the page:
-- Eyebrows/labels: 9px → 11px (`.bb-eyebrow`, `.section-eyebrow`, `.science-card-lbl`, `.don-callout-lbl`, Research Access callout)
-- Tags/badges: 8px → 10px (`.sku-info-tag`, `.roadmap-card-badge`, `.roadmap-card-specs span`)
-- Body/desc: 11px → 12px (`.sku-info-desc`, `.rstep-desc`, `.mode-card-tagline`, `.footer-brand-sub`, `.details-header h3`)
-- Footer text: 10px → 11px (`.footer-bottom`, `.footer-compliance`, `.footer-newsletter button`, `.nav-cart`, `.roadmap-cta-btn`, `.bb-compare`)
-- Content text: 12px → 13px (`.faq-a-inner`, `.footer-col a/p`, `.footer-newsletter input`, Research Access callout body)
-- Patent badge: 9px → 10px (`.bb-patent`)
-
-### Fix 3: Removed "Three offers. 200 units. First drop." Remnants
-- CTA band static text: removed "The first drop of a patented platform." — now just "Your hands have been waiting long enough."
-- `renderCtaBand()` JS: rewrote all sold-out state messages to remove specific drop numbers and unit counts.
-
-### Not Changed (Pending Tiffany)
-- Three-SKU selector layout (pending split PDP decision)
-- Nav bar alignment
-- Product images, URLs, debug panel, pricing, core drop logic
-
----
-
-## April 10, 2026 — 24-Hour Recap: Six Threads, Campaign 1 Pressure
-
-### 1. Data Privacy & Training Opt-Out
-Realized sensitive info (tax/financial data) had been shared while Anthropic training toggle was ON. Remediated: purged all 3 memory edits, toggled off "Help improve Claude," discussed deleting past conversations. Key takeaway: deleted chats are excluded from future training, but data already in the pipeline can't be unlearned. Practical risk of data surfacing to other users is very low but theoretically nonzero. Decided exposure was manageable and moved on.
-
-### 2. Full Skills Ecosystem Audit
-Cataloged all 11 installed skills (8 public, 2 custom, 1 example) into a reference table with paths, editability, descriptions, and revision cadence. Identified four new skills to build: bsg-design-system, investor-materials, campaign-1-launch (most time-sensitive — weekly updates through April 30), and claude-code-prompts (meta-skill about working patterns with Claude). Documented the skill update workflow: tell Claude what to change → download repackaged .skill → re-upload in Settings.
-
-### 3. Asana Backlog Sprint (50 Tasks)
-Sorted all 50 tasks on the Master Coordinator board by due date and worked through them sequentially. Accomplished: pricing rationale drafted ("Why $350/$85?"), TopSheng video brief completed, LegalZoom/corporate compliance documented (C Corp reinstatement filed, licensing checklist mapped — Seller's Permit, Home Occupation Verification, Business Tax Certificate), team comms sent to Chi Le and Tiffany Morimoto, Weekly Updater and COB task structures reviewed. Generated a full status report deliverable.
-
-**Honest assessment for Campaign 1:** Pre-Launch and Launch task lists mostly unassigned and unstarted. Five critical blockers: (1) no Shopify checkout, (2) no landing page, (3) no product liability insurance, (4) no Seller's Permit filed, (5) manufacturing status with TopSheng unconfirmed.
-
-### 4. Journal Workflow
-Consolidated April 9 work into a recap and generated a Claude Code prompt to append to JOURNAL.md. Confirmed workflow: Chat → Claude Code prompt → execute in terminal → push. Entries most-recent-first.
-
-### 5. 3D Design / OpenSCAD Exploration
-Explored whether Claude can create STP/CAD files. Established boundary: Claude can write parametric OpenSCAD .scad scripts but can't produce native CAD. Good for hard-surface/mechanical geometry, weak for organic surfaces. Downloaded OpenSCAD installer. New workflow unlocked: describe geometry → Claude writes script → render locally → export STL/STEP.
-
-### 6. PDP Pre-Order System + Product Roadmap
-Designed a pre-order cascade for the PDP: when a batch of 200 units sells out, the buy box transitions from "Add to Cart" to "Pre-Order · Ships [next drop date]," cascading through subsequent batches (April → July → October). Two features built via Claude Code prompt:
-- **Drop Status Strip** — relocated into the buy box. Shows remaining units counter, sold-percentage bar, 3-dot mini timeline.
-- **Product Roadmap section** — four cards (Foot SOKY, Knee SOKY, Elbow SOKY, SOKY Plus consumables) between Three Offers and FAQ, with pre-wired links to future PDP pages.
-
-### Overarching Theme
-20 days to Campaign 1 launch. Juggling legal compliance, frontend buildout, team coordination, manufacturing confirmation, and investor-facing polish simultaneously. Skills ecosystem and journal workflow are scaffolding for cross-session context. Biggest unlocks today: Tiffany meeting (frontend handoff) and Seller's Permit application.
+- **TopSheng:** Send specs and packaging designs for SKU 001 + SKU 002. Schedule call with Jack. Clarify payment term start date and installment structure. Consider having Sean on or briefed before the call.
+- **Fernando:** Wait for his response. If he bites, walk him through HubSpot and the database. Have commission structure ready.
+- **Seymour:** Follow up on equity conversation from today's call.
+- **Tiffany:** Review live draft at nmthera.com/home2 — flag anything that still needs work.
+- **Hameed:** After Tiffany sign-off, begin Elementor rebuild. Each page gets its own WordPress URL.
+- **WooCommerce:** Connect all Add to Cart buttons (backend annotations already in code).
+- **SBIR:** Park. Revisit June/July for grant writer search, target September submission.
+- **Trademark:** Monitor for examining attorney's next step. Line up replacement trademark counsel.
+- **Product insert:** Finalize SKU 002 insert with updated stats, prep for print run.
+- **Chi + Kenichiro:** Share TopSheng manufacturing update (drafted and ready to send).
 
 ---
 
