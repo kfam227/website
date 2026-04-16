@@ -493,6 +493,92 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 .rp-col li{font-family:var(--body);font-size:14px;color:rgba(17,24,39,0.78);line-height:1.7;list-style:none;padding:2px 0}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 
+/* ═══ QTY STEPPER — WP OVERRIDE FIX ═══ */
+.sku-c input[type="number"],
+.sku-c input[type="text"],
+.atc-wrap input[type="text"],
+.atc-wrap input[type="number"],
+.qty-wrap input[type="text"],
+.qty-wrap input[type="number"],
+.buy-box input[type="text"],
+.buy-box input[type="number"] {
+  width: 36px !important;
+  height: 44px !important;
+  border: none !important;
+  border-left: 1px solid var(--line) !important;
+  border-right: 1px solid var(--line) !important;
+  text-align: center !important;
+  font-family: var(--head) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: var(--ink) !important;
+  background: #fff !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: auto !important;
+  max-height: 44px !important;
+  line-height: 44px !important;
+  -moz-appearance: textfield !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  vertical-align: middle !important;
+}
+.sku-c input[type="number"]::-webkit-inner-spin-button,
+.sku-c input[type="number"]::-webkit-outer-spin-button,
+.atc-wrap input::-webkit-inner-spin-button,
+.atc-wrap input::-webkit-outer-spin-button,
+.qty-wrap input::-webkit-inner-spin-button,
+.qty-wrap input::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+.sku-c button[onclick*="nextElementSibling"],
+.sku-c button[onclick*="previousElementSibling"] {
+  width: 28px !important;
+  height: 28px !important;
+  border: none !important;
+  background: none !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  color: var(--muted) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: auto !important;
+  line-height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.qty-wrap {
+  display: flex !important;
+  align-items: center !important;
+  border: 1px solid var(--line-md) !important;
+  border-radius: var(--r-sm) !important;
+  overflow: hidden !important;
+  background: #fff !important;
+  height: 44px !important;
+}
+.qty-btn {
+  width: 36px !important;
+  height: 44px !important;
+  border: none !important;
+  background: none !important;
+  font-family: var(--head) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--muted) !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 /* ═══ LIQUID ACCENT ═══ */
 .liquid-accent{height:4px;border:none;margin:0;background:linear-gradient(90deg,transparent 0%,rgba(0,109,119,0.15) 15%,rgba(49,89,138,0.25) 35%,rgba(0,109,119,0.3) 50%,rgba(104,139,88,0.2) 70%,rgba(49,89,138,0.15) 85%,transparent 100%);filter:blur(1px)}
 
@@ -574,7 +660,16 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   .footer-grid{grid-template-columns:1fr}
   .refuse-pursue{grid-template-columns:1fr;gap:1rem}
   .mode-card{flex:0 0 100%;max-width:none}
-  .nav-cta{display:none}
+  /* Mobile: keep cart icon visible but compact — this is the only
+     checkout entry point on phones, so it must never be hidden. */
+  .nav-cta{
+    display:inline-flex;
+    padding:7px 10px;
+    gap:0;
+    font-size:0;              /* hides the "Cart" text label */
+  }
+  .nav-cta svg{width:15px;height:15px}
+  .nav-cta #cartCount{font-size:10px}
 }
 @media(max-width:480px){
   .hero{min-height:100vh;min-height:100dvh;padding-bottom:0}
@@ -772,6 +867,14 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   .science-grid{grid-template-columns:1fr}
 }
 
+/* ═══ CART TOAST ═══ */
+.cart-toast{position:fixed;top:90px;left:50%;transform:translateX(-50%) translateY(-20px);z-index:100001;background:rgba(104,139,88,0.95);color:#fff;font-family:var(--sub);font-size:12px;font-weight:600;letter-spacing:0.06em;padding:12px 24px;border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.15);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;white-space:nowrap}
+.cart-toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+
+/* ═══ PDP CHECKOUT CTA ═══ */
+.checkout-cta{display:block;width:100%;padding:16px 24px;border-radius:999px;background:linear-gradient(135deg,var(--pool),var(--navy));color:#fff;font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-align:center;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(0,109,119,0.25);margin-bottom:1rem;text-decoration:none}
+.checkout-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,109,119,0.35);background:linear-gradient(135deg,var(--navy),var(--pool))}
+
 </style>
 </head>
 <body>
@@ -779,6 +882,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <div class="noise-overlay" aria-hidden="true"></div>
 <script>document.documentElement.classList.add('js');</script>
 <div class="shell">
+<div class="cart-toast" id="cartToast"></div>
 
 <!-- ═══════════════════════════════════
    TOPBAR — Tab-based Navigation
@@ -820,7 +924,11 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     </div>
   </div>
   <!-- BACKEND: Navigate to cart/shop via WooCommerce -->
-  <button class="nav-cta" onclick="switchTab('shop')" data-backend="woocommerce" data-action="navigate-to-cart">Shop SOKY</button>
+  <a href="/cart" class="nav-cta" id="navCartBtn" data-backend="woocommerce" data-action="view-cart" style="position:relative">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="flex-shrink:0"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Cart
+    <span id="cartCount" style="display:none;position:absolute;top:-6px;right:-8px;min-width:18px;height:18px;border-radius:999px;background:var(--heat);color:#fff;font-family:var(--head);font-size:10px;font-weight:800;line-height:18px;text-align:center;padding:0 5px;box-shadow:0 2px 6px rgba(179,29,27,0.3);pointer-events:none">0</span>
+  </a>
 </div>
 </div>
 
@@ -1047,7 +1155,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <div class="hero-bottom">
       <div class="hero-meta"><strong>Pre-Order Open</strong> · Batch 1 ships Spring 2026</div>
       <!-- BACKEND: Contact to order via WooCommerce -->
-      <div class="hero-contact"><a href="/cdn-cgi/l/email-protection#177c7279796e57797a637f7265763974787a" data-backend="woocommerce" data-action="add-to-cart-or-contact">Contact to Order</a></div>
+      <div class="hero-contact"><a href="/cart" data-backend="woocommerce" data-action="view-cart" style="color:rgba(255,255,255,0.7)">View Cart →</a></div>
     </div>
   </div>
 
@@ -1058,7 +1166,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
     <div class="sku-cards reveal">
       <!-- BACKEND: Add to cart — HandSOKY_B_M_000 via WooCommerce -->
-      <div class="sku-c research" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000">
+      <div class="sku-c research" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000" onclick="skuCardClick(event,'pdp-single')" style="cursor:pointer">
         <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Single" loading="lazy" style="object-position:center 60%">
         <div class="sku-c-body">
           <div class="sku-c-id">HandSOKY_B_M_000</div>
@@ -1074,12 +1182,12 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
               <input type="number" value="1" min="1" max="10" style="width:32px;height:28px;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-family:var(--body);font-size:12px;color:var(--ink);-moz-appearance:textfield" oninput="this.value=Math.max(1,Math.min(10,+this.value||1))">
               <button onclick="var i=this.previousElementSibling;i.value=Math.min(10,+i.value+1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">+</button>
             </div>
-            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000">Add to Cart</button>
+            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000" data-wc-id="6556" onclick="addToCartWC(this)">Add to Cart</button>
           </div>
         </div>
       </div>
       <!-- BACKEND: Add to cart — HandSOKY_B_M_001 via WooCommerce -->
-      <div class="sku-c core" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_001">
+      <div class="sku-c core" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_001" onclick="skuCardClick(event,'pdp-pair')" style="cursor:pointer">
         <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Core" loading="lazy" style="object-position:center 45%">
         <div class="sku-c-body">
           <div class="sku-c-id">HandSOKY_B_M_001</div>
@@ -1095,12 +1203,12 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
               <input type="number" value="1" min="1" max="10" style="width:32px;height:28px;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-family:var(--body);font-size:12px;color:var(--ink);-moz-appearance:textfield" oninput="this.value=Math.max(1,Math.min(10,+this.value||1))">
               <button onclick="var i=this.previousElementSibling;i.value=Math.min(10,+i.value+1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">+</button>
             </div>
-            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_001">Add to Cart</button>
+            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_001" data-wc-id="6557" onclick="addToCartWC(this)">Add to Cart</button>
           </div>
         </div>
       </div>
       <!-- BACKEND: Add to cart — HandSOKY_B_M_002 via WooCommerce -->
-      <div class="sku-c kit" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_002">
+      <div class="sku-c kit" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_002" onclick="skuCardClick(event,'pdp-travel')" style="cursor:pointer">
         <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/03/Product-and-Program-Offer-Development-12.png" alt="Hand SOKY Travel System" loading="lazy">
         <div class="sku-c-body">
           <div class="sku-c-id">HandSOKY_B_M_002</div>
@@ -1116,7 +1224,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
               <input type="number" value="1" min="1" max="10" style="width:32px;height:28px;border:none;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-family:var(--body);font-size:12px;color:var(--ink);-moz-appearance:textfield" oninput="this.value=Math.max(1,Math.min(10,+this.value||1))">
               <button onclick="var i=this.previousElementSibling;i.value=Math.min(10,+i.value+1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">+</button>
             </div>
-            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_002">Add to Cart</button>
+            <button class="form-btn" style="flex:1;padding:8px 0;font-size:10px;letter-spacing:.1em" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_002" data-wc-id="6558" onclick="addToCartWC(this)">Add to Cart</button>
           </div>
         </div>
       </div>
@@ -1170,7 +1278,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <p class="cta-sub">Three offers. 200 units. The first drop of a patented platform.</p>
       <div class="cta-buttons">
         <!-- BACKEND: Contact to order via WooCommerce -->
-        <a href="/cdn-cgi/l/email-protection#6a010f0404132a04071e020f180b44090507" class="cta-btn primary" data-backend="woocommerce" data-action="add-to-cart-or-contact">Contact to Order</a>
+        <a href="/cart" class="cta-btn primary" data-backend="woocommerce" data-action="view-cart">View Cart</a>
         <button class="cta-btn secondary" onclick="switchTab('ritual')" data-backend="wp-nav" data-target-page="/ritual">Learn How It Works</button>
       </div>
     </div>
@@ -1228,9 +1336,10 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
             <input type="text" class="qty-val" id="qtyVal-pdp-single" value="1" readonly>
             <button class="qty-btn" onclick="changePdpQty('pdp-single',1)">+</button>
           </div>
-          <button class="atc-btn" id="atcBtn-pdp-single" data-price="45" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000">Add to Cart &mdash; $45</button>
+          <button class="atc-btn" id="atcBtn-pdp-single" data-price="45" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000" data-wc-id="6556" onclick="addToCartWC(this)">Add to Cart &mdash; $45</button>
         </div>
 
+        <a href="/cart" class="checkout-cta" data-backend="woocommerce" data-action="view-cart">Checkout →</a>
         <p style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-bottom:1.5rem"><strong style="color:var(--green)">IN STOCK</strong> &middot; Batch 1 &middot; 30-day satisfaction guarantee.</p>
 
         <!-- Collapsible Details -->
@@ -1405,9 +1514,10 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
             <input type="text" class="qty-val" id="qtyVal-pdp-pair" value="1" readonly>
             <button class="qty-btn" onclick="changePdpQty('pdp-pair',1)">+</button>
           </div>
-          <button class="atc-btn" id="atcBtn-pdp-pair" data-price="85" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_001">Add to Cart &mdash; $85</button>
+          <button class="atc-btn" id="atcBtn-pdp-pair" data-price="85" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_001" data-wc-id="6557" onclick="addToCartWC(this)">Add to Cart &mdash; $85</button>
         </div>
 
+        <a href="/cart" class="checkout-cta" data-backend="woocommerce" data-action="view-cart">Checkout →</a>
         <p style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-bottom:1.5rem"><strong style="color:var(--green)">IN STOCK</strong> &middot; Batch 1 &middot; 30-day satisfaction guarantee.</p>
 
         <!-- Collapsible Details -->
@@ -1582,9 +1692,10 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
             <input type="text" class="qty-val" id="qtyVal-pdp-travel" value="1" readonly>
             <button class="qty-btn" onclick="changePdpQty('pdp-travel',1)">+</button>
           </div>
-          <button class="atc-btn" id="atcBtn-pdp-travel" data-price="120" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_002">Add to Cart &mdash; $120</button>
+          <button class="atc-btn" id="atcBtn-pdp-travel" data-price="120" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_002" data-wc-id="6558" onclick="addToCartWC(this)">Add to Cart &mdash; $120</button>
         </div>
 
+        <a href="/cart" class="checkout-cta" data-backend="woocommerce" data-action="view-cart">Checkout →</a>
         <p style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-bottom:1.5rem"><strong style="color:var(--green)">IN STOCK</strong> &middot; Batch 1 &middot; 30-day satisfaction guarantee.</p>
 
         <!-- Collapsible Details -->
@@ -2897,6 +3008,189 @@ console.log('Status: Framework ready for backend integration');
     document.querySelectorAll(sel).forEach(function(el){el.style.display='none'});
   });
 })();
+
+/* ═══ SKU CARD CLICK → PDP NAVIGATION ═══ */
+function skuCardClick(e, pdpId){
+  // Don't navigate if clicking on the Add to Cart button, qty stepper, or any interactive element
+  var tag = e.target.tagName.toLowerCase();
+  var isInteractive = (tag === 'button' || tag === 'input' ||
+    e.target.closest('button') || e.target.closest('input') ||
+    e.target.closest('.form-btn') || e.target.closest('[onclick*="addToCartWC"]'));
+  if(isInteractive) return;
+  switchTab(pdpId);
+}
+
+/* ═══ WOOCOMMERCE ADD-TO-CART CONNECTOR ═══
+   Uses the canonical WC AJAX endpoint (?wc-ajax=add_to_cart).
+   This is what the native WC Add-to-Cart button uses and is the
+   ONLY endpoint that reliably writes to the cart session on iOS
+   Safari + iPadOS. credentials:'include' ensures the WC session
+   cookie is sent/received across ITP boundaries. */
+function addToCartWC(btn){
+  var wcId = btn.getAttribute('data-wc-id');
+  if(!wcId) return;
+  var wrap = btn.closest('.atc-wrap') || btn.parentElement;
+  var qtyInput = wrap ? wrap.querySelector('input[type="number"], input[type="text"].qty-val, input.qty-val') : null;
+  var qty = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+
+  var originalText = btn.textContent;
+  btn.textContent = 'Adding...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  function restore(label){
+    btn.textContent = label;
+    btn.style.opacity = '1';
+    setTimeout(function(){
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }, 1800);
+  }
+
+  fetch('/?wc-ajax=add_to_cart', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Accept': 'application/json, */*; q=0.01',
+      'X-Requested-With': 'XMLHttpRequest'
+    },
+    body: 'product_id=' + encodeURIComponent(wcId) +
+          '&quantity=' + encodeURIComponent(qty),
+    credentials: 'include'
+  })
+  .then(function(res){
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return res.json();
+  })
+  .then(function(data){
+    if(data && data.error){
+      // WC rejected the add — fall back to classic URL so the user still gets their item
+      window.location.href = '/cart/?add-to-cart=' + wcId + '&quantity=' + qty;
+      return;
+    }
+    // WC returned fragments — update counter directly from them (no second fetch needed)
+    if(data && data.fragments){
+      applyFragmentCount(data.fragments);
+    } else {
+      updateCartCounter();
+    }
+    showCartToast('Added to cart');
+    restore('Added ✓');
+    // Dispatch WC's standard event so any other WC widgets on the page refresh
+    try { document.body.dispatchEvent(new CustomEvent('added_to_cart', { detail: data })); } catch(e){}
+  })
+  .catch(function(){
+    // Any network/JSON failure: classic URL fallback — always works, leaves the page
+    window.location.href = '/cart/?add-to-cart=' + wcId + '&quantity=' + qty;
+  });
+}
+
+/* Helper: pull the item count out of WC fragments and paint the badge */
+function applyFragmentCount(frag){
+  var countEl = document.getElementById('cartCount');
+  if(!countEl) return;
+  var totalQty = 0;
+  var blob = '';
+  for(var k in frag){ if(Object.prototype.hasOwnProperty.call(frag,k)) blob += frag[k]; }
+
+  var m = blob.match(/cart-contents-count[^>]*>\s*(\d+)\s*</i);
+  if(m){ totalQty = parseInt(m[1]); }
+
+  if(totalQty === 0){
+    var qtys = blob.match(/class="quantity">\s*(\d+)\s*[×x&]/gi);
+    if(qtys){ qtys.forEach(function(s){ var n=s.match(/(\d+)/); if(n) totalQty+=parseInt(n[1]); }); }
+  }
+  if(totalQty === 0){
+    var items = blob.match(/mini_cart_item/g);
+    if(items) totalQty = items.length;
+  }
+  countEl.textContent = totalQty;
+  countEl.style.display = totalQty > 0 ? 'block' : 'none';
+}
+
+/* ═══ CART COUNTER UPDATE ═══ */
+function updateCartCounter(){
+  fetch('/?wc-ajax=get_refreshed_fragments', {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+  })
+  .then(function(res){ return res.json(); })
+  .then(function(data){
+    if(!data || !data.fragments) return;
+    var countEl = document.getElementById('cartCount');
+    if(!countEl) return;
+
+    var totalQty = 0;
+    var frag = data.fragments;
+
+    // Strategy 1: Check for a.cart-contents or similar fragment with direct count
+    var cartContents = frag['a.cart-contents'] || frag['a.cart-contents-count'] || frag['span.cart-contents-count'] || '';
+    var directMatch = cartContents.match(/(\d+)\s*item/i);
+    if(directMatch){
+      totalQty = parseInt(directMatch[1]);
+    }
+
+    // Strategy 2: Parse mini cart widget — sum quantities from each line item
+    if(totalQty === 0){
+      var cartWidget = frag['div.widget_shopping_cart_content'] || '';
+      var qtyMatches = cartWidget.match(/>(\d+)\s*[×x&]/gi);
+      if(qtyMatches && qtyMatches.length > 0){
+        for(var i = 0; i < qtyMatches.length; i++){
+          var num = qtyMatches[i].match(/(\d+)/);
+          if(num) totalQty += parseInt(num[1]);
+        }
+      }
+    }
+
+    // Strategy 3: Search all fragments for cart-contents-count
+    if(totalQty === 0){
+      var allFrags = JSON.stringify(frag);
+      var countInFrag = allFrags.match(/cart-contents-count[^>]*>(\d+)</i) ||
+                        allFrags.match(/"(\d+)\s*items?"/i);
+      if(countInFrag){
+        totalQty = parseInt(countInFrag[1]);
+      }
+    }
+
+    // Strategy 4: Fallback — count mini_cart_item occurrences (line items)
+    if(totalQty === 0){
+      var cartWidget2 = frag['div.widget_shopping_cart_content'] || '';
+      var itemMatches = cartWidget2.match(/mini_cart_item/g);
+      if(itemMatches) totalQty = itemMatches.length;
+    }
+
+    countEl.textContent = totalQty;
+    countEl.style.display = totalQty > 0 ? 'block' : 'none';
+  })
+  .catch(function(){ /* silent fail */ });
+}
+
+// Initialize cart counter on page load + on return from bfcache (mobile)
+document.addEventListener('DOMContentLoaded', function(){
+  updateCartCounter();
+});
+window.addEventListener('pageshow', function(e){
+  // pageshow fires on bfcache restore (persisted=true) AND normal loads
+  if(e.persisted) updateCartCounter();
+});
+// Also update when tab becomes visible again (user switches back from cart tab)
+document.addEventListener('visibilitychange', function(){
+  if(!document.hidden) updateCartCounter();
+});
+
+/* ═══ CART TOAST NOTIFICATION ═══ */
+var _toastTimer = null;
+function showCartToast(msg){
+  var toast = document.getElementById('cartToast');
+  if(!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  if(_toastTimer) clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function(){
+    toast.classList.remove('show');
+  }, 2800);
+}
 </script>
 </body>
 </html>
