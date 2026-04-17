@@ -7,14 +7,14 @@
 <meta name="description" content="SOKY is a patented wearable soak system for hands and feet. Portable immersion — spa-grade care that moves with you.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://nmthera.com/wp-content/uploads/2026/03/NM-THERA-LOGO-SITE-IMAGE.png">
-<meta property="og:url" content="https://kfam227.github.io/website/HTML/nmthera-sitemap-superpage.html">
+<meta property="og:url" content="https://nmthera.com">
 <meta property="og:title" content="SOKY — Wearable Soak System | NM Thera">
 <meta property="og:description" content="SOKY is a patented wearable soak system for hands and feet. Portable immersion — spa-grade care that moves with you.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://nmthera.com/wp-content/uploads/2026/03/NM-THERA-LOGO-SITE-IMAGE.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;500;600;700;800;900&family=Mulish:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Mulish:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════
    WORDPRESS / ELEMENTOR OVERRIDE LAYER
@@ -166,11 +166,17 @@ article.post,
   box-sizing: border-box !important;
 }
 
-/* --- Override body/html WP spacing --- */
+/* --- Override body/html WP spacing & font-size baseline --- */
+/* font-size:14px is critical — WP/Astra themes set html to 18px by
+   default, which inflates every rem-based value in the superpage by
+   ~28% (padding clamps on .quote-band, .hero-content, .hero-launch-callout,
+   .callout, etc). Forcing 14px makes rem resolution consistent with the
+   raw HTML render. Matches body's font-size already declared elsewhere. */
 html {
   margin-top: 0 !important;
   padding-top: 0 !important;
   scroll-padding-top: 0 !important;
+  font-size: 14px !important;
 }
 body {
   margin: 0 !important;
@@ -199,7 +205,7 @@ html.admin-bar {
   --r-xl:28px;--r-lg:20px;--r-md:14px;--r-sm:8px;
   --shadow:0 20px 56px rgba(17,24,39,0.10);--shadow-sm:0 3px 14px rgba(17,24,39,0.06);
   --max:1200px;
-  --head:'Montserrat',system-ui,sans-serif;--serif:'DM Serif Display',Georgia,serif;
+  --head:'Montserrat',system-ui,sans-serif;
   --sub:'Mulish',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -216,12 +222,12 @@ img{max-width:100%;display:block}
 .topbar-inner{display:flex;align-items:center;gap:16px;padding:10px 20px;border:1px solid rgba(255,255,255,0.75);background:rgba(255,255,255,0.56);border-radius:16px;box-shadow:0 8px 28px rgba(17,24,39,0.07);pointer-events:auto;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background .3s,border-color .3s}
 .topbar.is-dark .topbar-inner{background:rgba(12,21,32,0.6);border-color:rgba(255,255,255,0.1);backdrop-filter:blur(18px)}
 .topbar.is-dark .brand-name{color:rgba(255,255,255,0.92)}
-.topbar.is-dark .brand-logo{filter:brightness(1.8)}
+.topbar.is-dark .brand-logo{filter:none}
 .topbar.is-dark .nav-tab{color:rgba(255,255,255,0.7)}
 .topbar.is-dark .nav-tab:hover{color:#fff}
 .topbar.is-dark .nav-tab.active{color:#fff;border-bottom-color:rgba(255,255,255,0.5)}
 .brand-link{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.brand-logo{width:22px;height:22px;object-fit:contain;border-radius:4px}
+.brand-logo{width:auto;height:22px;max-width:120px;object-fit:contain;border-radius:0}
 .brand-name{font-family:var(--head);font-size:14px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink)}
 .nav-tabs{display:flex;gap:0;align-items:stretch;flex:1;min-width:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-left:clamp(12px,2vw,28px)}
 .nav-tabs::-webkit-scrollbar{display:none}
@@ -240,7 +246,7 @@ img{max-width:100%;display:block}
 .sec{padding:clamp(4rem,8vw,7rem) 0}
 .sec-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);margin-bottom:.5rem;display:flex;align-items:center;gap:10px}
 .sec-eyebrow::after{content:'';height:1px;flex:1;background:var(--line)}
-.sec-heading{font-family:var(--serif);font-size:clamp(24px,4vw,42px);color:var(--ink);margin-bottom:.5rem;line-height:1.12}
+.sec-heading{font-family:var(--head);font-size:clamp(24px,4vw,42px);color:var(--ink);margin-bottom:.5rem;line-height:1.12}
 .sec-sub{font-family:var(--body);font-size:14px;color:var(--muted);max-width:560px;margin-bottom:2rem;line-height:1.7}
 .divider{border:none;border-top:1px solid var(--line);margin:0;position:relative}
 .divider::after{content:'· · ·';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--paper);padding:0 1rem;font-family:var(--sub);font-size:10px;color:var(--line-md);letter-spacing:.3em}
@@ -248,7 +254,7 @@ img{max-width:100%;display:block}
 /* ═══ PAGE HERO (non-home pages) ═══ */
 .page-hero{padding:clamp(3rem,6vw,5rem) 0 clamp(2rem,4vw,3rem);border-bottom:1px solid var(--line)}
 .page-hero-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--pool);margin-bottom:.5rem}
-.page-hero-title{font-family:var(--serif);font-size:clamp(28px,5vw,48px);color:var(--ink);line-height:1.1;margin-bottom:.75rem}
+.page-hero-title{font-family:var(--head);font-size:clamp(28px,5vw,48px);color:var(--ink);line-height:1.1;margin-bottom:.75rem}
 .page-hero-sub{font-family:var(--body);font-size:15px;color:var(--muted);max-width:600px;line-height:1.75}
 
 /* ═══ HERO — CINEMATIC (HOME) ═══ */
@@ -260,6 +266,7 @@ img{max-width:100%;display:block}
 #heroBg,#shopHeroBg,#ritualHeroBg{position:absolute;inset:0;width:100%;height:100%;filter:blur(56px) saturate(1.5) brightness(0.75) opacity(0.9);z-index:1;pointer-events:none;will-change:filter}
 .hero-veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(135deg,rgba(12,21,32,0.88) 0%,rgba(12,21,32,0.55) 50%,rgba(12,21,32,0.78) 100%)}
 .hero-content{position:relative;z-index:10;display:flex;flex-direction:row;align-items:center;gap:clamp(32px,5vw,64px);width:100%;max-width:1320px;margin:0 auto;padding:clamp(180px,20vw,260px) clamp(2rem,5vw,4rem) clamp(7rem,12vw,12rem);min-height:100vh;min-height:100dvh}
+#page-home .hero-content{padding-bottom:clamp(4rem,8vw,6rem)}
 .hero-vid-stage{position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid rgba(255,255,255,0.18);box-shadow:0 30px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(49,89,138,0.06),inset 0 1px 0 rgba(255,255,255,0.2);background:rgba(12,21,32,0.3);flex-shrink:0;order:2}
 @supports(backdrop-filter:blur(4px)){.hero-vid-stage{backdrop-filter:blur(4px)}}
 #page-home .hero-vid-stage{width:clamp(240px,28vw,360px);aspect-ratio:9/16}
@@ -278,10 +285,11 @@ img{max-width:100%;display:block}
 .hv-mute svg{width:13px;height:13px;fill:currentColor;flex-shrink:0}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 /* Hero bottom bar */
-.hero-bottom{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:1.2rem clamp(2rem,5vw,4rem);background:rgba(12,21,32,0.4);display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;min-height:60px}
-.hero-meta{font-family:var(--sub);font-size:10px;color:rgba(255,255,255,0.6);line-height:1.8}
-.hero-meta strong{color:rgba(255,255,255,0.75);font-weight:600}
-.hero-contact{text-align:right;font-family:var(--sub);font-size:10px;color:rgba(255,255,255,0.6);line-height:1.8}
+.hero-bottom{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:0.6rem clamp(1.5rem,4vw,3rem);background:linear-gradient(to top,rgba(12,21,32,0.55),rgba(12,21,32,0));display:flex;justify-content:space-between;align-items:center;gap:1.5rem;min-height:auto;pointer-events:none}
+.hero-bottom a{pointer-events:auto}
+.hero-meta{font-family:var(--sub);font-size:9px;font-weight:500;letter-spacing:0.04em;color:rgba(255,255,255,0.5);line-height:1.6}
+.hero-meta strong{color:rgba(255,255,255,0.65);font-weight:600}
+.hero-contact{text-align:right;font-family:var(--sub);font-size:9px;font-weight:500;letter-spacing:0.04em;color:rgba(255,255,255,0.5);line-height:1.6}
 .hero-contact a{color:rgba(255,255,255,0.7)}
 /* Scroll cue */
 .scroll-cue{position:absolute;bottom:100px;left:clamp(4rem,8vw,8rem);z-index:20;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 2s ease forwards;pointer-events:none}
@@ -303,6 +311,7 @@ img{max-width:100%;display:block}
 html.js .reveal{opacity:0;transform:translateY(24px)}
 html.js .reveal.vis{opacity:1;transform:translateY(0)}
 .hero-text{position:relative;z-index:10;text-align:left;flex:1;min-width:0;order:1}
+.hero-cta-wrap{display:flex;justify-content:flex-start}
 .hero-eyebrow{font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.88);margin-bottom:1rem;display:flex;align-items:center;gap:12px}
 .hero-eyebrow::after{content:'';height:1px;width:40px;background:rgba(255,255,255,0.25)}
 .hero-title{font-family:var(--head);font-size:clamp(52px,9vw,120px);font-weight:900;line-height:.88;letter-spacing:.10em;text-transform:uppercase;color:#fff;margin-bottom:.5rem}
@@ -310,19 +319,19 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 .hero-tagline strong{font-weight:600;color:rgba(255,255,255,0.95)}
 .hero-desc{font-family:var(--body);font-size:clamp(12px,1.2vw,14px);font-weight:300;color:rgba(255,255,255,0.85);line-height:1.7;max-width:500px;margin-bottom:1.5rem}
 .hero-desc em{font-style:italic;color:rgba(255,255,255,0.92)}
-.hero-launch-callout{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(104,139,88,0.22),rgba(0,109,119,0.22));border:1px solid rgba(104,139,88,0.5);border-radius:10px;padding:12px 20px;margin-bottom:1.5rem;font-family:var(--head);font-size:clamp(18px,2.4vw,26px);font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#fff;box-shadow:0 8px 32px rgba(104,139,88,0.18);max-width:100%}
-.hero-launch-callout::before{content:'';width:10px;height:10px;border-radius:50%;background:#8fc57a;box-shadow:0 0 0 4px rgba(143,197,122,0.25);flex-shrink:0;animation:launch-pulse 2.2s ease-in-out infinite}
+.hero-launch-callout{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(104,139,88,0.14),rgba(0,109,119,0.14));border:1px solid rgba(104,139,88,0.35);border-radius:8px;padding:8px 14px;margin-bottom:1.25rem;font-family:var(--sub);font-size:clamp(11px,1.3vw,13px);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.9);box-shadow:0 4px 16px rgba(104,139,88,0.1);max-width:100%}
+.hero-launch-callout::before{content:'';width:6px;height:6px;border-radius:50%;background:#8fc57a;box-shadow:0 0 0 3px rgba(143,197,122,0.18);flex-shrink:0;animation:launch-pulse 2.2s ease-in-out infinite}
 @keyframes launch-pulse{0%,100%{box-shadow:0 0 0 4px rgba(143,197,122,0.25)}50%{box-shadow:0 0 0 8px rgba(143,197,122,0.08)}}
 .hero-badges{display:flex;flex-wrap:wrap;gap:7px}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:999px;padding:5px 12px;font-family:var(--sub);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.78)}
-.hero-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--pool);flex-shrink:0}
+.hero-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:999px;padding:3px 10px;font-family:var(--sub);font-size:8px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.58)}
+.hero-badge::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--pool);opacity:0.7;flex-shrink:0}
 .hero-badge.hl{background:rgba(49,89,138,0.3);border-color:rgba(49,89,138,0.5);color:rgba(255,255,255,0.65)}
 .hero-badge.hl::before{background:#7bb8e8}
 
 /* ═══ QUOTE BAND ═══ */
-.quote-band{padding:clamp(1rem,3vw,1.75rem);background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92));color:#fff;border-radius:var(--r-xl);box-shadow:0 24px 80px rgba(0,48,61,0.2);overflow:hidden;position:relative}
+.quote-band{padding:clamp(1.25rem,2.2vw,1.5rem) clamp(1.5rem,3vw,2rem);background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92));color:#fff;border-radius:var(--r-xl);box-shadow:0 24px 80px rgba(0,48,61,0.2);overflow:hidden;position:relative}
 .quote-band::after{content:'';position:absolute;right:-60px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.15),transparent 70%)}
-.quote-band blockquote{position:relative;z-index:1;font-family:var(--serif);font-size:clamp(16px,2vw,22px);line-height:1.45;font-style:italic;margin-bottom:10px}
+.quote-band blockquote{position:relative;z-index:1;font-family:var(--head);font-size:clamp(16px,2vw,22px);line-height:1.45;font-style:italic;margin-bottom:10px;color:#fff;border:none;padding:0}
 .quote-band cite{position:relative;z-index:1;display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;opacity:.65;font-style:normal;font-family:var(--sub);font-weight:600}
 
 /* ═══ CALLOUT ═══ */
@@ -336,14 +345,14 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 .callout p{font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.72);line-height:1.7}
 
 /* ═══ EDITORIAL IMAGE ═══ */
-.ed-img{width:100%;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow);position:relative;background:#0e1720}
-.ed-img img{width:100%;display:block;object-fit:cover;object-position:center 40%}
-.ed-img.med img{height:380px}
-.ed-img.short img{height:260px}
+.ed-img{width:100%;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow);position:relative;background:transparent}
+.ed-img img{width:100%;display:block;height:auto;object-fit:contain}
+.ed-img.med img{height:auto;max-height:none}
+.ed-img.short img{height:auto;max-height:none}
 .ed-img-cap{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 1.25rem .8rem;background:linear-gradient(0deg,rgba(12,21,32,0.65) 0%,transparent 100%);font-family:var(--sub);font-size:9.5px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,0.75);font-style:italic}
 .img-grid{display:grid;gap:12px}
 .img-grid.cols-2{grid-template-columns:1fr 1fr}
-.img-grid img{width:100%;height:280px;object-fit:cover;border-radius:var(--r-md);border:1px solid var(--line)}
+.img-grid img{width:100%;height:auto;object-fit:contain;border-radius:var(--r-md);border:1px solid var(--line);background:transparent}
 .img-grid img.contain{object-fit:contain;background:#fff;padding:.5rem}
 
 /* ═══ PERSONA CARDS ═══ */
@@ -351,7 +360,7 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 .persona-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:1.75rem;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
 .persona-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
 .persona-label{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
-.persona-title{font-family:var(--serif);font-size:clamp(18px,2vw,22px);color:var(--ink);margin-bottom:.6rem;line-height:1.2}
+.persona-title{font-family:var(--head);font-size:clamp(18px,2vw,22px);color:var(--ink);margin-bottom:.6rem;line-height:1.2}
 .persona-desc{font-family:var(--body);font-size:12.5px;color:rgba(17,24,39,0.78);line-height:1.65;margin-bottom:.75rem}
 .persona-conditions{display:flex;flex-wrap:wrap;gap:5px}
 .persona-conditions span{font-family:var(--sub);font-size:9px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1)}
@@ -371,26 +380,26 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 .sci-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:2.5rem}
 .sci-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1.5rem;box-shadow:var(--shadow-sm);text-align:center;transition:transform .2s,box-shadow .2s}
 .sci-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.sci-val{font-family:var(--serif);font-size:clamp(28px,4vw,40px);color:var(--pool);line-height:1;margin-bottom:.35rem}
+.sci-val{font-family:var(--head);font-size:clamp(28px,4vw,40px);color:var(--pool);line-height:1;margin-bottom:.35rem}
 .sci-lbl{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:.4rem}
 .sci-desc{font-family:var(--body);font-size:11.5px;color:var(--muted);line-height:1.5}
 
 /* ═══ SKU CARDS ═══ */
-.sku-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:2rem}
-.sku-c{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);position:relative;transition:transform .2s,box-shadow .2s}
+.sku-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:2rem;align-items:stretch}
+.sku-c{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);position:relative;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
 .sku-c:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .sku-c::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
 .sku-c.research::before{background:linear-gradient(90deg,var(--pool),var(--green))}
 .sku-c.core::before{background:linear-gradient(90deg,var(--navy),var(--pool))}
 .sku-c.kit::before{background:linear-gradient(90deg,var(--green),var(--navy))}
-.sku-c-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#f0eeeb}
-.sku-c-body{padding:1.25rem}
+.sku-c-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#f0eeeb;flex-shrink:0}
+.sku-c-body{padding:1.25rem;display:flex;flex-direction:column;flex:1}
 .sku-c-id{font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
-.sku-c-price{font-family:var(--serif);font-size:32px;color:var(--ink);line-height:1;margin-bottom:.25rem}
+.sku-c-price{font-family:var(--head);font-size:32px;font-weight:800;color:var(--ink);line-height:1;margin-bottom:.25rem}
 .sku-c-tag{display:inline-flex;font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-bottom:.5rem}
 .tag-r{background:rgba(0,109,119,0.1);color:var(--pool)}.tag-co{background:rgba(49,89,138,0.1);color:var(--navy)}.tag-k{background:rgba(104,139,88,0.1);color:var(--green)}
 .sku-c-name{font-family:var(--sub);font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.45rem}
-.sku-c-desc{font-family:var(--body);font-size:11.5px;color:var(--muted);line-height:1.55;margin-bottom:.7rem}
+.sku-c-desc{font-family:var(--body);font-size:11.5px;color:var(--muted);line-height:1.55;margin-bottom:.7rem;flex:1}
 .sku-stock-bar{display:flex;align-items:center;gap:6px;margin-top:.6rem}
 .stk-bar{flex:1;height:6px;border-radius:999px;background:var(--line);overflow:hidden}
 .stk-fill{height:100%;border-radius:999px}
@@ -443,10 +452,10 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 .form-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(49,89,138,0.35)}
 
 /* ═══ CTA BAND ═══ */
-.cta-band{padding:clamp(2rem,4vw,3rem);background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92));color:#fff;border-radius:var(--r-xl);text-align:center;margin:3rem 0;box-shadow:0 24px 80px rgba(0,48,61,0.2);position:relative;overflow:hidden}
+.cta-band{padding:clamp(1.5rem,2.5vw,2rem) clamp(2rem,4vw,3rem);background:linear-gradient(135deg,rgba(49,89,138,0.94),rgba(0,109,119,0.92));color:#fff;border-radius:var(--r-xl);text-align:center;margin:2rem 0;box-shadow:0 24px 80px rgba(0,48,61,0.2);position:relative;overflow:hidden}
 .cta-band::after{content:'';position:absolute;right:-60px;top:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%)}
-.cta-heading{font-family:var(--serif);font-size:clamp(18px,3vw,28px);font-style:italic;margin-bottom:.75rem;position:relative;z-index:1}
-.cta-sub{font-family:var(--body);font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:1.5rem;position:relative;z-index:1;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-heading{font-family:var(--head);font-size:clamp(18px,3vw,28px);font-style:italic;margin-bottom:.5rem;position:relative;z-index:1}
+.cta-sub{font-family:var(--body);font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:1rem;position:relative;z-index:1;max-width:500px;margin-left:auto;margin-right:auto}
 .cta-buttons{display:flex;gap:12px;justify-content:center;position:relative;z-index:1;flex-wrap:wrap}
 .cta-btn{padding:11px 28px;border-radius:999px;font-family:var(--head);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;transition:all .2s}
 .cta-btn.primary{background:#fff;color:var(--navy)}
@@ -462,7 +471,7 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 .coming-soon{text-align:center;padding:clamp(4rem,10vw,8rem) 0}
 .coming-soon-icon{width:48px;height:48px;margin:0 auto 1.5rem;border-radius:50%;background:rgba(0,109,119,0.08);display:flex;align-items:center;justify-content:center}
 .coming-soon-icon svg{width:24px;height:24px;color:var(--pool)}
-.coming-soon-title{font-family:var(--serif);font-size:clamp(22px,3vw,32px);color:var(--ink);margin-bottom:.5rem}
+.coming-soon-title{font-family:var(--head);font-size:clamp(22px,3vw,32px);color:var(--ink);margin-bottom:.5rem}
 .coming-soon-desc{font-family:var(--body);font-size:14px;color:var(--muted);max-width:480px;margin:0 auto 2rem;line-height:1.7}
 
 /* ═══ FOOTER ═══ */
@@ -479,16 +488,15 @@ html.js .reveal.vis{opacity:1;transform:translateY(0)}
 /* ═══ CONNECTION BAND ═══ */
 .connection-band{text-align:center;padding:clamp(2rem,4vw,3rem) clamp(1.5rem,4vw,3rem);max-width:720px;margin:0 auto}
 .conn-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--pool);margin-bottom:.75rem}
-.conn-heading{font-family:var(--serif);font-size:clamp(22px,3vw,34px);color:var(--ink);line-height:1.15;margin-bottom:1rem}
-.conn-body{font-family:var(--body);font-size:14px;color:rgba(17,24,39,0.82);line-height:1.78;margin-bottom:1rem}
-.conn-coda{font-family:var(--serif);font-size:clamp(15px,1.8vw,19px);font-style:italic;color:var(--pool);line-height:1.4}
+.conn-heading{font-family:var(--head);font-size:clamp(22px,3vw,34px);color:var(--ink);line-height:1.15;margin-bottom:1rem}
+.conn-body{font-family:var(--body);font-size:14px;color:rgba(17,24,39,0.82);line-height:1.78;margin-bottom:1rem;text-align:left}
 
 /* ═══ REFUSE / PURSUE ═══ */
-.refuse-pursue{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:680px;margin:0 auto;padding:clamp(1.5rem,3vw,2.5rem) 0}
-.rp-col{padding-left:14px}
+.refuse-pursue{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:720px;margin:0 auto;padding:clamp(1rem,2vw,1.5rem) 0}
+.rp-col{padding:1.25rem 1.5rem;border-radius:var(--r-lg);background:rgba(255,255,255,0.55);border:1px solid var(--line);box-shadow:0 2px 12px rgba(12,21,32,0.04);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .rp-col.refuse{border-left:none}
 .rp-col.pursue{border-left:none}
-.rp-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.6rem}
+.rp-eyebrow{font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.6rem;text-align:center}
 .rp-col.refuse .rp-eyebrow{color:var(--heat)}.rp-col.pursue .rp-eyebrow{color:var(--green)}
 .rp-col li{font-family:var(--body);font-size:14px;color:rgba(17,24,39,0.78);line-height:1.7;list-style:none;padding:2px 0}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
@@ -636,6 +644,27 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   .ritual{grid-template-columns:repeat(3,1fr)}.rstep:nth-child(4){border-top:1px solid var(--line)}.rstep:nth-child(3){border-right:none}
   .mode-card{flex:0 0 calc(50% - 4px);min-width:0;max-width:none}
   .refuse-pursue{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .platform-roadmap{
+    display:flex !important;
+    grid-template-columns:none !important;
+    gap:10px !important;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    padding:4px 20px 8px;
+    margin-left:-20px;
+    margin-right:-20px;
+    scrollbar-width:none;
+    mask-image:linear-gradient(to right,black 0,black calc(100% - 24px),transparent 100%);
+    -webkit-mask-image:linear-gradient(to right,black 0,black calc(100% - 24px),transparent 100%);
+  }
+  .platform-roadmap::-webkit-scrollbar{display:none}
+  .platform-roadmap > div{
+    flex:0 0 auto;
+    min-width:44vw;
+    max-width:180px;
+    scroll-snap-align:start;
+  }
   .img-grid.cols-2{grid-template-columns:1fr}
   .nav-tab{font-size:14px;padding:0 clamp(6px,1vw,10px)}
 }
@@ -650,15 +679,16 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 @media(max-width:600px){
   .hero{min-height:100vh;min-height:100dvh}
   .hero-title{font-size:clamp(36px,11vw,60px);letter-spacing:.06em}
-  .hero-launch-callout{font-size:clamp(15px,4.5vw,20px);padding:10px 16px;gap:10px;letter-spacing:.06em}
-  .hero-launch-callout::before{width:8px;height:8px}
+  .hero-launch-callout{font-size:clamp(10px,2.8vw,12px);padding:7px 12px;gap:8px;letter-spacing:0.1em}
+  .hero-launch-callout::before{width:5px;height:5px}
+  .hero-cta-wrap{justify-content:center}
   .persona-grid,.sci-grid{grid-template-columns:1fr}
   .ritual{grid-template-columns:1fr 1fr}
   .rstep:nth-child(3){border-right:1px solid var(--line);border-top:1px solid var(--line)}
   .rstep:nth-child(5){grid-column:span 2;border-top:1px solid var(--line)}
   .faq-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
-  .refuse-pursue{grid-template-columns:1fr;gap:1rem}
+  .refuse-pursue{grid-template-columns:1fr;gap:0.75rem}
   .mode-card{flex:0 0 100%;max-width:none}
   /* Mobile: keep cart icon visible but compact — this is the only
      checkout entry point on phones, so it must never be hidden. */
@@ -719,7 +749,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   .nav-tabs{gap:0;margin-left:8px}
   .nav-tab{padding:0 8px;font-size:13px;height:50px}
   .brand-name{font-size:10px;letter-spacing:0.1em}
-  .brand-logo{width:18px;height:18px}
+  .brand-logo{width:auto;height:18px;max-width:100px}
   .page-hero-title{font-size:clamp(22px,6vw,36px)}
   .page-hero-sub{font-size:13px}
   .form-group{margin-bottom:1rem}
@@ -750,6 +780,283 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   .topbar-inner{background:rgba(15,18,24,0.85);border-color:rgba(255,255,255,0.08)}
 }
 */
+/* ═══ WP TEXT-ELEMENT MARGIN GUARD ═══
+   WordPress themes apply global margin-bottom (typically 1.5em) to every
+   <p>, <h*>, <blockquote>, <cite>, <ul>, and <li>. That margin leaks into
+   BSG components and inflates them by 25-110px each vs the raw HTML render.
+   Fix: explicitly zero out margins on text elements inside every BSG
+   component. Each component's own scoped rules (e.g. .sec-heading's
+   margin-bottom:.5rem) still apply where defined — this block only kills
+   DEFAULT browser/WP margins that components don't set themselves.
+═══════════════════════════════════════════════════════════════════════ */
+.platform-roadmap p,
+.platform-roadmap h1, .platform-roadmap h2, .platform-roadmap h3,
+.quote-band blockquote, .quote-band cite, .quote-band p,
+.callout p, .callout h3,
+.don-callout p,
+.cta-band p, .cta-band h1, .cta-band h2, .cta-band h3,
+.cta-heading, .cta-sub,
+.page-hero p, .page-hero h1,
+.page-hero-title, .page-hero-sub, .page-hero-eyebrow,
+.connection-band p, .connection-band h2,
+.conn-body, .conn-heading, .conn-eyebrow,
+.cohort-band p, .cohort-band h2,
+.refuse-pursue p, .refuse-pursue ul, .refuse-pursue li,
+.rp-col p, .rp-col ul, .rp-col li,
+.persona-card p, .persona-card h3,
+.team-card p, .team-card h3,
+.sci-card p, .sci-card h3,
+.science-card p, .science-card h3,
+.sku-c p, .sku-c h3, .sku-c ul,
+.mode-card p, .mode-card h3,
+.faq-item p,
+.coming-soon p, .coming-soon h2, .coming-soon h3,
+.batch-wrap p, .batch-wrap h3,
+.sitemap-indicator p,
+.modes-cta p, .modes-cta h3,
+.policy-prose ul, .policy-prose li,
+.bb-includes-list,
+.footer-col p, .footer-col h4,
+.hero-text p, .hero-text h1,
+.ed-img-cap p,
+.vid-break-cap p,
+.buy-box p, .buy-box h1, .buy-box h3,
+.details-body-inner p, .details-body-inner h3 {
+  margin: 0;
+}
+
+/* Restore intentional spacing where components explicitly need it.
+   These mirror each component's native BSG spacing rhythm and win over
+   the zero-out above thanks to source order. */
+.quote-band blockquote { margin-bottom: 10px; }
+.callout p + p { margin-top: .75rem; }
+.details-body-inner p + p { margin-top: 8px; }
+.policy-prose p { margin-bottom: 1rem; }
+.policy-prose h3 { margin-top: 2rem; margin-bottom: .5rem; }
+.policy-prose h3:first-child { margin-top: 0; }
+
+/* ═══ WP DIRECT-ELEMENT COLOR OVERRIDE GUARD — DARK BANDS ═══
+   Astra applies color directly to h1/h2/h3/p/blockquote elements. Our
+   BSG components set color on the dark-background parent and rely on
+   inheritance, which loses to Astra's direct-element rules. Fix: set
+   color explicitly on every child text element inside a dark-gradient
+   band, with !important to defeat Astra's !important-stamped defaults.
+═══════════════════════════════════════════════════════════════════════ */
+.cta-band { color: #fff !important; }
+.cta-band .cta-heading,
+.cta-band h1, .cta-band h2, .cta-band h3 {
+  color: #fff !important;
+}
+.cta-band .cta-sub,
+.cta-band p {
+  color: rgba(255,255,255,0.78) !important;
+}
+
+/* Reinforce quote-band (Pass 3.6 extended to all instances with !important) */
+.quote-band { color: #fff !important; }
+.quote-band blockquote,
+.quote-band p {
+  color: #fff !important;
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+.quote-band cite {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* ═══ WP BUTTON-ELEMENT OVERRIDE GUARD ═══
+   Astra injects button {...!important} for every <button>, overwriting
+   our BSG button styles. Force our declarations to win by matching
+   !important on every property Astra touches. Applies to the two
+   video-mute buttons in the hero and video-break components.
+═══════════════════════════════════════════════════════════════════════ */
+.hv-mute {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  background: rgba(255,255,255,0.10) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: 999px !important;
+  padding: 5px 10px 5px 8px !important;
+  cursor: pointer !important;
+  color: rgba(255,255,255,0.75) !important;
+  font-family: var(--sub) !important;
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+.hv-mute:hover {
+  background: rgba(255,255,255,0.2) !important;
+  color: #fff !important;
+}
+.hv-mute svg {
+  width: 13px !important;
+  height: 13px !important;
+  fill: currentColor !important;
+  flex-shrink: 0 !important;
+}
+
+.vid-break .vid-mute {
+  background: rgba(0,0,0,0.5) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: 999px !important;
+  padding: 6px 12px 6px 8px !important;
+  color: rgba(255,255,255,0.6) !important;
+  font-family: var(--sub) !important;
+  font-size: 8px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  line-height: 1 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+.vid-break .vid-mute:hover { background: rgba(0,0,0,0.7) !important; color: #fff !important; }
+.vid-break .vid-mute.is-on { background: rgba(0,109,119,0.6) !important; border-color: rgba(0,109,119,0.4) !important; color: #fff !important; }
+
+/* ═══ WP VIDEO-ELEMENT SIZE OVERRIDE GUARD ═══
+   Astra injects `video { height: auto }` which breaks our object-fit
+   container fill. Force the video child to match stage dimensions.
+═══════════════════════════════════════════════════════════════════════ */
+.hero-vid-stage {
+  aspect-ratio: 9/16 !important;
+}
+#page-shop .hero-vid-stage,
+#page-ritual .hero-vid-stage {
+  aspect-ratio: 16/9 !important;
+}
+.hero-vid-stage video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+.vid-break video {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 520px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* ═══ WP FONT-FAMILY OVERRIDE GUARD ═══
+   Astra stamps `h1, h2, h3, h4, p { font-family: ... !important }` via
+   its typography utility classes. Our BSG classes set font-family
+   without !important and lose the cascade. Force our declarations to
+   win by matching !important on every class that owns its typography.
+═══════════════════════════════════════════════════════════════════════ */
+
+/* Headline-family headings (Montserrat) */
+.sec-heading,
+.page-hero-title,
+.persona-title,
+.conn-heading,
+.sci-val,
+.sku-c-price,
+.cta-heading,
+.coming-soon-title,
+.quote-band blockquote,
+.bb-title,
+.bb-value-prop,
+.don-callout-title,
+.hero-title,
+.details-body-inner h3 {
+  font-family: var(--head) !important;
+}
+
+/* Display-family headings (Montserrat) — wordmark, hero title, stat values */
+.hero-title,
+.hv-wordmark,
+.footer-brand {
+  font-family: var(--head) !important;
+}
+
+/* SKU prices — force bold against WP typography overrides */
+.sku-c-price,
+.bb-price {
+  font-weight: 800 !important;
+}
+
+/* Sub-family labels/eyebrows/buttons (Mulish) */
+.sec-eyebrow,
+.page-hero-eyebrow,
+.conn-eyebrow,
+.callout-lbl,
+.don-callout-lbl,
+.sku-c-id,
+.sku-c-tag,
+.sku-c-name,
+.mode-card-name,
+.hero-eyebrow,
+.hero-tagline,
+.hero-launch-callout,
+.hero-badge,
+.hv-eyebrow,
+.hv-tagline,
+.hv-mute,
+.vid-break .vid-mute,
+.vid-break-cap,
+.hero-bottom .hero-meta,
+.hero-bottom .hero-contact,
+.scroll-cue span,
+.footer-col h4,
+.nav-tabs,
+.nav-tab,
+.nav-cta,
+.form-btn,
+.form-input {
+  font-family: var(--sub) !important;
+}
+
+/* Body-family prose (Inter) */
+.hero-desc,
+.sku-c-desc,
+.conn-body,
+.callout p,
+.don-callout p,
+.cta-sub,
+.footer-col p,
+.footer-col a,
+.footer-brand-sub,
+.footer-bottom,
+.footer-compliance,
+.mode-card-tag,
+.mode-card-body-inner,
+.rp-col li,
+.policy-prose,
+.policy-prose p,
+.policy-prose li,
+.details-body-inner p,
+.faq-q,
+.faq-a {
+  font-family: var(--body) !important;
+}
+
+/* Also lock the heading-italic variant on cta-heading (it is italic by spec) */
+.cta-heading { font-style: italic !important; }
+.quote-band blockquote { font-style: italic !important; }
+
+/* ═══ VIDEO CAST/REMOTE-PLAYBACK ICON SUPPRESSION ═══
+   Backstop for Chrome's Remote Playback overlay button that briefly
+   appears before disableRemotePlayback takes effect. Also covers
+   Safari/iOS AirPlay picker icon variants.
+═══════════════════════════════════════════════════════════════════════ */
+video::-internal-media-controls-overlay-cast-button,
+video::-webkit-media-controls-overlay-cast-button,
+video::-webkit-media-controls-cast-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* ═══ SELECTION HIGHLIGHT ═══ */
 ::selection{background:rgba(0,109,119,0.15);color:var(--ink)}
 /* ═══ SMOOTH SCROLL OFFSET FOR TAB TARGETS ═══ */
@@ -773,7 +1080,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .topbar.is-dark .nav-dropdown-item:hover{background:rgba(255,255,255,0.08)}
 .nav-dropdown-item .dd-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .dd-dot.pool{background:var(--pool)}.dd-dot.navy{background:var(--navy)}.dd-dot.green{background:var(--green)}
-.nav-dropdown-item .dd-price{margin-left:auto;font-family:var(--serif);font-size:13px;color:var(--muted);font-weight:400;letter-spacing:0;text-transform:none}
+.nav-dropdown-item .dd-price{margin-left:auto;font-family:var(--head);font-size:13px;color:var(--muted);font-weight:400;letter-spacing:0;text-transform:none}
 .topbar.is-dark .nav-dropdown-item .dd-price{color:rgba(255,255,255,0.5)}
 .nav-dropdown-divider{height:1px;background:var(--line);margin:4px 14px}
 
@@ -781,21 +1088,21 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 #page-pdp-single,#page-pdp-pair,#page-pdp-travel{padding-top:100px}
 .pdp-hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);padding:2rem 0 4rem;align-items:start}
 .hero-gallery{position:sticky;top:100px}
-.hero-main-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--r-xl);box-shadow:var(--shadow);background:#0c1520;overflow:hidden;position:relative}
-.hero-main-img img{width:100%;height:100%;object-fit:cover}
+.hero-main-img{width:100%;aspect-ratio:auto;border-radius:var(--r-xl);box-shadow:var(--shadow);background:#f0eeeb;overflow:hidden;position:relative}
+.hero-main-img img{width:100%;height:auto;object-fit:contain;display:block}
 .hero-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
 .hero-thumb{border-radius:var(--r-sm);overflow:hidden;border:2px solid transparent;cursor:pointer;transition:border-color .2s;aspect-ratio:1;background:#f0eeeb}
 .hero-thumb:hover,.hero-thumb.active{border-color:var(--navy)}
-.hero-thumb img{width:100%;height:100%;object-fit:cover}
+.hero-thumb img{width:100%;height:100%;object-fit:contain;background:#f0eeeb}
 .buy-box{padding-top:0.5rem}
 .bb-eyebrow{font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--pool);margin-bottom:0.5rem;display:flex;align-items:center;gap:8px}
 .bb-title{font-family:var(--head);font-size:clamp(32px,5vw,48px);font-weight:900;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);line-height:1;margin-bottom:0.25rem}
-.bb-subtitle{font-family:var(--serif);font-size:clamp(14px,1.6vw,18px);color:var(--muted);font-style:italic;margin-bottom:1.25rem}
+.bb-subtitle{font-family:var(--head);font-size:clamp(14px,1.6vw,18px);color:var(--muted);font-style:italic;margin-bottom:1.25rem}
 .bb-value-prop{font-family:var(--body);font-size:14px;color:rgba(17,24,39,0.72);line-height:1.75;margin-bottom:1.5rem;max-width:480px}
 .bb-value-prop strong{color:var(--ink)}
 .bb-compare{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:rgba(0,109,119,0.06);border:1px solid rgba(0,109,119,0.15);font-family:var(--sub);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--pool);margin-bottom:1.5rem}
 .bb-patent{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:rgba(104,139,88,0.08);border:1px solid rgba(104,139,88,0.18);font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-left:8px}
-.bb-price{font-family:var(--serif);font-size:clamp(36px,5vw,52px);color:var(--ink);line-height:1;margin-bottom:0.25rem}
+.bb-price{font-family:var(--head);font-size:clamp(36px,5vw,52px);color:var(--ink);line-height:1;margin-bottom:0.25rem}
 .bb-price-sub{font-family:var(--body);font-size:12px;color:var(--muted);margin-bottom:1.25rem}
 .bb-includes{margin-bottom:1.5rem}
 .bb-includes-title{font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:.5rem}
@@ -835,11 +1142,11 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .don-callout-lbl{font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--pool);margin-bottom:0.3rem}
 .don-callout p{font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.72);line-height:1.7}
 .media-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:2rem 0}
-.media-pair img{width:100%;height:280px;object-fit:cover;border-radius:var(--r-md);border:1px solid var(--line)}
+.media-pair img{width:100%;height:auto;max-height:400px;object-fit:contain;background:#f0eeeb;border-radius:var(--r-md);border:1px solid var(--line)}
 .science-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:2rem}
 .science-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-md);padding:1.75rem;box-shadow:var(--shadow-sm)}
 .science-card-lbl{font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navy);margin-bottom:0.5rem}
-.science-card-val{font-family:var(--serif);font-size:clamp(28px,4vw,42px);color:var(--pool);line-height:1;margin-bottom:0.4rem}
+.science-card-val{font-family:var(--head);font-size:clamp(28px,4vw,42px);color:var(--pool);line-height:1;margin-bottom:0.4rem}
 .science-card-desc{font-family:var(--body);font-size:12px;color:var(--muted);line-height:1.55}
 .eng-visual{background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);padding:2rem;box-shadow:var(--shadow-sm);margin-bottom:2rem}
 .eng-visual svg{width:100%;height:auto;display:block}
@@ -850,7 +1157,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   .pdp-hero{grid-template-columns:1fr}
   .hero-gallery{position:static}
   .media-pair{grid-template-columns:1fr}
-  .media-pair img{height:220px}
+  .media-pair img{height:auto;max-height:320px}
   .science-grid{grid-template-columns:1fr 1fr}
   .pdp-ritual-steps{grid-template-columns:repeat(3,1fr)}
   .pdp-rstep:nth-child(4){border-top:1px solid var(--line)}
@@ -875,6 +1182,156 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .checkout-cta{display:block;width:100%;padding:16px 24px;border-radius:999px;background:linear-gradient(135deg,var(--pool),var(--navy));color:#fff;font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-align:center;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(0,109,119,0.25);margin-bottom:1rem;text-decoration:none}
 .checkout-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,109,119,0.35);background:linear-gradient(135deg,var(--navy),var(--pool))}
 
+/* ═══ FLOATING BOTTOM BAR ═══ */
+.float-bar{position:fixed;bottom:20px;right:20px;z-index:99997;background:rgba(255,255,255,0.56);border:1px solid rgba(255,255,255,0.75);border-radius:16px;box-shadow:0 8px 28px rgba(17,24,39,0.07);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:14px 20px 10px;width:320px;transition:opacity 0.3s ease,transform 0.3s ease;overflow:hidden}
+.float-bar.dismissed{opacity:0;transform:translateY(20px);pointer-events:none}
+.float-bar-close{position:absolute;top:6px;right:8px;width:18px;height:18px;border:none !important;background:none !important;font-size:14px;color:var(--muted) !important;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:color 0.15s;line-height:1;padding:0 !important;box-shadow:none !important;text-shadow:none !important}
+.float-bar-close:hover{color:var(--ink) !important;background:none !important}
+.float-bar-track{position:relative;height:58px}
+.float-bar-slide{opacity:0;position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:8px;transition:opacity 0.5s ease;pointer-events:none}
+.float-bar-slide.active{opacity:1;pointer-events:auto}
+.float-bar-row{display:flex;align-items:center;gap:8px}
+.float-bar-dot{width:5px;height:5px;border-radius:50%;background:var(--pool);flex-shrink:0;animation:launch-pulse 2.2s ease-in-out infinite}
+.float-bar-text{font-family:var(--sub);font-size:11px;font-weight:600;color:var(--ink);letter-spacing:0.02em;flex:1;min-width:0}
+.float-bar-text strong{color:var(--pool);font-weight:700}
+.float-bar-cta{padding:6px 18px;border-radius:999px;background:linear-gradient(135deg,var(--navy),var(--pool));color:#fff;font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border:none !important;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px rgba(49,89,138,0.25) !important;line-height:1 !important;text-shadow:none !important;min-width:80px;text-align:center}
+.float-bar-cta:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(49,89,138,0.3) !important}
+.float-bar-input{flex:1;padding:6px 10px;border:1px solid var(--line-md) !important;border-radius:var(--r-sm);font-family:var(--body);font-size:11px;color:var(--ink) !important;background:#fff !important;outline:none;min-width:0;transition:border-color 0.2s;width:auto !important;height:auto !important;min-height:auto !important;max-height:none !important}
+.float-bar-input:focus{border-color:var(--pool) !important}
+.float-bar-input::placeholder{color:var(--muted);font-size:10px}
+.float-bar-indicators{display:flex;gap:5px;justify-content:center;margin-top:6px}
+.float-bar-ind{width:16px;height:3px;border-radius:999px;background:var(--line);cursor:pointer;transition:background 0.2s,width 0.2s}
+.float-bar-ind.active{background:var(--pool);width:24px}
+@media (max-width:600px){.float-bar{right:12px;left:12px;bottom:12px;width:auto;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;background:rgba(255,255,255,0.92) !important}}
+@media print{.float-bar{display:none !important}}
+
+/* ═══ SURVEY POPUP ═══ */
+.survey-overlay{position:fixed;inset:0;z-index:100002;background:rgba(12,21,32,0.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+.survey-overlay.active{opacity:1;pointer-events:auto}
+.survey-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.95);z-index:100003;background:rgba(255,255,255,0.56);border:1px solid rgba(255,255,255,0.75);border-radius:16px;box-shadow:0 8px 28px rgba(17,24,39,0.07);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);width:min(440px,calc(100vw - 40px));max-height:calc(100vh - 80px);overflow-y:auto;padding:0;opacity:0;pointer-events:none;transition:opacity 0.3s ease,transform 0.3s ease}
+.survey-popup.active{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.survey-popup::-webkit-scrollbar{width:4px}
+.survey-popup::-webkit-scrollbar-thumb{background:var(--line-md);border-radius:999px}
+.survey-close{position:absolute;top:12px;right:14px;width:24px;height:24px;border:none;background:none;font-size:18px;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:color 0.15s,background 0.15s;z-index:5;padding:0;line-height:1}
+.survey-close:hover{color:var(--ink);background:rgba(17,24,39,0.05)}
+.survey-step{display:none;padding:clamp(1.75rem,4vw,2.25rem)}
+.survey-step.active{display:block}
+.survey-step-indicator{display:flex;gap:4px;justify-content:center;margin-bottom:1.25rem}
+.survey-step-dot{width:20px;height:3px;border-radius:999px;background:var(--line);transition:background 0.2s,width 0.2s}
+.survey-step-dot.active{background:var(--pool);width:28px}
+.survey-step-dot.done{background:var(--green)}
+.survey-title{font-family:var(--head);font-size:clamp(18px,3vw,22px);font-weight:800;color:var(--ink);margin-bottom:0.5rem;line-height:1.2;padding-right:24px}
+.survey-desc{font-family:var(--body);font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem}
+.survey-desc strong{color:var(--ink)}
+.survey-caption{font-family:var(--body);font-size:10px;color:var(--muted);line-height:1.5;margin-top:0.4rem}
+.survey-btn-row{display:flex;gap:8px;margin-top:1.25rem}
+.survey-btn{flex:1;padding:10px 16px;border-radius:999px;font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.15s;text-align:center;border:none}
+.survey-btn.primary{background:linear-gradient(135deg,var(--navy),var(--pool));color:#fff;box-shadow:0 2px 8px rgba(49,89,138,0.25)}
+.survey-btn.primary:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(49,89,138,0.35)}
+.survey-btn.secondary{background:rgba(17,24,39,0.04);color:var(--muted);border:1px solid var(--line)}
+.survey-btn.secondary:hover{background:rgba(17,24,39,0.08);color:var(--ink)}
+.survey-input{width:100%;padding:10px 14px;border:1px solid var(--line-md);border-radius:var(--r-sm);font-family:var(--body);font-size:13px;color:var(--ink);background:#fff;outline:none;transition:border-color 0.2s;margin-bottom:0.5rem}
+.survey-input:focus{border-color:var(--pool)}
+.survey-textarea{width:100%;padding:10px 14px;border:1px solid var(--line-md);border-radius:var(--r-sm);font-family:var(--body);font-size:13px;color:var(--ink);background:#fff;outline:none;transition:border-color 0.2s;resize:vertical;min-height:70px}
+.survey-textarea:focus{border-color:var(--pool)}
+.survey-checkbox-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0.5rem}
+.survey-chip{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:999px;font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;transition:all 0.15s;user-select:none;border:1px solid var(--line);background:rgba(17,24,39,0.02);color:var(--muted)}
+.survey-chip:hover{border-color:rgba(49,89,138,0.25);color:var(--navy)}
+.survey-chip.selected{background:rgba(0,109,119,0.08);border-color:rgba(0,109,119,0.3);color:var(--pool)}
+.survey-select{width:100%;padding:10px 14px;border:1px solid var(--line-md);border-radius:var(--r-sm);font-family:var(--body);font-size:13px;color:var(--ink);background:#fff;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;cursor:pointer}
+.survey-select:focus{border-color:var(--pool)}
+.survey-consent{display:flex;align-items:flex-start;gap:8px;margin-top:1rem}
+.survey-consent input[type="checkbox"]{margin-top:3px;accent-color:var(--pool);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.survey-consent label{font-family:var(--body);font-size:12px;color:var(--muted);line-height:1.5;cursor:pointer}
+.survey-success{text-align:center;padding:2rem 1.5rem}
+.survey-success-icon{width:48px;height:48px;border-radius:50%;background:rgba(104,139,88,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.survey-success-icon svg{width:24px;height:24px;stroke:var(--green);fill:none;stroke-width:2.5}
+.survey-success-title{font-family:var(--head);font-size:20px;font-weight:800;color:var(--ink);margin-bottom:0.5rem}
+.survey-success-desc{font-family:var(--body);font-size:13px;color:var(--muted);line-height:1.65}
+@media(max-width:600px){
+  .survey-popup{width:calc(100vw - 24px);max-height:calc(100vh - 40px);backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(255,255,255,0.95)}
+  .survey-overlay{backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+@media print{.survey-overlay,.survey-popup{display:none !important}}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   NUCLEAR WP OVERRIDE GUARD — LAST BLOCK IN STYLESHEET
+   This block MUST remain at the end of the <style> to win by source
+   order. Every property uses !important to defeat Astra's !important
+   declarations. If WP rendering breaks ANY element, the fix goes here.
+═══════════════════════════════════════════════════════════════════════ */
+
+/* --- Logo image: force constrained sizing --- */
+.brand-logo{width:auto !important;height:22px !important;max-width:120px !important;max-height:22px !important;min-width:0 !important;min-height:0 !important;object-fit:contain !important;border-radius:0 !important;display:inline-block !important}
+@media (max-width:768px){.brand-logo{height:18px !important;max-width:100px !important;max-height:18px !important}}
+
+/* --- Footer wordmark image --- */
+.footer-brand img{height:24px !important;width:auto !important;max-width:140px !important;max-height:24px !important;object-fit:contain !important;display:inline-block !important}
+
+/* --- Global: prevent WP from blowing up ANY img inside .shell --- */
+.shell img{max-width:100% !important;height:auto !important}
+.shell .brand-logo,
+.shell .footer-brand img,
+.shell .hero-vid-ui img{height:auto}
+
+/* --- Float bar: full element lockdown --- */
+.float-bar{width:320px !important;max-width:calc(100vw - 40px) !important;padding:14px 20px 10px !important;border-radius:16px !important;position:fixed !important}
+.float-bar-track{height:58px !important;position:relative !important}
+.float-bar-row{display:flex !important;align-items:center !important;gap:8px !important}
+.float-bar-cta{padding:6px 18px !important;border-radius:999px !important;font-size:9px !important;font-weight:700 !important;letter-spacing:0.1em !important;min-width:80px !important;min-height:auto !important;max-height:30px !important;height:auto !important;width:auto !important;line-height:1 !important;text-shadow:none !important;border:none !important;box-shadow:0 2px 8px rgba(49,89,138,0.25) !important;background:linear-gradient(135deg,var(--navy),var(--pool)) !important;color:#fff !important;text-transform:uppercase !important;font-family:var(--sub) !important;text-align:center !important;cursor:pointer !important}
+.float-bar-input{flex:1 !important;padding:6px 10px !important;border:1px solid var(--line-md) !important;border-radius:var(--r-sm) !important;font-family:var(--body) !important;font-size:11px !important;color:var(--ink) !important;background:#fff !important;width:auto !important;height:auto !important;min-height:auto !important;max-height:32px !important;min-width:0 !important;box-shadow:none !important;-webkit-appearance:none !important;appearance:none !important}
+.float-bar-input:focus{border-color:var(--pool) !important;outline:none !important}
+.float-bar-close{width:18px !important;height:18px !important;min-width:0 !important;min-height:0 !important;padding:0 !important;border:none !important;background:none !important;box-shadow:none !important;text-shadow:none !important;font-size:14px !important}
+.float-bar-dot{width:5px !important;height:5px !important;min-width:0 !important;min-height:0 !important}
+.float-bar-text{font-size:11px !important;font-family:var(--sub) !important;line-height:1.3 !important}
+.float-bar-ind{height:3px !important;min-height:0 !important}
+@media (max-width:600px){.float-bar{right:12px !important;left:12px !important;bottom:12px !important;width:auto !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;background:rgba(255,255,255,0.92) !important}}
+
+/* --- Form buttons: prevent WP button inflation --- */
+.shell .form-btn{padding:11px 28px !important;font-size:11px !important;font-weight:700 !important;letter-spacing:0.12em !important;line-height:1 !important;border-radius:999px !important;min-height:auto !important;height:auto !important;border:none !important;text-shadow:none !important;font-family:var(--head) !important;text-transform:uppercase !important;cursor:pointer !important}
+
+/* --- Form inputs: prevent WP input inflation --- */
+.shell .form-input,
+.shell .form-textarea,
+.shell .form-select{padding:10px 14px !important;font-size:13px !important;font-family:var(--body) !important;border:1px solid var(--line-md) !important;border-radius:var(--r-sm) !important;background:#fff !important;color:var(--ink) !important;min-height:auto !important;height:auto !important;box-shadow:none !important;-webkit-appearance:none !important;appearance:none !important}
+.shell .form-input:focus,
+.shell .form-textarea:focus,
+.shell .form-select:focus{border-color:var(--navy) !important;outline:none !important;box-shadow:none !important}
+
+/* --- CTA band buttons: prevent WP button inflation --- */
+.shell .cta-btn{padding:11px 28px !important;font-size:11px !important;font-weight:700 !important;letter-spacing:0.12em !important;line-height:1 !important;border-radius:999px !important;min-height:auto !important;height:auto !important;text-shadow:none !important;font-family:var(--head) !important;text-transform:uppercase !important;cursor:pointer !important}
+.shell .cta-btn.primary{background:#fff !important;color:var(--navy) !important;border:none !important}
+.shell .cta-btn.secondary{background:transparent !important;color:#fff !important;border:1px solid rgba(255,255,255,0.3) !important}
+
+/* --- Nav CTA (cart button): prevent WP button inflation --- */
+.shell .nav-cta{padding:7px 16px !important;font-size:12px !important;font-weight:700 !important;min-height:auto !important;height:auto !important;border:none !important;text-shadow:none !important;box-shadow:0 2px 8px rgba(49,89,138,0.25) !important}
+
+/* --- ATC button: prevent WP button inflation --- */
+.shell .atc-btn{padding:0 24px !important;min-height:44px !important;font-size:12px !important;font-weight:700 !important;letter-spacing:0.14em !important;line-height:1 !important;border:none !important;border-radius:var(--r-sm) !important;text-shadow:none !important;font-family:var(--head) !important;text-transform:uppercase !important}
+
+/* --- Checkout CTA: prevent WP button inflation --- */
+.shell .checkout-cta{padding:16px 24px !important;font-size:13px !important;font-weight:700 !important;letter-spacing:0.14em !important;line-height:1 !important;border-radius:999px !important;min-height:auto !important;height:auto !important;text-shadow:none !important;text-decoration:none !important;font-family:var(--head) !important;text-transform:uppercase !important}
+
+/* --- Editorial images: prevent aspect ratio distortion --- */
+.shell .ed-img img,
+.shell .img-grid img{max-width:100% !important;display:block !important}
+.shell .ed-img img{width:100% !important;height:auto !important;object-fit:contain !important}
+
+/* --- SKU card images: locked aspect ratio --- */
+.shell .sku-c-img{width:100% !important;aspect-ratio:4/3 !important;object-fit:cover !important}
+
+/* --- PDP gallery images --- */
+.shell .hero-main-img img{width:100% !important;height:auto !important;object-fit:contain !important}
+.shell .hero-thumb img{width:100% !important;height:100% !important;object-fit:contain !important}
+
+/* --- Survey popup: prevent WP inflation --- */
+.shell .survey-popup .survey-btn{padding:10px 16px !important;font-size:10px !important;font-weight:700 !important;min-height:auto !important;height:auto !important;border-radius:999px !important;line-height:1 !important;text-shadow:none !important;font-family:var(--sub) !important;text-transform:uppercase !important}
+.shell .survey-input,
+.shell .survey-textarea,
+.shell .survey-select{padding:10px 14px !important;font-size:13px !important;font-family:var(--body) !important;border:1px solid var(--line-md) !important;border-radius:var(--r-sm) !important;background:#fff !important;color:var(--ink) !important;min-height:auto !important;height:auto !important;box-shadow:none !important}
+.shell .survey-close{width:24px !important;height:24px !important;min-width:0 !important;min-height:0 !important;padding:0 !important;border:none !important;background:none !important;box-shadow:none !important;text-shadow:none !important}
+.shell .survey-chip{padding:5px 12px !important;font-size:10px !important;min-height:auto !important;height:auto !important;border-radius:999px !important;line-height:1 !important;text-shadow:none !important}
+
 </style>
 </head>
 <body>
@@ -884,14 +1341,196 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <div class="shell">
 <div class="cart-toast" id="cartToast"></div>
 
+<!-- ═══ FLOATING BOTTOM BAR — Persistent CTA ═══ -->
+<div class="float-bar" id="floatBar">
+  <button class="float-bar-close" id="floatBarClose" aria-label="Dismiss">&times;</button>
+  <div class="float-bar-track" id="floatBarTrack">
+    <!-- Slide 1: Free Shipping -->
+    <div class="float-bar-slide active" id="floatSlide1">
+      <div class="float-bar-row">
+        <div class="float-bar-dot"></div>
+        <span class="float-bar-text">Free shipping on orders over <strong>$149</strong></span>
+      </div>
+      <div class="float-bar-row">
+        <button class="float-bar-cta" onclick="switchTab('shop')">Shop Now</button>
+      </div>
+    </div>
+    <!-- Slide 2: Email Signup -->
+    <div class="float-bar-slide" id="floatSlide2">
+      <div class="float-bar-row">
+        <div class="float-bar-dot" style="background:var(--green)"></div>
+        <span class="float-bar-text">Get ritual tips &amp; early access</span>
+      </div>
+      <div class="float-bar-row">
+        <input type="email" class="float-bar-input" placeholder="Your email" id="floatBarEmail" data-backend="form" data-form-type="newsletter-signup">
+        <button class="float-bar-cta" id="floatBarJoin" onclick="floatBarSignup()">Join</button>
+      </div>
+    </div>
+  </div>
+  <!-- Slide indicators -->
+  <div class="float-bar-indicators">
+    <span class="float-bar-ind active" onclick="floatBarGoTo(0)"></span>
+    <span class="float-bar-ind" onclick="floatBarGoTo(1)"></span>
+  </div>
+</div>
+
+<!-- ═══ SURVEY POPUP ═══ -->
+<div class="survey-overlay" id="surveyOverlay"></div>
+<div class="survey-popup" id="surveyPopup">
+  <button class="survey-close" id="surveyClose" aria-label="Close survey">&times;</button>
+
+  <!-- Step 0: Welcome -->
+  <div class="survey-step active" data-step="0">
+    <div class="survey-step-indicator">
+      <span class="survey-step-dot active"></span>
+      <span class="survey-step-dot"></span>
+      <span class="survey-step-dot"></span>
+      <span class="survey-step-dot"></span>
+      <span class="survey-step-dot"></span>
+    </div>
+    <p style="font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--pool);margin-bottom:0.5rem">Quick Survey</p>
+    <h2 class="survey-title">Hey — thanks for visiting.</h2>
+    <p class="survey-desc">We're a small garage-based team, a few people dedicated to bringing a new kind of hand &amp; foot care into reality. <strong>Would you mind answering a quick survey?</strong> It takes about 60 seconds and helps us build something better.</p>
+    <div class="survey-btn-row">
+      <button class="survey-btn secondary" onclick="closeSurvey()">No thanks</button>
+      <button class="survey-btn primary" onclick="surveyGoTo(1)">Sure, let's go</button>
+    </div>
+  </div>
+
+  <!-- Step 1: Email -->
+  <div class="survey-step" data-step="1">
+    <div class="survey-step-indicator">
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot active"></span>
+      <span class="survey-step-dot"></span>
+      <span class="survey-step-dot"></span>
+      <span class="survey-step-dot"></span>
+    </div>
+    <h2 class="survey-title">First, your email.</h2>
+    <p class="survey-desc">We use this for internal validation only. No spam — ever.</p>
+    <input type="email" class="survey-input" id="surveyEmail" placeholder="your@email.com">
+    <p class="survey-caption">Your email stays private. We won't add you to any list without your permission.</p>
+    <div class="survey-btn-row">
+      <button class="survey-btn secondary" onclick="surveyGoTo(0)">Back</button>
+      <button class="survey-btn primary" onclick="surveyValidateEmail()">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Usage Type -->
+  <div class="survey-step" data-step="2">
+    <div class="survey-step-indicator">
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot active"></span>
+      <span class="survey-step-dot"></span>
+      <span class="survey-step-dot"></span>
+    </div>
+    <h2 class="survey-title">What are you looking to use SOKY for?</h2>
+    <p class="survey-desc">Select all that apply.</p>
+    <div class="survey-checkbox-grid" id="surveyUsage">
+      <span class="survey-chip" data-val="Eczema">Eczema</span>
+      <span class="survey-chip" data-val="Physical Therapy">Physical Therapy</span>
+      <span class="survey-chip" data-val="Occupational Therapy">Occupational Therapy</span>
+      <span class="survey-chip" data-val="Pain Relief">Pain Relief</span>
+      <span class="survey-chip" data-val="Hyperhidrosis">Hyperhidrosis</span>
+      <span class="survey-chip" data-val="Fungal Care">Fungal Care</span>
+      <span class="survey-chip" data-val="Skincare">Skincare</span>
+      <span class="survey-chip" data-val="Nailcare">Nailcare</span>
+      <span class="survey-chip" data-val="Personal Care">Personal Care</span>
+      <span class="survey-chip" data-val="Self Care">Self Care</span>
+    </div>
+    <div class="survey-btn-row">
+      <button class="survey-btn secondary" onclick="surveyGoTo(1)">Back</button>
+      <button class="survey-btn primary" onclick="surveyGoTo(3)">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Treatment Area -->
+  <div class="survey-step" data-step="3">
+    <div class="survey-step-indicator">
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot active"></span>
+      <span class="survey-step-dot"></span>
+    </div>
+    <h2 class="survey-title">Which body areas are you looking to treat?</h2>
+    <p class="survey-desc">Select all that apply.</p>
+    <div class="survey-checkbox-grid" id="surveyArea">
+      <span class="survey-chip" data-val="Hands">Hands</span>
+      <span class="survey-chip" data-val="Feet">Feet</span>
+      <span class="survey-chip" data-val="Elbows">Elbows</span>
+      <span class="survey-chip" data-val="Knees">Knees</span>
+      <span class="survey-chip" data-val="Arms">Arms</span>
+      <span class="survey-chip" data-val="Legs">Legs</span>
+      <span class="survey-chip" data-val="Pelvic">Pelvic</span>
+      <span class="survey-chip" data-val="Back">Back</span>
+      <span class="survey-chip" data-val="Shoulder">Shoulder</span>
+    </div>
+    <div class="survey-btn-row">
+      <button class="survey-btn secondary" onclick="surveyGoTo(2)">Back</button>
+      <button class="survey-btn primary" onclick="surveyGoTo(4)">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 4: Referral + Why + Consent -->
+  <div class="survey-step" data-step="4">
+    <div class="survey-step-indicator">
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot done"></span>
+      <span class="survey-step-dot active"></span>
+    </div>
+    <h2 class="survey-title">Almost done — a couple more.</h2>
+
+    <label style="font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink);display:block;margin-bottom:0.4rem">How did you hear about us?</label>
+    <select class="survey-select" id="surveyReferral">
+      <option value="">Select one...</option>
+      <option value="Reddit">Reddit</option>
+      <option value="Instagram">Instagram</option>
+      <option value="TikTok">TikTok</option>
+      <option value="Google Search">Google Search</option>
+      <option value="YouTube">YouTube</option>
+      <option value="Friend or Family">Friend or Family</option>
+      <option value="Clinician or Doctor">Clinician or Doctor</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label style="font-family:var(--sub);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink);display:block;margin-top:1rem;margin-bottom:0.4rem">Why are you interested in SOKY?</label>
+    <textarea class="survey-textarea" id="surveyWhy" placeholder="Tell us a little about what brought you here..."></textarea>
+
+    <div class="survey-consent">
+      <input type="checkbox" id="surveyConsent">
+      <label for="surveyConsent">I'm open to being contacted by the NM Thera team.</label>
+    </div>
+
+    <div class="survey-btn-row">
+      <button class="survey-btn secondary" onclick="surveyGoTo(3)">Back</button>
+      <button class="survey-btn primary" id="surveySubmitBtn" onclick="surveySubmit()">Submit</button>
+    </div>
+  </div>
+
+  <!-- Step 5: Thank You -->
+  <div class="survey-step" data-step="5">
+    <div class="survey-success">
+      <div class="survey-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <h2 class="survey-success-title">Thank you.</h2>
+      <p class="survey-success-desc">Your answers help us build something real. We're a small team, and every response matters. If you gave us permission, we may reach out — otherwise, we'll just keep building.</p>
+      <div class="survey-btn-row" style="justify-content:center;margin-top:1.5rem">
+        <button class="survey-btn primary" onclick="closeSurvey()" style="flex:none;padding:10px 28px">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════════════════════
    TOPBAR — Tab-based Navigation
 ═══════════════════════════════════ -->
 <div class="topbar" id="topbar">
 <div class="topbar-inner">
   <a href="#" class="brand-link" onclick="switchTab('home');return false">
-    <img src="https://nmthera.com/wp-content/uploads/2026/03/Logo-Icon.png" alt="NM Thera" class="brand-logo">
-    <span class="brand-name">NM Thera</span>
+    <img src="https://nmthera.com/wp-content/uploads/2026/04/NMThera1-Logo-T.webp" alt="NM Thera" class="brand-logo" id="navLogo">
   </a>
   <div class="nav-tabs" id="navTabs">
     <div class="nav-tab active" data-tab="home">Home</div>
@@ -943,12 +1582,12 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-content">
       <div class="hero-vid-stage">
-        <video id="heroVid" autoplay muted loop playsinline preload="metadata" poster="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg">
+        <video id="heroVid" autoplay muted loop playsinline preload="metadata" disableRemotePlayback controlsList="nodownload noremoteplayback" x-webkit-airplay="deny" poster="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg">
           <source src="https://kfam227.github.io/website/Videos/26Mar2026%20Kv%20Blue.mp4" type="video/mp4">
         </video>
         <div class="hero-vid-ui">
           <div class="hv-brand">
-            <p class="hv-eyebrow">NM Thera presents</p>
+            <img src="https://nmthera.com/wp-content/uploads/2026/04/TheraDrop-Logo-3.png" alt="" style="width:18px;height:auto;opacity:0.7;margin-bottom:4px" aria-hidden="true">
             <div class="hv-wordmark">SOKY</div>
           </div>
           <div class="hv-bottom">
@@ -971,40 +1610,65 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           <span class="hero-badge">Shop Now</span>
           <span class="hero-badge">Medical-Grade Silicone</span>
         </div>
-        <button class="nav-cta" onclick="switchTab('shop')" style="margin-top:1.25rem" data-backend="woocommerce" data-action="navigate-to-cart">Explore SOKY</button>
+        <div class="hero-cta-wrap" style="margin-top:1.5rem"><button class="nav-cta" onclick="switchTab('shop')" style="padding:14px 32px;font-size:13px;letter-spacing:0.14em;background:var(--pool);color:#fff;border:1px solid var(--pool);box-shadow:0 8px 24px rgba(0,109,119,0.28)" data-backend="woocommerce" data-action="navigate-to-cart">Explore SOKY</button></div>
       </div>
     </div>
     <div class="scroll-cue"><span>Scroll</span><div class="scroll-cue-bar"></div></div>
-    <div class="hero-bottom">
-      <div class="hero-meta"><strong>NM Therapeutics, Inc.</strong> · Wearable soak systems for hands &amp; feet</div>
-      <!-- BACKEND: External contact link -->
-      <div class="hero-contact"><a href="/cdn-cgi/l/email-protection#ff949a919186bf91928b979a8d9ed19c9092" data-backend="external" data-url="mailto:kenny@nmthera.com"><span class="__cf_email__" data-cfemail="c7aca2a9a9be87a9aab3afa2b5a6e9a4a8aa">[email&#160;protected]</span></a> · <span data-backend="external" data-url="https://nmthera.com">nmthera.com</span></div>
-    </div>
-  </div>
-
-  <!-- Refuse / Pursue -->
-  <div class="container" style="padding-top:clamp(2rem,4vw,3rem)">
-    <div class="refuse-pursue reveal">
-      <div class="rp-col refuse"><div class="rp-eyebrow">What We Refuse</div><ul><li>Complexity disguised as innovation</li><li>Care that demands stillness</li><li>Products designed to be replaced</li></ul></div>
-      <div class="rp-col pursue"><div class="rp-eyebrow">What We Pursue</div><ul><li>Simplicity earned through discipline</li><li>Rituals that move with the person</li><li>Tools built to be kept and repaired</li></ul></div>
-    </div>
   </div>
 
   <!-- Manifesto Quote -->
-  <div class="sec"><div class="container">
-    <div class="quote-band reveal" style="margin-bottom:2rem">
+  <div class="sec" style="padding-bottom:clamp(1.5rem,3vw,2.5rem)"><div class="container">
+    <div class="quote-band reveal" style="margin-bottom:1.5rem">
       <blockquote>"Care for the hands is care for everything the hands make possible. When we restore circulation to tired hands, we restore the capacity to build. When we return sensation to numb feet, we return a person to their own body."</blockquote>
       <cite>— NM Thera Manifesto, 2026</cite>
     </div>
-    <div class="ed-img med" style="margin-bottom:2rem">
+    <div class="ed-img med" style="margin-bottom:1.25rem">
       <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_0152.jpg" alt="SOKY in a home setting" loading="lazy" style="object-position:center 50%">
       <div class="ed-img-cap">A real soak session at home — the ritual fits wherever life happens</div>
     </div>
-    <div style="max-width:680px;margin:0 auto;text-align:center">
-      <p style="font-family:var(--serif);font-size:clamp(17px,2vw,22px);color:rgba(17,24,39,0.85);line-height:1.45;font-style:italic;margin-bottom:1rem">The ritual of soaking has existed in every human culture that left records.</p>
-      <p style="font-family:var(--body);font-size:14px;color:var(--muted);line-height:1.75;max-width:540px;margin:0 auto">Warm water, time, and attention are among the most powerful therapeutic forces available. SOKY makes them <strong style="color:var(--ink)">portable</strong> — so the ritual can finally move with the person who needs it.</p>
+    <div style="margin:0 auto;text-align:center;margin-top:0">
+      <p style="font-family:var(--head);font-size:clamp(17px,2vw,22px);color:rgba(17,24,39,0.85);line-height:1.45;font-style:italic;margin-bottom:1rem">The ritual of soaking has existed in every human culture that left records.</p>
+      <p style="font-family:var(--body);font-size:14px;color:var(--muted);line-height:1.75;margin:0 auto;text-align:center">Warm water, time, and attention are among the most powerful therapeutic forces available. SOKY makes them <strong style="color:var(--ink)">portable</strong> — so the ritual can finally move with the person who needs it.</p>
     </div>
   </div></div>
+
+  <!-- SOKY Helps With — Condition Routing -->
+  <div class="container" style="padding-top:clamp(1rem,2vw,1.5rem);padding-bottom:clamp(2rem,4vw,3rem)">
+    <div class="reveal" style="background:linear-gradient(135deg,rgba(245,241,233,0.85),rgba(138,106,77,0.08),rgba(0,109,119,0.06));border:1px solid rgba(138,106,77,0.15);border-radius:var(--r-xl);padding:clamp(1.75rem,3vw,2.5rem) clamp(2rem,4vw,3rem);box-shadow:0 8px 32px rgba(0,48,61,0.04)">
+      <div style="text-align:center;margin-bottom:1.25rem">
+        <p style="font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--pool);margin-bottom:0.4rem">Hand &amp; Foot Care</p>
+        <h2 style="font-family:var(--head);font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--ink);margin-bottom:0.5rem">SOKY Helps With</h2>
+        <p style="font-family:var(--body);font-size:13px;color:var(--muted);max-width:480px;margin:0 auto;line-height:1.65">One glove. Dozens of applications. Whether it's recovery, relief, or your daily wellness ritual — the soak adapts to what you need.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:1.5rem">
+        <!-- Hand SOKY conditions -->
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Dry Cracked Hands</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Sweaty Hands</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Post-Workout Recovery</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(138,106,77,0.07);color:var(--umber);border:1px solid rgba(138,106,77,0.12);transition:all .15s">Eczema</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Arthritis Relief</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Carpal Tunnel Relief</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Raynaud's Syndrome</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(138,106,77,0.07);color:var(--umber);border:1px solid rgba(138,106,77,0.12);transition:all .15s">Grip Recovery</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Nail &amp; Cuticle Care</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Trigger Finger</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Stress Relief Ritual</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(138,106,77,0.07);color:var(--umber);border:1px solid rgba(138,106,77,0.12);transition:all .15s">Hand Fatigue</a>
+        <!-- Foot SOKY conditions -->
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Plantar Fasciitis</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Diabetic Foot Care</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Athlete's Foot</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(138,106,77,0.07);color:var(--umber);border:1px solid rgba(138,106,77,0.12);transition:all .15s">Callus Softening</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Post-Run Recovery</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Peripheral Neuropathy</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Cracked Heel Repair</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(138,106,77,0.07);color:var(--umber);border:1px solid rgba(138,106,77,0.12);transition:all .15s">Gout Flare</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Standing-Profession Fatigue</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Daily Wellness</a>
+        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Sleep Preparation Soak</a>
+      </div>
+    </div>
+  </div>
 
   <hr class="liquid-accent">
 
@@ -1012,34 +1676,16 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="container"><div class="connection-band reveal">
     <div class="conn-eyebrow">The Deeper Idea</div>
     <h2 class="conn-heading">The hand is where connection begins.</h2>
-    <p class="conn-body">A handshake. A child's grip. A steadying touch on someone's shoulder. The moments that matter most in a complex world happen through our hands — and millions of people avoid them. Sweating, cracking, aching, or simply neglected, the hands become a barrier instead of a bridge. SOKY exists to remove that barrier. Not with complexity, but with water, warmth, and a ritual simple enough to keep.</p>
-    <p class="conn-coda">When we restore care to the hands, we restore the capacity to reach out.</p>
-    <button class="nav-cta" onclick="switchTab('shop')" style="margin-top:1.5rem" data-backend="woocommerce" data-action="navigate-to-cart">Shop SOKY</button>
-  </div></div>
-
-  <!-- Persona Funnel — SEO symptom routing -->
-  <div class="sec" style="padding-top:0"><div class="container">
-    <div style="text-align:center;max-width:680px;margin:0 auto">
-      <p style="font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">SOKY helps with</p>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center">
-        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Dry Cracked Hands</a>
-        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Sweaty Hands</a>
-        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Post-Workout Recovery</a>
-        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Eczema</a>
-        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Arthritis Relief</a>
-        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(104,139,88,0.06);color:var(--green);border:1px solid rgba(104,139,88,0.1);transition:all .15s">Plantar Fasciitis</a>
-        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(49,89,138,0.06);color:var(--navy);border:1px solid rgba(49,89,138,0.1);transition:all .15s">Hand Fatigue</a>
-        <a href="#" onclick="switchTab('shop');return false" style="font-family:var(--sub);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:5px 14px;border-radius:999px;background:rgba(0,109,119,0.06);color:var(--pool);border:1px solid rgba(0,109,119,0.1);transition:all .15s">Daily Wellness</a>
-      </div>
-    </div>
+    <p class="conn-body">A handshake. A child's grip. A steadying touch on someone's shoulder. The moments that matter most in a complex world happen through our hands — and millions of people avoid them. Sweating, cracking, aching, or simply neglected, the hands become a barrier instead of a bridge. SOKY exists to remove that barrier. Not with complexity, but with water, warmth, and a ritual simple enough to keep. When we restore care to the hands, we restore the capacity to reach out.</p>
+    <div style="display:flex;justify-content:center;margin-top:1.5rem"><button class="nav-cta" onclick="switchTab('shop')" data-backend="woocommerce" data-action="navigate-to-cart">Shop SOKY</button></div>
   </div></div>
 
   <hr class="divider">
 
   <!-- Editorial Gallery -->
   <div class="sec"><div class="container">
-    <div class="sec-eyebrow">In the Wild</div>
-    <h2 class="sec-heading">The product in its element.</h2>
+    <div class="sec-eyebrow">When We Restore</div>
+    <h2 class="sec-heading">The ritual in practice.</h2>
     <div class="img-grid reveal cols-2" style="margin-bottom:2rem">
       <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9940.jpg" alt="Fist sealed — demonstrating seal hold" loading="lazy" style="object-position:center 50%">
       <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_1196.jpg" alt="SOKY against spa tile backdrop" loading="lazy" style="object-position:center 45%">
@@ -1048,6 +1694,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9929.jpg" alt="Full finger mobility while sealed" loading="lazy" style="object-position:center 50%">
       <div class="ed-img-cap">Full finger extension — the glove moves with the hand, not against it</div>
     </div>
+    <div style="display:flex;justify-content:center;margin-top:2rem">
+      <button class="nav-cta" onclick="switchTab('shop')" style="padding:14px 32px;font-size:13px;letter-spacing:0.14em" data-backend="woocommerce" data-action="navigate-to-cart">Explore SOKY</button>
+    </div>
   </div></div>
 
   <!-- Platform Vision Teaser -->
@@ -1055,23 +1704,23 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <div class="sec-eyebrow">The Platform</div>
     <h2 class="sec-heading">Hands and feet are just the beginning.</h2>
     <p class="sec-sub">One garment base. One universal port. One ritual. Every new body zone adds a new mold — the platform scales without starting over.</p>
-    <p style="font-family:var(--serif);font-size:clamp(15px,1.8vw,18px);font-style:italic;color:var(--pool);margin-bottom:1.5rem">One port. One ritual. Every body zone.</p>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:2rem">
-      <div style="background:rgba(0,109,119,0.06);border:1px solid rgba(0,109,119,0.15);border-radius:var(--r-md);padding:1.25rem;text-align:center">
-        <p style="font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pool);margin-bottom:.3rem">Now</p>
-        <p style="font-family:var(--head);font-size:15px;font-weight:800;color:var(--ink)">Hands · Feet</p>
+    <p style="font-family:var(--head);font-size:clamp(15px,1.8vw,18px);font-style:italic;color:var(--pool);margin-bottom:1.5rem">One port. One ritual. Every body zone.</p>
+    <div class="platform-roadmap" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:2rem">
+      <div style="background:rgba(0,109,119,0.06);border:1px solid rgba(0,109,119,0.15);border-radius:var(--r-md);padding:0.75rem 1.25rem;text-align:center">
+        <p style="font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pool);margin-bottom:.15rem">Now</p>
+        <p style="font-family:var(--head);font-size:15px;font-weight:800;color:var(--ink);margin:0">Hands · Feet</p>
       </div>
-      <div style="background:rgba(49,89,138,0.04);border:1px solid rgba(49,89,138,0.12);border-radius:var(--r-md);padding:1.25rem;text-align:center">
-        <p style="font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:.3rem">Next</p>
-        <p style="font-family:var(--head);font-size:15px;font-weight:800;color:rgba(17,24,39,0.78)">Arms · Legs</p>
+      <div style="background:rgba(49,89,138,0.04);border:1px solid rgba(49,89,138,0.12);border-radius:var(--r-md);padding:0.75rem 1.25rem;text-align:center">
+        <p style="font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:.15rem">Next</p>
+        <p style="font-family:var(--head);font-size:15px;font-weight:800;color:rgba(17,24,39,0.78);margin:0">Arms · Legs</p>
       </div>
-      <div style="background:rgba(104,139,88,0.04);border:1px solid rgba(104,139,88,0.12);border-radius:var(--r-md);padding:1.25rem;text-align:center">
-        <p style="font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.3rem">Expand</p>
-        <p style="font-family:var(--head);font-size:15px;font-weight:800;color:rgba(17,24,39,0.78)">Knees · Elbows</p>
+      <div style="background:rgba(104,139,88,0.04);border:1px solid rgba(104,139,88,0.12);border-radius:var(--r-md);padding:0.75rem 1.25rem;text-align:center">
+        <p style="font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.15rem">Expand</p>
+        <p style="font-family:var(--head);font-size:15px;font-weight:800;color:rgba(17,24,39,0.78);margin:0">Knees · Elbows</p>
       </div>
-      <div style="background:rgba(179,29,27,0.03);border:1px solid rgba(179,29,27,0.1);border-radius:var(--r-md);padding:1.25rem;text-align:center">
-        <p style="font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--heat);margin-bottom:.3rem">Beyond</p>
-        <p style="font-family:var(--head);font-size:15px;font-weight:800;color:rgba(17,24,39,0.78)">Pelvic</p>
+      <div style="background:rgba(179,29,27,0.03);border:1px solid rgba(179,29,27,0.1);border-radius:var(--r-md);padding:0.75rem 1.25rem;text-align:center">
+        <p style="font-family:var(--sub);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--heat);margin-bottom:.15rem">Beyond</p>
+        <p style="font-family:var(--head);font-size:15px;font-weight:800;color:rgba(17,24,39,0.78);margin:0">Pelvic</p>
       </div>
     </div>
     <div class="img-grid reveal cols-2">
@@ -1087,7 +1736,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="container">
     <div class="cta-band reveal">
       <h2 class="cta-heading">"Your hands deserve meaningful care."</h2>
-      <p class="cta-sub">Three paths in. 200 units. First drop of a patented platform.</p>
+      <p class="cta-sub">Three paths in. 250 units. First drop of a patented platform.</p>
       <div class="cta-buttons">
         <!-- BACKEND: Navigate to cart via WooCommerce -->
         <button class="cta-btn primary" onclick="switchTab('shop')" data-backend="woocommerce" data-action="navigate-to-cart">Shop Now</button>
@@ -1097,11 +1746,11 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 
   <!-- Join the Community -->
-  <div class="sec"><div class="container">
-    <div style="text-align:center;max-width:560px;margin:0 auto">
+  <div class="sec" style="padding:clamp(2rem,4vw,3rem) 0"><div class="container">
+    <div class="cohort-band reveal" style="text-align:center;max-width:640px;margin:0 auto;padding:clamp(1.75rem,3vw,2.25rem) clamp(2rem,4vw,3rem);background:linear-gradient(135deg,rgba(245,241,233,0.85),rgba(0,109,119,0.08));border:1px solid rgba(0,109,119,0.15);border-radius:var(--r-xl);box-shadow:0 8px 32px rgba(0,48,61,0.06)">
       <div class="sec-eyebrow" style="justify-content:center">Join the Founding Cohort</div>
-      <h2 class="sec-heading" style="text-align:center">Be part of what's next.</h2>
-      <p style="font-family:var(--body);font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:1.5rem;text-align:center">First-drop updates, ritual tips, early access to new products and formulations, and community insights from the SOKY Commons. No spam. Just the ritual.</p>
+      <h2 class="sec-heading" style="text-align:center;margin-bottom:.5rem">Be part of what's next.</h2>
+      <p style="font-family:var(--body);font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;text-align:center;max-width:480px;margin-left:auto;margin-right:auto">First-drop updates, ritual tips, early access to new products and formulations, and community insights from the SOKY Commons. No spam. Just the ritual.</p>
       <div style="display:flex;gap:8px;max-width:400px;margin:0 auto">
         <!-- BACKEND: Newsletter signup form -->
         <input type="email" class="form-input" placeholder="Your email address" style="flex:1" data-backend="form" data-form-type="newsletter-signup">
@@ -1136,46 +1785,41 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-content">
       <div class="hero-vid-stage">
-        <video id="shopHeroVid" autoplay muted loop playsinline preload="metadata">
+        <video id="shopHeroVid" autoplay muted loop playsinline preload="metadata" disableRemotePlayback controlsList="nodownload noremoteplayback" x-webkit-airplay="deny">
           <source src="https://nmthera.com/wp-content/uploads/2026/03/0227.mp4" type="video/mp4">
         </video>
       </div>
       <div class="hero-text">
         <div class="hero-eyebrow">Shop SOKY</div>
         <h1 class="hero-title" style="font-size:clamp(42px,7vw,88px)">Choose Your Entry</h1>
-        <div class="hero-tagline">Three Offers · 200 Units · <strong>First Drop</strong></div>
+        <div class="hero-tagline">Three Offers · 250 Units · <strong>First Drop</strong></div>
         <p class="hero-desc">Every offer ships the same patented glove — identical silicone, identical seal, identical ritual. Pick the one that fits your path.</p>
         <div class="hero-badges">
-          <span class="hero-badge hl">Batch 1 · Spring 2026</span>
+          <span class="hero-badge hl">Batch 1 · Available Now</span>
           <span class="hero-badge">30-Day Guarantee</span>
           <span class="hero-badge">Free US Shipping</span>
         </div>
       </div>
     </div>
-    <div class="hero-bottom">
-      <div class="hero-meta"><strong>Pre-Order Open</strong> · Batch 1 ships Spring 2026</div>
-      <!-- BACKEND: Contact to order via WooCommerce -->
-      <div class="hero-contact"><a href="/cart" data-backend="woocommerce" data-action="view-cart" style="color:rgba(255,255,255,0.7)">View Cart →</a></div>
-    </div>
   </div>
 
   <div class="sec"><div class="container">
-    <div class="sec-eyebrow">First Drop · Batch 1 of 200</div>
-    <h2 class="sec-heading">Three offers. 200 units. First drop.</h2>
+    <div class="sec-eyebrow">First Drop · Batch 1: 250 Units Available</div>
+    <h2 class="sec-heading">Three offers. 250 units. First drop.</h2>
     <p class="sec-sub">Every offer ships the same patented glove — identical silicone, identical seal, identical ritual. Pick the one that fits your path.</p>
 
     <div class="sku-cards reveal">
       <!-- BACKEND: Add to cart — HandSOKY_B_M_000 via WooCommerce -->
       <div class="sku-c research" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_000" onclick="skuCardClick(event,'pdp-single')" style="cursor:pointer">
-        <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Single" loading="lazy" style="object-position:center 60%">
+        <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Single" loading="lazy" style="object-position:center 45%">
         <div class="sku-c-body">
           <div class="sku-c-id">HandSOKY_B_M_000</div>
           <div class="sku-c-price">$45</div>
-          <span class="sku-c-tag tag-r">Single Glove · 40 Units</span>
+          <span class="sku-c-tag tag-r">Single Glove · Most Affordable</span>
           <div class="sku-c-name">Hand SOKY — Single</div>
           <div class="sku-c-desc">One glove, Size Medium. Same patented seal, same ritual. Try SOKY at the entry price.</div>
           <!-- BACKEND: Dynamic inventory count for _000 -->
-          <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_000"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--pool),var(--green))"></div></div><span class="stk-lbl">40 / 40</span></div>
+          <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_000"><div class="stk-bar"><div class="stk-fill" style="width:52%;background:linear-gradient(90deg,var(--pool),var(--green))"></div></div><span class="stk-lbl">26 / 50</span></div>
           <div style="display:flex;align-items:center;gap:8px;margin-top:1rem">
             <div style="display:flex;align-items:center;border:1px solid var(--line-md);border-radius:var(--r-sm);overflow:hidden">
               <button onclick="var i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">−</button>
@@ -1188,7 +1832,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       </div>
       <!-- BACKEND: Add to cart — HandSOKY_B_M_001 via WooCommerce -->
       <div class="sku-c core" data-backend="woocommerce" data-action="add-to-cart" data-sku="HandSOKY_B_M_001" onclick="skuCardClick(event,'pdp-pair')" style="cursor:pointer">
-        <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Core" loading="lazy" style="object-position:center 45%">
+        <img class="sku-c-img" src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Core" loading="lazy" style="object-position:center 60%">
         <div class="sku-c-body">
           <div class="sku-c-id">HandSOKY_B_M_001</div>
           <div class="sku-c-price">$85</div>
@@ -1196,7 +1840,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           <div class="sku-c-name">Hand SOKY</div>
           <div class="sku-c-desc">One pair, Size Medium. The essential starting point — everything you need for the full ritual.</div>
           <!-- BACKEND: Dynamic inventory count for _001 -->
-          <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_001"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--navy),var(--pool))"></div></div><span class="stk-lbl">80 / 80</span></div>
+          <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_001"><div class="stk-bar"><div class="stk-fill" style="width:74%;background:linear-gradient(90deg,var(--navy),var(--pool))"></div></div><span class="stk-lbl">74 / 100</span></div>
           <div style="display:flex;align-items:center;gap:8px;margin-top:1rem">
             <div style="display:flex;align-items:center;border:1px solid var(--line-md);border-radius:var(--r-sm);overflow:hidden">
               <button onclick="var i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">−</button>
@@ -1217,7 +1861,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           <div class="sku-c-name">Hand SOKY Travel System</div>
           <div class="sku-c-desc">Gloves + towel + clip hook + bag + instructions. Gift-ready. The complete experience.</div>
           <!-- BACKEND: Dynamic inventory count for _002 -->
-          <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_002"><div class="stk-bar"><div class="stk-fill" style="width:100%;background:linear-gradient(90deg,var(--green),var(--navy))"></div></div><span class="stk-lbl">100 / 100</span></div>
+          <div class="sku-stock-bar" data-backend="woocommerce" data-action="inventory-display" data-sku="HandSOKY_B_M_002"><div class="stk-bar"><div class="stk-fill" style="width:98%;background:linear-gradient(90deg,var(--green),var(--navy))"></div></div><span class="stk-lbl">98 / 100</span></div>
           <div style="display:flex;align-items:center;gap:8px;margin-top:1rem">
             <div style="display:flex;align-items:center;border:1px solid var(--line-md);border-radius:var(--r-sm);overflow:hidden">
               <button onclick="var i=this.nextElementSibling;i.value=Math.max(1,+i.value-1)" style="width:28px;height:28px;border:none;background:none;cursor:pointer;font-size:14px;color:var(--muted)">−</button>
@@ -1230,7 +1874,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       </div>
     </div>
 
-    <p style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-top:1.5rem;margin-bottom:2rem"><strong style="color:var(--green)">PRE-ORDER</strong> · Batch 1 ships Spring 2026. 30-day satisfaction guarantee.</p>
+    <p style="font-family:var(--sub);font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-top:1.5rem;margin-bottom:2rem"><strong style="color:var(--green)">AVAILABLE NOW</strong> · Batch 1 · 250 units · 30-day satisfaction guarantee.</p>
 
     <!-- Research Access Callout — routes to Research tab -->
     <div style="background:linear-gradient(135deg,rgba(0,109,119,0.06),rgba(104,139,88,0.06));border:1px solid rgba(0,109,119,0.18);border-radius:var(--r-lg);padding:1.5rem 1.75rem;display:flex;align-items:center;gap:1.25rem;margin-bottom:2rem;cursor:pointer;transition:all .2s" onclick="switchTab('research')" onmouseover="this.style.borderColor='rgba(0,109,119,0.35)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(0,109,119,0.18)';this.style.transform='none'">
@@ -1254,12 +1898,12 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     </div>
 
     <h3 style="font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem">Product &amp; Materials</h3>
-    <div style="max-width:720px;margin-bottom:2rem">
+    <div style="margin-bottom:2rem">
       <p style="font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.72);line-height:1.75;margin-bottom:1rem"><strong>Medical-grade silicone</strong> — skin-safe, allergy-friendly, latex-free, BPA-free. Designed for wearable airtight applications. No-leak, patented inversion cuff seal &mdash; low-tech by design. No clamps. No adhesives. No nonsense. (US 11,602,631 B2). Full finger mobility maintained during use. Lightweight, portable — fits in a coat pocket. Reusable — built for 90+ sessions with proper care. One size fits most (M) — additional sizes coming Batch 2.</p>
     </div>
 
     <h3 style="font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem">Care Instructions</h3>
-    <div style="max-width:720px;margin-bottom:2rem">
+    <div style="margin-bottom:2rem">
       <p style="font-family:var(--body);font-size:13px;color:rgba(17,24,39,0.72);line-height:1.75">Rinse with clean water after every session. Air dry fully before storing — never store damp. Store unfolded with cuff extended. Avoid petroleum-based products or bleach. Inspect port and cuff before each session. 90+ sessions with proper care. Do not use with open wounds without consulting your healthcare provider.</p>
     </div>
 
@@ -1275,7 +1919,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
     <div class="cta-band reveal">
       <h2 class="cta-heading">"Your hands have been waiting long enough."</h2>
-      <p class="cta-sub">Three offers. 200 units. The first drop of a patented platform.</p>
+      <p class="cta-sub">Three offers. 250 units. The first drop of a patented platform.</p>
       <div class="cta-buttons">
         <!-- BACKEND: Contact to order via WooCommerce -->
         <a href="/cart" class="cta-btn primary" data-backend="woocommerce" data-action="view-cart">View Cart</a>
@@ -1297,7 +1941,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <!-- Gallery -->
       <div class="hero-gallery">
         <div class="hero-main-img" id="mainImg-pdp-single">
-          <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Single" id="mainImgEl-pdp-single">
+          <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Single" id="mainImgEl-pdp-single">
         </div>
         <div class="hero-thumbs">
           <div class="hero-thumb active" onclick="swapPdpImg('pdp-single',this,'https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg')"><img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Product hero" loading="lazy"></div>
@@ -1475,11 +2119,11 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <!-- Gallery -->
       <div class="hero-gallery">
         <div class="hero-main-img" id="mainImg-pdp-pair">
-          <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Hand SOKY Pair" id="mainImgEl-pdp-pair">
+          <img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Hand SOKY Pair" id="mainImgEl-pdp-pair">
         </div>
         <div class="hero-thumbs">
-          <div class="hero-thumb active" onclick="swapPdpImg('pdp-pair',this,'https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg')"><img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Product hero" loading="lazy"></div>
-          <div class="hero-thumb" onclick="swapPdpImg('pdp-pair',this,'https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg')"><img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Gloves flat" loading="lazy"></div>
+          <div class="hero-thumb" onclick="swapPdpImg('pdp-pair',this,'https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg')"><img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-3.jpg" alt="Gloves flat" loading="lazy"></div>
+          <div class="hero-thumb active" onclick="swapPdpImg('pdp-pair',this,'https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg')"><img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-6.jpg" alt="Product hero" loading="lazy"></div>
           <div class="hero-thumb" onclick="swapPdpImg('pdp-pair',this,'https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-2.jpg')"><img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-2.jpg" alt="Annotated features" loading="lazy"></div>
           <div class="hero-thumb" onclick="swapPdpImg('pdp-pair',this,'https://nmthera.com/wp-content/uploads/2026/01/IMG_9940.jpg')"><img src="https://nmthera.com/wp-content/uploads/2026/01/IMG_9940.jpg" alt="Fist sealed" loading="lazy"></div>
           <div class="hero-thumb" onclick="swapPdpImg('pdp-pair',this,'https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-4.jpg')"><img src="https://nmthera.com/wp-content/uploads/2026/01/SKU001-Launch-Assets-4.jpg" alt="Lifestyle shot" loading="lazy"></div>
@@ -1830,7 +2474,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <div class="hero-veil" aria-hidden="true"></div>
     <div class="hero-content">
       <div class="hero-vid-stage">
-        <video id="ritualHeroVid" muted loop playsinline preload="metadata">
+        <video id="ritualHeroVid" muted loop playsinline preload="metadata" disableRemotePlayback controlsList="nodownload noremoteplayback" x-webkit-airplay="deny">
           <source src="https://videos.files.wordpress.com/2uAOPAQx/pool-water-video-cl-edit.mp4" type="video/mp4">
         </video>
       </div>
@@ -1955,7 +2599,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <h2 class="sec-heading">Three layers. One universal port.</h2>
     <p class="sec-sub">Model F (passive OTC) and Model E (clinical electro) are the same garment — a different cap attached to the same universal port.</p>
 
-    <div style="font-family:var(--serif);font-size:clamp(16px,2vw,20px);font-style:italic;color:var(--pool);text-align:center;margin-bottom:2rem">One port. One ritual. Every body zone.</div>
+    <div style="font-family:var(--head);font-size:clamp(16px,2vw,20px);font-style:italic;color:var(--pool);text-align:center;margin-bottom:2rem">One port. One ritual. Every body zone.</div>
 
     <div class="callout" style="margin-bottom:2rem">
       <div class="callout-lbl">Layer 1 · Garment Base</div>
@@ -1999,6 +2643,12 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 
   <div class="sec"><div class="container">
+    <!-- What We Refuse / What We Pursue — relocated from Home -->
+    <div class="refuse-pursue" style="margin-bottom:2.5rem">
+      <div class="rp-col refuse"><div class="rp-eyebrow">What We Refuse</div><ul><li>Complexity disguised as innovation</li><li>Care that demands stillness</li><li>Products designed to be replaced</li></ul></div>
+      <div class="rp-col pursue"><div class="rp-eyebrow">What We Pursue</div><ul><li>Simplicity earned through discipline</li><li>Rituals that move with the person</li><li>Tools built to be kept and repaired</li></ul></div>
+    </div>
+
     <div class="sec-eyebrow">Mission · Vision · Values</div>
     <div style="max-width:720px">
       <p style="font-family:var(--body);font-size:14px;color:rgba(17,24,39,0.78);line-height:1.75;margin-bottom:1.5rem"><strong>Mission:</strong> Provide innovative solutions and compassionate support for people whose skin and health conditions impact their confidence, relationships, or work.</p>
@@ -2082,6 +2732,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <p>The engaged early adopter who may not be in a position to pay full price but has everything to offer in terms of lived experience, honest feedback, and genuine stake in whether this works. Chronically undertreated conditions, limited healthcare access, high motivation — exactly the population whose outcomes matter most to get right.</p>
       </div>
 
+      <div id="form-research-access">
       <h3 style="font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem;margin-top:3rem">Apply for Research Access</h3>
       <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="Your full name"></div>
       <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your@email.com" data-backend="form" data-form-type="research-access-application"></div>
@@ -2089,6 +2740,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <div class="form-group"><label class="form-label">Are you comfortable committing to 90 days of structured feedback?</label><select class="form-select"><option>Yes — I understand and commit</option><option>I'd like to learn more first</option></select></div>
       <!-- BACKEND: Research access application form -->
       <button class="form-btn" data-backend="form" data-form-type="research-access-application">Submit Application</button>
+      </div>
       <p style="font-family:var(--body);font-size:10px;color:var(--muted);margin-top:1rem">20 slots per drop. Applications reviewed on a rolling basis. You'll hear from us within 5 business days.</p>
 
       <hr class="divider" style="margin:3rem 0 2rem">
@@ -2163,6 +2815,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <p><strong>Dr. Craig Heller</strong>, Professor of Biology at Stanford University, serves as NM Thera's Research Advisor. Dr. Heller is the world's foremost researcher on thermoregulation and palmar AVA vasculature — the biological foundation for SOKY's clinical positioning.</p>
       </div>
 
+      <div id="form-clinical-partner">
       <h3 style="font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem;margin-top:3rem">Express Interest</h3>
       <div class="form-group"><label class="form-label">Practice Name</label><input type="text" class="form-input" placeholder="Your clinic or practice name"></div>
       <div class="form-group"><label class="form-label">Your Name &amp; Title</label><input type="text" class="form-input" placeholder="Dr. Jane Smith, PT"></div>
@@ -2171,6 +2824,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" placeholder="Tell us about your practice and how you see SOKY fitting in."></textarea></div>
       <!-- BACKEND: Clinical partner interest form -->
       <button class="form-btn" data-backend="form" data-form-type="clinical-partner-interest">Submit Interest</button>
+      </div>
     </div>
   </div></div>
 </div>
@@ -2314,7 +2968,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     </div>
   </div></div>
 </div>
-═══════════════════════════════════════════ -->
 <!-- ═══════════════════════════════════════════
    PAGE 10: CONTACT
 ═══════════════════════════════════════════ -->
@@ -2328,6 +2981,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="sec"><div class="container">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;max-width:900px">
       <div>
+        <div id="form-contact-general">
         <h3 style="font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem">Send Us a Message</h3>
         <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" placeholder="Your name"></div>
         <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com" data-backend="form" data-form-type="contact-general"></div>
@@ -2335,6 +2989,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="How can we help?"></textarea></div>
         <!-- BACKEND: Contact general form -->
         <button class="form-btn" data-backend="form" data-form-type="contact-general">Send Message</button>
+        </div>
       </div>
       <div>
         <h3 style="font-family:var(--sub);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);margin-bottom:1rem">Direct Contact</h3>
@@ -2372,7 +3027,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="sec"><div class="container">
     <div class="policy-prose">
       <h3>Shipping Policy</h3>
-      <p><strong>Pre-order:</strong> Batch 1 ships Spring 2026. You'll receive a tracking number when your order ships.</p>
+      <p><strong>Pre-order:</strong> Batch 1 Available Now. You'll receive a tracking number when your order ships.</p>
       <p><strong>Domestic US shipping:</strong> Free standard shipping on all orders. Expedited options available at checkout.</p>
       <p><strong>International shipping:</strong> Not currently available for Batch 1. International availability is planned for future drops.</p>
 
@@ -2431,28 +3086,28 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="sec"><div class="container">
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
       <div style="background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm)">
-        <div style="width:100%;height:180px;background:linear-gradient(135deg,rgba(49,89,138,0.12),rgba(0,109,119,0.08));display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:48px;color:rgba(49,89,138,0.2)">01</span></div>
+        <div style="width:100%;height:180px;background:linear-gradient(135deg,rgba(49,89,138,0.12),rgba(0,109,119,0.08));display:flex;align-items:center;justify-content:center"><span style="font-family:var(--head);font-size:48px;color:rgba(49,89,138,0.2)">01</span></div>
         <div style="padding:1.25rem">
           <p style="font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pool);margin-bottom:.4rem">Launch Story</p>
-          <h3 style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:.5rem;line-height:1.25">Why We're Starting With 200 Units</h3>
+          <h3 style="font-family:var(--head);font-size:18px;color:var(--ink);margin-bottom:.5rem;line-height:1.25">Why We're Starting With 250 Units</h3>
           <p style="font-family:var(--body);font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:.75rem">The first drop isn't about moving inventory. It's about building trust. Here's the strategy behind the intentionally narrow launch.</p>
           <span style="font-family:var(--sub);font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Coming Soon</span>
         </div>
       </div>
       <div style="background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm)">
-        <div style="width:100%;height:180px;background:linear-gradient(135deg,rgba(104,139,88,0.1),rgba(0,109,119,0.08));display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:48px;color:rgba(104,139,88,0.2)">02</span></div>
+        <div style="width:100%;height:180px;background:linear-gradient(135deg,rgba(104,139,88,0.1),rgba(0,109,119,0.08));display:flex;align-items:center;justify-content:center"><span style="font-family:var(--head);font-size:48px;color:rgba(104,139,88,0.2)">02</span></div>
         <div style="padding:1.25rem">
           <p style="font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.4rem">Science</p>
-          <h3 style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:.5rem;line-height:1.25">The Science of Soaking: Why Water Works</h3>
+          <h3 style="font-family:var(--head);font-size:18px;color:var(--ink);margin-bottom:.5rem;line-height:1.25">The Science of Soaking: Why Water Works</h3>
           <p style="font-family:var(--body);font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:.75rem">Occlusion, mineral absorption, and vasodilation — the evidence behind what cultures have practiced for millennia.</p>
           <span style="font-family:var(--sub);font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Coming Soon</span>
         </div>
       </div>
       <div style="background:var(--surface-strong);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm)">
-        <div style="width:100%;height:180px;background:linear-gradient(135deg,rgba(138,106,77,0.08),rgba(212,187,160,0.12));display:flex;align-items:center;justify-content:center"><span style="font-family:var(--serif);font-size:48px;color:rgba(138,106,77,0.2)">03</span></div>
+        <div style="width:100%;height:180px;background:linear-gradient(135deg,rgba(138,106,77,0.08),rgba(212,187,160,0.12));display:flex;align-items:center;justify-content:center"><span style="font-family:var(--head);font-size:48px;color:rgba(138,106,77,0.2)">03</span></div>
         <div style="padding:1.25rem">
           <p style="font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--umber);margin-bottom:.4rem">Founder's Note</p>
-          <h3 style="font-family:var(--serif);font-size:18px;color:var(--ink);margin-bottom:.5rem;line-height:1.25">The Hand I Couldn't Hold</h3>
+          <h3 style="font-family:var(--head);font-size:18px;color:var(--ink);margin-bottom:.5rem;line-height:1.25">The Hand I Couldn't Hold</h3>
           <p style="font-family:var(--body);font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:.75rem">The story behind SOKY — a child's request and eight years of development.</p>
           <span style="font-family:var(--sub);font-size:9px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Coming Soon</span>
         </div>
@@ -2460,7 +3115,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     </div>
 
     <div style="text-align:center;margin-top:3rem;padding:2rem 0;border-top:1px solid var(--line)">
-      <p style="font-family:var(--serif);font-size:clamp(16px,2vw,20px);font-style:italic;color:var(--ink);margin-bottom:.75rem">Stories from the build. Science behind the soak.</p>
+      <p style="font-family:var(--head);font-size:clamp(16px,2vw,20px);font-style:italic;color:var(--ink);margin-bottom:.75rem">Stories from the build. Science behind the soak.</p>
       <p style="font-family:var(--body);font-size:13px;color:var(--muted);margin-bottom:1.5rem;max-width:480px;margin-left:auto;margin-right:auto">The Journal launches alongside Batch 1. Subscribe to get notified when new articles drop — launch stories, science deep-dives, founder reflections, and community spotlights.</p>
       <div style="display:flex;gap:8px;max-width:380px;margin:0 auto">
         <!-- BACKEND: Journal subscribe form -->
@@ -2527,7 +3182,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
       <div style="text-align:center;max-width:480px;margin:0 auto">
         <p style="font-family:var(--sub);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--umber);margin-bottom:.5rem">Coming Later</p>
-        <h3 style="font-family:var(--serif);font-size:clamp(18px,2.5vw,24px);color:var(--ink);margin-bottom:.5rem">SOKY Sessions</h3>
+        <h3 style="font-family:var(--head);font-size:clamp(18px,2.5vw,24px);color:var(--ink);margin-bottom:.5rem">SOKY Sessions</h3>
         <p style="font-family:var(--body);font-size:13px;color:var(--muted);line-height:1.7">The culture arm. Community listening sessions, ambient soundscapes for soaking, DJ sets, and the social layer of the ritual. Where the product meets the people who use it. More details as the Commons matures.</p>
       </div>
     </div>
@@ -2543,7 +3198,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <div style="width:56px;height:56px;border-radius:50%;background:rgba(104,139,88,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem">
         <svg viewBox="0 0 24 24" fill="none" stroke="#688B58" stroke-width="2.5" width="28" height="28"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <h1 style="font-family:var(--serif);font-size:clamp(26px,4vw,40px);color:var(--ink);margin-bottom:.75rem">Thank you for your order.</h1>
+      <h1 style="font-family:var(--head);font-size:clamp(26px,4vw,40px);color:var(--ink);margin-bottom:.75rem">Thank you for your order.</h1>
       <p style="font-family:var(--body);font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:2rem">Your SOKY is on its way. You'll receive a confirmation email shortly with your order details and tracking information when it ships.</p>
 
       <div class="callout green" style="text-align:left;margin-bottom:2rem">
@@ -2591,7 +3246,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <div class="container">
   <div class="footer-grid">
     <div class="footer-col">
-      <div class="footer-brand">NM Thera</div>
+      <div class="footer-brand">
+        <img src="https://nmthera.com/wp-content/uploads/2026/04/NMThera1-Logo-T.webp" alt="NM Thera" style="height:24px;width:auto;object-fit:contain">
+      </div>
       <p class="footer-brand-sub">Wearable soak systems for hands &amp; feet. Patented. Portable. Ready.</p>
     </div>
     <div class="footer-col">
@@ -2794,6 +3451,12 @@ function updateTopbar(){
     topbar.classList.toggle('is-dark',window.scrollY<hero.offsetHeight*0.85);
   } else {
     topbar.classList.remove('is-dark');
+  }
+  var navLogo=document.getElementById('navLogo');
+  if(navLogo){
+    navLogo.src=topbar.classList.contains('is-dark')
+      ? 'https://nmthera.com/wp-content/uploads/2026/04/NMThera1-WHITE.webp'
+      : 'https://nmthera.com/wp-content/uploads/2026/04/NMThera1-Logo-T.webp';
   }
 }
 updateTopbar();
@@ -3191,6 +3854,394 @@ function showCartToast(msg){
     toast.classList.remove('show');
   }, 2800);
 }
+
+/* ═══ HUBSPOT FORM SUBMISSION CONNECTOR ═══
+   Submits contact data to HubSpot CRM via the Forms API.
+   Creates or updates a contact with source attribution. */
+var HS_PORTAL = '43868994';
+var HS_FORM = '77e77793-858d-45cd-aefe-24281e2fbb43';
+var HS_ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit/' + HS_PORTAL + '/' + HS_FORM;
+
+function submitToHubSpot(fields, btn, successLabel){
+  var originalText = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  var payload = {
+    fields: fields,
+    context: {
+      pageUri: window.location.href,
+      pageName: document.title
+    }
+  };
+
+  var hutk = document.cookie.match(/hubspotutk=([^;]*)/);
+  if(hutk && hutk[1]){
+    payload.context.hutk = hutk[1];
+  }
+
+  function doSubmit(){
+    fetch(HS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res){
+      if(!res.ok) throw new Error('HS ' + res.status);
+      btn.textContent = successLabel || 'Submitted ✓';
+      btn.style.opacity = '1';
+      btn.style.background = 'var(--green)';
+      setTimeout(function(){
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 2500);
+    })
+    .catch(function(err){
+      console.error('HubSpot submission error:', err);
+      btn.textContent = 'Retry';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      setTimeout(function(){ btn.textContent = originalText; }, 2000);
+    });
+  }
+
+  fetch('https://api.ipify.org?format=json')
+  .then(function(r){ return r.json(); })
+  .then(function(d){ if(d && d.ip) payload.context.ipAddress = d.ip; })
+  .catch(function(){})
+  .finally(doSubmit);
+}
+
+/* ═══ WIRE ALL EMAIL-ONLY SIGNUP BUTTONS ═══ */
+(function(){
+  var signupTypes = {
+    'newsletter-signup': 'cohort-signup',
+    'journal-subscribe': 'journal-subscribe',
+    'commons-waitlist': 'commons-waitlist',
+    'codev-waitlist': 'codev-waitlist'
+  };
+  var successLabels = {
+    'newsletter-signup': 'Joined ✓',
+    'journal-subscribe': 'Subscribed ✓',
+    'commons-waitlist': 'On the List ✓',
+    'codev-waitlist': 'Notified ✓'
+  };
+
+  Object.keys(signupTypes).forEach(function(formType){
+    var buttons = document.querySelectorAll('button[data-form-type="' + formType + '"]');
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        var wrap = btn.parentElement;
+        var input = wrap ? wrap.querySelector('input[type="email"]') : null;
+        if(!input || !input.value || input.value.indexOf('@') === -1){
+          if(input){
+            input.style.borderColor = 'var(--heat)';
+            setTimeout(function(){ input.style.borderColor = ''; }, 1500);
+          }
+          return;
+        }
+        var fields = [
+          { name: 'email', value: input.value },
+          { name: 'form_source', value: signupTypes[formType] }
+        ];
+        submitToHubSpot(fields, btn, successLabels[formType]);
+        setTimeout(function(){ input.value = ''; }, 2600);
+      });
+    });
+  });
+})();
+
+/* ═══ WIRE MULTI-FIELD FORM BUTTONS TO HUBSPOT ═══ */
+(function(){
+  // Research Access Application
+  var raBtn = document.querySelector('button[data-form-type="research-access-application"]');
+  if(raBtn){
+    raBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      var container = raBtn.closest('[id^="form-"]') || raBtn.closest('.container');
+      if(!container) return;
+      var inputs = container.querySelectorAll('.form-input, .form-textarea, .form-select');
+      var name = '', email = '', why = '', commitment = '';
+      inputs.forEach(function(el){
+        var label = '';
+        var group = el.closest('.form-group');
+        if(group){ var lbl = group.querySelector('.form-label'); if(lbl) label = lbl.textContent.trim().toLowerCase(); }
+        if(label.indexOf('name') > -1) name = el.value.trim();
+        else if(el.type === 'email') email = el.value.trim();
+        else if(el.tagName === 'TEXTAREA') why = el.value.trim();
+        else if(el.tagName === 'SELECT') commitment = el.value.trim();
+      });
+      if(!email || email.indexOf('@') === -1){
+        var emailEl = container.querySelector('input[type="email"]');
+        if(emailEl){ emailEl.style.borderColor = 'var(--heat)'; setTimeout(function(){ emailEl.style.borderColor = ''; }, 1500); }
+        return;
+      }
+      var msg = '';
+      if(why) msg += 'Why interested: ' + why;
+      if(commitment) msg += (msg ? '\n\n' : '') + 'Commitment: ' + commitment;
+      var fields = [
+        { name: 'email', value: email },
+        { name: 'firstname', value: name },
+        { name: 'form_source', value: 'research-access' },
+        { name: 'message', value: msg }
+      ];
+      submitToHubSpot(fields, raBtn, 'Applied ✓');
+      setTimeout(function(){ inputs.forEach(function(el){ if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = ''; }); }, 2600);
+    });
+  }
+
+  // Clinical Partner Interest
+  var cpBtn = document.querySelector('button[data-form-type="clinical-partner-interest"]');
+  if(cpBtn){
+    cpBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      var container = cpBtn.closest('[id^="form-"]') || cpBtn.closest('.container');
+      if(!container) return;
+      var inputs = container.querySelectorAll('.form-input, .form-textarea, .form-select');
+      var practice = '', nameTitle = '', email = '', specialty = '', notes = '';
+      inputs.forEach(function(el){
+        var label = '';
+        var group = el.closest('.form-group');
+        if(group){ var lbl = group.querySelector('.form-label'); if(lbl) label = lbl.textContent.trim().toLowerCase(); }
+        if(label.indexOf('practice') > -1) practice = el.value.trim();
+        else if(label.indexOf('name') > -1) nameTitle = el.value.trim();
+        else if(el.type === 'email') email = el.value.trim();
+        else if(label.indexOf('specialty') > -1 || label.indexOf('specialt') > -1) specialty = el.value.trim();
+        else if(el.tagName === 'TEXTAREA') notes = el.value.trim();
+      });
+      if(!email || email.indexOf('@') === -1){
+        var emailEl = container.querySelector('input[type="email"]');
+        if(emailEl){ emailEl.style.borderColor = 'var(--heat)'; setTimeout(function(){ emailEl.style.borderColor = ''; }, 1500); }
+        return;
+      }
+      var fields = [
+        { name: 'email', value: email },
+        { name: 'firstname', value: nameTitle },
+        { name: 'company', value: practice },
+        { name: 'form_source', value: 'clinical-partner' },
+        { name: 'medical_specialty', value: specialty },
+        { name: 'message', value: notes }
+      ];
+      submitToHubSpot(fields, cpBtn, 'Submitted ✓');
+      setTimeout(function(){ inputs.forEach(function(el){ if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = ''; }); }, 2600);
+    });
+  }
+
+  // Contact General
+  var ctBtn = document.querySelector('button[data-form-type="contact-general"]');
+  if(ctBtn){
+    ctBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      var container = ctBtn.closest('[id^="form-"]') || ctBtn.closest('.container');
+      if(!container) return;
+      var inputs = container.querySelectorAll('.form-input, .form-textarea, .form-select');
+      var name = '', email = '', subject = '', message = '';
+      inputs.forEach(function(el){
+        var label = '';
+        var group = el.closest('.form-group');
+        if(group){ var lbl = group.querySelector('.form-label'); if(lbl) label = lbl.textContent.trim().toLowerCase(); }
+        if(label.indexOf('name') > -1 && el.type !== 'email') name = el.value.trim();
+        else if(el.type === 'email') email = el.value.trim();
+        else if(label.indexOf('subject') > -1) subject = el.value.trim();
+        else if(el.tagName === 'TEXTAREA') message = el.value.trim();
+      });
+      if(!email || email.indexOf('@') === -1){
+        var emailEl = container.querySelector('input[type="email"]');
+        if(emailEl){ emailEl.style.borderColor = 'var(--heat)'; setTimeout(function(){ emailEl.style.borderColor = ''; }, 1500); }
+        return;
+      }
+      var fullMsg = '';
+      if(subject) fullMsg += 'Subject: ' + subject;
+      if(message) fullMsg += (fullMsg ? '\n\n' : '') + message;
+      var fields = [
+        { name: 'email', value: email },
+        { name: 'firstname', value: name },
+        { name: 'form_source', value: 'contact' },
+        { name: 'message', value: fullMsg }
+      ];
+      submitToHubSpot(fields, ctBtn, 'Sent ✓');
+      setTimeout(function(){ inputs.forEach(function(el){ if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = ''; }); }, 2600);
+    });
+  }
+})();
+
+/* ═══ FLOATING BOTTOM BAR — AUTO-CYCLE ═══ */
+(function(){
+  var bar = document.getElementById('floatBar');
+  var closeBtn = document.getElementById('floatBarClose');
+  var slides = bar ? bar.querySelectorAll('.float-bar-slide') : [];
+  var indicators = bar ? bar.querySelectorAll('.float-bar-ind') : [];
+  var current = 0;
+  var timer = null;
+  var INTERVAL = 5000;
+
+  if(!bar || slides.length === 0) return;
+
+  function goTo(idx){
+    slides.forEach(function(s){ s.classList.remove('active'); });
+    indicators.forEach(function(ind){ ind.classList.remove('active'); });
+    slides[idx].classList.add('active');
+    indicators[idx].classList.add('active');
+    current = idx;
+  }
+
+  function next(){
+    goTo((current + 1) % slides.length);
+  }
+
+  function startCycle(){
+    if(timer) clearInterval(timer);
+    timer = setInterval(next, INTERVAL);
+  }
+
+  var emailInput = document.getElementById('floatBarEmail');
+  if(emailInput){
+    emailInput.addEventListener('focus', function(){ if(timer) clearInterval(timer); timer = null; goTo(1); });
+    emailInput.addEventListener('blur', function(){ startCycle(); });
+  }
+
+  closeBtn.addEventListener('click', function(){
+    bar.classList.add('dismissed');
+    if(timer) clearInterval(timer);
+    timer = null;
+    setTimeout(function(){
+      bar.classList.remove('dismissed');
+      startCycle();
+    }, 60000);
+  });
+
+  window.floatBarGoTo = function(idx){
+    goTo(idx);
+    startCycle();
+  };
+
+  window.floatBarSignup = function(){
+    var input = document.getElementById('floatBarEmail');
+    if(!input || !input.value || input.value.indexOf('@') === -1){
+      if(input){
+        input.style.borderColor = 'var(--heat)';
+        setTimeout(function(){ input.style.borderColor = ''; }, 1500);
+      }
+      return;
+    }
+    var joinBtn = document.getElementById('floatBarJoin');
+    if(joinBtn){
+      var fields = [
+        { name: 'email', value: input.value },
+        { name: 'form_source', value: 'floating-bar' }
+      ];
+      submitToHubSpot(fields, joinBtn, 'Joined ✓');
+      setTimeout(function(){ input.value = ''; }, 2600);
+    }
+  };
+
+  bar.style.opacity = '0';
+  bar.style.transform = 'translateY(20px)';
+  setTimeout(function(){
+    bar.style.opacity = '';
+    bar.style.transform = '';
+    startCycle();
+  }, 3000);
+})();
+
+/* ═══ SURVEY POPUP ═══ */
+(function(){
+  var overlay = document.getElementById('surveyOverlay');
+  var popup = document.getElementById('surveyPopup');
+  var closeBtn = document.getElementById('surveyClose');
+  if(!overlay || !popup) return;
+
+  var shown = false;
+  try { shown = sessionStorage.getItem('soky_survey_shown') === '1'; } catch(e){}
+
+  if(!shown){
+    setTimeout(function(){
+      overlay.classList.add('active');
+      popup.classList.add('active');
+      try { sessionStorage.setItem('soky_survey_shown', '1'); } catch(e){}
+    }, 1000);
+  }
+
+  window.closeSurvey = function(){
+    overlay.classList.remove('active');
+    popup.classList.remove('active');
+  };
+  closeBtn.addEventListener('click', closeSurvey);
+  overlay.addEventListener('click', closeSurvey);
+  popup.addEventListener('click', function(e){ e.stopPropagation(); });
+
+  window.surveyGoTo = function(step){
+    var steps = popup.querySelectorAll('.survey-step');
+    steps.forEach(function(s){ s.classList.remove('active'); });
+    var target = popup.querySelector('.survey-step[data-step="' + step + '"]');
+    if(target) target.classList.add('active');
+    popup.scrollTop = 0;
+  };
+
+  popup.querySelectorAll('.survey-chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chip.classList.toggle('selected');
+    });
+  });
+
+  window.surveyValidateEmail = function(){
+    var input = document.getElementById('surveyEmail');
+    if(!input || !input.value || input.value.indexOf('@') === -1){
+      if(input){
+        input.style.borderColor = 'var(--heat)';
+        setTimeout(function(){ input.style.borderColor = ''; }, 1500);
+      }
+      return;
+    }
+    surveyGoTo(2);
+  };
+
+  function getChipValues(containerId){
+    var chips = document.getElementById(containerId);
+    if(!chips) return '';
+    var selected = chips.querySelectorAll('.survey-chip.selected');
+    var vals = [];
+    selected.forEach(function(c){ vals.push(c.getAttribute('data-val')); });
+    return vals.join(';');
+  }
+
+  window.surveySubmit = function(){
+    var email = (document.getElementById('surveyEmail').value || '').trim();
+    var usageType = getChipValues('surveyUsage');
+    var treatmentArea = getChipValues('surveyArea');
+    var referral = (document.getElementById('surveyReferral').value || '').trim();
+    var why = (document.getElementById('surveyWhy').value || '').trim();
+    var consent = document.getElementById('surveyConsent').checked;
+
+    if(!email || email.indexOf('@') === -1){
+      surveyGoTo(1);
+      return;
+    }
+
+    var msgParts = [];
+    if(why) msgParts.push('Why interested: ' + why);
+    if(referral) msgParts.push('Heard about us via: ' + referral);
+    msgParts.push('Contact consent: ' + (consent ? 'Yes' : 'No'));
+    var message = msgParts.join('\n\n');
+
+    var fields = [
+      { name: 'email', value: email },
+      { name: 'form_source', value: 'survey-popup' },
+      { name: 'message', value: message }
+    ];
+    if(usageType) fields.push({ name: 'soky_usage_type', value: usageType });
+    if(treatmentArea) fields.push({ name: 'soky_treatment_area', value: treatmentArea });
+    if(referral) fields.push({ name: 'referral_source', value: referral });
+
+    var btn = document.getElementById('surveySubmitBtn');
+    submitToHubSpot(fields, btn, 'Submitted ✓');
+
+    setTimeout(function(){ surveyGoTo(5); }, 1500);
+  };
+})();
 </script>
 </body>
 </html>
